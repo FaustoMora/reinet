@@ -11,6 +11,7 @@ from app.forms import BootstrapAuthenticationForm
 # from django.contrib import admin
 # admin.autodiscover()
 
+#Jorge
 urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'app.views.home', name='home'),
