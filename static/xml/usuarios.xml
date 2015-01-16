@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<usuarios>
+	<usuario>
+        <id>001</id>
+		<nombre>Angel Guale</nombre>
+		<ci>0989829999</ci>
+		<nacimiento>12/11/2002</nacimiento>
+		<institucion>Escuela Superior Politécnica del Litoral</institucion>
+		<cargo>Estudiante</cargo>
+		<actividad>Estudio en espol</actividad>
+		<pais>Ecuador</pais>
+		<ciudad>Guayaquil</ciudad>
+		<foto>../img/foto1.jpg</foto>
+		<sitioweb>www.espol.edu.ec</sitioweb>
+		<telefono>09867236364</telefono>
+		<correo>angelguale@espol.edu.ec</correo>
+		<areasinteres>Multimedia, matemáticas</areasinteres>
+		<clave>dificil</clave>
+	</usuario>
+	
+	<usuario>
+        <id>003</id>
+		<nombre>Ray Montiel</nombre>
+		<ci>09673548463</ci>
+		<nacimiento>07/11/1998</nacimiento>
+		<institucion>Espol</institucion>
+		<cargo>Decano Fiec</cargo>
+		<actividad>Soy decano de la Fiec</actividad>
+		<pais>Ecuador</pais>
+		<ciudad>Guayaquil</ciudad>
+		<foto>../img/foto2.jpg</foto>
+		<sitioweb>www.espol.edu.ec</sitioweb>
+		<telefono>0912678436</telefono>
+		<correo>raymontiel@espol.edu.ec</correo>
+		<areasinteres>Multimedia, graficos</areasinteres>
+		<clave>facil</clave>
+	</usuario>
+    <usuario>
+        <id>002</id>
+		<nombre>Pedro Navaja</nombre>
+		<ci>0989829999</ci>
+		<nacimiento>12/11/2002</nacimiento>
+		<institucion>Usuario Independiente</institucion>
+		<cargo>Estudiante</cargo>
+		<actividad>Exportación de material humano y/o coyotero</actividad>
+		<pais>Ecuador</pais>
+		<ciudad>Guayaquil</ciudad>
+		<foto>../img/face2.jpg</foto>
+		<sitioweb>www.espol.edu.ec</sitioweb>
+		<telefono>09867236364</telefono>
+		<correo>pnavaja@gmail.com</correo>
+		<areasinteres>Multimedia, matemáticas</areasinteres>
+		<clave>xxx</clave>
+	</usuario>
+	
+
+</usuarios>

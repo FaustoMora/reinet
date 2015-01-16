@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<demandas>
+	<demanda>
+	<problema>Necesidad de google glass</problema>
+	<descripcion>Se ha visto la necesidad de conseguir google glass</descripcion>
+	<dominio>Innavacion</dominio>
+	<subdominio>Realidad aumentada</subdominio>
+	<palabrasclaves>realidad aumentada google glass</palabrasclaves>
+	<tiempo>2 meses</tiempo>
+	<lugar>La Libertad</lugar>
+	<beneficiario>estudiantes de escuelas públicas</beneficiario>
+	<cliente>personas con prototipos de una google glass</cliente>
+	<alternativas>Otras gafas</alternativas>
+	<importancia>es muy importante para los estudiantes de escuelas</importancia>
+	<img>../images/logoconcurso2.jpg</img>
+	</demanda>
+
+<demanda>
+	<problema>Necesidad de diodos zener</problema>
+	<descripcion>Se ha visto la necesidad de conseguir zener</descripcion>
+	<dominio>Emprendimiento</dominio>
+	<subdominio>Electronica</subdominio>
+	<palabrasclaves>realidad aumentada google glass</palabrasclaves>
+	<tiempo>2 meses</tiempo>
+	<lugar>La Libertad</lugar>
+	<beneficiario>estudiantes de escuelas públicas</beneficiario>
+	<cliente>personas con prototipos de una google glass</cliente>
+	<alternativas>Otras gafas</alternativas>
+	<importancia>es muy importante para los estudiantes de escuelas</importancia>
+	<img>../images/logoconcurso2.jpg</img>
+	</demanda>
+	
+	
+	<demanda>
+	<problema>Necesidad de Perro robot</problema>
+	<descripcion>Se necesita un perro robot</descripcion>
+	<dominio>Innavacion</dominio>
+	<subdominio>Robotica</subdominio>
+	<palabrasclaves>realidad aumentada google glass</palabrasclaves>
+	<tiempo>2 meses</tiempo>
+	<lugar>La Libertad</lugar>
+	<beneficiario>estudiantes de escuelas públicas</beneficiario>
+	<cliente>personas con prototipos de una google glass</cliente>
+	<alternativas>Otras gafas</alternativas>
+	<importancia>es muy importante para los estudiantes de escuelas</importancia>
+	<img>../images/logoconcurso2.jpg</img>
+	</demanda>
+</demandas>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<incubaciones>
+	<incubacion>
+		<nombre>Aplicaciones multimedia</nombre>
+		<fecha>22-02-2014</fecha>
+		<descripcion>Incubaremos ofertas relacionas con realidad aumentada</descripcion>
+		<condiciones>Ninguna</condiciones>
+		<perfil>Gente emprendedora</perfil>
+		<tipo>Tecnología</tipo>
+		<alcance>Institución</alcance>
+	</incubacion>
+
+	<incubacion>
+		<nombre>Proyectos arduinos</nombre>
+		<fecha>14-11-2014</fecha>
+		<descripcion>Incubaremos ofertas relacionas con arduinos</descripcion>
+		<condiciones>Personas mayores a 18 años</condiciones>
+		<perfil>Adultos emprendedores</perfil>
+		<tipo>Tecnología</tipo>
+		<alcance>Global</alcance>
+	</incubacion>
+	<incubacion>
+		<nombre>Proyectos transistores hibridos</nombre>
+		<fecha>13-12-2014</fecha>
+		<descripcion>Incubaremos ofertas relacionas con transistores hibridos</descripcion>
+		<condiciones>Personas mayores a 20 años</condiciones>
+		<perfil>Adultos emprendedores</perfil>
+		<tipo>Emprendimiento</tipo>
+		<alcance>Global</alcance>
+	</incubacion>
+
+
+</incubaciones>

@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<concursos>
+    <concurso>
+        <nombre>Realidad aumentada</nombre>
+		<fecha>22-02-2014</fecha>
+		<descripcion>Concurso sobre realidad aumentada</descripcion>
+		<condiciones>Ninguna</condiciones>
+		<perfil>Gente emprendedora</perfil>	
+		<alcance>Institución</alcance>
+        <ranking>3</ranking>
+        <participantes>10</participantes>
+    </concurso>
+</concursos>

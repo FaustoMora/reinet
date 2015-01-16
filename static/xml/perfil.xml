@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<perfiles>
+	<perfil>
+        <id>001</id>
+	    <nombre>Kimberly Clark</nombre>
+        <informacion>Esta empresa esta encargada de la produccion de articulos de aseo personal, es reconocida como una de las mejores empresas del pais por los beneficios que ofrece a sus empleados y la calidad de sus productos. Entre sus productos mas populares estan jabones, pastas dentales, papel higienico entre otros.</informacion>
+        <descripcion>Cuenta con una planta de produccion a nivel nacional, de amplias instalaciones, con mas de 1000 empleados y con ingresos anuales de mas de $500000. Su matriz principal se encuentra ubicada en Quito, sus productos cumplen con standares internacionales de calidad.</descripcion>
+        <mision>Ofrecer al cliente un producto de calidad, expandir la marca a nivel nacional y contribuir con los ingresos economicos del pais, ofreciendo trabajo a miles de personas.</mision>
+        <persona>Angel Guale</persona>
+		<ci>0989829999</ci>
+		<nacimiento>12/11/2002</nacimiento>
+		<institucion>Espol</institucion>
+		<cargo>Estudiante</cargo>
+		<actividad>Estudio en espol</actividad>
+		<pais>Ecuador</pais>
+		<ciudad>Guayaquil</ciudad>
+		<foto>../images/foto1.jpg</foto>
+		<sitioweb>www.espol.edu.ec</sitioweb>
+		<telefono>09867236364</telefono>
+		<correo>angelguale@espol.edu.ec</correo>
+		<areasinteres>Multimedia, matemáticas</areasinteres>
+        <direccion>La calle x y la que cruza</direccion>
+        <webempresa>www.kimberlyclark.com</webempresa>
+        <telfempresa>042598763 ext 545</telfempresa>
+        <horario>Lunes a Viernes 8am-10om</horario>
+        
+    </perfil>
+    <perfil>
+        <id>002</id>
+	    <nombre>Coca Cola</nombre>
+        <informacion>Esta empresa esta encargada de la produccion de articulos de aseo personal, es reconocida como una de las mejores empresas del pais por los beneficios que ofrece a sus empleados y la calidad de sus productos. Entre sus productos mas populares estan jabones, pastas dentales, papel higienico entre otros.</informacion>
+        <descripcion>Cuenta con una planta de produccion a nivel nacional, de amplias instalaciones, con mas de 1000 empleados y con ingresos anuales de mas de $500000. Su matriz principal se encuentra ubicada en Quito, sus productos cumplen con standares internacionales de calidad.</descripcion>
+        <mision>Ofrecer al cliente un producto de calidad, expandir la marca a nivel nacional y contribuir con los ingresos economicos del pais, ofreciendo trabajo a miles de personas.</mision>
+        <persona>Pedro Navaja</persona>
+		<ci>0989521313</ci>
+		<nacimiento>07/12/1990</nacimiento>
+		<institucion>CNE</institucion>
+		<cargo>Gerente</cargo>
+		<actividad>Gerente del area de operaciones en la empresa.</actividad>
+		<pais>Ecuador</pais>
+		<ciudad>Guayaquil</ciudad>
+		<foto>../images/foto2.jpg</foto>
+		<sitioweb>www.espol.edu.ec</sitioweb>
+		<telefono>0916545131</telefono>
+		<correo>xxx</correo>
+		<areasinteres>Computacion,Ciencia</areasinteres>
+        <direccion>La calle R y la que cruza</direccion>
+        <webempresa>www.cocacola.com</webempresa>
+        <telfempresa>04256669 ext 533</telfempresa>
+        <horario>Lunes a Viernes 7am-10pm</horario>
+    </perfil>
+    <perfil>
+        <id>003</id>
+	    <nombre>Nestle</nombre>
+        <informacion>Esta empresa esta encargada de la produccion de articulos de aseo personal, es reconocida como una de las mejores empresas del pais por los beneficios que ofrece a sus empleados y la calidad de sus productos. Entre sus productos mas populares estan jabones, pastas dentales, papel higienico entre otros.</informacion>
+        <descripcion>Cuenta con una planta de produccion a nivel nacional, de amplias instalaciones, con mas de 1000 empleados y con ingresos anuales de mas de $500000. Su matriz principal se encuentra ubicada en Quito, sus productos cumplen con standares internacionales de calidad.</descripcion>
+        <mision>Ofrecer al cliente un producto de calidad, expandir la marca a nivel nacional y contribuir con los ingresos economicos del pais, ofreciendo trabajo a miles de personas.</mision>
+        <persona>Ray Montiel</persona>
+		<ci>09673548463</ci>
+		<nacimiento>07/11/1998</nacimiento>
+		<institucion>Espol</institucion>
+		<cargo>Decano Fiec</cargo>
+		<actividad>Soy decano de la Fiec</actividad>
+		<pais>Ecuador</pais>
+		<ciudad>Guayaquil</ciudad>
+		<foto>../images/foto3.jpg</foto>
+		<sitioweb>www.espol.edu.ec</sitioweb>
+		<telefono>0912678436</telefono>
+		<correo>raymontiel@espol.edu.ec</correo>
+		<areasinteres>Multimedia, graficos</areasinteres>
+        <direccion>La calle u y la que cruza</direccion>
+        <webempresa>www.nestle.com</webempresa>
+        <telfempresa>042888963 ext 945</telfempresa>
+        <horario>Lunes a Viernes 9am-11pm</horario>
+    </perfil>
+</perfiles>

@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<noticias>
+<noticia>
+<usuario>Xavier Rocha</usuario>
+<descripcion>Ha sido transferido a incubadora</descripcion>
+<fecha>12/12/2014</fecha>
+</noticia>
+<noticia>
+<usuario>Peter Andrade</usuario>
+<descripcion>Ha respondido a tu oferta.</descripcion>
+<fecha>15/10/2014</fecha>
+</noticia>
+<noticia>
+<usuario>Mayra Morales</usuario>
+<descripcion>Ha abierto una nueva demanda.</descripcion>
+ <fecha>22/11/2014</fecha>
+</noticia>
+<noticia>
+<usuario>Steven Rodriguez</usuario>
+<descripcion>Ha participado en concurso</descripcion>
+<fecha>12/09/2014</fecha>
+</noticia>
+</noticias>

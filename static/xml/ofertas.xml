@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ofertas>
+	<oferta>
+	<nombre>Lentes de realidad aumentada</nombre>
+	<tipo>Tecnologia</tipo>
+	<descripcion>Los lentes de realidad aumentada son lo máximo</descripcion>
+	<dominio>Todos los reales</dominio>
+	<subdominio>Interacción hombre máquina</subdominio>
+	<tiempo>4 semanas</tiempo>
+	<palabrasclaves>lentes realidad aumentada</palabrasclaves>
+	<lugar>Ecuador</lugar>
+	<perfilbeneficiario>Público en general</perfilbeneficiario>
+	<perfilcliente>Empresas de tecnologias multimedia</perfilcliente>
+	<alternativas>googleglass</alternativas>
+	<importancia>son muy importantes porque son cheveres</importancia>
+	<img>../images/logoconcurso2.jpg</img>
+	
+	</oferta>
+	
+	<oferta>
+	<nombre>Focos de navidad comestibles</nombre>
+	<tipo>Emprendimiento</tipo>
+	<descripcion>Estos focos se pueden comer</descripcion>
+	<dominio>Todos los hogares</dominio>
+	<subdominio>Decoración</subdominio>
+	<tiempo>5 semanas</tiempo>
+	<palabrasclaves>focos navidad navideño</palabrasclaves>
+	<lugar>Ecuador</lugar>
+	<perfilbeneficiario>Público en general</perfilbeneficiario>
+	<perfilcliente>Empresas de tecnologias multimedia</perfilcliente>
+	<alternativas>focos de navidad normales</alternativas>
+	<importancia>importantes en la decoracion</importancia>
+	<img>../images/logoconcurso2.jpg</img>
+	
+	</oferta>
+	
+
+</ofertas>
