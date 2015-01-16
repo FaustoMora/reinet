@@ -56,6 +56,10 @@ dlldata.c
 *.pidb
 *.svclog
 *.scc
+*.pyc
+.project
+.pydevproject
+db.sqlite3
 
 # Chutzpah Test files
 _Chutzpah*
