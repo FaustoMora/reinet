@@ -63,7 +63,7 @@
           <li class="dropdown hidden-sm">
             <a href="INCUBACION_inicio.html">INCUBACIONES </a>
           </li>
-          <li class="visible-xs"><a href="USUARIO_sign-in.html">Sign In</a></li>
+          <li class="visible-xs"><a href="{% url 'usuarios.views.ingresar' %}">Sign In</a></li>
           <li  class="visible-xs"><a href="#">Sign Out</a></li>
         </ul>
         <!-- Search form for extra small screens -->
@@ -77,7 +77,7 @@
           <!-- Sign in & Sign up -->
           {% block sigin %}
           <li id="sign-up" class="show"><a href="sign-up.html">Sign Up</a></li>
-          <li id="sign-in" class="show"><a href="#">Sign In</a></li>
+          <li id="sign-in" class="show"><a href="{% url 'usuarios.views.ingresar' %}">Sign In</a></li>
           {% endblock %}
           <!-- Search Button -->
           <li id="search">

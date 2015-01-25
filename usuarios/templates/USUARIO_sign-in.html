@@ -1,0 +1,74 @@
+
+    {% extends "base.tpl.html" %}
+{% block content %}
+ 
+    <!-- Page tip -->
+    <div class="page-tip animated slideInDown">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12">
+            <p>Por favor, ingresa. Si no eres un miembro,<a href="USUARIO_sign-up.html">crea una cuenta</a>.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-sm-6">
+          <h3 class="hl top-zero">Ingresar a Rei-Net:</h3>
+          <hr>
+          <p>Nuestro sitio soporta varios m&eacute;todos para verificar tu identidad. Ingresa para acceder a todas nuestros servicios.</p>
+          <!-- Social icons -->
+          <div class="login-social">
+            <ul>
+              <li id="twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>
+              <li id="facebook"><a href="#"><i class="fa fa-facebook"></i></a></li>
+              <li id="google"><a href="#"><i class="fa fa-google-plus"></i></a></li>
+            </ul>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        <!-- Login Box -->
+        <div class="col-md-4 col-sm-6">
+          <div class="form-box">
+            <h4>Ingresar</h4>
+            <hr>
+            <form role="form">
+              <div class="form-group">
+                <label class="sr-only" for="exampleInputEmail1">Correo electr&oacute;nico</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Ingresa email">
+              </div>
+              <div class="form-group">
+                <label class="sr-only" for="exampleInputPassword1">Contraseña</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Contraseña">
+              </div>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox"> Recordar
+                </label>
+              </div>
+              <button  class="btn btn-green" id="loginbtn">Ingresar</button>
+            </form>
+            <hr>
+            <p>¿No est&aacute;s registrado?<a href="USUARIO_sign-up.html">Crea una cuenta.</a></p>
+            <div class="pwd-lost">
+              <div class="pwd-lost-q show">¿Olvidaste tu contraseña? <a href="#">Click aquí para recuperarla.</a></div>
+              <div class="pwd-lost-f hidden">
+                <p class="text-muted">Ingresa tu dirección email y enviaremos un link para restablecer tu contraseña.</p>
+                <form class="form-inline" role="form">
+                  <div class="form-group">
+                    <label class="sr-only" for="email-pwd">Direcci&oacute;n Email</label>
+                    <input type="email" class="form-control" id="email-pwd" placeholder="Ingresa email">
+                  </div>
+                  <button type="submit" class="btn btn-blue">Enviar</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+
+{% endblock %}

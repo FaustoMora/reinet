@@ -3,8 +3,9 @@ Definition of urls for reinet.
 """
 
 from datetime import datetime
-from django.conf.urls import patterns, url
+from django.conf.urls import patterns, url, include
 from app.forms import BootstrapAuthenticationForm
+from usuarios.views import *
 
 # Uncomment the next lines to enable the admin:
 # from django.conf.urls import include
@@ -37,6 +38,7 @@ urlpatterns = patterns('',
         name='logout'),
 
     url(r'^incubaciones$','concursoIncubacion.views.homeIncubaciones',name='incubaciones'),
+    url(r'^',include('usuarios.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
