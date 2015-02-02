@@ -44,7 +44,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="index.html" class="link">REI-NET</a>
+        <a class="navbar-brand" href="{% url 'usuarios.views.index' %}" class="link">REI-NET</a>
       </div>
       <div class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
@@ -76,7 +76,7 @@
         <ul class="nav navbar-nav navbar-right hidden-xs">
           <!-- Sign in & Sign up -->
           {% block sigin %}
-          <li id="sign-up" class="show"><a href="sign-up.html">Sign Up</a></li>
+          <li id="sign-up" class="show"><a href="{% url 'usuarios.views.register' %}">Sign Up</a></li>
           <li id="sign-in" class="show"><a href="{% url 'usuarios.views.ingresar' %}">Sign In</a></li>
           {% endblock %}
           <!-- Search Button -->

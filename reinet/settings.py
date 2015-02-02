@@ -23,9 +23,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'redinnovacion',
         'USER': 'root',
-        'PASSWORD': '',
+        'PASSWORD': 'sql24',
         'HOST': 'localhost',
-        'PORT': '',
+        'PORT': '3306',
     }
 }
 
@@ -172,3 +172,4 @@ LOGGING = {
 
 # Specify the default test runner.
 TEST_RUNNER = 'django.test.runner.DiscoverRunner'
+AUTH_PROFILE_MODULE = 'usuario.Persona'
