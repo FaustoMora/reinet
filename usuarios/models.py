@@ -71,7 +71,7 @@ class Catalogo(models.Model):
 
 class Comentario(models.Model):
     idcomentario = models.BigIntegerField(unique=True)
-    idusuario = models.ForeignKey('AuthUser', db_column='id')
+    idusuario = models.ForeignKey('AuthUser', db_column='idusuario')
     comentario = models.CharField(max_length=500L)
     calificacion = models.IntegerField(null=True, blank=True)
     idpublicacion = models.ForeignKey('Publicacion', db_column='idpublicacion')
@@ -262,7 +262,7 @@ class Persona(models.Model):
         db_table = 'persona'
 
 class Politicaprivacidad(models.Model):
-    idusuario = models.ForeignKey('AuthUser', db_column='id')
+    idusuario = models.ForeignKey('AuthUser', db_column='idusuario')
     idpublicacion = models.ForeignKey('Publicacion', db_column='idpublicacion')
     tipo_alcance = models.CharField(max_length=50L)
     class Meta:
@@ -270,7 +270,7 @@ class Politicaprivacidad(models.Model):
 
 class Publicacion(models.Model):
     idpublicacion = models.BigIntegerField(unique=True)
-    idusuario = models.ForeignKey('AuthUser', db_column='id')
+    idusuario = models.ForeignKey('AuthUser', db_column='idusuario')
     nombre = models.CharField(max_length=150L)
     descripcion = models.CharField(max_length=500L)
     dominio = models.IntegerField()
