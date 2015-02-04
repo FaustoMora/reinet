@@ -87,6 +87,7 @@ class UsuarioForm2(UserCreationForm):
 			p.actividad=self.cleaned_data['actividad']
 			p.cargo=self.cleaned_data['cargo']
 			p.idUsuario='null';
+			p.user_id=user.id
 			p.save()
 			
 		

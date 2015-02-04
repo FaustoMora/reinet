@@ -172,4 +172,3 @@ LOGGING = {
 
 # Specify the default test runner.
 TEST_RUNNER = 'django.test.runner.DiscoverRunner'
-AUTH_PROFILE_MODULE = 'usuario.Persona'
