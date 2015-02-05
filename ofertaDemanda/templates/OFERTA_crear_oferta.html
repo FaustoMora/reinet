@@ -1,0 +1,148 @@
+  {% extends "base.tpl.html" %}
+{%block content%}
+<div class="section-header">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12">
+            <!-- Remove the .animated class if you don't want things to move -->
+            <h1 class="animated slideInLeft"><span>Crear Ofertas</span></h1>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <!-- Help Center -->
+      <div class="row">
+        <!-- Profile Menu -->
+        <div class="col-sm-4 col-md-3">
+          <div class="user-menu bottom-15">
+            <ul>
+              <li>
+                <a href="{% url 'ofertaDemanda.views.OfertaInicio' %}">
+                  <i class="sign fa fa-sign-out bg-amethyst"></i> Cancelar <i class="fa fa-chevron-right pull-right"></i>
+                </a>  
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-sm-8 col-md-6">
+          <!-- Edit profile form -->
+          <h3 class="hl"><small>CREAR Ofertas</small></h3>
+          <p class="text-muted">Por favor ingrese los datos de la Oferta</p>
+          <hr>
+          <h4 class="hl bottom-15">Informaci&oacute;n General</h4>
+          <form role="form" id="formulario">
+            <div class="form-group">
+              <label for="full-name">Nombre de la tecnolog&iacute;a, prototipo, o emprendimiento</label>
+              <input type="text" class="form-control" id="full-name" placeholder="Ingrese el nombre" required>
+            </div>
+         
+              <div class="form-group col-xs-6">
+              <label for="date-start">Fecha de inicio</label>
+              <input type="date" class="form-control" id="date-start" required>
+            </div>
+        
+            <div class="form-group col-xs-6">
+              <label for="date-end">Fecha de fin</label>
+              <input type="date" class="form-control" id="date-end" required>
+            </div>
+           
+            <div class="form-group">
+              <label for="description">Descripci&oacute;n resumida de la tecnolog&iacute;a, prototipo o emprendimiento</label>
+              <input type="text" class="form-control" id="description" placeholder="Ingrese una breve descripcion" required>
+            </div>
+
+            <div class="form-group">
+              <label for="description">Palabras Claves para b&uacute;squeda rapida</label>
+              <input type="text" class="form-control" id="descPcl" placeholder="Ingrese la palabara clave" required>
+            </div>
+
+			<div class="form-group">
+              <label>Tipo de Oferta</label><br />
+              <label class="radio-inline" for="radios-0">
+                <input type="radio" name="radios" id="radios-0" value="Emprendimiento" checked="checked">
+                  Emprendimiento
+              </label><br />
+			   <label class="radio-inline" for="radios-0">
+                <input type="radio" name="radios" id="radios-0" value="Innovacion" checked="checked">
+                  Tecnologi&oacute;a
+              </label><br />
+              <label class="radio-inline" for="radios-1">
+                <input type="radio" name="radios" id="radios-1" value="Prototipo">
+                  Prototipo
+              </label>
+            </div>
+
+            <div class="form-group">
+              <label for="description">Lugar</label>
+              <input type="text" class="form-control" id="lugarO" placeholder="Ingrese el lugar" required>
+            </div>
+    
+            <div class="form-group">
+              <label for="description">Perfil Beneficiario de la oferta</label>
+              <input type="text" class="form-control" id="perfilBe" placeholder="Ingrese el beneficiario" required>
+            </div>
+             
+            <div class="form-group">
+              <label for="description">Perfil del cliente para la oferta</label>
+              <input type="text" class="form-control" id="perfilCliente" placeholder="Ingrese el cliente" required>
+            </div>  
+         
+            <div class="form-group">
+              <label for="description">Descripci&oacute;n Alternativa de solucion existentes</label>
+              <input type="text" class="form-control" id="alterSol" placeholder="Ingrese la descripci&oacute;n" required>
+            </div>
+
+            <div class="form-group">
+              <label for="description">Descripci&oacute;n de la propuesta por valor</label>
+              <input type="text" class="form-control" id="desProV" placeholder="Ingrese la descripci&oacute;n" required>
+            </div>
+
+            <div class="form-group">
+              <label for="description">Business Model Canvas</label>
+              <input type="text" class="form-control" id="bmc" placeholder="Ingrese Business Model Canvas" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="description">Diagrama de Porter</label>
+              <input type="text" class="form-control" id="dPotter" placeholder="Ingrese diagrama" required>
+            </div>
+
+            <div class="form-group">
+              <label for="description">Descripci&oacute;n de la propuesta por valor</label>
+              <input type="text" class="form-control" id="descriptionvalor" placeholder="Ingrese la descripci&oacute;n" required>
+            </div>
+            
+             <div class="form-group">
+              <label for="description">Fotos del prototipo o producto</label>
+              <input type="file" class="form-control" id="fotos" required>
+            </div>
+              
+           <div class="form-group" id="consultant">
+              <label for="consultor">Equipo (miembros de plataforma)</label>
+              <input type="text" class="form-control" id="consultor" placeholder="Ingrese el nombre del miembro" required>
+              <br /><button id="addConsultant" type="button" class="btn btn-dark">Agregar otro miembro</button> 
+            </div>
+              
+            <div class="form-group">
+              <label for="description">Estado de propiedad intelectual</label>
+              <input type="text" class="form-control" id="estadoIn" required>
+            </div>
+              
+            <div class="form-group">
+              <label for="description">Evidencia de tracc&aacute;ion si la hubiere</label>
+              <input type="text" class="form-control" id="eviTracc" required>
+            </div>
+              
+            <div class="form-group">
+              <label for="description">Rol de los miembros del Equipo (si las hubiere)</label>
+              <input type="text" class="form-control" id="rol1" placeholder="Ingrese los roles de los integrantes">
+              <input type="text" class="form-control" id="rol2" placeholder="Ingrese los roles de los integrantes">
+              <input type="text" class="form-control" id="rol3" placeholder="Ingrese los roles de los integrantes">
+              <input type="text" class="form-control" id="rol4" placeholder="Ingrese los roles de los integrantes">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+      {% endblock %}
