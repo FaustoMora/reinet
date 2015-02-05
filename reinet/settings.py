@@ -23,7 +23,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'redinnovacion',
         'USER': 'root',
-        'PASSWORD': 'sql24',
+        'PASSWORD': '',
         'HOST': 'localhost',
         'PORT': '3306',
     }
@@ -135,6 +135,7 @@ INSTALLED_APPS = (
     'app',
     'concursoIncubacion',
     'usuarios',
+    'ofertaDemanda',
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:

@@ -15,8 +15,9 @@ urlpatterns = patterns('',
         url(r'^register_success[/]?$',register_success,name='index'),
         url(r'^create[/]?$',create,name='index'),
         url(r'^$',index,name='index'),
-        url(r'^perfil[/]?$',perfil_view,name='index'),
-        
+        url(r'^perfil[/]?$',perfil_view),    
+        url(r'^mensajes[/]?$',mensajes_view),   
 
+       url(r'^inicio[/]?$',inicio_view),   
         
 )

@@ -23,8 +23,8 @@ class MyRegistrationForm(UserCreationForm):
 
 """
 from django import forms
-from models import  AuthUser, Persona
-from django.contrib.auth.forms import UserCreationForm
+from models import  Persona
+from django.contrib.auth.forms import *
 from django.contrib.auth.models import User
 
 """
@@ -92,4 +92,43 @@ class UsuarioForm2(UserCreationForm):
 			
 		
 		
+		return user
+
+class PersonaForm(UserCreationForm):
+
+	class Meta:
+		model=Persona
+		exclude=['last_login','is_superuser','user_permissions','is_staff','groups'
+		,'date_joined','idpersona','is_active','fecha_nacimiento','password']
+		fields=['username','first_name','last_name','email','identificacion',
+		'cargo','actividad','areas_interes','password1','password2']
+		widgets={
+			'password': forms.PasswordInput(attrs={'class': 'form-control','placeholder':'Password'}),
+			
+			'username': forms.TextInput(attrs={'class': 'form-control','placeholder':'Username'}),
+			
+			'first_name': forms.TextInput(attrs={'class': 'form-control','placeholder':'Nombre'}),
+			
+			'last_name': forms.TextInput(attrs={'class': 'form-control','placeholder':'Apellidos'}),
+			
+			'email': forms.TextInput(attrs={'class': 'form-control','placeholder':'Email'}),
+			
+			'identificacion': forms.TextInput(attrs={'class': 'form-control','placeholder':'Identificacion'}),
+			
+			'cargo': forms.TextInput(attrs={'class': 'form-control','placeholder':'Cargo'}),
+			
+			'actividad': forms.TextInput(attrs={'class': 'form-control','placeholder':'Actividad'}),
+
+			'areas_interes': forms.TextInput(attrs={'class': 'form-control','placeholder':'Areas de Interes'}),
+
+			'password1': forms.TextInput(attrs={'class': 'form-control','placeholder':'Password'}),
+			
+		}
+	def save(self, commit=True):
+		user=super(PersonaForm, self).save(commit=False)
+		#user.idpersona='default'
+		user.fecha_nacimiento='2012-12-12'
+		if commit:
+			user.save()
+			
 		return user

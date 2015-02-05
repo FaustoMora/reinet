@@ -91,13 +91,13 @@
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Usuario  <b class="caret"></b>
         </a>
         <ul class="dropdown-menu">
-                  <li><a href="USUARIO_profile.html" class="link">Mi Perfil</a></li>
+                  <li><a href="{% url 'usuarios.views.perfil_view' %}" >Mi Perfil</a></li>
                   <li><a href="#">Configuraciones</a></li>
-                  <li><a href="index.html" >Cerrar Sesi&oacute;n</a></li>
+                  <li><a href="{% url 'usuarios.views.logout' %}" >Cerrar Sesi&oacute;n</a></li>
                 </ul>
         
       </li>
-            <li id="mensajes" class="show"><a href="USUARIO_inbox.html" class="link">Mensajes</a></li>
+            <li id="mensajes" class="show"><a href="{% url 'usuarios.views.mensajes_view' %}" class="link">Mensajes</a></li>
             <!-- Signed in. Profile Menu -->
 <!--
             <li id="cogs-menu" class="hidden">
