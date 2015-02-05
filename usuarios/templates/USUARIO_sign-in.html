@@ -1,5 +1,10 @@
 
     {% extends "base.tpl.html" %}
+    {% block title-complement %}Ingresar{%endblock%}
+    {%block signin %}
+     <li id="sign-up" class="show"><a href="{% url 'usuarios.views.register' %}">Sign Up</a></li>
+          <li id="sign-in" class="show"><a href="{% url 'usuarios.views.ingresar' %}">Sign In</a></li>
+{% endblock %}
 {% block content %}
  
     <!-- Page tip -->
@@ -7,7 +12,7 @@
       <div class="container">
         <div class="row">
           <div class="col-sm-12">
-            <p>Por favor, ingresa. Si no eres un miembro,<a href="USUARIO_sign-up.html">crea una cuenta</a>.</p>
+            <p>Por favor, ingresa. Si no eres un miembro,<a href="{% url 'usuarios.views.register' %}">crea una cuenta</a>.</p>
           </div>
         </div>
       </div>
@@ -33,24 +38,24 @@
           <div class="form-box">
             <h4>Ingresar</h4>
             <hr>
-            <form role="form">
+            <form action="/auth/" method="post" role="form">{% csrf_token %}
               <div class="form-group">
-                <label class="sr-only" for="exampleInputEmail1">Correo electr&oacute;nico</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Ingresa email">
+                <label class="sr-only" for="Email">Usuario</label>
+                <input type="text" class="form-control" id="Email" name="Email" placeholder="Ingresa usuario">
               </div>
               <div class="form-group">
-                <label class="sr-only" for="exampleInputPassword1">Contraseña</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Contraseña">
+                <label class="sr-only" for="password">Contraseña</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña">
               </div>
               <div class="checkbox">
                 <label>
                   <input type="checkbox"> Recordar
                 </label>
               </div>
-              <button  class="btn btn-green" id="loginbtn">Ingresar</button>
+              <button  type="submit" class="btn btn-green" id="loginbtn" name="loginbtn">Ingresar</button>
             </form>
             <hr>
-            <p>¿No est&aacute;s registrado?<a href="USUARIO_sign-up.html">Crea una cuenta.</a></p>
+            <p>¿No est&aacute;s registrado?<a href="{% url 'usuarios.views.register' %}">Crea una cuenta.</a></p>
             <div class="pwd-lost">
               <div class="pwd-lost-q show">¿Olvidaste tu contraseña? <a href="#">Click aquí para recuperarla.</a></div>
               <div class="pwd-lost-f hidden">

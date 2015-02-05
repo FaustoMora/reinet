@@ -1,0 +1,192 @@
+    {% extends "base.tpl.html" %}
+{% block content %}
+ 
+
+    <div class="section-header">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12">
+            <!-- Remove the .animated class if you don't want things to move -->
+            <h1 class="animated slideInLeft"><span>Mensajes</span></h1>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <!-- Help Center -->
+      <div class="row">
+        <!-- Profile Menu -->
+        <div class="col-sm-4 col-md-3">
+          <div class="user-menu bottom-15">
+            <ul>
+              <li>
+                <a href="USUARIO_profile.html"  class="link" class="active" >
+                  <i class="sign fa fa-user bg-green"></i> Mi Perfil <i class="fa fa-chevron-right pull-right"></i>
+                </a>  
+              </li>
+              <li>
+                <a href="USUARIO_edit-profile.html" class="link">
+                  <i class="sign fa fa-edit bg-blue"></i> Editar Perfil<i class="fa fa-chevron-right pull-right"></i>
+                </a>  
+              </li>
+              <li>
+                <a href="USUARIO_inbox.html" class="link">
+                  <i class="sign fa fa-envelope bg-red"></i> Inbox <i class="fa fa-chevron-right pull-right"></i>
+                </a>  
+              </li>
+              <li>
+                <a href="index.html">
+                  <i class="sign fa fa-sign-out bg-amethyst"></i> Cerrar sesi&oacute;n <i class="fa fa-chevron-right pull-right"></i>
+                </a>  
+              </li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="col-sm-8 col-md-7">
+          <!-- List of recent dialogs -->
+          <div class="pm-search">
+            <form role="form">
+              <div class="row">
+                <div class="col-sm-12 col-md-10">
+                  <div class="input-group">
+                    <label class="sr-only" for="pm-search">Direcci&oacute;n Email</label>
+                    <input type="text" class="form-control" id="pm-search" placeholder="Ingresa tu búsqueda aquí">
+                    <span class="input-group-btn">
+                      <button type="button" class="btn btn-dark">Buscar</button>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          <ul class="text-muted list-inline">
+            <li><i class="fa fa-comments-o"></i> 25 conversaciones</li>
+            <li><i class="fa fa-envelope-o"></i> 115 mensajes</li>
+          </ul>
+          <div class="pm-list">
+            <ul>
+              <!-- First dialog -->
+              <li>
+                <p class="text-muted">
+                  <img src="img/face2.jpg" alt="...">
+                    From: <a href="profile.html">Dan Smith</a><br />
+                    <small>5 days ago</small>
+                </p>
+                <p class="text-muted">
+                  <a href="inbox-dialog.html" class="inbox-dialog">Lorem ipsum dolor sit amet, consectetur adipiscing elit...</a>
+                </p>
+                <div class="clearfix"></div>
+              </li>
+              <!-- Second dialog -->
+              <li>
+                <p class="text-muted">
+                  <img src="img/face3.jpg" alt="...">
+                    To: <a href="profile.html">David Smith</a><br />
+                    <small>10 days ago</small>
+                </p>
+                <p class="text-muted">
+                  <a href="inbox-dialog.html" class="inbox-dialog">Re: Lorem ipsum dolor sit amet, consectetur adipiscing elit...</a>
+                </p>
+                <div class="clearfix"></div>
+              </li>
+              <!-- Third dialog -->
+              <li>
+                <p class="text-muted">
+                  <img src="img/face4.jpg" alt="...">
+                    From: <a href="profile.html">Nathan Smith</a><br />
+                    <small>11 days ago</small>
+                </p>
+                <p class="text-muted">
+                  <a href="inbox-dialog.html" class="inbox-dialog">Re: Lorem ipsum dolor sit amet, consectetur adipiscing elit...</a>
+                </p>
+                <div class="clearfix"></div>
+              </li>
+              <!-- Fourth dialog -->
+              <li>
+                <p class="text-muted">
+                  <img src="img/face2.jpg" alt="...">
+                    From: <a href="profile.html">Dan Smith</a><br />
+                    <small>5 days ago</small>
+                </p>
+                <p class="text-muted">
+                  <a href="inbox-dialog.html" class="inbox-dialog">Lorem ipsum dolor sit amet, consectetur adipiscing elit...</a>
+                </p>
+                <div class="clearfix"></div>
+              </li>
+              <!-- Fifth dialog -->
+              <li>
+                <p class="text-muted">
+                  <img src="img/face3.jpg" alt="...">
+                    To: <a href="profile.html">David Smith</a><br />
+                    <small>10 days ago</small>
+                </p>
+                <p class="text-muted">
+                  <a href="inbox-dialog.html" class="inbox-dialog">Re: Lorem ipsum dolor sit amet, consectetur adipiscing elit...</a>
+                </p>
+                <div class="clearfix"></div>
+              </li>
+              <!-- Sixth dialog -->
+              <li>
+                <p class="text-muted">
+                  <img src="img/face4.jpg" alt="...">
+                    From: <a href="profile.html">Nathan Smith</a><br />
+                    <small>11 days ago</small>
+                </p>
+                <p class="text-muted">
+                  <a href="inbox-dialog.html" class="inbox-dialog">Re: Lorem ipsum dolor sit amet, consectetur adipiscing elit...</a>
+                </p>
+                <div class="clearfix"></div>
+              </li>
+              <!-- Seventh dialog -->
+              <li>
+                <p class="text-muted">
+                  <img src="img/face2.jpg" alt="...">
+                    From: <a href="profile.html">Dan Smith</a><br />
+                    <small>5 days ago</small>
+                </p>
+                <p class="text-muted">
+                  <a href="inbox-dialog.html" class="inbox-dialog">Lorem ipsum dolor sit amet, consectetur adipiscing elit...</a>
+                </p>
+                <div class="clearfix"></div>
+              </li>
+              <!-- Eighth dialog -->
+              <li>
+                <p class="text-muted">
+                  <img src="img/face3.jpg" alt="...">
+                    To: <a href="profile.html">David Smith</a><br />
+                    <small>10 days ago</small>
+                </p>
+                <p class="text-muted">
+                  <a href="inbox-dialog.html" class="inbox-dialog">Re: Lorem ipsum dolor sit amet, consectetur adipiscing elit...</a>
+                </p>
+                <div class="clearfix"></div>
+              </li>
+              <!-- Ninth dialog -->
+              <li>
+                <p class="text-muted">
+                  <img src="img/face4.jpg" alt="...">
+                    From: <a href="profile.html">Nathan Smith</a><br />
+                    <small>11 days ago</small>
+                </p>
+                <p class="text-muted">
+                  <a href="inbox-dialog.html" class="inbox-dialog">Re: Lorem ipsum dolor sit amet, consectetur adipiscing elit...</a>
+                </p>
+                <div class="clearfix"></div>
+              </li>
+            </ul>
+          </div>
+          <!-- Pagination -->
+          <ul class="pagination pull-right">
+            <li class="disabled"><a href="#">&laquo;</a></li>
+            <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li><a href="#">&raquo;</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+{% endblock %}

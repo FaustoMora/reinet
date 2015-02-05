@@ -1,0 +1,20 @@
+    {% extends "base.tpl.html" %}
+{% block content %}
+
+<h2>Register</h2>
+<form action="/accounts/register/" method="post" role="form">{% csrf_token %}
+
+<!--
+{{ form.non_field_errors }}
+<div  class="form-group">
+    {{ form.nombre.errors }}
+    <label class="sr-only" for="{{ form.nombre.id_for_label }}">Nombre</label><br>
+    {{ form.nombre }}
+</div>
+-->
+{{form.as_p}}
+
+<input type="submit" value="Register"/>
+
+</form>
+{% endblock %}
