@@ -278,11 +278,5 @@ class Publicacion(models.Model):
     class Meta:
         db_table = 'publicacion'
 
-class Solicitud(models.Model):
-    idsolicitud = models.BigIntegerField(primary_key=True)
-    idpublicacion = models.ForeignKey(Publicacion, db_column='idpublicacion', related_name='solicitud_publicacion')
-    idofertapublicada = models.ForeignKey(Publicacion, db_column='idofertapublicada')
-    fecha = models.IntegerField(null=True, blank=True)
-    class Meta:
-        db_table = 'solicitud'
+
 
