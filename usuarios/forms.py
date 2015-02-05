@@ -121,7 +121,8 @@ class PersonaForm(UserCreationForm):
 
 			'areas_interes': forms.TextInput(attrs={'class': 'form-control','placeholder':'Areas de Interes'}),
 
-
+			'password1': forms.TextInput(attrs={'class': 'form-control','placeholder':'Password'}),
+			
 		}
 	def save(self, commit=True):
 		user=super(PersonaForm, self).save(commit=False)

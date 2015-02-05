@@ -95,3 +95,5 @@ def perfil_view(request):
 	args={}
 	args['user']=user1
 	return render_to_response('USUARIO_profile.html',args)
+def mensajes_view(request):
+	return render_to_response('')

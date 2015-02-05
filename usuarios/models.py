@@ -37,7 +37,7 @@ class Institucion(User):
     mision = models.CharField(max_length=900L)
     sitio_web = models.CharField(max_length=200L)
     persona_que_registra = models.CharField(max_length=200L)
-    idadministrador = models.BigIntegerField(db_column='idAdministrador') # Field name made lowercase.
+    idadministrador = models.IntegerField(db_column='idAdministrador') # Field name made lowercase.
     telefono = models.CharField(max_length=15L)
     recursos = models.CharField(max_length=100L)
     miembros = models.ManyToManyField('Persona', through='InstitucionPersona')
@@ -64,6 +64,14 @@ class Persona(User):
     #idusuario = models.ForeignKey(AuthUser, db_column='id')
     class Meta:
         db_table = 'persona'
+
+class Mensaje(models.Model):
+    idEmisor=models.IntegerField(db_column='idpersona')
+    idDestimo=models.IntegerField(db_column='idpersona')
+    txtMensaje=models.CharField(max_length=250)
+    fecha=models.DateField()
+    hora=models.TimeField()
+
 """
 class Politicaprivacidad(models.Model):
     idusuario = models.ForeignKey('Persona', db_column='idusuario')
