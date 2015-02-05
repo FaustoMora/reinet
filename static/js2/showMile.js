@@ -1,6 +1,10 @@
 function inicializar() {
-    var link = document.getElementById("openmile");
-    link.addEventListener("click", showmile, false);
+    var link = document.getElementsByClassName("openmile");
+
+    for(i=0;i<link.length;i++){
+        link[i].addEventListener("click", showmile, false);
+    }
+    
 
     var black = document.getElementById("blackscreen");
     black.addEventListener("click", hidemiles, false);
