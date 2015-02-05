@@ -41,7 +41,7 @@ def invalid(request):
 
 def logout(request):
 	auth.logout(request)
-	return HttpResponseRedirect('/index/')
+	return render_to_response('USUARIO_index.html')
 
 def register(request):
 	if request.method=='POST':

@@ -5,7 +5,7 @@ from views import *
 
 urlpatterns = patterns('',
 
-	url(r'^index[/]?$',index,name='index'),
+		url(r'^index[/]?$',index,name='index'),
         url(r'^ingresar[/]?$',ingresar,name='index'),
         url(r'^logout[/]?$',logout,name='index'),
         url(r'^auth[/]?$',auth_view,name='index'),
