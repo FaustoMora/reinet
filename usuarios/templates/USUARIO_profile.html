@@ -1,4 +1,18 @@
-    {% extends "baseLoggedin.html" %}
+    {% extends "base.tpl.html" %}
+    {% block title-complement %}Perfil{%endblock%}
+   <!--  {% block signin %}
+  <li id="usuario" class="show">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Usuario  <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+                  <li><a href="{% url 'usuarios.views.perfil_view' %}" >Mi Perfil</a></li>
+                  <li><a href="#">Configuraciones</a></li>
+                  <li><a href="{% url 'usuarios.views.logout' %}" >Cerrar Sesi&oacute;n</a></li>
+                </ul>
+        
+      </li>
+            <li id="mensajes" class="show"><a href="{% url 'usuarios.views.mensajes_view' %}" class="link">Mensajes</a></li> 
+     {% endblock %} -->
 {%block content%}
     <div class="section-header">
       <div class="container">
