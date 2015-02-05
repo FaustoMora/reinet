@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib import auth
 from django.core.context_processors import csrf
-from forms import UsuarioForm2
+from forms import *
 from django.contrib.auth.forms import UserCreationForm
 from models import *
 
@@ -20,10 +20,14 @@ def auth_view(request):
 	name=request.POST.get('Email', '')
 	password=request.POST.get('password', '')
 	user=auth.authenticate(username=name, password=password)
-	
+		
 	if user is not None:
 		auth.login(request, user)
 		request.session['id_user']=request.user.id
+		personas=Persona.objects.raw('SELECT * FROM persona WHERE user_ptr_id =%s',request.user.id)
+		p=personas[0]
+		request.session['id_persona']=p.idpersona
+		#print p.idpersona
 		return HttpResponseRedirect('/perfil')
 	else:
 		return HttpResponseRedirect('/invalid')
@@ -41,19 +45,20 @@ def logout(request):
 
 def register(request):
 	if request.method=='POST':
-		form=UsuarioForm2(request.POST)
+		form=PersonaForm(request.POST)
 	
 		if form.is_valid():
 			form.save()
-			return HttpResponseRedirect('/register_success/')
+			return HttpResponseRedirect('/ingresar/')
 		else:
 			print form.is_valid()
 	else:
-		form=UsuarioForm2()
+		form=PersonaForm()
 
 	args={}
 	args.update(csrf(request))
-	
+	for f in form:
+		print f.id_for_label
 	args['form']=form
 	return render_to_response('USUARIO_sign-up.html', args)
 
@@ -78,7 +83,15 @@ def create(request):
 
 def perfil_view(request):
 	id_session=request.session['id_user']
-	print id_session
+	
+	id_persona=request.session['id_persona']
+	print id_session, id_persona
 	user1=User.objects.get(id=id_session)
-	#persona=
-	return render_to_response('USUARIO_profile.html', {'full_name':user1.username})
+	#personas=Persona.objects.raw('SELECT * FROM persona WHERE user_id=%s',id_session)
+	#p=personas[0]
+	#request.session['id_persona']=p.idpersona
+	#print request.session['id_persona']
+	#print personas[0].idpersona
+	args={}
+	args['user']=user1
+	return render_to_response('USUARIO_profile.html',args)

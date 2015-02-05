@@ -84,34 +84,17 @@
               </div>
             </div>
 -->
-			{{ form.non_field_errors }}
+			 {{ form.non_field_errors }}
 			{%for f in form%}
-      {%if f.id_for_label == "id_username"%}
+
     <div  class="form-group">
        {{f.errors}}
       {{f.label_tag}}<br>
-      <input type="text" class="form-control" id="id_username" name="username" placeholder="Username"/>
+     {{f}}
     </div>
-    {%elif f.id_for_label == "id_password1"%}
-    <div  class="form-group">
-       {{f.errors}}
-      {{f.label_tag}}<br>
-      <input type="password" class="form-control" id="id_password1" name="password1" placeholder="Password" />
-    </div>
-    {%elif f.id_for_label == "id_password2"%}
-    <div  class="form-group">
-       {{f.errors}}
-      {{f.label_tag}}<br>
-      <input type="password" class="form-control" id="id_password2" name="password2" placeholder="Confirma Password"/>
-    </div>
-    {%else%}
-		<div  class="form-group">
-       {{f.errors}}
-			{{f.label_tag}}<br>
-			{{ f }}
-		</div>
-    {%endif%}
-		{%endfor%}
+
+		{%endfor%} 
+
             <div class="checkbox">
 
               <label>

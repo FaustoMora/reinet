@@ -23,7 +23,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'redinnovacion',
         'USER': 'root',
-        'PASSWORD': 'sql24',
+        'PASSWORD': '',
         'HOST': 'localhost',
         'PORT': '3306',
     }
