@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-
-=======
->>>>>>> 17b1966edac18d6aefbb4227724004206d354b05
 from datetime import datetime
 from django.conf.urls import patterns, url
 from app.forms import BootstrapAuthenticationForm
@@ -9,11 +5,7 @@ from views import *
 
 urlpatterns = patterns('',
 
-<<<<<<< HEAD
-    url(r'^index[/]?$',index,name='index'),
-    url(r'^ingresar[/]?$',ingresar,name='index'),
-=======
-	url(r'^index[/]?$',index,name='index'),
+		url(r'^index[/]?$',index,name='index'),
         url(r'^ingresar[/]?$',ingresar,name='index'),
         url(r'^logout[/]?$',logout,name='index'),
         url(r'^auth[/]?$',auth_view,name='index'),
@@ -26,5 +18,4 @@ urlpatterns = patterns('',
         url(r'^perfil[/]?$',perfil_view),    
         url(r'^mensajes[/]?$',mensajes_view),    
        
->>>>>>> 17b1966edac18d6aefbb4227724004206d354b05
 )

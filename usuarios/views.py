@@ -41,7 +41,7 @@ def invalid(request):
 
 def logout(request):
 	auth.logout(request)
-	return HttpResponseRedirect('/index/')
+	return render_to_response('USUARIO_index.html')
 
 def register(request):
 	if request.method=='POST':
@@ -96,4 +96,4 @@ def perfil_view(request):
 	args['user']=user1
 	return render_to_response('USUARIO_profile.html',args)
 def mensajes_view(request):
-	return render_to_response('USUARIO_inbox.html')
+	return render_to_response('')

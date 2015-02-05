@@ -64,15 +64,14 @@ class Persona(User):
     #idusuario = models.ForeignKey(AuthUser, db_column='id')
     class Meta:
         db_table = 'persona'
-
+"""
 class Mensaje(models.Model):
-    idEmisor=models.ForeignKey(Persona,db_column='idpersEmisor', related_name='p_emisor')
-    idDestimo=models.ForeignKey(Persona,db_column='idpersDest', related_name='p_destino')
+    idEmisor=models.ForeignKey(Persona,db_column='idpersona', related_name='p_emisor')
+    idDestimo=models.ForeignKey(Persona,db_column='idpersona', related_name='p_destino')
     txtMensaje=models.CharField(max_length=250)
     fecha=models.DateField()
     hora=models.TimeField()
-    class Meta:
-        db_table = 'mensaje'
+"""
 """
 class Politicaprivacidad(models.Model):
     idusuario = models.ForeignKey('Persona', db_column='idusuario')

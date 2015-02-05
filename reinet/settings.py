@@ -135,6 +135,7 @@ INSTALLED_APPS = (
     'app',
     'concursoIncubacion',
     'usuarios',
+    'ofertaDemanda',
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
