@@ -7,6 +7,7 @@ from django.core.context_processors import csrf
 from forms import *
 from django.contrib.auth.forms import UserCreationForm
 from models import *
+from django.contrib.auth.decorators import login_required
 
 def index(request):
 	return render_to_response('USUARIO_index.html')
@@ -41,6 +42,7 @@ def invalid(request):
 
 def logout(request):
 	auth.logout(request)
+	print "LA VARIABLE DE SESSION LOGOUT", request.session['id_user']
 	return render_to_response('USUARIO_index.html')
 
 def register(request):
@@ -81,6 +83,7 @@ def create(request):
 	args['form']= form
 	return render_to_response('USUARIO_sign-up.html', args)
 
+@login_required(login_url='/ingresar/')
 def perfil_view(request):
 	id_session=request.session['id_user']
 	
@@ -93,8 +96,12 @@ def perfil_view(request):
 	#print request.session['id_persona']
 	#print personas[0].idpersona
 	args={}
-	args['user']=user1
+	args['usuario']=user1
+	persona=Persona.objects.get(idpersona=id_persona)
+	args['persona']=persona
 	return render_to_response('USUARIO_profile.html',args)
+
+@login_required(login_url='/ingresar/')
 def mensajes_view(request):
 	return render_to_response('USUARIO_inbox.html')
 
