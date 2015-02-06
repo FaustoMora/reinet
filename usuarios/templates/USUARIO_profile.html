@@ -83,7 +83,7 @@
             </div>
             <!-- Main profile info -->
             <div class="col-sm-8">
-              <h3 class="hl" id="principalNombre">{{user.username}} <small> Usuario Independiente</small></h3>
+              <h3 class="hl" id="principalNombre">{{usuario.first_name}} {{usuario.last_name}} <small> Usuario Independiente</small></h3>
               <hr>
               <!-- User status update form -->
               <div class="user-status">
@@ -156,7 +156,8 @@
                           <button type="button" class="btn btn-green" data-dismiss="modal">Enviar</button>
                         </form>
                       </div>
-                    --></div> /.modal-content 
+                    -->
+                  </div> <!--/.modal-content -->
                   </div><!-- /.modal-dialog -->
                 </div><!-- /.modal -->
                 <!-- End of modal window -->
@@ -193,6 +194,29 @@
                     <td>Ecuador</td>
                   </tr>
 -->
+              <tr>
+                    <td class="text-muted">Nombre</td>
+                    <td>{{usuario.first_name}} </td>
+                  </tr>
+                  
+                  <tr>
+                    <td class="text-muted">Apellido</td>
+                    <td>{{usuario.last_name}}</td>
+                  </tr>
+                  <tr>
+                    <td class="text-muted">Instituci&oacute;n</td>
+                    <td>ESPOL</td>
+                  </tr>
+                 
+                  <tr>
+                    <td class="text-muted">Identificaci&oacute;n</td>
+                    <td>{{persona.identificacion}}</td>
+                  </tr>
+                  <tr>
+                    <td class="text-muted">&Aacute;reas de inter&eacute;s</td>
+                    <td>{{persona.areas_interes}}</td>
+                  </tr>
+
                 </tbody>
               </table>
               <hr>
@@ -213,7 +237,11 @@
                     <td class="text-muted">Sitio Web</td>
                     <td>http://www.example.com</td>
                   </tr>
--->
+-->             
+                   <tr>
+                    <td class="text-muted">Email</td>
+                    <td>{{usuario.email}} </td>
+                  </tr>
                 </tbody>
               </table>
               <hr>

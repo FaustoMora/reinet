@@ -10,4 +10,4 @@ def DemandaInicio(request):
     return render_to_response('DEMANDA_Inicio.html')
 
 def OfertaInicio(request):
-    return render_to_response('OFERTA_Inicio.html')
+    return render_to_response('OFERTA_Inicio2.html')

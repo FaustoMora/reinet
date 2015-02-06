@@ -53,7 +53,14 @@ class MilestoneParticipante(models.Model):
         managed = False
         db_table = 'milestoneparticipante'
         
-        
+class Convocatoria(models.Model):
+    idconvocatoria = models.BigIntegerField(unique=True, db_column='idConvocatoria') # Field name made lowercase.
+    fechainicio = models.DateField(db_column='fechaInicio') # Field name made lowercase.
+    fechafin = models.DateField(db_column='fechaFin') # Field name made lowercase.
+    idpublicacionconvocatoria = models.ForeignKey(Publicacion, db_column='idpublicacionConvocatoria') # Field name made lowercase.
+    class Meta:
+        db_table = 'convocatoria'
+
 class Solicitud(models.Model):
     idsolicitud = models.BigIntegerField(primary_key=True)
     idpublicacion = models.ForeignKey(Publicacion, db_column='idpublicacion', related_name='solicitud_publicacion')
