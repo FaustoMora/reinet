@@ -54,7 +54,7 @@ class Milestoneparticipante(models.Model):
 
 class Publicacion(models.Model):
     idpublicacion = models.BigIntegerField(unique=True)
-    idusuario = models.ForeignKey('AuthUser', db_column='idusuario')
+    #idusuario = models.ForeignKey('Persona', db_column='idpersona')
     nombre = models.CharField(max_length=150L)
     descripcion = models.CharField(max_length=500L)
     dominio = models.IntegerField()

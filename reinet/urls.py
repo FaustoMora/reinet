@@ -37,7 +37,6 @@ urlpatterns = patterns('',
         },
         name='logout'),
 
-    url(r'^incubaciones$','concursoIncubacion.views.homeIncubaciones',name='incubaciones'),
     url(r'^demanda$','ofertaDemanda.views.DemandaInicio',name='demanda'),
     url(r'^oferta$','ofertaDemanda.views.OfertaInicio',name='oferta'),
     url(r'^',include('usuarios.urls')),
