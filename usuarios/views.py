@@ -92,8 +92,11 @@ def perfil_view(request):
 	#request.session['id_persona']=p.idpersona
 	#print request.session['id_persona']
 	#print personas[0].idpersona
+	persona1=Persona.objects.get(idpersona=id_persona)
 	args={}
-	args['user']=user1
+	args['usuario']=user1
+	args['persona']=persona1
+	
 	return render_to_response('USUARIO_profile.html',args)
 def mensajes_view(request):
 	return render_to_response('USUARIO_inbox.html')
