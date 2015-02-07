@@ -5,7 +5,7 @@ from views import *
 
 urlpatterns = patterns('',
 
-		url(r'^index[/]?$',index,name='index'),
+	url(r'^index[/]?$',index,name='index'),
         url(r'^ingresar[/]?$',ingresar,name='index'),
         url(r'^logout[/]?$',logout,name='index'),
         url(r'^auth[/]?$',auth_view,name='index'),
@@ -18,6 +18,7 @@ urlpatterns = patterns('',
         url(r'^perfil[/]?$',perfil_view),    
         url(r'^mensajes[/]?$',mensajes_view),   
 
-       url(r'^inicio[/]?$',inicio_view),   
+       url(r'^inicio[/]?$',inicio_view), 
+        url(r'^editarperfil[/]?$',editar_perfil_view),   
         
 )

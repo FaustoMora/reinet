@@ -23,12 +23,12 @@
                 </a>  
               </li>
               <li>
-                <a href="USUARIO_edit-profile.html" class="link">
+                <a href="/editarperfil/">
                   <i class="sign fa fa-edit bg-blue"></i> Editar Perfil<i class="fa fa-chevron-right pull-right"></i>
                 </a>  
               </li>
               <li>
-                <a href="{% url 'usuarios.views.mensajes_view' %}" class="link">
+                <a href="{% url 'usuarios.views.mensajes_view' %}">
                   <i class="sign fa fa-envelope bg-red"></i> Inbox <i class="fa fa-chevron-right pull-right"></i>
                 </a>  
               </li>
@@ -42,6 +42,7 @@
         </div>
         {%endblock%}
         <!-- Avatar & social links -->
+        {%block contenidoUsuario%}
         <div class="col-sm-8 col-md-6">
           <div class="row">
             <div class="col-sm-4">
@@ -248,7 +249,9 @@
             </div>
           </div>
         </div>
+        {%endblock%}
         <!-- Stats and Galery -->
+        {%block galeriaUsuario%}
         <div class="col-sm-8 col-sm-offset-4 col-md-3 col-md-offset-0">
           <div class="block-inverse">
             <div class="head-inverse">
@@ -276,8 +279,8 @@
             </div>
           </div>
         </div>
+        {%endblock%}
       </div>
     </div>
-
 
   {% endblock %}

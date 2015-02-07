@@ -11,7 +11,6 @@ TEMPLATE_DEBUG = DEBUG
 ALLOWED_HOSTS = (
     'localhost',
 )
-
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
