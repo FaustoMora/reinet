@@ -82,7 +82,7 @@ def create(request):
 	args.update(csrf(request))
 	args['form']= form
 	return render_to_response('USUARIO_sign-up.html', args)
-
+@login_required(login_url='/ingresar/')
 def perfil_view(request):
 	id_session=request.session['id_user']
 	
@@ -128,4 +128,4 @@ def editar_perfil_view(request):
 		args['userform']=user_form
 		args['personaform']=persona_form
 	#return render_to_response('USUARIO_edit-profile.html', args)
-	return render_to_response('loggedin.html', args)
+	return render_to_response('USUARIO_edit-profile.html', args)
