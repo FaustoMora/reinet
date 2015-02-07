@@ -95,6 +95,7 @@ def perfil_view(request):
 	args['persona']=persona1
 	
 	return render_to_response('USUARIO_profile.html',args)
+@login_required(login_url='/ingresar/')
 def mensajes_view(request):
 	return render_to_response('USUARIO_inbox.html')
 
