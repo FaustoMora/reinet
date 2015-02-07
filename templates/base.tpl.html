@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -20,6 +20,7 @@
   <link href="{% static 'css/elements.css' %}" type="text/css" rel="stylesheet"/>
   <link href="{% static 'css/custom.css' %}" type="text/css" rel="stylesheet"/>
   <link href="{% static 'fonts/font-awesome-4.0.3/css/font-awesome.min.css' %}" type="text/css" rel="stylesheet"/>
+  <link href="{% static 'isotope/css/style.css'%}" rel="stylesheet">
   <!--<link rel="stylesheet" type="text/css" href="css/animate.css" />
   <link rel="stylesheet" type="text/css" href="css/elements.css" />
   <link rel="stylesheet" type="text/css" href="css/custom.css" />
@@ -58,10 +59,10 @@
             <a href="Demandas" >DEMANDAS </a>
           </li>
           <li class="dropdown hidden-sm">
-            <a href="homeConcursos" >CONCURSOS </a>
+            <a href="{% url 'concursoIncubacion.views.homeConcursos' %}" >CONCURSOS </a>
           </li>
           <li class="dropdown hidden-sm">
-            <a href="homeIncubacion">INCUBACIONES </a>
+            <a href="{% url 'concursoIncubacion.views.homeIncubacion' %}">INCUBACIONES </a>
           </li>
           <li class="visible-xs"><a href="{% url 'usuarios.views.ingresar' %}">Sign In</a></li>
           <li  class="visible-xs"><a href="#">Sign Out</a></li>
