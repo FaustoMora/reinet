@@ -23,12 +23,12 @@
                 </a>  
               </li>
               <li>
-                <a href="USUARIO_edit-profile.html" class="link">
+                <a href="/editarperfil/">
                   <i class="sign fa fa-edit bg-blue"></i> Editar Perfil<i class="fa fa-chevron-right pull-right"></i>
                 </a>  
               </li>
               <li>
-                <a href="{% url 'usuarios.views.mensajes_view' %}" class="link">
+                <a href="{% url 'usuarios.views.mensajes_view' %}">
                   <i class="sign fa fa-envelope bg-red"></i> Inbox <i class="fa fa-chevron-right pull-right"></i>
                 </a>  
               </li>
@@ -42,6 +42,7 @@
         </div>
         {%endblock%}
         <!-- Avatar & social links -->
+        {%block contenidoUsuario%}
         <div class="col-sm-8 col-md-6">
           <div class="row">
             <div class="col-sm-4">
@@ -83,7 +84,8 @@
             </div>
             <!-- Main profile info -->
             <div class="col-sm-8">
-              <h3 class="hl" id="principalNombre">{{user.first_name}} {{user.last_name}} <small> Usuario Independiente</small></h3>
+
+              <h3 class="hl" id="principalNombre">{{usuario.first_name}} {{usuario.last_name}} <small> Usuario Independiente</small></h3>
               <hr>
               <!-- User status update form -->
               <div class="user-status">
@@ -156,7 +158,8 @@
                           <button type="button" class="btn btn-green" data-dismiss="modal">Enviar</button>
                         </form>
                       </div>
-                    </div> /.modal-content -->
+                    -->
+                  </div> <!--/.modal-content -->
                   </div><!-- /.modal-dialog -->
                 </div><!-- /.modal -->
                 <!-- End of modal window -->
@@ -192,8 +195,31 @@
                     <td class="text-muted">Ubicaci&oacute;n</td>
                     <td>Ecuador</td>
                   </tr>
--->             
+-->
+              <tr>
+                    <td class="text-muted">Nombre</td>
+                    <td>{{usuario.first_name}} </td>
+                  </tr>
+                  
+                  <tr>
+                    <td class="text-muted">Apellido</td>
+                    <td>{{usuario.last_name}}</td>
+                  </tr>
+                  <tr>
+                    <td class="text-muted">Instituci&oacute;n</td>
+                    <td>ESPOL</td>
+                  </tr>
                  
+                  <tr>
+                    <td class="text-muted">Identificaci&oacute;n</td>
+                    <td>{{persona.identificacion}}</td>
+                  </tr>
+                  <tr>
+                    <td class="text-muted">&Aacute;reas de inter&eacute;s</td>
+                    <td>{{persona.areas_interes}}</td>
+                  </tr>
+
+
                 </tbody>
               </table>
               <hr>
@@ -214,14 +240,20 @@
                     <td class="text-muted">Sitio Web</td>
                     <td>http://www.example.com</td>
                   </tr>
--->
+-->             
+                   <tr>
+                    <td class="text-muted">Email</td>
+                    <td>{{usuario.email}} </td>
+                  </tr>
                 </tbody>
               </table>
               <hr>
             </div>
           </div>
         </div>
+        {%endblock%}
         <!-- Stats and Galery -->
+        {%block galeriaUsuario%}
         <div class="col-sm-8 col-sm-offset-4 col-md-3 col-md-offset-0">
           <div class="block-inverse">
             <div class="head-inverse">
@@ -249,8 +281,8 @@
             </div>
           </div>
         </div>
+        {%endblock%}
       </div>
     </div>
-
 
   {% endblock %}

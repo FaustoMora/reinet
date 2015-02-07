@@ -1,8 +1,9 @@
-
-    {% extends "base.tpl.html" %}
+homeIncubacion{% extends "base.tpl.html" %}
 {% block content %}
- 
-	 <div class="section-header">
+<!-- Main body
+================== -->
+
+    <div class="section-header">
       <div class="container">
         <div class="row">
           <div class="col-sm-12">
@@ -13,58 +14,60 @@
       </div>
     </div>
     <div class="container">
-      <ul class="row list-inline gallery-list" id="isotope-container">
-          <li class="isotope-item cat-3 cat-1">
-          <a href="DEMANDA_crear_demanda.html">
-            <span class="gallery-text">
-              <span class="gallery-title"> + Crear Demanda</span>
-            </span>
-          </a>
-        </li>
-      </ul>
-      <h3>MIS DEMANDAS</h3>
+      <h3>Mis Incubaciones</h3>
       <ul class="row list-inline gallery-list" id="isotope-container">
         <li class="isotope-item cat-1 cat-2 cat-4">
-          <a href="DEMANDA_perfil.html">
+          <a href="verIncubacion">
             <span class="gallery-thumbnail">
-              <img class="img-responsive" src="../static/img/imgDemandaOferta/works1.jpg" alt="...">
+              <img class="img-responsive" src="../../static/img/works1.jpg" alt="...">
             </span>
             <span class="gallery-text">
-              <span class="gallery-title">Demanda 1</span>
+              <span class="gallery-title">Proyecto Manhattan</span>
               Nullam id ipsum varius, tincidunt odio nec, placerat enim.
             </span>
           </a>
         </li>
         <li class="isotope-item cat-2 cat-4">
-          <a href="DEMANDA_perfil.html">
+          <a href="verIncubacion">
             <span class="gallery-thumbnail">
-              <img class="img-responsive" src="../static/img/imgDemandaOferta/works2.jpg" alt="...">
+              <img class="img-responsive" src="../../static/img/works2.jpg" alt="...">
             </span>
             <span class="gallery-text">
-              <span class="gallery-title">Demanda 2</span>
+              <span class="gallery-title">Robots parlantes</span>
               Nullam id ipsum varius, tincidunt odio nec, placerat enim.
             </span>
           </a>
         </li>
         <li class="isotope-item cat-3 cat-1">
-          <a href="DEMANDA_perfil.html">
+          <a href="verIncubacion">
             <span class="gallery-thumbnail">
-              <img class="img-responsive" src="../static/img/imgDemandaOferta/works3.jpg" alt="...">
+              <img class="img-responsive" src="../../static/img/works3.jpg" alt="...">
             </span>
             <span class="gallery-text">
-              <span class="gallery-title">Demanda 3</span>
+              <span class="gallery-title">Falsificador de notas</span>
               Nullam id ipsum varius, tincidunt odio nec, placerat enim.
             </span>
           </a>
         </li>
         <li class="isotope-item cat-2 cat-4">
-          <a href="DEMANDA_perfil.html">
+          <a href="verIncubacion">
             <span class="gallery-thumbnail">
-              <img class="img-responsive" src="../static/img/imgDemandaOferta/works4.jpg" alt="...">
+              <img class="img-responsive" src="../../static/img/works4.jpg" alt="...">
             </span>
             <span class="gallery-text">
-              <span class="gallery-title">Demanda 4</span>
+              <span class="gallery-title">Paseador de perros</span>
               Nullam id ipsum varius, tincidunt odio nec, placerat enim.
+            </span>
+          </a>
+        </li>
+        <li class="isotope-item cat-3 cat-1">
+          <a href="crearIncubacion">
+            <span class="gallery-thumbnail">
+              <img class="img-responsive" src="../../static/img/dots2.jpg" alt="...">
+            </span>
+            <span class="gallery-text">
+              <span class="gallery-title"> + Crear Incubaci&oacute;n</span>
+              
             </span>
           </a>
         </li>
@@ -73,54 +76,55 @@
     </div>
 	
 	<div class="container">
-         <h3>DEMANDAS EN LA RED</h3>
+      <h3>Areas de inter&eacute;s</h3>
       <ul class="row list-inline gallery-list" id="isotope-container">
         <li class="isotope-item cat-1 cat-2 cat-4">
-          <a href="DEMANDA_perfil.html">
+          <a href="verIncubacion">
             <span class="gallery-thumbnail">
-              <img class="img-responsive" src="../static/img/imgDemandaOferta/works1.jpg" alt="...">
+              <img class="img-responsive" src="../../static/img/works1.jpg" alt="...">
             </span>
             <span class="gallery-text">
-              <span class="gallery-title">Demanda 1</span>
+              <span class="gallery-title">Proyecto Manhattan</span>
               Nullam id ipsum varius, tincidunt odio nec, placerat enim.
             </span>
           </a>
         </li>
         <li class="isotope-item cat-2 cat-4">
-          <a href="DEMANDA_perfil.html">
+          <a href="verIncubacion">
             <span class="gallery-thumbnail">
-              <img class="img-responsive" src="../static/img/imgDemandaOferta/works2.jpg" alt="...">
+              <img class="img-responsive" src="../../static/img/works2.jpg" alt="...">
             </span>
             <span class="gallery-text">
-              <span class="gallery-title">Demanda 2</span>
+              <span class="gallery-title">Robots parlantes</span>
               Nullam id ipsum varius, tincidunt odio nec, placerat enim.
             </span>
           </a>
         </li>
         <li class="isotope-item cat-3 cat-1">
-          <a href="DEMANDA_perfil.html">
+          <a href="verIncubacion">
             <span class="gallery-thumbnail">
-              <img class="img-responsive" src="../static/img/imgDemandaOferta/works3.jpg" alt="...">
+              <img class="img-responsive" src="../../static/img/works3.jpg" alt="...">
             </span>
             <span class="gallery-text">
-              <span class="gallery-title">Demanda 3</span>
+              <span class="gallery-title">Falsificador de notas</span>
               Nullam id ipsum varius, tincidunt odio nec, placerat enim.
             </span>
           </a>
         </li>
         <li class="isotope-item cat-2 cat-4">
-          <a href="DEMANDA_perfil.html">
+          <a href="verIncubacion">
             <span class="gallery-thumbnail">
-              <img class="img-responsive" src="../static/img/imgDemandaOferta/works4.jpg" alt="...">
+              <img class="img-responsive" src="../../static/img/works4.jpg" alt="...">
             </span>
             <span class="gallery-text">
-              <span class="gallery-title">Demanda 4</span>
+              <span class="gallery-title">Paseador de perros</span>
               Nullam id ipsum varius, tincidunt odio nec, placerat enim.
             </span>
           </a>
         </li>
-        
       </ul>
-     
     </div>
-  {% endblock %}
+	
+
+    
+{% endblock %}
