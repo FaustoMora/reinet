@@ -27,7 +27,7 @@ class Comentario(models.Model):
 """
 
 class Publicacion(models.Model):
-    idpublicacion = models.BigIntegerField(unique=True)
+    idpublicacion = models.AutoField(unique=True,primary_key=True)
     idusuario = models.ForeignKey(User, db_column='idusuario')
     nombre = models.CharField(max_length=150L)
     descripcion = models.CharField(max_length=500L)
