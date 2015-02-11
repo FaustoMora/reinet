@@ -1,6 +1,10 @@
     {% extends "base.tpl.html" %}
+    {% block signin %}
+<li id="sign-up" class="show"><a href="{% url 'usuarios.views.register' %}">Sign Up</a></li>
+<li id="sign-in" class="show"><a href="{% url 'usuarios.views.ingresar' %}">Sign In</a></li>
+{% endblock %}
 {% block content %}
 
-<h1>Hola {{full_name}} Error</h1>
-<h1>click <a href="/ingresar">here</a></h1>
+<h1>Error de usuario o clave</h1>
+<h1>Click <a href="/ingresar">aqu&iacute;</a> para ingresar</h1>
 {% endblock %}
