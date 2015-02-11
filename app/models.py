@@ -31,9 +31,8 @@ class Publicacion(models.Model):
     idusuario = models.ForeignKey(User, db_column='idusuario')
     nombre = models.CharField(max_length=150L)
     descripcion = models.CharField(max_length=500L)
-    dominio = models.IntegerField()
-    subdominio = models.IntegerField()
+    dominio = models.CharField(max_length=200L)
+    subdominio = models.CharField(max_length=200L)
     class Meta:
         db_table = 'publicacion'
-
 

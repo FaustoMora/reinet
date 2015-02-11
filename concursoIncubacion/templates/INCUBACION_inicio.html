@@ -1,4 +1,4 @@
-homeIncubacion{% extends "base.tpl.html" %}
+{% extends "base.tpl.html" %}
 {% block content %}
 <!-- Main body
 ================== -->
@@ -14,7 +14,16 @@ homeIncubacion{% extends "base.tpl.html" %}
       </div>
     </div>
     <div class="container">
-      <h3>Mis Incubaciones</h3>
+      <ul class="row list-inline gallery-list" id="isotope-container">
+        <li class="isotope-item cat-3 cat-1">
+          <a href="crearIncubacion">
+            <span class="gallery-text">
+              <span class="gallery-title"> + Crear Incubac&iacute;on</span>
+            </span>
+          </a>
+        </li>
+      </ul>
+      <h3>MIS INCUBACIONES</h3>
       <ul class="row list-inline gallery-list" id="isotope-container">
         <li class="isotope-item cat-1 cat-2 cat-4">
           <a href="verIncubacion">
@@ -60,22 +69,10 @@ homeIncubacion{% extends "base.tpl.html" %}
             </span>
           </a>
         </li>
-        <li class="isotope-item cat-3 cat-1">
-          <a href="crearIncubacion">
-            <span class="gallery-thumbnail">
-              <img class="img-responsive" src="../../static/img/dots2.jpg" alt="...">
-            </span>
-            <span class="gallery-text">
-              <span class="gallery-title"> + Crear Incubaci&oacute;n</span>
-              
-            </span>
-          </a>
-        </li>
-        
       </ul>
     </div>
-	
-	<div class="container">
+  
+  <div class="container">
       <h3>Areas de inter&eacute;s</h3>
       <ul class="row list-inline gallery-list" id="isotope-container">
         <li class="isotope-item cat-1 cat-2 cat-4">
@@ -124,7 +121,7 @@ homeIncubacion{% extends "base.tpl.html" %}
         </li>
       </ul>
     </div>
-	
+  
 
     
 {% endblock %}
