@@ -13,23 +13,6 @@ from django.contrib.auth.models import User
 from app.models import *
 
 
-"""
-class Equipo(models.Model):
-    idequipo = models.BigIntegerField(primary_key=True)
-    idpublicacion = models.ForeignKey('Publicacion', db_column='idpublicacion')
-    idusuario = models.ForeignKey('Persona', db_column='id')
-    rol = models.CharField(max_length=100L)
-    class Meta:
-        db_table = 'equipo'
-"""
-"""
-class Imagen(models.Model):
-    idimagen = models.BigIntegerField(primary_key=True)
-    idpublicacion = models.ForeignKey('Publicacion', db_column='idpublicacion')
-    enlace_imagen = models.CharField(max_length=100L)
-    class Meta:
-        db_table = 'imagen'
-"""
 class Institucion(User):
     idinstitucion = models.AutoField(primary_key=True)
     nombre_corto = models.CharField(max_length=20L)
@@ -73,11 +56,4 @@ class Mensaje(models.Model):
     hora=models.TimeField()
     class Meta:
         db_table = 'mensaje'
-"""
-class Politicaprivacidad(models.Model):
-    idusuario = models.ForeignKey('Persona', db_column='idusuario')
-    idpublicacion = models.ForeignKey('Publicacion', db_column='idpublicacion')
-    tipo_alcance = models.CharField(max_length=50L)
-    class Meta:
-        db_table = 'politicaprivacidad'
-"""
+

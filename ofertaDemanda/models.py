@@ -1,9 +1,15 @@
 from django.db import models
-"""
+from app.models import *
+from usuarios.models import *
 # Create your models here. OFERTA DEMANDA
 class Detalledemanda(models.Model):
-    iddetalledemanda = models.BigIntegerField(unique=True)
-    idpublicacion = models.ForeignKey('Publicacion', db_column='idpublicacion', related_name='detalle_publicacion')
+    
+    iddetalledemanda = models.AutoField(primary_key=True)
+    idusuario = models.ForeignKey(User, db_column='idusuario')
+    nombre = models.CharField(max_length=150L)
+    descripcion = models.CharField(max_length=500L)
+    dominio = models.IntegerField()
+    subdominio = models.IntegerField()
     palabras_claves = models.CharField(max_length=100L, db_column='palabras_Claves') # Field name made lowercase.
     tiempo_inicio_disponible = models.DateField(db_column='tiempo_Inicio_Disponible') # Field name made lowercase.
     tiempo_fin_disponible = models.DateField(db_column='tiempo_Fin_Disponible') # Field name made lowercase.
@@ -17,8 +23,12 @@ class Detalledemanda(models.Model):
 
 
 class Detalleoferta(models.Model):
-    iddetalleoferta = models.BigIntegerField(unique=True)
-    idpublicacion = models.ForeignKey('Publicacion', null=True, db_column='idpublicacion', blank=True)
+    iddetalleoferta = models.AutoField(primary_key=True)
+    idusuario = models.ForeignKey(User, db_column='idusuario')
+    nombre = models.CharField(max_length=150L)
+    descripcion = models.CharField(max_length=500L)
+    dominio = models.IntegerField()
+    subdominio = models.IntegerField()
     palabras_claves = models.CharField(max_length=100L, db_column='palabras_Claves') # Field name made lowercase.
     tiempo_inicio_disponible = models.DateField(db_column='tiempo_Inicio_Disponible') # Field name made lowercase.
     tiempo_fin_disponible = models.DateField(db_column='tiempo_Fin_Disponible') # Field name made lowercase.
@@ -37,7 +47,7 @@ class Detalleoferta(models.Model):
 
 
 class Diagramacanvas(models.Model):
-    iddiagramacanvas = models.BigIntegerField(primary_key=True, db_column='idDiagramaCanvas') # Field name made lowercase.
+    iddiagramacanvas = models.AutoField(primary_key=True, db_column='idDiagramaCanvas') # Field name made lowercase.
     iddetalleoferta = models.ForeignKey(Detalleoferta, db_column='iddetalleoferta')
     asociacionesclave = models.CharField(max_length=150L, db_column='asociacionesClave') # Field name made lowercase.
     actividadesclave = models.CharField(max_length=150L, db_column='actividadesClave') # Field name made lowercase.
@@ -51,7 +61,7 @@ class Diagramacanvas(models.Model):
         db_table = 'diagramacanvas'
 
 class Diagramaporter(models.Model):
-    iddiagramaporter = models.BigIntegerField(primary_key=True, db_column='iddiagramaPorter') # Field name made lowercase.
+    iddiagramaporter = models.AutoField(primary_key=True, db_column='iddiagramaPorter') # Field name made lowercase.
     iddetalleoferta = models.ForeignKey(Detalleoferta, db_column='iddetalleoferta')
     rivalidadcompetidores = models.CharField(max_length=200L, db_column='rivalidadCompetidores') # Field name made lowercase.
     competidorespotenciales = models.CharField(max_length=200L, db_column='competidoresPotenciales') # Field name made lowercase.
@@ -61,4 +71,40 @@ class Diagramaporter(models.Model):
     class Meta:
         db_table = 'diagramaporter'
 
-"""
+
+class Equipo(models.Model):
+    idequipo = models.AutoField(primary_key=True)
+    idOferta = models.ForeignKey(Detalleoferta, db_column='iddetalleoferta')
+    idusuario = models.ForeignKey(Persona, db_column='idpersona')
+    rol = models.CharField(max_length=100L)
+    estado=models.IntegerField()
+    class Meta:
+        db_table = 'equipo'
+
+
+class ImagenOferta(models.Model):
+    idimagen = models.AutoField(primary_key=True)
+    idOferta = models.ForeignKey(Detalleoferta, db_column='iddetalleoferta')
+    enlace_imagen = models.CharField(max_length=100L)
+    class Meta:
+        db_table = 'imagenOferta'
+
+
+class ComentarioOferta(models.Model):
+    idcomentario = models.AutoField(primary_key=True)
+    idusuario = models.ForeignKey(Persona, db_column='idpersona')
+    comentario = models.CharField(max_length=500L)
+    calificacion = models.IntegerField(null=True, blank=True)
+    idoferta = models.ForeignKey(Detalleoferta, db_column='iddetalleoferta')
+    class Meta:
+        db_table = 'comentarioOferta'
+
+
+class ComentarioDemanda(models.Model):
+    idcomentario = models.AutoField(primary_key=True)
+    idusuario = models.ForeignKey(Persona, db_column='idpersona')
+    comentario = models.CharField(max_length=500L)
+    calificacion = models.IntegerField(null=True, blank=True)
+    idDemanda = models.ForeignKey(Detalledemanda, db_column='iddetalledemanda')
+    class Meta:
+        db_table = 'comentarioOferta'

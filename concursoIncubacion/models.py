@@ -68,3 +68,4 @@ class Solicitud(models.Model):
     fecha = models.IntegerField(null=True, blank=True)
     class Meta:
         db_table = 'solicitud'
+
