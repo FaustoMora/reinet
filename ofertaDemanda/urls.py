@@ -13,5 +13,6 @@ urlpatterns = patterns('',
         url(r'^Ofertas[/]?$',Ofertas,name='Ofertas'),
         url(r'^OfertaCrear[/]?$',OfertaCrear,name='OfertaCrear'),  
         url(r'^OfertaVer[/]?$',OfertaVer,name='OfertaVer'), 
+        url(r'^OfertasMisOfertas[/]?$',OfertasMisOfertas,name='OfertasMisOfertas'), 
         
 )

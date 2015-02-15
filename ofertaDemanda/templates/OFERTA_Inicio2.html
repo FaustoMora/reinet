@@ -1,5 +1,5 @@
 
-    {% extends "base.tpl.html" %}
+{% extends "base.tpl.html" %}
 {% block content %}
  
 	 <div class="section-header">
@@ -7,120 +7,147 @@
         <div class="row">
           <div class="col-sm-12">
             <!-- Remove the .animated class if you don't want things to move -->
-            <h1 class="animated slideInLeft"><span>Inicio</span></h1>
+            <h1 class="animated slideInLeft"><span>Ofertas de la Red de Innovaci&oacute;n</span></h1>
           </div>
         </div>
-      </div>
+      </div>      
     </div>
+    
     <div class="container">
-      <ul class="row list-inline gallery-list" id="isotope-container">
-          <li class="isotope-item cat-3 cat-1">
-          <a href="OfertaCrear">
-            <span class="gallery-text">
-              <span class="gallery-title"> + Crear Oferta</span>
-            </span>
-          </a>
-        </li>
-      </ul>
-      <h3>MIS OFERTAS</h3>
-      <ul class="row list-inline gallery-list" id="isotope-container">
-        <li class="isotope-item cat-1 cat-2 cat-4">
-          <a href="OfertaVer">
-            <span class="gallery-thumbnail">
-              <img class="img-responsive" src="../static/img/imgDemandaOferta/works1.jpg" alt="...">
-            </span>
-            <span class="gallery-text">
-              <span class="gallery-title"> Oferta 1</span>
-              Nullam id ipsum varius, tincidunt odio nec, placerat enim.
-            </span>
-          </a>
-        </li>
-        <li class="isotope-item cat-2 cat-4">
-          <a href="OfertaVer">
-            <span class="gallery-thumbnail">
-              <img class="img-responsive" src="../static/img/imgDemandaOferta/works2.jpg" alt="...">
-            </span>
-            <span class="gallery-text">
-              <span class="gallery-title"> Oferta 2</span>
-              Nullam id ipsum varius, tincidunt odio nec, placerat enim.
-            </span>
-          </a>
-        </li>
-        <li class="isotope-item cat-3 cat-1">
-          <a href="OfertaVer">
-            <span class="gallery-thumbnail">
-              <img class="img-responsive" src="../static/img/imgDemandaOferta/works3.jpg" alt="...">
-            </span>
-            <span class="gallery-text">
-              <span class="gallery-title"> Oferta 3</span>
-              Nullam id ipsum varius, tincidunt odio nec, placerat enim.
-            </span>
-          </a>
-        </li>
-        <li class="isotope-item cat-2 cat-4">
-          <a href="OfertaVer">
-            <span class="gallery-thumbnail">
-              <img class="img-responsive" src="../static/img/imgDemandaOferta/works4.jpg" alt="...">
-            </span>
-            <span class="gallery-text">
-              <span class="gallery-title"> Oferta 4</span>
-              Nullam id ipsum varius, tincidunt odio nec, placerat enim.
-            </span>
-          </a>
-        </li>
-        
-      </ul>
+      <div class="row">
+        <div class="col-md-6 col-sm-9">
+          <div class="row faq-cats">
+            <div class="col-md-6">
+              <ul>
+                <li><i class="fa fa-coffee fa-2x"></i> <a href="OfertasMisOfertas">Visualizar mis Ofertas</a></li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+        <div class="col-md-6 col-sm-9">
+          <form class="form-inline" role="form">
+            <div class="row">
+              <div class="col-md-10 col-sm-10">
+                <div class="input-group">
+                  <label class="sr-only" for="search3">Search</label>
+                    <input type="text" class="form-control " id="search3" placeholder="Encuentre ofertas de su inter&eacute;s">
+                  <span class="input-group-btn">
+                    <button type="submit" class="btn btn-blue">Buscar</button>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </form><br />
+        </div>
+      </div>
+
     </div>
-	
-	<div class="container">
-         <h3>OFERTAS EN LA RED</h3>
-      <ul class="row list-inline gallery-list" id="isotope-container">
-        <li class="isotope-item cat-1 cat-2 cat-4">
-          <a href="OfertaVer">
-            <span class="gallery-thumbnail">
-              <img class="img-responsive" src="../static/img/imgDemandaOferta/works1.jpg" alt="...">
-            </span>
-            <span class="gallery-text">
-              <span class="gallery-title"> Oferta 1</span>
-              Nullam id ipsum varius, tincidunt odio nec, placerat enim.
-            </span>
-          </a>
-        </li>
-        <li class="isotope-item cat-2 cat-4">
-          <a href="OfertaVer">
-            <span class="gallery-thumbnail">
-              <img class="img-responsive" src="../static/img/imgDemandaOferta/works2.jpg" alt="...">
-            </span>
-            <span class="gallery-text">
-              <span class="gallery-title"> Oferta 2</span>
-              Nullam id ipsum varius, tincidunt odio nec, placerat enim.
-            </span>
-          </a>
-        </li>
-        <li class="isotope-item cat-3 cat-1">
-          <a href="OfertaVer">
-            <span class="gallery-thumbnail">
-              <img class="img-responsive" src="../static/img/imgDemandaOferta/works3.jpg" alt="...">
-            </span>
-            <span class="gallery-text">
-              <span class="gallery-title"> Oferta 3</span>
-              Nullam id ipsum varius, tincidunt odio nec, placerat enim.
-            </span>
-          </a>
-        </li>
-        <li class="isotope-item cat-2 cat-4">
-          <a href="OfertaVer">
-            <span class="gallery-thumbnail">
-              <img class="img-responsive" src="../static/img/imgDemandaOferta/works4.jpg" alt="...">
-            </span>
-            <span class="gallery-text">
-              <span class="gallery-title"> Oferta 4</span>
-              Nullam id ipsum varius, tincidunt odio nec, placerat enim.
-            </span>
-          </a>
-        </li>
-        
-      </ul>
-     
-    </div>
+    <div class="container">   
+      <div class="row">
+
+
+        <div class="col-md-3 col-sm-6">
+            <div class="thumbnail">
+              <img src="../static/img/imgDemandaOferta/works1.jpg" class="img-responsive" alt="Oferta">
+              <div class="visit"><a href="OfertaVer"><i class="fa fa-question-circle"></i> Ver Oferta</a></div>
+              <div class="caption">
+                <h4>Nombre de la Oferta</h4>
+                <div class="rating">
+                    <i class="fa fa-star"></i> 
+                    <i class="fa fa-star"></i> 
+                    <i class="fa fa-star"></i> 
+                    <i class="fa fa-star"></i> 
+                    <i class="fa fa-star"></i>
+                  </div>
+                <ul class="text-muted list-inline">
+                  <li><i class="fa fa-user"></i> <a href="#">Administrator</a></li>
+                  <li><i class="fa fa-calendar"></i> November 8, 2013</li>
+                  <li><i class="fa fa-comments-o"></i> 6 comments</li>
+                </ul>
+                  
+                <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam.</p>
+              </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+            <div class="thumbnail">
+              <img src="../static/img/imgDemandaOferta/works1.jpg" class="img-responsive" alt="Oferta">
+              <div class="visit"><a href="OfertaVer"><i class="fa fa-question-circle"></i> Ver Oferta</a></div>
+              <div class="caption">
+                <h4>Nombre de la Oferta</h4>
+                <div class="rating">
+                    <i class="fa fa-star"></i> 
+                    <i class="fa fa-star"></i> 
+                    <i class="fa fa-star"></i> 
+                    <i class="fa fa-star"></i> 
+                    <i class="fa fa-star"></i>
+                  </div>
+                <ul class="text-muted list-inline">
+                  <li><i class="fa fa-user"></i> <a href="#">Administrator</a></li>
+                  <li><i class="fa fa-calendar"></i> November 8, 2013</li>
+                  <li><i class="fa fa-comments-o"></i> 6 comments</li>
+                </ul>
+                  
+                <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam.</p>
+              </div>
+            </div>
+        </div>      
+        <div class="clearfix visible-sm"></div>       
+        <div class="col-md-3 col-sm-6">
+            <div class="thumbnail">
+              <img src="../static/img/imgDemandaOferta/works1.jpg" class="img-responsive" alt="Oferta">
+              <div class="visit"><a href="OfertaVer"><i class="fa fa-question-circle"></i> Ver Oferta</a></div>
+              <div class="caption">
+                <h4>Nombre de la Oferta</h4>
+                <div class="rating">
+                    <i class="fa fa-star"></i> 
+                    <i class="fa fa-star"></i> 
+                    <i class="fa fa-star"></i> 
+                    <i class="fa fa-star"></i> 
+                    <i class="fa fa-star"></i>
+                  </div>
+                <ul class="text-muted list-inline">
+                  <li><i class="fa fa-user"></i> <a href="#">Administrator</a></li>
+                  <li><i class="fa fa-calendar"></i> November 8, 2013</li>
+                  <li><i class="fa fa-comments-o"></i> 6 comments</li>
+                </ul>
+                  
+                <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam.</p>
+              </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+            <div class="thumbnail">
+              <img src="../static/img/imgDemandaOferta/works1.jpg" class="img-responsive" alt="Oferta">
+              <div class="visit"><a href="OfertaVer"><i class="fa fa-question-circle"></i> Ver Oferta</a></div>
+              <div class="caption">
+                <h4>Nombre de la Oferta</h4>
+                <div class="rating">
+                    <i class="fa fa-star"></i> 
+                    <i class="fa fa-star"></i> 
+                    <i class="fa fa-star"></i> 
+                    <i class="fa fa-star"></i> 
+                    <i class="fa fa-star"></i>
+                  </div>
+                <ul class="text-muted list-inline">
+                  <li><i class="fa fa-user"></i> <a href="#">Administrator</a></li>
+                  <li><i class="fa fa-calendar"></i> November 8, 2013</li>
+                  <li><i class="fa fa-comments-o"></i> 6 comments</li>
+                </ul>
+                  
+                <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam.</p>
+              </div>
+            </div>
+        </div>      
+        <div class="clearfix visible-sm"></div>               
+      </div>
+
+
+                
+      </div>
+
+      
+
+    </div>  
   {% endblock %}

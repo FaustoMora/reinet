@@ -19,3 +19,6 @@ def OfertaCrear(request):
 
 def OfertaVer(request):
     return render_to_response('OFERTA_perfil.html')
+
+def OfertasMisOfertas(request):
+    return render_to_response('OFERTA_misOfertas.html')
