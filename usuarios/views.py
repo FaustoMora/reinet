@@ -8,7 +8,7 @@ from forms import *
 from django.contrib.auth.forms import UserCreationForm
 from models import *
 from django.contrib.auth.decorators import login_required
-
+from django.template import RequestContext
 
 def index(request):
 	return render_to_response('USUARIO_index.html')
@@ -99,33 +99,41 @@ def perfil_view(request):
 def mensajes_view(request):
 	return render_to_response('USUARIO_inbox.html')
 
-
+@login_required(login_url='/ingresar/')
 def inicio_view(request):
 	return render_to_response('USUARIO_inicio.html')
 
 
-@login_required
+@login_required(login_url='/ingresar/')
 def editar_perfil_view(request):
 	id_session=request.session['id_user']
 	id_persona=request.session['id_persona']
+	args={}
 	if request.method == 'POST':
 		id_session=request.session['id_user']
 		id_persona=request.session['id_persona']
 		user=User.objects.get(id=id_session)
 		persona=Persona.objects.get(idpersona=id_persona)
-		user_form = UserCreationForm(request.POST, instance=user)
-		persona_form = PersonaForm(request.POST, instance=persona)
+		user_form = UserCreationForm(request.POST,  request.FILES,instance=user)
+		persona_form = PersonaForm(request.POST, request.FILES, instance=persona)
+		print "validacioneees", user_form.is_valid(), persona_form.is_valid()
 		if user_form.is_valid() and persona_form.is_valid():
 			user_form.save()
 			persona_form.save()
 			return HttpResponseRedirect('/perfil/')
+		else:
+			user=User.objects.get(id=id_session)
+			persona=Persona.objects.get(idpersona=id_persona)
+			user_form = UserCreationForm(instance=user)
+			persona_form = PersonaForm(instance=persona)
+			args['userform']=user_form
+			args['personaform']=persona_form
 	else:
 		user=User.objects.get(id=id_session)
 		persona=Persona.objects.get(idpersona=id_persona)
 		user_form = UserCreationForm(instance=user)
 		persona_form = PersonaForm(instance=persona)
-		args={}
 		args['userform']=user_form
 		args['personaform']=persona_form
 	#return render_to_response('USUARIO_edit-profile.html', args)
-	return render_to_response('USUARIO_edit-profile.html', args)
+	return render_to_response('USUARIO_edit-profile.html', RequestContext(request,args))

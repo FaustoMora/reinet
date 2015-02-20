@@ -6,25 +6,25 @@
           <p class="text-muted">Por favor llena correctamente los campos para editar tu perfil.</p>
           <hr>
           <h4 class="hl bottom-15">Informaci&oacute;n General</h4>
-          <form role="form" method="POST">
-            {{ form.non_field_errors }}
+          <form role="form" action="/editarperfil/" method="POST">
+            {%csrf_token%}
             {%for f in personaform%}
                     
                              {%if f.id_for_label == "id_username"%}
 
-                             <div class="form-group">
+                         <!--     <div class="form-group">
                              {{f.errors}}
                              {{f.label_tag}}<br>
                              <input type="text" class="form-control" id="id_username" name="username" placeholder="Username"/>
-                             </div>
+                             </div> -->
                              {%elif f.id_for_label == "id_password1"%}
-                             <div class="form-group">
+                            <!--  <div class="form-group">
                              {{f.errors}}
                              {{f.label_tag}}<br>
                              <input type="password" class="form-control" id="id_password1" name="password1" placeholder="Password" />
-                            </div>
+                            </div> -->
                              {%elif f.id_for_label == "id_password2"%}
-                            <div class="form-group">
+                           <!--  <div class="form-group">
 
                             {{f.errors}}
 
@@ -32,7 +32,7 @@
 
                              <input type="password" class="form-control" id="id_password2" name="password2" placeholder="Confirma Password"/>
 
-                            </div>
+                            </div> -->
                              {%else%}
 
                              <div class="form-group">
@@ -43,12 +43,26 @@
                              {{ f }}
                              </div>
                              {%endif%}
-                                    {%endfor%} 
-
+                    {%endfor%} 
+                  
+                  {% if form.errors %}
+                   {% for field in form %}
+                      {% for error in field.errors %}
+                      <div >
+                          <strong>{{ error|escape }}</strong>
+                      </div>
+                   {% endfor %}
+                  {% endfor %}
+                   {% for error in form.non_field_errors %}
+                       <div >
+                              <strong>{{ error|escape }}</strong>
+                          </div>
+                      {% endfor %}
+                  {% endif %}
             <button type="submit" class="btn btn-green pull-right">Aceptar</button>
             <div class="clearfix"></div>
           </form>
-          <h4 class="hl bottom-15">Configuraci&oacute;n del Perfil</h4>
+          <!-- <h4 class="hl bottom-15">Configuraci&oacute;n del Perfil</h4>
           <hr>
           <form role="form">
             <div class="form-group">
@@ -74,7 +88,8 @@
             </div>
             <hr>
             <button type="submit" class="btn btn-green pull-right">Aceptar</button>
-          </form>
+          </form> -->
+
         </div>
 {%endblock%}
 
