@@ -33,7 +33,21 @@
           <p class="text-muted">Por favor ingrese los datos de la incubaci&oacute;n.</p>
           <hr>
           <h4 class="hl bottom-15">Informaci&oacute;n General</h4>
-          <form role="form" id="formulario">
+
+          <form role="form" id="formulario" action="/crearIncubacion/" method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+              {#{ form.as_p }#}
+              
+              {% for f in form %}
+                  <div class="form-group">
+                      <label>{{ f.label }}</label>
+              <p>{{ f }}</p>
+                  </div>
+              {% endfor %}
+
+
+
+            <!--
             <div class="form-group">
               <label for="full-name">Nombre de la incubaci&oacute;n</label>
               <input type="text" class="form-control" id="full-name" placeholder="Ingrese el nombre" required>
@@ -92,7 +106,9 @@
               <input type="text" class="form-control" id="consultor" placeholder="Ingrese el nombre de un usuario para invitarlo como consultor" required>
               <br /><button id="addConsultant" type="button" class="btn btn-dark">Invitar otro Consultor</button> 
             </div>
-            <button type="submit" class="btn btn-green pull-right">Submit</button>
+          -->
+          
+            <input type="submit" class="btn btn-green pull-right" value="Crear Incubacion"></button>
           </form>
         </div>
       </div>

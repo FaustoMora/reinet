@@ -25,6 +25,24 @@
       </ul>
       <h3>MIS INCUBACIONES</h3>
       <ul class="row list-inline gallery-list" id="isotope-container">
+
+    {% for i in lst_incubacion%}
+    
+     <li class="isotope-item cat-1 cat-2 cat-4">
+          <a href="verIncubacion/?q={{i.idIncubacion}}">
+            <span class="gallery-thumbnail">
+              <img class="img-responsive" src="{{MEDIA_URL}}{{ i.imagen }} " alt="...">
+            </span>
+            <span class="gallery-text">
+              <span class="gallery-title">{{ i.nombre }}</span>
+              {{ i.descripcion }}
+            </span>
+          </a>
+        </li>
+    
+    {% endfor %} 
+
+        <!--
         <li class="isotope-item cat-1 cat-2 cat-4">
           <a href="verIncubacion">
             <span class="gallery-thumbnail">
@@ -71,6 +89,7 @@
         </li>
       </ul>
     </div>
+  -->
   
   <div class="container">
       <h3>Areas de inter&eacute;s</h3>

@@ -28,19 +28,25 @@ class Concurso(models.Model):
 		db_table = 'concursos'
         
 
-class Incubacion(Publicacion):
+class Incubacion(models.Model):
     idIncubacion = models.AutoField(db_column='idDetalleIncubacion', unique=True,primary_key=True)  # Field name made lowercase.
-    idPublicacion = models.OneToOneField(Publicacion,db_column='idpublicacion',parent_link=True)
-    fecha_inicio = models.DateField()
+    idusuario = models.ForeignKey(User, db_column='idusuario')
+    nombre = models.CharField(max_length=150L)
+    descripcion = models.CharField(max_length=500L)
+    dominio = models.CharField(max_length=200L)
+    subdominio = models.CharField(max_length=200L)
+    fecha_inicio=models.DateField(db_column='fechaInicio')
     condiciones = models.CharField(max_length=300)
-    perfil_oferta = models.IntegerField()
+    perfil_oferta = models.CharField(max_length=200)
     tipo_oferta = models.IntegerField()
+    estado = models.IntegerField()
+    imagen = models.ImageField(upload_to='conInc_media')
 
     def __unicode__(self):
-        return self.idIncubacion
+        return self.image.name
 
     class Meta:
-        db_table = 'detalleincubacion'
+        db_table = 'incubacion'
 
 
 class Solicitud(models.Model):
