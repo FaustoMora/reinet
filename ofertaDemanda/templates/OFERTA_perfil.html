@@ -1,5 +1,6 @@
      {% extends "base.tpl.html" %}
 {%block content%}
+
     <div class="section-header">
       <div class="container">
         <div class="row">
@@ -10,118 +11,241 @@
         </div>
       </div>
     </div>
+
     <div class="container">
       <div class="row">
+        <div class="col-sm-10">            
+            <div class="col-sm-10">
+              <h3>
+                HighLand - a new responsive Bootstrap 3 template
+              </h3>
+            </div>
+            <!-- Este es el codigo para el rating las estrellitas-->
+            <div class="col-sm-12">
+              <ul class="text-muted list-inline">
+                <li><i class="fa fa-flag"></i> Disponible</li>
+                <li><i class="fa fa-user"></i> <a href="profile.html">Nombre del dueño de la oferta</a></li>
+                <li><i class="fa fa-calendar"></i> November 10, 2013</li>
+                <li><i class="fa fa-comments-o"></i> 21 comments</li>
+              </ul>
+            </div>
+        </div>
         <div class="col-sm-8">
-          <!-- Blog Post -->
-          <h4><a href="blog-post.html">HighLand - a new responsive Bootstrap 3 template</a></h4>
-          <ul class="text-muted list-inline">
-            <li><i class="fa fa-user"></i> <a href="profile.html">Administrator</a></li>
-            <li><i class="fa fa-calendar"></i> November 10, 2013</li>
-            <li><i class="fa fa-comments-o"></i> 21 comments</li>
-          </ul>
-          <hr>
+          <!-- Blog Post -->         
+          
           <p class="blog-text">
-            <img class="pull-right img-responsive blog-img" alt="..." src="../static/img/works1.jpg">
+            <div class="col-md-3 col-sm-6">
+              <div class="thumbnail">
+                  <img src="../static/img/imgDemandaOferta/works1.jpg" class="img-responsive" alt="Oferta">
+                  <div class="visit"><a href="OfertaVer"><i class="fa fa-question-circle"></i> Galeria</a></div>
+              </div>
+            </div>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc consectetur urna at neque mollis sagittis. Vivamus viverra justo in dui vulputate tincidunt in eu magna. Ut ut risus pretium, varius felis a, congue metus. Nam aliquam pretium eros, et venenatis sapien porttitor at. Nunc bibendum ipsum sit amet euismod sodales. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam varius justo sed velit dictum feugiat. Sed tempus eros quis eleifend posuere. Fusce tempus euismod sem vitae porta. Vestibulum eget mi suscipit, ultrices turpis quis, ultricies ipsum. Pellentesque et facilisis odio. Vivamus et mauris consequat, rhoncus risus vitae, porttitor dui.
             <br /><br />
             Maecenas non laoreet ipsum, id mattis nunc. Vestibulum viverra sapien a porta venenatis. Morbi in dignissim quam, eu malesuada lorem. Integer quis cursus ligula. Proin elementum, massa egestas rhoncus blandit, tortor mauris pellentesque eros, eget volutpat ligula nunc quis sapien. Integer eget cursus turpis. Sed non aliquam odio. Nullam et arcu sed felis interdum aliquam. Fusce euismod, mauris non lacinia porttitor, enim tortor porttitor diam, sit amet fringilla felis orci bibendum erat. Praesent lectus mauris, volutpat eu blandit auctor, varius faucibus est.
           </p>
+
+          
+          <div class="row">
+            <!-- Informacion general dominio,subdominio,disponibilidad, lugar de palicacion -->
+            <div class="col-sm-12">
+              <div class="block-header">
+                <h2>
+                  <span class="title">Informaci&oacute;n General</span><span class="decoration"></span><span class="decoration"></span><span class="decoration"></span>
+                </h2>
+              </div>
+              <div class="col-sm-10">
+                <table class="table">
+                  <tbody>
+                    <tr>
+                      <td class="text-muted">Dominio</td>
+                      <td colspan=4 style="text-align:center">Tecnología</td>
+                    </tr>
+                    <tr>
+                      <td class="text-muted">Subdominio</td>
+                      <td colspan=4 style="text-align:center">Electricidad con celdas fotovoltaicas que  vuelan</td>
+                    </tr>
+                    <tr>
+                      <td class="text-muted">Lugar de Aplicación</td>
+                      <td colspan=4 style="text-align:center">Ecuador y más alla</td>
+                    </tr>
+                    <tr>
+                      <td class="text-muted">Fecha disponibilidad</td>
+                      <td class="text-muted">Desde:</td>
+                      <td>01/02/2015</td>
+                      <td class="text-muted">Hasta:</td>
+                      <td>01/12/2015</td>
+                    </tr>
+                  </tbody>
+                </table>  
+              </div>
+            </div>
+             <!-- Perfil del beneficiario  y del cliente-->
+            <div class="col-sm-12">
+              <div class="block-header">
+                <h2>
+                  <span class="title">Perfiles</span><span class="decoration"></span><span class="decoration"></span><span class="decoration"></span>
+                </h2>
+              </div>
+              <div class="col-sm-10">
+                <table class="table">
+                  <tbody>
+                    <tr>
+                      <td class="text-muted">Beneficiario</td>
+                      <td>El beneficiario es una persona de escasos recursos económicos que no puede pagar la universidad y necesita electricidad para su celular</td>
+                    </tr>
+                    <tr>
+                      <td class="text-muted">Cliente</td>
+                      <td>El beneficiario es una persona de escasos recursos económicos que no puede pagar la universidad y necesita electricidad para su celular</td>
+                    </tr>
+                  </tbody>
+                </table>  
+              </div>
+            </div>
+            <!-- Otros datos relevantes de la oferta-->
+            <div class="col-sm-12">
+              <div class="block-header">
+                <h2>
+                  <span class="title">Otros</span><span class="decoration"></span><span class="decoration"></span><span class="decoration"></span>
+                </h2>
+              </div>
+              <div class="col-sm-10">
+                <table class="table">
+                  <tbody>
+                    <tr>
+                      <td class="text-muted">Soluciones Alternativas</td>
+                      <td>El beneficiario es una persona de escasos recursos económicos que no puede pagar la universidad y necesita electricidad para su celular</td>
+                    </tr>
+                    <tr>
+                      <td class="text-muted">Propuesta de Valor</td>
+                      <td>El beneficiario es una persona de escasos recursos económicos que no puede pagar la universidad y necesita electricidad para su celular</td>
+                    </tr>
+                    <tr>
+                      <td class="text-muted">Estado Propiedad Intelectual</td>
+                      <td>El beneficiario es una persona de escasos recursos económicos que no puede pagar la universidad y necesita electricidad para su celular</td>
+                    </tr>
+                    <tr>
+                      <td class="text-muted">Evidencia de Tracción</td>
+                      <td>El beneficiario es una persona de escasos recursos económicos que no puede pagar la universidad y necesita electricidad para su celular</td>
+                    </tr>
+                  </tbody>
+                </table>  
+              </div>
+            </div>
+          </div>
+
           <!-- New comment form -->
-          <div class="new-comment">
-            <form class="form-horizontal" role="form">
-              <div class="form-group">
-                <div class="col-sm-2 hidden-xs">
-                  <img src="img/face1.jpg" alt="..." class="img-responsive">
+          <div class="col-sm-10 col-sm-offset-1">
+            <div class="new-comment">
+              <form class="form-horizontal" role="form">
+                <div class="form-group">
+                  <div class="col-sm-2 hidden-xs">
+                    <img src="../static/img/face1.jpg" alt="..." class="img-responsive">
+                  </div>
+                  <div class="col-sm-10">
+                    <textarea class="form-control" rows="3" placeholder="Leave a message..."></textarea>
+                  </div>
                 </div>
-                <div class="col-sm-10">
-                  <textarea class="form-control" rows="3" placeholder="Leave a message..."></textarea>
+                <div class="form-group">
+                  <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-dark btn-sm">Post comment</button>
+                  </div>
                 </div>
-              </div>
-              <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                  <button type="submit" class="btn btn-dark btn-sm">Post comment</button>
+              </form>
+            </div>
+            <!-- Comments list -->
+            <h4>21 comments</h4>
+            <hr>
+            <div class="comment">
+              <div class="media">
+                <a class="pull-left" href="#">
+                  <img class="media-object" src="../static/img/face2.jpg" alt="...">
+                </a>
+                <div class="media-body">
+                  <p><a href="profile.html">Username</a></p>
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc consectetur urna at neque mollis sagittis. Vivamus viverra justo in dui vulputate tincidunt in eu magna. Ut ut risus pretium, varius felis a, congue metus.
+                  </p>
+                  <ul class="text-muted list-inline">
+                    <li><i class="fa fa-clock-o"></i> 20 minutes ago</li>
+                  </ul>
                 </div>
-              </div>
-            </form>
-          </div>
-          <!-- Comments list -->
-          <h4>21 comments</h4>
-          <hr>
-          <div class="comment">
-            <div class="media">
-              <a class="pull-left" href="#">
-                <img class="media-object" src="../static/img/face2.jpg" alt="...">
-              </a>
-              <div class="media-body">
-                <p><a href="profile.html">Username</a></p>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc consectetur urna at neque mollis sagittis. Vivamus viverra justo in dui vulputate tincidunt in eu magna. Ut ut risus pretium, varius felis a, congue metus.
-                </p>
-                <ul class="text-muted list-inline">
-                  <li><i class="fa fa-clock-o"></i> 20 minutes ago</li>
-                  <li><i class="fa fa-cog"></i> <a href="#">Edit</a></li>
-                </ul>
               </div>
             </div>
-          </div>
-          <div class="comment">
-            <div class="media">
-              <a class="pull-left" href="#">
-                <img class="media-object" src="../static/img/face3.jpg" alt="...">
-              </a>
-              <div class="media-body">
-                <p><a href="profile.html">Username 2</a></p>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc consectetur urna at neque mollis sagittis. Vivamus viverra justo in dui vulputate tincidunt in eu magna. Ut ut risus pretium, varius felis a, congue metus.
-                </p>
-                <ul class="text-muted list-inline">
-                  <li><i class="fa fa-clock-o"></i> 1 hour ago</li>
-                  <li><i class="fa fa-cog"></i> <a href="#">Edit</a></li>
-                </ul>
+            <div class="comment">
+              <div class="media">
+                <a class="pull-left" href="#">
+                  <img class="media-object" src="../static/img/face3.jpg" alt="...">
+                </a>
+                <div class="media-body">
+                  <p><a href="profile.html">Username 2</a></p>
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc consectetur urna at neque mollis sagittis. Vivamus viverra justo in dui vulputate tincidunt in eu magna. Ut ut risus pretium, varius felis a, congue metus.
+                  </p>
+                  <ul class="text-muted list-inline">
+                    <li><i class="fa fa-clock-o"></i> 1 hour ago</li>
+                  </ul>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="comment">
-            <div class="media">
-              <a class="pull-left" href="#">
-                <img class="media-object" src="../static/img/face4.jpg" alt="...">
-              </a>
-              <div class="media-body">
-                <p><a href="profile.html">Username 3</a></p>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc consectetur urna at neque mollis sagittis. Vivamus viverra justo in dui vulputate tincidunt in eu magna. Ut ut risus pretium, varius felis a, congue metus.
-                </p>
-                <ul class="text-muted list-inline">
-                  <li><i class="fa fa-calendar"></i> 11/10/2013</li>
-                  <li><i class="fa fa-cog"></i> <a href="#">Edit</a></li>
-                </ul>
+            <div class="comment">
+              <div class="media">
+                <a class="pull-left" href="#">
+                  <img class="media-object" src="../static/img/face4.jpg" alt="...">
+                </a>
+                <div class="media-body">
+                  <p><a href="profile.html">Username 3</a></p>
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc consectetur urna at neque mollis sagittis. Vivamus viverra justo in dui vulputate tincidunt in eu magna. Ut ut risus pretium, varius felis a, congue metus.
+                  </p>
+                  <ul class="text-muted list-inline">
+                    <li><i class="fa fa-calendar"></i> 11/10/2013</li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
         </div>
+
         <div class="col-sm-4">
-          <!-- Social Links -->
-          <h3 class="hl">Bookmark</h3>
-          <hr>
-          <div class="social-icons social-icons-default">
-            <ul>
-                <li class="rss"><a href="#"><i class="fa fa-rss"></i></a></li>
-                <li class="twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>
-                <li class="facebook"><a href="#"><i class="fa fa-facebook"></i></a></li>
-                <li class="pinterest"><a href="#"><i class="fa fa-pinterest"></i></a></li>
-                <li class="github"><a href="#"><i class="fa fa-github"></i></a></li>
-                <li class="linkedin"><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                <li class="vk"><a href="#"><i class="fa fa-vk"></i></a></li>
-                <li class="plus"><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                <li class="dropbox"><a href="#"><i class="fa fa-dropbox"></i></a></li>
-                <li class="vimeo"><a href="#"><i class="fa fa-vimeo-square"></i></a></li>
-            </ul>
-            <div class="clearfix"></div>
+          <div class="block-inverse">
+            <div class="head-inverse">
+              <div class="text-center">
+                <strong class="text-muted">Ranking</strong>
+                      <div class="thumbnail " style="margin-bottom:0;background-color:#F5F5F5">              
+                        <div class="caption">
+                          <div class="rating">
+                              <i class="fa fa-star"></i> 
+                              <i class="fa fa-star"></i> 
+                              <i class="fa fa-star"></i> 
+                              <i class="fa fa-star"></i> 
+                              <i class="fa fa-star"></i>
+                          </div>                              
+                        </div>
+                      </div>
+              </div>
+            </div>
+            <div class="body-inverse">
+              <p class="text-center">
+                <strong class="text-muted">My Gallery</strong>
+              </p>
+              <div class="user-gallery text-center">
+                <a href="#"><img src="../static/img/works1.jpg" alt="..."></a>
+                <a href="#"><img src="../static/img/works2.jpg" alt="..."></a>
+                <a href="#"><img src="../static/img/works3.jpg" alt="..."></a>
+                <a href="#"><img src="../static/img/works4.jpg" alt="..."></a>
+                <a href="#"><img src="../static/img/works1.jpg" alt="..."></a>
+                <a href="#"><img src="../static/img/works2.jpg" alt="..."></a>
+                <a href="#"><img src="../static/img/works3.jpg" alt="..."></a>
+                <a href="#"><img src="../static/img/works4.jpg" alt="..."></a>
+                <a href="#"><img src="../static/img/dots.jpg" alt="..."></a>
+              </div>
+            </div>
           </div>
+                     
 
           <!-- Tags -->
-          <h3 class="hl">Story tags</h3>
+          <h3 class="hl">PALABRAS CLAVES</h3>
           <hr>
           <p class="tags">
             <a href="#">Bootstrap</a>
@@ -136,24 +260,69 @@
           <!-- Recently Added -->
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h3 class="panel-title">Recently Added</h3>
+              <h3 class="panel-title">Equipo</h3>
             </div>
             <div class="panel-body">
               <div class="recent-blogs">
                 <ul>
-                  <li><a href="blog-post.html" class="new-story">HighLand - a new responsive Bootstrap 3 template</a></li>
-                  <li><a href="blog-post.html" class="new-story">Lorem ipsum dolor sit amet, consectetur adipiscing elit</a></li>
-                  <li><a href="blog-post.html">Nulla dapibus lorem sed felis placerat fringilla</a></li>
-                  <li><a href="blog-post.html">Praesent eget nibh quis arcu iaculis commodo et at lectus</a></li>
-                  <li><a href="blog-post.html">Etiam a enim ut odio laoreet viverra</a></li>
+
+                  <li>
+                    <div class="media">
+                      <a class="pull-left" href="#">
+                        <img class="media-object" src="../static/img/face2.jpg" alt="...">
+                      </a>
+                      <div class="media-body">
+                        <p><a href="profile.html">Username</a></p>
+                        <ul class="text-muted list-inline">
+                          <li><i class="fa fa-flag"></i> Estado</li>
+                          <li><i class="fa fa-heart"></i>Programador(Rol)</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="media">
+                      <a class="pull-left" href="#">
+                        <img class="media-object" src="../static/img/face2.jpg" alt="...">
+                      </a>
+                      <div class="media-body">
+                        <p><a href="profile.html">Username</a></p>
+                        <ul class="text-muted list-inline">
+                          <li><i class="fa fa-flag"></i> Estado</li>
+                          <li><i class="fa fa-heart"></i>Programador(Rol)</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </li>
+
                 </ul>
               </div>
             </div>
           </div>
-          
-        </div>
-      </div>
-    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 {% endblock %}
