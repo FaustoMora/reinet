@@ -1,6 +1,7 @@
 from django.db import models
 from app.models import *
 from usuarios.models import *
+from django.contrib.auth.models import User
 # Create your models here. OFERTA DEMANDA
 
 class Demanda(models.Model):    

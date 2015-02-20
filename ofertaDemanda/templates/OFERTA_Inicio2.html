@@ -55,6 +55,34 @@
     <div class="container">   
       <div class="row">
 
+      <!-- Se presenta las ofertas --> 
+         {% for c in lst_ofertas %}
+
+            <div class="col-md-3 col-sm-6">
+                <div class="thumbnail">
+                  <img src="../static/img/imgDemandaOferta/works1.jpg" class="img-responsive" alt="Oferta">
+                  <div class="visit"><a href="OfertaVer"><i class="fa fa-question-circle"></i> Ver Oferta</a></div>
+                  <div class="caption">
+                    <h4>{{c.nombre}}</h4>
+                    <div class="rating">
+                        {{c.calificacionGeneral}}
+                        <i class="fa fa-star"></i> 
+                        <i class="fa fa-star"></i> 
+                        <i class="fa fa-star"></i> 
+                        <i class="fa fa-star"></i> 
+                        <i class="fa fa-star"></i>
+                      </div>
+                    <ul class="text-muted list-inline">
+                      <li><i class="fa fa-user"></i> <a href="#">Administrator {{c.idusuario}}</a></li>
+                      <li><i class="fa fa-calendar"></i> {{c.tiempo_inicio_disponible}}</li>
+                      <li><i class="fa fa-comments-o"></i> 6 comments</li>
+                    </ul>
+                      
+                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam.</p>
+                  </div>
+                </div>
+            </div>
+        {% endfor %}
 
         <div class="col-md-3 col-sm-6">
             <div class="thumbnail">
@@ -79,6 +107,7 @@
               </div>
             </div>
         </div>
+        
         <div class="col-md-3 col-sm-6">
             <div class="thumbnail">
               <img src="../static/img/imgDemandaOferta/works1.jpg" class="img-responsive" alt="Oferta">
