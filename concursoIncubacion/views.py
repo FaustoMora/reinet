@@ -74,7 +74,9 @@ def editarConcurso(request):
 
 @login_required(login_url='/ingresar/')
 def homeIncubacion(request):
-    return render_to_response('INCUBACION_inicio.html')
+	lst_incubacion = Incubacion.objects.all().filter(idusuario=request.session['id_user'])[:8]
+	return render_to_response('INCUBACION_inicio.html',{'lst_incubacion' : lst_incubacion},context_instance=RequestContext(request))
+
     
 @login_required(login_url='/ingresar/')
 def verIncubacion(request):
@@ -82,4 +84,22 @@ def verIncubacion(request):
     
 @login_required(login_url='/ingresar/')    
 def crearIncubacion(request):
-    return render_to_response('INCUBACION_crear.html')    # Create your views here.
+	if request.POST: #POST
+		form = CrearIncubacionForm(request.POST, request.FILES)
+
+		if form.is_valid():
+			nuevoIncubacion=super(CrearIncubacionForm, form).save(commit=False)
+			nuevoIncubacion.idusuario=Persona.objects.get(idpersona=request.session['id_persona'])
+			nuevoIncubacion.estado=1
+			nuevoIncubacion.save()
+			return HttpResponseRedirect('/homeIncubacion')
+		else:
+			form = CrearIncubacionForm()
+	else:
+		form=CrearIncubacionForm()
+
+	args={}
+	args.update(csrf(request))
+	args['form']=form
+	return render_to_response('INCUBACION_crear.html', args)
+
