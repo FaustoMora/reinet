@@ -60,6 +60,7 @@ class Oferta(models.Model):
     cuadro_tendencias_relevantes = models.CharField(max_length=100L, db_column='cuadro_Tendencias_Relevantes', blank=True) # Field name made lowercase.
     estado_propiedad_intelectual = models.CharField(max_length=500L, db_column='estado_Propiedad_Intelectual', blank=True) # Field name made lowercase.
     evidencia_traccion = models.CharField(max_length=500L, db_column='evidencia_Traccion', blank=True) # Field name made lowercase.
+    imagen = models.ImageField(upload_to='ofDem_media')
     class Meta:
         db_table = 'oferta'
 
