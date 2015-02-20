@@ -61,6 +61,16 @@ def OfertaCrear(request):
 def OfertaVer(request):
     return render_to_response('OFERTA_perfil.html')
 
+
+
+@login_required(login_url='/ingresar/') 
+def OfertaEditar(request):
+    
+    return render_to_response('OFERTA_perfil.html')
+
+
+
+
 @login_required(login_url='/ingresar/') 
 def OfertasMisOfertas(request):
 	lst_ofertas = Oferta.objects.all()[:4]
