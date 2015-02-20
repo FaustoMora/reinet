@@ -28,16 +28,43 @@
           </div>
         </div>
         <div class="col-sm-8 col-md-6">
+                      
+			{% if messages %}
+				    {% for message in messages %}
+						<div class="col-md-12">
+							<div class="alert alert-success h4">
+							<p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+							</div>
+						</div>
+				    {% endfor %}
+			{% endif %}
+        
+        
           <!-- Edit profile form -->
           <h3 class="hl">Crear <small>Concurso </small> </h3>
           <p class="text-muted">Por favor ingrese los datos del concurso.</p>
           <hr>
           <h4 class="hl bottom-15">Informaci&oacute;n General</h4>
 
-            <form role="form" id="formulario" action="/crearConcurso/" method="POST">
+            <form role="form" id="formulario" action="/crearConcurso/" method="POST" enctype="multipart/form-data">
               {% csrf_token %}
-              {{ form.as_p }}
-
+              {#{ form.as_p }#}
+              
+              {% for f in form %}
+              	{% if f.label == "Fecha Inicio" or f.label == "Fecha Final" %}
+              		<div class="form-group col-xs-6">
+							<label>{{ f.label }}</label>
+							<p>{{ f }}</p>
+              		</div>
+              	{% else %}
+              		<div class="form-group">
+              				<label>{{ f.label }}</label>
+							<p>{{ f }}</p>
+              		</div>
+              	{% endif %}
+              {% endfor %}
+              
+              
               <!--      
               <div class="form-group">
                 <label for="full-name">Nombre del concurso</label>
@@ -71,13 +98,13 @@
                 <label for="offerProfile">Perfil de Ofertas</label>
                 <input type="text" class="form-control" id="offerProfile" placeholder="Ingrese un perfil de ofertas" required>
               </div>
-        <div class="form-group">
+  			<div class="form-group">
                 <label>Tipo de Ofertas</label><br />
                 <label class="radio-inline" for="radios-0">
                   <input type="radio" name="radios" id="radios-0" value="Emprendimiento" checked="checked">
                     Emprendimiento
                 </label><br />
-           <label class="radio-inline" for="radios-0">
+  			   <label class="radio-inline" for="radios-0">
                   <input type="radio" name="radios" id="radios-0" value="Innovacion" checked="checked">
                     Innovaci&oacute;n
                 </label><br />
@@ -142,9 +169,7 @@
               <input type="submit" class="btn btn-green pull-right" value="Crear Concurso"></input>
             </form>
 
-            {% if info_enviado %}
-              <h1>{{ info }}</h1>
-            {% endif %}
+
         </div>
       </div>
     </div>

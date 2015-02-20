@@ -2,14 +2,17 @@ from datetime import datetime
 from django.conf.urls import patterns, url
 from app.forms import BootstrapAuthenticationForm
 from views import *
+from reinet import settings
 
 urlpatterns = patterns('',
 
-		url(r'^homeConcursos[/]?$',homeConcursos,name='homeConcursos'),
+        url(r'^homeConcursos[/]?$',homeConcursos,name='homeConcursos'),
         url(r'^crearConcurso[/]?$',crearConcurso,name='crearConcurso'),
         url(r'^verConcurso[/]?$',verConcurso,name='verConcurso'),
+		url(r'^editarConcurso[/]?$',editarConcurso,name='editarConcurso'),
         url(r'^homeIncubacion[/]?$',homeIncubacion,name='homeIncubacion'),
-		url(r'^crearIncubacion[/]?$',crearIncubacion,name='crearIncubacion'),
-		url(r'^verIncubacion[/]?$',verIncubacion,name='verIncubacion')
-		
+        url(r'^crearIncubacion[/]?$',crearIncubacion,name='crearIncubacion'),
+        url(r'^verIncubacion[/]?$',verIncubacion,name='verIncubacion'),
+        url(r'^media/(?P<path>.*)$','django.views.static.serve',{'document_root':settings.MEDIA_ROOT})
+        
 )

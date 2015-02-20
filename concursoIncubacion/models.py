@@ -1,21 +1,31 @@
 from django.db import models
+from usuarios.models import Persona
+from django.contrib.auth.models import User
 from app.models import Publicacion
 
 # Create your models here.
-class Concurso(Publicacion):
-    idConcurso = models.AutoField(db_column='idDetalleConcurso',unique=True,primary_key=True)
-    idPublicacion = models.OneToOneField(Publicacion,db_column='idpublicacion',parent_link=True)
-    fecha_inicio=models.DateField(db_column='fechaInicio')
-    fecha_fin=models.DateField(db_column='fechaFin')
-    premios = models.CharField(max_length=200)
-    alcance = models.CharField(max_length=300)
-    num_finalistas = models.IntegerField()
-    perfil = models.CharField(max_length=200)
-    tipo_oferta = models.IntegerField()
-    estado = models.IntegerField()
+class Concurso(models.Model):
+	idConcurso = models.AutoField(db_column='idConcurso',unique=True,primary_key=True)
+	idusuario = models.ForeignKey(User, db_column='idusuario')
+	nombre = models.CharField(max_length=150L)
+	descripcion = models.CharField(max_length=500L)
+	dominio = models.CharField(max_length=200L)
+	subdominio = models.CharField(max_length=200L)
+	fecha_inicio=models.DateField(db_column='fechaInicio')
+	fecha_fin=models.DateField(db_column='fechaFin')
+	premios = models.CharField(max_length=200)
+	alcance = models.CharField(max_length=300)
+	num_finalistas = models.IntegerField()
+	perfil = models.CharField(max_length=200)
+	tipo_oferta = models.IntegerField()
+	estado = models.IntegerField()
+	imagen = models.ImageField(upload_to='conInc_media')
 
-    class Meta:
-        db_table = 'detalleconcurso'
+	def __unicode__(self):
+		return self.image.name
+
+	class Meta:
+		db_table = 'concursos'
         
 
 class Incubacion(Publicacion):
@@ -25,6 +35,9 @@ class Incubacion(Publicacion):
     condiciones = models.CharField(max_length=300)
     perfil_oferta = models.IntegerField()
     tipo_oferta = models.IntegerField()
+
+    def __unicode__(self):
+        return self.idIncubacion
 
     class Meta:
         db_table = 'detalleincubacion'
