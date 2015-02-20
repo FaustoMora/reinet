@@ -34,24 +34,28 @@ def Ofertas(request):
 
 @login_required(login_url='/ingresar/')
 def OfertaCrear(request):
-	if request.POST: #POST
-		form = CrearOfertaForm(request.POST, request.FILES)
+    if request.POST: #POST
+        form = CrearOfertaForm(request.POST, request.FILES)
 
-		if form.is_valid():
-			nuevaOferta=super(CrearOfertaForm, form).save(commit=False)
-			nuevaOferta.idusuario=Persona.objects.get(idpersona=request.session['id_persona'])
-			nuevaOferta.estado=1
-			nuevaOferta.save()
-			return HttpResponseRedirect('/Ofertas')
-		else:
-			form = CrearOfertaForm()
-	else:
-		form=CrearOfertaForm()
+        if form.is_valid():
+            nuevaOferta=super(CrearOfertaForm, form).save(commit=False)
+            nuevaOferta.idusuario=Persona.objects.get(idpersona=request.session['id_persona'])
+            nuevaOferta.estadoOferta=1
+            nuevaOferta.ofertaPublicada = 1            
+            nuevaOferta.dominio = 1
+            nuevaOferta.subdominio = 1
+            nuevaOferta.evidencia_traccion='dsa'		
+            nuevaOferta.save()
+            return HttpResponseRedirect('/Ofertas')
+        else:
+            form = CrearOfertaForm()
+    else:
+        form=CrearOfertaForm()
 
-	args={}
-	args.update(csrf(request))
-	args['form']=form
-	return render_to_response('OFERTA_crear_oferta.html')
+    args={}
+    args.update(csrf(request))
+    args['form']=form
+    return render_to_response('OFERTA_crear_oferta.html',args)
 	
 @login_required(login_url='/ingresar/') 
 def OfertaVer(request):
