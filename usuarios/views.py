@@ -8,7 +8,7 @@ from forms import *
 from django.contrib.auth.forms import UserCreationForm
 from models import *
 from django.contrib.auth.decorators import login_required
-from django.template import RequestContext
+
 
 def index(request):
 	return render_to_response('USUARIO_index.html')
@@ -43,7 +43,8 @@ def invalid(request):
 
 def logout(request):
 	auth.logout(request)
-	return render_to_response('base.tpl.html')
+	print "LA VARIABLE DE SESSION LOGOUT", request.session['id_user']
+	return render_to_response('USUARIO_index.html')
 
 def register(request):
 	if request.method=='POST':
@@ -83,6 +84,7 @@ def create(request):
 	args['form']= form
 	return render_to_response('USUARIO_sign-up.html', args)
 
+
 @login_required(login_url='/ingresar/')
 def perfil_view(request):
 	id_session=request.session['id_user']
@@ -101,42 +103,33 @@ def perfil_view(request):
 def mensajes_view(request):
 	return render_to_response('USUARIO_inbox.html')
 
-@login_required(login_url='/ingresar/')
+
 def inicio_view(request):
-        id_session=request.session['id_user']
-        return render_to_response('USUARIO_inicio.html')
+	return render_to_response('USUARIO_inicio.html')
 
 
-@login_required(login_url='/ingresar/')
+@login_required
 def editar_perfil_view(request):
 	id_session=request.session['id_user']
 	id_persona=request.session['id_persona']
-	args={}
 	if request.method == 'POST':
 		id_session=request.session['id_user']
 		id_persona=request.session['id_persona']
-		#user=User.objects.get(id=id_session)
+		user=User.objects.get(id=id_session)
 		persona=Persona.objects.get(idpersona=id_persona)
-		#user_form = UserCreationForm(request.POST,  request.FILES,instance=user)
-		persona_form = PersonaEditarForm(request.POST, request.FILES, instance=persona)
-		print "validacioneees", persona_form.is_valid()
-		if  persona_form.is_valid():
-			#user_form.save()
+		user_form = UserCreationForm(request.POST, instance=user)
+		persona_form = PersonaForm(request.POST, instance=persona)
+		if user_form.is_valid() and persona_form.is_valid():
+			user_form.save()
 			persona_form.save()
 			return HttpResponseRedirect('/perfil/')
-		else:
-			#user=User.objects.get(id=id_session)
-			persona=Persona.objects.get(idpersona=id_persona)
-			#user_form = UserCreationForm(instance=user)
-			persona_form = PersonaEditarForm(instance=persona)
-			#args['userform']=user_form
-			args['personaform']=persona_form
 	else:
-		#user=User.objects.get(id=id_session)
+		user=User.objects.get(id=id_session)
 		persona=Persona.objects.get(idpersona=id_persona)
-		#user_form = UserCreationForm(instance=user)
-		persona_form = PersonaEditarForm(instance=persona)
-		#args['userform']=user_form
+		user_form = UserCreationForm(instance=user)
+		persona_form = PersonaForm(instance=persona)
+		args={}
+		args['userform']=user_form
 		args['personaform']=persona_form
 	#return render_to_response('USUARIO_edit-profile.html', args)
-	return render_to_response('USUARIO_edit-profile.html', RequestContext(request,args))
+	return render_to_response('USUARIO_edit-profile.html', args)
