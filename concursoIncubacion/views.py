@@ -47,7 +47,6 @@ def verConcurso(request):
 	return render_to_response('CONCURSO_perfil.html', args)
 
 @login_required(login_url='/ingresar/')
-
 def editarConcurso(request):
 	idcon = int(request.GET.get('q', ''))
 	print 'HERE HELLO!!!'
@@ -80,7 +79,12 @@ def homeIncubacion(request):
     
 @login_required(login_url='/ingresar/')
 def verIncubacion(request):
-    return render_to_response('INCUBACION_perfil.html')
+	idincu = int(request.GET.get('q', ''))
+	incubacion=Incubacion.objects.get(idIncubacion = idincu)
+	args = {}
+	args['incubacion'] = incubacion
+	print incubacion.descripcion
+	return render_to_response('INCUBACION_perfil.html',args)
     
 @login_required(login_url='/ingresar/')    
 def crearIncubacion(request):
@@ -102,4 +106,30 @@ def crearIncubacion(request):
 	args.update(csrf(request))
 	args['form']=form
 	return render_to_response('INCUBACION_crear.html', args)
+
+
+@login_required(login_url='/ingresar/')
+def editarIncubacion(request):
+	idincu = int(request.GET.get('q', ''))
+	print 'HERE HELLO!!!'
+	print idincu
+	if request.method == 'POST':
+		incubacion=Incubacion.objects.get(idIncubacion = idincu)
+		form = CrearIncubacionForm(request.POST, request.FILES, instance=incubacion)
+		if form.is_valid() :
+			print 'Yeah'
+			form.save()
+			return HttpResponseRedirect('/homeIncubacion')
+		else:
+			incubacionForm = CrearIncubacionForm(instance=incubacion)
+	else:
+		print 'oh no'
+		incubacion=Incubacion.objects.get(idIncubacion = idincu)
+		incubacionForm = CrearIncubacionForm(instance=incubacion)
+		
+	args={}
+	args.update(csrf(request))
+	args['form']=incubacionForm
+	print incubacion.nombre
+	return render_to_response('INCUBACION_editar_incubacion.html', args)
 

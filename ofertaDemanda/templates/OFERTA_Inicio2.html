@@ -1,7 +1,10 @@
 
 {% extends "base.tpl.html" %}
+{% block home %}
+<a class="navbar-brand" href="{% url 'usuarios.views.inicio_view' %}" class="link">REI-NET</a>
+{% endblock %}
 {% block content %}
- 
+
 	 <div class="section-header">
       <div class="container">
         <div class="row">
@@ -60,7 +63,7 @@
 
             <div class="col-md-3 col-sm-6">
                 <div class="thumbnail">
-                  <img src="../static/img/imgDemandaOferta/works1.jpg" class="img-responsive" alt="Oferta">
+                  <img class="img-responsive" src="{{MEDIA_URL}}{{ c.imagen }} " alt="Oferta">
                   <div class="visit"><a href="OfertaVer"><i class="fa fa-question-circle"></i> Ver Oferta</a></div>
                   <div class="caption">
                     <h4>{{c.nombre}}</h4>
@@ -84,106 +87,13 @@
             </div>
         {% endfor %}
 
-        <div class="col-md-3 col-sm-6">
-            <div class="thumbnail">
-              <img src="../static/img/imgDemandaOferta/works1.jpg" class="img-responsive" alt="Oferta">
-              <div class="visit"><a href="OfertaVer"><i class="fa fa-question-circle"></i> Ver Oferta</a></div>
-              <div class="caption">
-                <h4>Nombre de la Oferta</h4>
-                <div class="rating">
-                    <i class="fa fa-star"></i> 
-                    <i class="fa fa-star"></i> 
-                    <i class="fa fa-star"></i> 
-                    <i class="fa fa-star"></i> 
-                    <i class="fa fa-star"></i>
-                  </div>
-                <ul class="text-muted list-inline">
-                  <li><i class="fa fa-user"></i> <a href="#">Administrator</a></li>
-                  <li><i class="fa fa-calendar"></i> November 8, 2013</li>
-                  <li><i class="fa fa-comments-o"></i> 6 comments</li>
-                </ul>
-                  
-                <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam.</p>
-              </div>
-            </div>
-        </div>
-        
-        <div class="col-md-3 col-sm-6">
-            <div class="thumbnail">
-              <img src="../static/img/imgDemandaOferta/works1.jpg" class="img-responsive" alt="Oferta">
-              <div class="visit"><a href="OfertaVer"><i class="fa fa-question-circle"></i> Ver Oferta</a></div>
-              <div class="caption">
-                <h4>Nombre de la Oferta</h4>
-                <div class="rating">
-                    <i class="fa fa-star"></i> 
-                    <i class="fa fa-star"></i> 
-                    <i class="fa fa-star"></i> 
-                    <i class="fa fa-star"></i> 
-                    <i class="fa fa-star"></i>
-                  </div>
-                <ul class="text-muted list-inline">
-                  <li><i class="fa fa-user"></i> <a href="#">Administrator</a></li>
-                  <li><i class="fa fa-calendar"></i> November 8, 2013</li>
-                  <li><i class="fa fa-comments-o"></i> 6 comments</li>
-                </ul>
-                  
-                <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam.</p>
-              </div>
-            </div>
-        </div>      
-        <div class="clearfix visible-sm"></div>       
-        <div class="col-md-3 col-sm-6">
-            <div class="thumbnail">
-              <img src="../static/img/imgDemandaOferta/works1.jpg" class="img-responsive" alt="Oferta">
-              <div class="visit"><a href="OfertaVer"><i class="fa fa-question-circle"></i> Ver Oferta</a></div>
-              <div class="caption">
-                <h4>Nombre de la Oferta</h4>
-                <div class="rating">
-                    <i class="fa fa-star"></i> 
-                    <i class="fa fa-star"></i> 
-                    <i class="fa fa-star"></i> 
-                    <i class="fa fa-star"></i> 
-                    <i class="fa fa-star"></i>
-                  </div>
-                <ul class="text-muted list-inline">
-                  <li><i class="fa fa-user"></i> <a href="#">Administrator</a></li>
-                  <li><i class="fa fa-calendar"></i> November 8, 2013</li>
-                  <li><i class="fa fa-comments-o"></i> 6 comments</li>
-                </ul>
-                  
-                <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam.</p>
-              </div>
-            </div>
-        </div>
-        <div class="col-md-3 col-sm-6">
-            <div class="thumbnail">
-              <img src="../static/img/imgDemandaOferta/works1.jpg" class="img-responsive" alt="Oferta">
-              <div class="visit"><a href="OfertaVer"><i class="fa fa-question-circle"></i> Ver Oferta</a></div>
-              <div class="caption">
-                <h4>Nombre de la Oferta</h4>
-                <div class="rating">
-                    <i class="fa fa-star"></i> 
-                    <i class="fa fa-star"></i> 
-                    <i class="fa fa-star"></i> 
-                    <i class="fa fa-star"></i> 
-                    <i class="fa fa-star"></i>
-                  </div>
-                <ul class="text-muted list-inline">
-                  <li><i class="fa fa-user"></i> <a href="#">Administrator</a></li>
-                  <li><i class="fa fa-calendar"></i> November 8, 2013</li>
-                  <li><i class="fa fa-comments-o"></i> 6 comments</li>
-                </ul>
-                  
-                <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam.</p>
-              </div>
-            </div>
         </div>      
         <div class="clearfix visible-sm"></div>               
       </div>
 
 
                 
-      </div>
+     
 
       
 
