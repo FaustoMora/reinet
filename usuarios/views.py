@@ -43,7 +43,7 @@ def invalid(request):
 
 def logout(request):
 	auth.logout(request)
-	return render_to_response('USUARIO_index.html')
+	return render_to_response('base.tpl.html')
 
 def register(request):
 	if request.method=='POST':
@@ -82,6 +82,7 @@ def create(request):
 	args.update(csrf(request))
 	args['form']= form
 	return render_to_response('USUARIO_sign-up.html', args)
+
 @login_required(login_url='/ingresar/')
 def perfil_view(request):
 	id_session=request.session['id_user']
@@ -95,13 +96,15 @@ def perfil_view(request):
 	args['persona']=persona1
 	
 	return render_to_response('USUARIO_profile.html',args)
+
 @login_required(login_url='/ingresar/')
 def mensajes_view(request):
 	return render_to_response('USUARIO_inbox.html')
 
 
 def inicio_view(request):
-	return render_to_response('USUARIO_inicio.html')
+        id_session=request.session['id_user']
+        return render_to_response('USUARIO_inicio.html')
 
 
 @login_required

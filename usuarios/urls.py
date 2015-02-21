@@ -13,11 +13,11 @@ urlpatterns = patterns('',
         url(r'^invalid[/]?$',invalid,name='index'),
         url(r'^register[/]?$',register,name='index'),
         url(r'^register_success[/]?$',register_success,name='index'),
+        url(r'^inicio_view[/]?$',inicio_view,name='index'),
         url(r'^$',index,name='index'),
         url(r'^perfil[/]?$',perfil_view),    
         url(r'^mensajes[/]?$',mensajes_view),   
 
-       url(r'^inicio[/]?$',inicio_view), 
         url(r'^editarperfil[/]?$',editar_perfil_view),   
         
 )
