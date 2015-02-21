@@ -66,7 +66,7 @@ def register(request):
 
 def register_success(request):
 	return render_to_response('USUARIO_index.html')
-	
+
 def create(request):
 	if request.POST:
 		form=UsuarioForm2(request.POST)
@@ -115,28 +115,28 @@ def editar_perfil_view(request):
 	if request.method == 'POST':
 		id_session=request.session['id_user']
 		id_persona=request.session['id_persona']
-		user=User.objects.get(id=id_session)
+		#user=User.objects.get(id=id_session)
 		persona=Persona.objects.get(idpersona=id_persona)
-		user_form = UserCreationForm(request.POST,  request.FILES,instance=user)
+		#user_form = UserCreationForm(request.POST,  request.FILES,instance=user)
 		persona_form = PersonaEditarForm(request.POST, request.FILES, instance=persona)
-		print "validacioneees", user_form.is_valid(), persona_form.is_valid()
+		print "validacioneees", persona_form.is_valid()
 		if  persona_form.is_valid():
-			user_form.save()
+			#user_form.save()
 			persona_form.save()
 			return HttpResponseRedirect('/perfil/')
 		else:
-			user=User.objects.get(id=id_session)
+			#user=User.objects.get(id=id_session)
 			persona=Persona.objects.get(idpersona=id_persona)
-			user_form = UserCreationForm(instance=user)
+			#user_form = UserCreationForm(instance=user)
 			persona_form = PersonaEditarForm(instance=persona)
-			args['userform']=user_form
+			#args['userform']=user_form
 			args['personaform']=persona_form
 	else:
-		user=User.objects.get(id=id_session)
+		#user=User.objects.get(id=id_session)
 		persona=Persona.objects.get(idpersona=id_persona)
-		user_form = UserCreationForm(instance=user)
+		#user_form = UserCreationForm(instance=user)
 		persona_form = PersonaEditarForm(instance=persona)
-		args['userform']=user_form
+		#args['userform']=user_form
 		args['personaform']=persona_form
 	#return render_to_response('USUARIO_edit-profile.html', args)
 	return render_to_response('USUARIO_edit-profile.html', RequestContext(request,args))
