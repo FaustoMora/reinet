@@ -132,3 +132,38 @@ class PersonaForm(UserCreationForm):
 			user.save()
 			
 		return user
+
+class PersonaEditarForm(forms.ModelForm):
+
+	class Meta:
+		model=Persona
+		#exclude=['last_login','is_superuser','user_permissions','is_staff','groups'
+		#,'date_joined','idpersona','is_active','fecha_nacimiento','password','username','password1', 'password2']
+		#fields=['first_name','last_name','email','identificacion','cargo','actividad','areas_interes']
+		"""
+		widgets={
+			
+			'first_name': forms.TextInput(attrs={'class': 'form-control','placeholder':'Nombre'}),
+			
+			'last_name': forms.TextInput(attrs={'class': 'form-control','placeholder':'Apellidos'}),
+			
+			'email': forms.TextInput(attrs={'class': 'form-control','placeholder':'Email'}),
+			
+			'identificacion': forms.TextInput(attrs={'class': 'form-control','placeholder':'Identificacion'}),
+			
+			'cargo': forms.TextInput(attrs={'class': 'form-control','placeholder':'Cargo'}),
+			
+			'actividad': forms.TextInput(attrs={'class': 'form-control','placeholder':'Actividad'}),
+
+			'areas_interes': forms.TextInput(attrs={'class': 'form-control','placeholder':'Areas de Interes'}),
+
+		}
+	def save(self, commit=True):
+		#user=super(PersonaForm, self).save(commit=False)
+		#user.idpersona='default'
+		user.fecha_nacimiento='2012-12-12'
+		if commit:
+			user.save()
+			
+		return user
+		"""

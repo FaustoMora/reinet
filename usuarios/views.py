@@ -115,9 +115,9 @@ def editar_perfil_view(request):
 		user=User.objects.get(id=id_session)
 		persona=Persona.objects.get(idpersona=id_persona)
 		user_form = UserCreationForm(request.POST,  request.FILES,instance=user)
-		persona_form = PersonaForm(request.POST, request.FILES, instance=persona)
+		persona_form = PersonaEditarForm(request.POST, request.FILES, instance=persona)
 		print "validacioneees", user_form.is_valid(), persona_form.is_valid()
-		if user_form.is_valid() and persona_form.is_valid():
+		if  persona_form.is_valid():
 			user_form.save()
 			persona_form.save()
 			return HttpResponseRedirect('/perfil/')
@@ -125,14 +125,14 @@ def editar_perfil_view(request):
 			user=User.objects.get(id=id_session)
 			persona=Persona.objects.get(idpersona=id_persona)
 			user_form = UserCreationForm(instance=user)
-			persona_form = PersonaForm(instance=persona)
+			persona_form = PersonaEditarForm(instance=persona)
 			args['userform']=user_form
 			args['personaform']=persona_form
 	else:
 		user=User.objects.get(id=id_session)
 		persona=Persona.objects.get(idpersona=id_persona)
 		user_form = UserCreationForm(instance=user)
-		persona_form = PersonaForm(instance=persona)
+		persona_form = PersonaEditarForm(instance=persona)
 		args['userform']=user_form
 		args['personaform']=persona_form
 	#return render_to_response('USUARIO_edit-profile.html', args)
