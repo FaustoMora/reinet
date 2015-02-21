@@ -23,7 +23,7 @@ class MyRegistrationForm(UserCreationForm):
 
 """
 from django import forms
-from models import  Persona
+from models import  *
 from django.contrib.auth.forms import *
 from django.contrib.auth.models import User
 
@@ -168,3 +168,7 @@ class PersonaEditarForm(forms.ModelForm):
 			
 		return user
 		"""
+class MensajeForm(forms.ModelForm):
+
+	class Meta:
+		model=Mensaje

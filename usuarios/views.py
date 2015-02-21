@@ -140,3 +140,7 @@ def editar_perfil_view(request):
 		args['personaform']=persona_form
 	#return render_to_response('USUARIO_edit-profile.html', args)
 	return render_to_response('USUARIO_edit-profile.html', RequestContext(request,args))
+
+def my_404_view(request):
+	return render_to_response('404.html')
+
