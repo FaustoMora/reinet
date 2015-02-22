@@ -2,11 +2,11 @@
 {% block contenidoUsuario %}
         <div class="col-sm-8 col-md-6">
           <!-- Edit profile form -->
-          <h3 class="hl" id="tituloNombre">Editar Perfil <small>Alex Smith</small></h3>
+          <h3 class="hl" id="tituloNombre">Editar Perfil</h3>
           <p class="text-muted">Por favor llena correctamente los campos para editar tu perfil.</p>
           <hr>
           <h4 class="hl bottom-15">Informaci&oacute;n General</h4>
-          <form role="form" action="/editarperfil/" method="POST">
+          <form role="form" action="/editarperfil/" method="POST" enctype="multipart/form-data">
             {%csrf_token%}
             {%for f in personaform%}
                     

@@ -12,36 +12,337 @@ from django.db import models
 
 from usuarios.models import *
 from django.contrib.auth.models import User
-
+from django.utils.translation import ugettext_lazy as _
+from datetime import datetime
 
 
 
 class CrearOfertaForm(forms.ModelForm):
 	
     class Meta:
-
         model = Oferta
-        fields = ['nombre','descripcion','palabras_claves','tiempo_inicio_disponible','tiempo_fin_disponible','lugar_aplicacion','perfil_beneficiario','perfil_cliente','soluciones_alternativas','propuesta_valor','cuadro_competidores','cuadro_tendencias_relevantes','imagen','estado_propiedad_intelectual']
+        fields = ['tipoOferta','nombre','descripcion','dominio','subdominio',
+        'palabras_claves','lugar_aplicacion','tiempo_inicio_disponible',
+        'tiempo_fin_disponible',
+        'perfil_beneficiario','perfil_cliente',
+        'redAsociados','asociacionesclave','recursosclave','propuestavalor','relacionclientes',
+        'canalesDistribucion','segmentomercado','estructuracostos','fuenteingresos',
+        'rivalidadcompetidores','competidorespotenciales','proveedores','sustitutos','consumidores',
+        'soluciones_alternativas','propuesta_valor','cuadro_competidores',
+        'cuadro_tendencias_relevantes','estado_propiedad_intelectual','evidencia_traccion']
+        labels = {
+            #'nombre': _('Writer'),
+        }
+        help_texts = {
+            #'nombre': _('Some useful help text.'),
+        }
+        error_messages = {
+            #'nombre': {
+             #   'max_length': _("This writer's name is too long."),
+            #},
+        }
+
+    tipoOferta = forms.ChoiceField(
+        label="Tipo de la oferta",
+        choices = (
+            ('0', "Seleccione el tipo de oferta"), 
+            ('1', "Emprendimiento"), 
+            ('2', "Prototipo"),
+            ('3', "Tecnologia")
+        ),
+        widget = forms.Select(
+                attrs={'class':'form-group form-control infoGener', 'required':''}
+            ),
+        initial = '0',
+    )
+
+    nombre = forms.CharField(
+        label="Nombre",
+        max_length=150,
+        widget=forms.TextInput(
+            attrs={'class':'form-control form-group infoGener', 'placeholder':'Ingrese el nombre de su oferta', 'required':''}
+        )
+    )
+
+    descripcion = forms.CharField(
+        max_length=500,
+        label="Descripcion",
+        widget = forms.Textarea(
+            attrs={'class':'form-control form-group infoGener', 'placeholder':'Ingrese una descripcion general de su oferta','rows':'4','style':'resize:none', 'required':''}
+        )
+    )
+
+    dominio = forms.CharField(
+        label="Dominio",
+        max_length=500,
+        widget=forms.TextInput(
+            attrs={'class':'form-control form-group infoGener', 'placeholder':'Ingrese el nombre de su oferta', 'required':''}
+        )
+    )
+
+    subdominio = forms.CharField(
+        label="Subdominio",
+        max_length=200,
+        widget=forms.TextInput(
+            attrs={'class':'form-control form-group infoGener', 'placeholder':'Ingrese el nombre de su oferta', 'required':''}
+        )
+    )
+
+    palabras_claves = forms.CharField(
+        label="Palabras Claves",
+        max_length=200,
+        widget=forms.TextInput(
+            attrs={'class':'form-control form-group infoGener', 'placeholder':'Ingrese palabras claves que se refieran a su oferta', 'required':''}
+        )
+    )
+
+    lugar_aplicacion = forms.ChoiceField(
+        label="Lugar de Aplicacion",
+        choices = (
+            ('0', "Seleccione la provincia"),('1', "Azuay"),('2', "Bolivar"),('3', "Caniar"),
+            ('4', "Carchi"),('5', "Chimborazo"),('6', "Cotopaxi"),('7', "El Oro"),
+            ('8', "Esmeraldas"),('9', "Galapagos"),('10', "Guayas"),('11', "Imbabura"),
+            ('12', "Loja"),('13', "Los Rios"),('14', "Manabi"),('15', "Morona Santiago"),
+            ('16', "Napo"),('17', "Orellana"),('18', "Pastaza"),('19', "Pichincha"),
+            ('20', "Santa Elena"),('21', "Santo Domingo de los Tsachilas"),('22', "Sucumbios"),('23', "Tungurahua"),('24', "Zamora Chinchipe")
+        ),
+        widget = forms.Select(
+                attrs={'class':'form-group form-control infoGener', 'required':''}
+            ),
+        initial = '0',
+    )
+
+    tiempo_inicio_disponible = forms.DateField(
+
+        label="Desde",
+        #initial=datetime.date.today(),
+        widget=forms.DateInput(format=('%d/%m/%y'),
+            attrs={'class':'form-control form-group infoGener', 'required':'','type':'date'}
+        )
+    )
+
+    tiempo_fin_disponible = forms.DateField(
+        label="Hasta",
+        #initial=datetime.date.today(),
+        widget=forms.DateInput(format=('%d/%m/%y'),
+            attrs={'class':'form-control form-group infoGener', 'required':'','type':'date'}
+        )
+    ) 
+
+    perfil_beneficiario = forms.CharField(
+        required=False,
+        label="Perfil del Beneficiario",
+        max_length=500,
+        widget = forms.Textarea(
+            attrs={'class':'form-control form-group',
+            'placeholder':'Describa el perfil de los beneficiarios de su oferta si esta saliera al mercado','rows':'4','style':'resize:none', 'required':'False'}
+        )
+    )
+
+    perfil_cliente = forms.CharField(
+        required=False,
+        max_length=500,
+        label="Perfil del Cliente",
+        widget = forms.Textarea(
+            attrs={'class':'form-control form-group',
+            'placeholder':'Describa el perfil de los clientes de su oferta si esta saliera al mercado','rows':'4','style':'resize:none','required':'False'}
+        )
+    )
+
+    redAsociados = forms.CharField(
+        label="Red de Asociados",
+        required=False,
+        widget = forms.Textarea(
+            attrs={'class':'form-control form-group',
+            'placeholder':'Escriba aqui','rows':'13','style':'resize:none','required':'False'}
+        )
+    )
+
+    asociacionesclave = forms.CharField(
+        label="Actividades Clave",
+        required=False,
+        widget = forms.Textarea(
+            attrs={'class':'form-control form-group',
+            'placeholder':'Escriba aqui','rows':'5','style':'resize:none','required':'False'}
+        )
+    )
+
+    recursosclave = forms.CharField(
+        label="Recursos Clave",
+        required=False,
+        widget = forms.Textarea(
+            attrs={'class':'form-control form-group',
+            'placeholder':'Escriba aqui','rows':'5','style':'resize:none','required':'False'}
+        )
+    )
+
+    propuestavalor = forms.CharField(
+        label="Proposicion de Valor",
+        required=False,
+        widget = forms.Textarea(
+            attrs={'class':'form-control form-group',
+            'placeholder':'Escriba aqui','rows':'13','style':'resize:none','required':'False'}
+        )
+    )
+
+    relacionclientes = forms.CharField(
+        label="Relacion con los Clientes",
+        required=False,
+        widget = forms.Textarea(
+            attrs={'class':'form-control form-group',
+            'placeholder':'Escriba aqui','rows':'5','style':'resize:none'}
+        )
+    )
+
+    canalesDistribucion = forms.CharField(
+        label="Canales de Distribucion",
+        required=False,
+        widget = forms.Textarea(
+            attrs={'class':'form-control form-group',
+            'placeholder':'Escriba aqui','rows':'5','style':'resize:none','required':'False'}
+        )
+    )
+
+    segmentomercado = forms.CharField(
+        label="Segmentos de Clientes",
+        required=False,
+        widget = forms.Textarea(
+            attrs={'class':'form-control form-group',
+            'placeholder':'Escriba aqui','rows':'13','style':'resize:none','required':'False'}
+        )
+    )
+
+    estructuracostos = forms.CharField(
+        label="Estructura de Costos",
+        required=False,
+        widget = forms.Textarea(
+            attrs={'class':'form-control form-group',
+            'placeholder':'Escriba aqui','rows':'5','style':'resize:none','required':'False'}
+        )
+    )
+
+    fuenteingresos = forms.CharField(
+        label="Fuente de Ingresos",
+        required=False,
+        widget = forms.Textarea(
+            attrs={'class':'form-control form-group',
+            'placeholder':'Escriba aqui','rows':'5','style':'resize:none','required':'False'}
+        )
+    )
+
+    soluciones_alternativas = forms.CharField(
+        required=False,
+        label="Soluciones Alternativas",
+        max_length=500,
+        widget = forms.Textarea(
+            attrs={'class':'form-control form-group',
+            'placeholder':'Escriba aqui','rows':'5','style':'resize:none','required':'False'}
+        )
+    )
+
+    propuesta_valor = forms.CharField(
+        required=False,
+        label="Propuestas de Valor",
+        max_length=300,
+        widget = forms.Textarea(
+            attrs={'class':'form-control form-group',
+            'placeholder':'Escriba aqui','rows':'5','style':'resize:none','required':'False'}
+        )
+    )
+
+    estado_propiedad_intelectual = forms.CharField(
+        required=False,
+        label="Estado Propiedad Intelectual",
+        max_length=500,
+        widget = forms.Textarea(
+            attrs={'class':'form-control form-group',
+            'placeholder':'Escriba aqui','rows':'5','style':'resize:none','required':'False'}
+        )
+    )
+
+    evidencia_traccion = forms.CharField(
+        required=False,
+        label="Evidencia de traccion",
+        max_length=500,
+        widget = forms.Textarea(
+            attrs={'class':'form-control form-group',
+            'placeholder':'Explique la evidencia de Traccion','rows':'5','style':'resize:none','required':'False'}
+        )
+    )
+
+    cuadro_competidores = forms.CharField(
+        required=False,
+        label="Cuadro de Competidores",
+        max_length=500,
+        widget = forms.Textarea(
+            attrs={'class':'form-control form-group',
+            'placeholder':'Describa el cuadro de Competidores','rows':'5','style':'resize:none','required':'False'}
+        )
+    )
+
+    cuadro_tendencias_relevantes = forms.CharField(
+        required=False,
+        label="Cuadro de Tendecias Relativas",
+        max_length=500,
+        widget = forms.Textarea(
+            attrs={'class':'form-control form-group',
+            'placeholder':'Describa el cuadro de Tendencias Relativas','rows':'5','style':'resize:none','required':'False'}
+        )
+    )
+
+    rivalidadcompetidores = forms.CharField(
+        required=False,
+        label="Rivalidad de Competidores",
+        max_length=200,
+        widget = forms.Textarea(
+            attrs={'class':'form-control form-group',
+            'placeholder':'Describa la rivalidad de los competidores del mercado','rows':'4','style':'resize:none;margin-bottom:0','required':'False'}
+        )
+    )
+
+    competidorespotenciales = forms.CharField(
+        required=False,
+        max_length=200,
+        label="Competidores Potenciales",
+        widget = forms.Textarea(
+            attrs={'class':'form-control form-group',
+            'placeholder':'Describa si hay nuevos competidores potenciales','rows':'4','style':'resize:none;margin-bottom:0','required':'False'}
+        )
+    )
+
+    proveedores = forms.CharField(
+        required=False,
+        label="Proveedores",
+        max_length=200,
+        widget = forms.Textarea(
+            attrs={'class':'form-control form-group',
+            'placeholder':'Describa sus proveedores','rows':'4','style':'resize:none;margin-bottom:0','required':'False'}
+        )
+    )
+
+    sustitutos = forms.CharField(
+        required=False,
+        label="Sustitutos",
+        max_length=200,
+        widget = forms.Textarea(
+            attrs={'class':'form-control form-group',
+            'placeholder':'Describa sus productos o servicios sustitutos','rows':'4','style':'resize:none;margin-bottom:0','required':'False'}
+        )
+    )
+
+    consumidores = forms.CharField(
+        required=False,
+        label="Consumidores",
+        max_length=200,
+        widget = forms.Textarea(
+            attrs={'class':'form-control form-group',
+            'placeholder':'Describa los consumidores de su producto','rows':'4','style':'resize:none;margin-bottom:0','required':'False'}
+        )
+    )
 
 
-    TiposOfertaChoice = (('1','Tecnologia'),('2','Emprendimiento'),('3','Prototipo'))
-
-    nombre = forms.CharField(label="Nombre",widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Ingrese el nombre de la oferta','data-trigger':'focus','data-placement':'left','data-toggle':'popover', 'required':''}))
-    descripcion = forms.CharField(label="Descripcion",widget=forms.Textarea(attrs={'rows':4, 'cols':60,'class':'form-control', 'placeholder':'Ingrese una breve descripcion de la oferta','data-trigger':'focus','data-placement':'left','data-toggle':'popover', 'required':''}))
-    palabras_claves = forms.CharField(label="Palabras Clave",widget=forms.Textarea(attrs={'rows':4, 'cols':60,'class':'form-control', 'placeholder':'Ingrese palabras clave de la oferta','data-trigger':'focus','data-placement':'left','data-toggle':'popover', 'required':''}))
-    tiempo_inicio_disponible = forms.DateField(label="Fecha Inicio",widget=forms.DateInput(format=('%m/%d/%Y'),attrs={'class':'form-control','placeholder':'Fecha inicial de la oferta (m/d/Y)','required':''}))
-    tiempo_fin_disponible = forms.DateField(label="Fecha Final",widget=forms.DateInput(format=('%m/%d/%Y'),attrs={'class':'form-control','placeholder':'Fecha fin de la oferta (m/d/Y)','required':''}))
-    lugar_aplicacion = forms.CharField(label="Lugar",widget=forms.Textarea(attrs={'rows':4, 'cols':60,'class':'form-control', 'placeholder':'Ingrese el lugar','data-trigger':'focus','data-placement':'left','data-toggle':'popover', 'required':''}))
-    perfil_beneficiario = forms.CharField(label="Perfil del beneficiario de la oferta",widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Ingrese el beneficiario de la oferta','data-trigger':'focus','data-placement':'left','data-toggle':'popover', 'required':''}))
-    perfil_cliente = forms.CharField(label="Perfil del cliente de la oferta",widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Ingrese el cliente de la oferta','data-trigger':'focus','data-placement':'left','data-toggle':'popover', 'required':''}))
-    soluciones_alternativas = forms.CharField(label="Descripcion de soluciones alternativas existentes",widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Ingrese el cliente de la oferta','data-trigger':'focus','data-placement':'left','data-toggle':'popover', 'required':''}))
-    propuesta_valor = forms.CharField(label="Descripcion de la propuesta por valor",widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'ingrese la descripcion','data-trigger':'focus','data-placement':'left','data-toggle':'popover', 'required':''}))
-    cuadro_competidores = forms.CharField(label="Business model canvas",widget=forms.Textarea(attrs={'rows':3, 'cols':60, 'class':'form-control', 'placeholder':'Ingrese el business model canvas','data-trigger':'focus','data-placement':'left','data-toggle':'popover', 'required':''}))
-    cuadro_tendencias_relevantes = forms.CharField(label="Diagrama de Porter",widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Diagrama de porter','data-trigger':'focus','data-placement':'left','data-toggle':'popover', 'required':''}))
-    imagen = forms.ImageField(label="Cargar Imagen",widget=forms.FileInput(attrs={'class':'btn btn-default','data-trigger':'focus','data-placement':'left','data-toggle':'popover'}))  
-    estado_propiedad_intelectual = forms.CharField(label="Estado de la propiedad intelectual",widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Ingrese el estado de la propiedad intelectual','data-trigger':'focus','data-placement':'left','data-toggle':'popover', 'required':''}))
-	
 
     def clean(self):
         return self.cleaned_data
-                
+
+    

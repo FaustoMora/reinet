@@ -23,10 +23,10 @@ class MyRegistrationForm(UserCreationForm):
 
 """
 from django import forms
-from models import  Persona
+from models import  *
 from django.contrib.auth.forms import *
 from django.contrib.auth.models import User
-
+from datetime import datetime
 """
 class UsuarioForm(forms.ModelForm):
 	
@@ -100,16 +100,10 @@ class PersonaForm(UserCreationForm):
 		model=Persona
 		exclude=['last_login','is_superuser','user_permissions','is_staff','groups'
 		,'date_joined','idpersona','is_active','fecha_nacimiento','password']
-		fields=['username','first_name','last_name','email','identificacion',
+		fields=['username','first_name','last_name', 'email','identificacion',
 		'cargo','actividad','areas_interes','password1','password2']
 		widgets={
 			'password': forms.PasswordInput(attrs={'class': 'form-control','placeholder':'Password'}),
-			
-			'username': forms.TextInput(attrs={'class': 'form-control','placeholder':'Username'}),
-			
-			'first_name': forms.TextInput(attrs={'class': 'form-control','placeholder':'Nombre'}),
-			
-			'last_name': forms.TextInput(attrs={'class': 'form-control','placeholder':'Apellidos'}),
 			
 			'email': forms.TextInput(attrs={'class': 'form-control','placeholder':'Email'}),
 			
@@ -124,6 +118,12 @@ class PersonaForm(UserCreationForm):
 			'password1': forms.TextInput(attrs={'class': 'form-control','placeholder':'Password'}),
 			
 		}
+	username=forms.CharField(label='Usuario',widget=forms.TextInput(attrs={'class': 'form-control','placeholder':'Username'}))
+	first_name=forms.CharField(label='Nombres',widget=forms.TextInput(attrs={'class': 'form-control','placeholder':'Nombre'}))
+	last_name=forms.CharField(label='Apellidos',widget=forms.TextInput(attrs={'class': 'form-control','placeholder':'Apellidos'}))
+	password2=forms.CharField(label='Confirmacion password',widget=forms.PasswordInput(attrs={'class': 'form-control','placeholder':'Confirmacion'}))
+	#imagen = forms.ImageField(label="Imagen Perfil",widget=forms.FileInput(attrs={'class':'btn btn-default','data-trigger':'focus','data-placement':'left','data-toggle':'popover'}))
+
 	def save(self, commit=True):
 		user=super(PersonaForm, self).save(commit=False)
 		#user.idpersona='default'
@@ -139,7 +139,7 @@ class PersonaEditarForm(forms.ModelForm):
 		model=Persona
 		#exclude=['last_login','is_superuser','user_permissions','is_staff','groups'
 		#,'date_joined','idpersona','is_active','fecha_nacimiento','password','username','password1', 'password2']
-		fields=['first_name','last_name','email','identificacion','cargo','actividad','areas_interes']
+		fields=['first_name','last_name','email','identificacion','cargo','actividad','areas_interes','imagen']
 		
 		widgets={
 			
@@ -158,6 +158,9 @@ class PersonaEditarForm(forms.ModelForm):
 			'areas_interes': forms.TextInput(attrs={'class': 'form-control','placeholder':'Areas de Interes'}),
 
 		}
+
+	def clean(self):
+		return self.cleaned_data
 	"""
 	def save(self, commit=True):
 		#user=super(PersonaForm, self).save(commit=False)
@@ -168,3 +171,27 @@ class PersonaEditarForm(forms.ModelForm):
 			
 		return user
 		"""
+class MensajeForm(forms.ModelForm):
+	recibe=forms.CharField(label='Para', widget= forms.TextInput(attrs={'class': 'form-control','placeholder':'Destinatario'}))
+	txtMensaje=forms.CharField(label='Mensaje',widget=forms.Textarea(attrs={'class': 'form-control'}))
+	asunto=forms.CharField(label='Asunto',widget=forms.TextInput(attrs={'class': 'form-control','placeholder':'Asunto'}))
+	class Meta:
+		model=Mensaje
+		fields=['recibe','asunto','txtMensaje']
+		"""
+		def save(self, commit=True):
+			#mensaje=super(MensajeForm,self).save(commit=False)
+			#mensaje.idEmisor=1
+			mensaje.fecha='2012-12-12'
+			mensaje.hora=null
+			p=Persona.objects.get(username=recibe)
+			print "persooona", p
+			mensaje.idDestino=p.idpersona
+			#if commit:
+				#mensaje.save()
+			return mensaje
+		"""
+class ImagenPerfilForm(forms.ModelForm):
+	class Meta:
+		model=Persona
+		fields=['imagen']

@@ -36,7 +36,6 @@ class InstitucionPersona(models.Model):
     class Meta:
         db_table = 'institucion_persona'
 
-
 class Persona(User):
     idpersona = models.AutoField(primary_key=True)
     identificacion = models.CharField(max_length=20L)
@@ -44,16 +43,19 @@ class Persona(User):
     actividad = models.CharField(max_length=150L)
     fecha_nacimiento = models.DateField()
     areas_interes = models.CharField(max_length=50L)
+    imagen=models.ImageField(upload_to='usuarios_media')
     #idusuario = models.ForeignKey(AuthUser, db_column='id')
     class Meta:
         db_table = 'persona'
 
 class Mensaje(models.Model):
-    idEmisor=models.ForeignKey(Persona,db_column='idp_emisor', related_name='p_emisor')
-    idDestimo=models.ForeignKey(Persona,db_column='idp_destino', related_name='p_destino')
-    txtMensaje=models.CharField(max_length=250)
+    idEmisor=models.ForeignKey(User,db_column='idp_emisor', related_name='p_emisor')
+    idDestino=models.ForeignKey(User,db_column='idp_destino', related_name='p_destino')
+    asunto=models.CharField(max_length=50)
+    txtMensaje=models.TextField(max_length=300)
     fecha=models.DateField()
     hora=models.TimeField()
+    leido=models.BooleanField()
     class Meta:
         db_table = 'mensaje'
 

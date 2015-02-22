@@ -1,129 +1,107 @@
 
-    {% extends "base.tpl.html" %}
- {% block home %}
+{% extends "base.tpl.html" %}
+{% block home %}
 <a class="navbar-brand" href="{% url 'usuarios.views.inicio_view' %}" class="link">REI-NET</a>
 {% endblock %}
 {% block content %}
 
-	 <div class="section-header">
+   <div class="section-header">
       <div class="container">
         <div class="row">
           <div class="col-sm-12">
             <!-- Remove the .animated class if you don't want things to move -->
-            <h1 class="animated slideInLeft"><span>Inicio</span></h1>
+            <h1 class="animated slideInLeft"><span>Demandas de la Red de Innovaci&oacute;n</span></h1>
+          </div>
+        </div>
+      </div>      
+    </div>
+    
+    <div class="container">
+      <div class="row">
+        <div class=" ">
+          <div class="row faq-cats">
+            <div class="col-xs-6 col-xs-offset-6 visible-xs">
+              <ul>
+                <li><i class="fa fa-home fa-2x"></i><a href="/misDemandas/">Visualizar mis Demandas</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-sm-9">
+          <form class="form-inline" role="form">
+            <div class="row">
+              <div class="col-md-10 col-sm-10">
+                <div class="input-group">
+                  <label class="sr-only" for="search3">Search</label>
+                    <input type="text" class="form-control " id="search3" placeholder="Encuentre demandas de su inter&eacute;s">
+                  <span class="input-group-btn">
+                    <button type="submit" class="btn btn-blue">Buscar</button>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </form><br />
+        </div>
+
+        <div class="col-md-6 col-sm-3 hidden-xs">
+          <div class="row faq-cats">
+            <div class="col-md-6 col-md-offset-6 col-sm-12">
+              <ul>
+                <li><i class="fa fa-home fa-2x"></i><a href="/misDemandas/">Visualizar mis Demandas</a></li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="container">
-      <ul class="row list-inline gallery-list" id="isotope-container">
-          <li class="isotope-item cat-3 cat-1">
-          <a href="DemandaCrear">
-            <span class="gallery-text">
-              <span class="gallery-title"> + Crear Demanda</span>
-            </span>
-          </a>
-        </li>
-      </ul>
-      <h3>MIS DEMANDAS</h3>
-      <ul class="row list-inline gallery-list" id="isotope-container">
-        <li class="isotope-item cat-1 cat-2 cat-4">
-          <a href="DemandaVer">
-            <span class="gallery-thumbnail">
-              <img class="img-responsive" src="../static/img/imgDemandaOferta/works1.jpg" alt="...">
-            </span>
-            <span class="gallery-text">
-              <span class="gallery-title">Demanda 1</span>
-              Nullam id ipsum varius, tincidunt odio nec, placerat enim.
-            </span>
-          </a>
-        </li>
-        <li class="isotope-item cat-2 cat-4">
-          <a href="DemandaVer">
-            <span class="gallery-thumbnail">
-              <img class="img-responsive" src="../static/img/imgDemandaOferta/works2.jpg" alt="...">
-            </span>
-            <span class="gallery-text">
-              <span class="gallery-title">Demanda 2</span>
-              Nullam id ipsum varius, tincidunt odio nec, placerat enim.
-            </span>
-          </a>
-        </li>
-        <li class="isotope-item cat-3 cat-1">
-          <a href="DemandaVer">
-            <span class="gallery-thumbnail">
-              <img class="img-responsive" src="../static/img/imgDemandaOferta/works3.jpg" alt="...">
-            </span>
-            <span class="gallery-text">
-              <span class="gallery-title">Demanda 3</span>
-              Nullam id ipsum varius, tincidunt odio nec, placerat enim.
-            </span>
-          </a>
-        </li>
-        <li class="isotope-item cat-2 cat-4">
-          <a href="DemandaVer">
-            <span class="gallery-thumbnail">
-              <img class="img-responsive" src="../static/img/imgDemandaOferta/works4.jpg" alt="...">
-            </span>
-            <span class="gallery-text">
-              <span class="gallery-title">Demanda 4</span>
-              Nullam id ipsum varius, tincidunt odio nec, placerat enim.
-            </span>
-          </a>
-        </li>
-        
-      </ul>
-    </div>
-	
-	<div class="container">
-         <h3>DEMANDAS EN LA RED</h3>
-      <ul class="row list-inline gallery-list" id="isotope-container">
-        <li class="isotope-item cat-1 cat-2 cat-4">
-          <a href="DemandaVer">
-            <span class="gallery-thumbnail">
-              <img class="img-responsive" src="../static/img/imgDemandaOferta/works1.jpg" alt="...">
-            </span>
-            <span class="gallery-text">
-              <span class="gallery-title">Demanda 1</span>
-              Nullam id ipsum varius, tincidunt odio nec, placerat enim.
-            </span>
-          </a>
-        </li>
-        <li class="isotope-item cat-2 cat-4">
-          <a href="DemandaVer">
-            <span class="gallery-thumbnail">
-              <img class="img-responsive" src="../static/img/imgDemandaOferta/works2.jpg" alt="...">
-            </span>
-            <span class="gallery-text">
-              <span class="gallery-title">Demanda 2</span>
-              Nullam id ipsum varius, tincidunt odio nec, placerat enim.
-            </span>
-          </a>
-        </li>
-        <li class="isotope-item cat-3 cat-1">
-          <a href="DemandaVer">
-            <span class="gallery-thumbnail">
-              <img class="img-responsive" src="../static/img/imgDemandaOferta/works3.jpg" alt="...">
-            </span>
-            <span class="gallery-text">
-              <span class="gallery-title">Demanda 3</span>
-              Nullam id ipsum varius, tincidunt odio nec, placerat enim.
-            </span>
-          </a>
-        </li>
-        <li class="isotope-item cat-2 cat-4">
-          <a href="DemandaVer">
-            <span class="gallery-thumbnail">
-              <img class="img-responsive" src="../static/img/imgDemandaOferta/works4.jpg" alt="...">
-            </span>
-            <span class="gallery-text">
-              <span class="gallery-title">Demanda 4</span>
-              Nullam id ipsum varius, tincidunt odio nec, placerat enim.
-            </span>
-          </a>
-        </li>
-        
-      </ul>
+
+    <div class="container">   
+      <div class="row">
+
+      <!-- Se presenta las ofertas  
+         {% for c in lst_demandas %}
+
+         {% if c.idusuario|stringformat:"s" != persona|stringformat:"s"  %}
+
+            <div class="col-md-3 col-sm-6">
+                <div class="thumbnail">
+                  <img class="img-responsive" src="{{MEDIA_URL}}{{ c.imagen }} " alt="Oferta">
+                  <div class="visit"><a href="verOferta"><i class="fa fa-question-circle"></i> Ver Demandas</a></div>
+                  <div class="caption">
+                    <h4>{{c.nombre}}</h4>
+                    <div class="rating">
+                        {{c.calificacionGeneral}}
+                        <i class="fa fa-star"></i> 
+                        <i class="fa fa-star"></i> 
+                        <i class="fa fa-star"></i> 
+                        <i class="fa fa-star"></i> 
+                        <i class="fa fa-star"></i>
+                      </div>
+                    <ul class="text-muted list-inline">
+                      <li><i class="fa fa-user"></i> <a href="#">Administrator {{c.idusuario}}</a></li>
+                      <li><i class="fa fa-calendar"></i> {{c.tiempo_inicio_disponible}}</li>
+                      <li><i class="fa fa-comments-o"></i> 6 comments</li>
+                    </ul>
+                      
+                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam.</p>
+                  </div>
+                </div>
+            </div>
+
+
+          {% endif %}
+        {% endfor %}
+-->
+        </div>      
+        <div class="clearfix visible-sm"></div>               
+      </div>
+
+
+                
      
-    </div>
+
+      
+
+    </div>  
   {% endblock %}

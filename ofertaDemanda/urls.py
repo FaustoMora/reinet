@@ -6,15 +6,23 @@ from reinet import settings
 
 urlpatterns = patterns('',
 
-        url(r'^Demandas[/]?$',Demandas,name='Demandas'),
-        url(r'^DemandaVer[/]?$',DemandaVer,name='DemandaVer'),
-        url(r'^DemandaCrear[/]?$',DemandaCrear,name='DemandaCrear'),
+        url(r'^homeDemandas[/]?$',homeDemandas,name='homeDemandas'),
+        url(r'^verDemanda[/]?$',verDemanda,name='verDemanda'),
+        url(r'^crearDemanda[/]?$',crearDemanda,name='crearDemanda'),    
+        url(r'^misDemandas[/]?$',misDemandas,name='misDemandas'),            
+        url(r'^homeOfertas[/]?$',homeOfertas,name='homeOfertas'),
+        url(r'^crearOferta[/]?$',crearOferta,name='crearOferta'),  
+        url(r'^matricular/(?P<idalumno>\d+)/(?P<idcurso>\d+)/$',
+      'make_matricula',
+      name='modulo-matriculas-add'),
+
         
-              
-        url(r'^Ofertas[/]?$',Ofertas,name='Ofertas'),
-        url(r'^OfertaCrear[/]?$',OfertaCrear,name='OfertaCrear'),  
-        url(r'^OfertaVer[/]?$',OfertaVer,name='OfertaVer'), 
-        url(r'^OfertasMisOfertas[/]?$',OfertasMisOfertas,name='OfertasMisOfertas'), 
+        url(r'^verOferta[/]?$',verOferta,name='verOferta'),
+        url(r'^editarOferta[/]?$',editarOferta,name='editarOferta'),   
+        url(r'^misOfertas[/]?$',misOfertas,name='misOfertas'),
+        
+
+
         url(r'^media/(?P<path>.*)$','django.views.static.serve',{'document_root':settings.MEDIA_ROOT})
         
 )
