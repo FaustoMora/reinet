@@ -173,13 +173,16 @@ class MensajeForm(forms.ModelForm):
 	class Meta:
 		model=Mensaje
 		fields=['recibe','asunto','txtMensaje']
-		
+		"""
 		def save(self, commit=True):
-			mensaje=super(MensajeForm,self).save(commit=False)
-			mensaje.idEmisor=null
+			#mensaje=super(MensajeForm,self).save(commit=False)
+			#mensaje.idEmisor=1
 			mensaje.fecha='2012-12-12'
 			mensaje.hora=null
-			mensaje.idDestino=null
-			if commit:
-				mensaje.save()
+			p=Persona.objects.get(username=recibe)
+			print "persooona", p
+			mensaje.idDestino=p.idpersona
+			#if commit:
+				#mensaje.save()
 			return mensaje
+		"""

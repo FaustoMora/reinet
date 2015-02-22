@@ -100,10 +100,22 @@ def perfil_view(request):
 
 @login_required(login_url='/ingresar/')
 def enviar_mensaje(request):
+	id_user=request.session['id_user']
 	if request.method=='POST':
 		form1=MensajeForm(request.POST)
 		if form1.is_valid():
-			form1.save()
+			mensaje=super(MensajeForm,form1).save(commit=False)
+			emisor=User.objects.get(id=id_user)
+			ur=form1.cleaned_data['recibe']
+			print "aqui ur",ur
+			userReceptor=User.objects.get(username=ur)
+			print "aqui ureceptor",userReceptor
+			#receptor=Persona.objects.get(id_user)
+			mensaje.idEmisor=emisor
+			mensaje.idDestino=emisor
+			mensaje.fecha='2012-12-12'
+			mensaje.hora='12:00:00'
+			mensaje.save()
 			return HttpResponseRedirect('/mensajes/')
 	else:
 		id_persona=request.session['id_persona']
@@ -116,7 +128,9 @@ def enviar_mensaje(request):
 @login_required(login_url='/ingresar/')
 def mensajes_view(request):
 	id_persona=request.session['id_persona']
+	mensajes = Mensaje.objects.all().filter(idDestino=request.session['id_user'])[:8]
 	args={}
+	args['mensajes']=mensajes
 	return render_to_response('USUARIO_inbox.html',args)
 
 @login_required(login_url='/ingresar/')

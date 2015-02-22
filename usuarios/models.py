@@ -48,8 +48,8 @@ class Persona(User):
         db_table = 'persona'
 
 class Mensaje(models.Model):
-    idEmisor=models.ForeignKey(Persona,db_column='idp_emisor', related_name='p_emisor')
-    idDestino=models.ForeignKey(Persona,db_column='idp_destino', related_name='p_destino')
+    idEmisor=models.ForeignKey(User,db_column='idp_emisor', related_name='p_emisor')
+    idDestino=models.ForeignKey(User,db_column='idp_destino', related_name='p_destino')
     asunto=models.CharField(max_length=50)
     txtMensaje=models.TextField(max_length=300)
     fecha=models.DateField()

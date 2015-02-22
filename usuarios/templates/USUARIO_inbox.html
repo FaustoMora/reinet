@@ -67,101 +67,21 @@
                 <div class="clearfix"></div>
               </li>
               <!-- Second dialog -->
-              <li>
-                <p class="text-muted">
-                  <img src="../static/img/face3.jpg" alt="...">
-                    To: <a href="profile.html">David Smith</a><br />
-                    <small>10 days ago</small>
-                </p>
-                <p class="text-muted">
-                  <a href="inbox-dialog.html" class="inbox-dialog">Re: Lorem ipsum dolor sit amet, consectetur adipiscing elit...</a>
-                </p>
-                <div class="clearfix"></div>
-              </li>
-              <!-- Third dialog -->
-              <li>
-                <p class="text-muted">
-                  <img src="../static/img/face4.jpg" alt="...">
-                    From: <a href="profile.html">Nathan Smith</a><br />
-                    <small>11 days ago</small>
-                </p>
-                <p class="text-muted">
-                  <a href="inbox-dialog.html" class="inbox-dialog">Re: Lorem ipsum dolor sit amet, consectetur adipiscing elit...</a>
-                </p>
-                <div class="clearfix"></div>
-              </li>
-              <!-- Fourth dialog -->
+              {%for msj in mensajes%}
+             
               <li>
                 <p class="text-muted">
                   <img src="../static/img/face2.jpg" alt="...">
-                    From: <a href="profile.html">Dan Smith</a><br />
+                    From: <a href="profile.html">{{msj.idEmisor}}</a><br />
                     <small>5 days ago</small>
                 </p>
                 <p class="text-muted">
-                  <a href="inbox-dialog.html" class="inbox-dialog">Lorem ipsum dolor sit amet, consectetur adipiscing elit...</a>
+                  <a href="inbox-dialog.html" class="inbox-dialog">{{msj.txtMensaje}}</a>
                 </p>
                 <div class="clearfix"></div>
               </li>
-              <!-- Fifth dialog -->
-              <li>
-                <p class="text-muted">
-                  <img src="../static/img/face3.jpg" alt="...">
-                    To: <a href="profile.html">David Smith</a><br />
-                    <small>10 days ago</small>
-                </p>
-                <p class="text-muted">
-                  <a href="inbox-dialog.html" class="inbox-dialog">Re: Lorem ipsum dolor sit amet, consectetur adipiscing elit...</a>
-                </p>
-                <div class="clearfix"></div>
-              </li>
-              <!-- Sixth dialog -->
-              <li>
-                <p class="text-muted">
-                  <img src="../static/img/face4.jpg" alt="...">
-                    From: <a href="profile.html">Nathan Smith</a><br />
-                    <small>11 days ago</small>
-                </p>
-                <p class="text-muted">
-                  <a href="inbox-dialog.html" class="inbox-dialog">Re: Lorem ipsum dolor sit amet, consectetur adipiscing elit...</a>
-                </p>
-                <div class="clearfix"></div>
-              </li>
-              <!-- Seventh dialog -->
-              <li>
-                <p class="text-muted">
-                  <img src="../static/img/face2.jpg" alt="...">
-                    From: <a href="profile.html">Dan Smith</a><br />
-                    <small>5 days ago</small>
-                </p>
-                <p class="text-muted">
-                  <a href="inbox-dialog.html" class="inbox-dialog">Lorem ipsum dolor sit amet, consectetur adipiscing elit...</a>
-                </p>
-                <div class="clearfix"></div>
-              </li>
-              <!-- Eighth dialog -->
-              <li>
-                <p class="text-muted">
-                  <img src="../static/img/face3.jpg" alt="...">
-                    To: <a href="profile.html">David Smith</a><br />
-                    <small>10 days ago</small>
-                </p>
-                <p class="text-muted">
-                  <a href="inbox-dialog.html" class="inbox-dialog">Re: Lorem ipsum dolor sit amet, consectetur adipiscing elit...</a>
-                </p>
-                <div class="clearfix"></div>
-              </li>
-              <!-- Ninth dialog -->
-              <li>
-                <p class="text-muted">
-                  <img src="../static/img/face4.jpg" alt="...">
-                    From: <a href="profile.html">Nathan Smith</a><br />
-                    <small>11 days ago</small>
-                </p>
-                <p class="text-muted">
-                  <a href="inbox-dialog.html" class="inbox-dialog">Re: Lorem ipsum dolor sit amet, consectetur adipiscing elit...</a>
-                </p>
-                <div class="clearfix"></div>
-              </li>
+              {%endfor%}
+
             </ul>
           </div>
           <!-- Pagination -->
