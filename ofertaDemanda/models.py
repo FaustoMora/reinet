@@ -70,12 +70,12 @@ class Oferta(models.Model):
 class Diagramacanvas(models.Model):
     iddiagramacanvas = models.AutoField(primary_key=True) # Field name made lowercase.
     idOferta = models.ForeignKey(Oferta, db_column='idOferta')
-    redAsociados = models.CharField(max_length=150L, db_column='asociacionesClave',null=True) # Field name made lowercase.
+    redAsociados = models.CharField(max_length=150L, db_column='redAsociados',null=True) # Field name made lowercase.
     asociacionesclave = models.CharField(max_length=150L, db_column='asociacionesClave',null=True) # Field name made lowercase.
     actividadesclave = models.CharField(max_length=150L, db_column='actividadesClave',null=True) # Field name made lowercase.
     recursosclave = models.CharField(max_length=150L, db_column='recursosClave',null=True) # Field name made lowercase.
     propuestavalor = models.CharField(max_length=150L, db_column='propuestaValor',null=True) # Field name made lowercase.
-    canalesDistribucion = models.CharField(max_length=150L, db_column='relacionClientes',null=True) # Field name made lowercase.
+    canalesDistribucion = models.CharField(max_length=150L, db_column='canalesDistribucion',null=True) # Field name made lowercase.
     relacionclientes = models.CharField(max_length=150L, db_column='relacionClientes',null=True) # Field name made lowercase.
     segmentomercado = models.CharField(max_length=150L, db_column='segmentoMercado',null=True) # Field name made lowercase.
     estructuracostos = models.CharField(max_length=150L, db_column='estructuraCostos',null=True) # Field name made lowercase.

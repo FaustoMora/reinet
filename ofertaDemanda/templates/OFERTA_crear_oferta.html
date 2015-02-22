@@ -62,7 +62,8 @@
               <ul class="nav nav-tabs">
                 <li class="active"><a href="#informacionG" data-toggle="tab"><h5>Información General</h5></a></li>
                 <li><a href="#perfiles" data-toggle="tab"><h5>Perfiles</h5></a></li>
-                <li><a href="#modelos" data-toggle="tab"><h5>Modelo de Negocio</h5></a></li>
+                <li><a href="#canvas" data-toggle="tab"><h5>Canvas</h5></a></li>
+                <li><a href="#porter" data-toggle="tab"><h5>Porter</h5></a></li>
                 <li><a href="#otros" data-toggle="tab"><h5>Otros</h5></a></li>
               </ul>
               <div class="tab-content">
@@ -101,7 +102,11 @@
               {% endfor %}
               </div>
 
-              <div class="tab-pane col-xs-12" id="modelos">
+              <div class="tab-pane col-xs-12" id="canvas">
+              <div class="info-board info-board-green">
+                <p>Para definir el modelo de negocio de una empresa o proyecto se suele utilizar el denominado Modelo CANVAS, desarrollado por Alexander Osterwalder y que trata de hacer que el proceso de desarrollo de un nuevo modelo de negocio contemple todos los aspectos claves que la futura organizaci&oacute;n ha de tener en cuenta vi&eacute;ndolos de forma integrada en un gráfico.</p>
+              </div>             
+
               {% for f in form %} 
                   {% if f.label == "Red de Asociados" or f.label == "Proposicion de Valor" or f.label == "Segmentos de Clientes" %}
                     <div class="col-xs-2 fixpadding" id="fixpadding">
@@ -159,6 +164,11 @@
               {% endfor %}
               </div>
 
+              <div class="tab-pane col-xs-12" id="porter">
+                <div class="info-board info-board-green">
+                  Las Cinco Fuerzas de Porter es un modelo holístico que permite analizar cualquier industria en términos de rentabilidad. También llamado “Modelo de Competitividad Ampliada de Porter”, constituye una herramienta de gestión que permite realizar un análisis externo de una empresa a través del análisis de la industria o sector a la que pertenece.
+                </div>  
+              </div>
 
               <div class="tab-pane col-xs-10 col-xs-offset-1" id="otros">
               {% for f in form %} 
@@ -170,8 +180,6 @@
                   {% endif %}
               {% endfor %}
               </div>
-
-
 
 
               </div>
