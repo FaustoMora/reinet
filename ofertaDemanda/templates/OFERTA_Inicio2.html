@@ -62,7 +62,7 @@
       <!-- Se presenta las ofertas --> 
          {% for c in lst_ofertas %}
 
-         {% if c.idusuario|stringformat:"s" != id_persona|stringformat:"s"  %}
+         {% if c.idusuario|stringformat:"s" != persona|stringformat:"s"  %}
 
             <div class="col-md-3 col-sm-6">
                 <div class="thumbnail">
