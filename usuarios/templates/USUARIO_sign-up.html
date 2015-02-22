@@ -1,4 +1,7 @@
 {% extends "base.tpl.html" %}
+{% block home %}
+        <a class="navbar-brand" href="{% url 'usuarios.views.index' %}" class="link">REI-NET</a>
+{% endblock %}
 {% block signin %}
 <li id="sign-up" class="show"><a href="{% url 'usuarios.views.register' %}">Sign Up</a></li>
 <li id="sign-in" class="show"><a href="{% url 'usuarios.views.ingresar' %}">Sign In</a></li>

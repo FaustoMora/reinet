@@ -67,14 +67,14 @@
                       </div>
                       <div class="modal-body">
                         <p>Please choose a file to upload. JPG, PNG, GIF only.</p>
-                        <form role="form">
+                        <form role="form" action="/actualizarFoto/" method="POST"  enctype="multipart/form-data">
                           <div class="form-group">
-                            <label for="file">File input</label>
-                            <input type="file" id="file">
+                            <label for="imagen">File input</label>
+                            <input type="file" id="id_imagen">
                             <p class="help-block">Files up to 5Mb only.</p>
                           </div>
                           <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                          <button type="button" class="btn btn-green" data-dismiss="modal">Subir</button>
+                          <button type="submit" class="btn btn-green" data-dismiss="modal">Subir</button>
                         </form>
                       </div>
                     </div><!-- /.modal-content -->
@@ -112,7 +112,7 @@
                     <div class="modal-content">
                       <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <img src="{{ persona.imagen }}" alt="..." id="mensajeFoto">
+                        <img src="{{MEDIA_URL}}{{ persona.imagen }}" alt="..." id="mensajeFoto">
                         <h4 class="modal-title" id="mensajeTitulo">Usuario Independiente</h4>
                         <p class="text-muted"><i class="fa fa-envelope"></i> Nuevo Mensaje</p>
                         <div class="clearfix"></div>

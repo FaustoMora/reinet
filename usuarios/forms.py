@@ -191,3 +191,7 @@ class MensajeForm(forms.ModelForm):
 				#mensaje.save()
 			return mensaje
 		"""
+class ImagenPerfilForm(forms.ModelForm):
+	class Meta:
+		model=Persona
+		fields=['imagen']

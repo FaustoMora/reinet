@@ -181,5 +181,17 @@ def my_404_view(request):
 @login_required(login_url='/ingresar/')
 def subir_imagen(request):
 	id_persona=request.session['id_persona']
+	persona=Persona.objects.get(idpersona=id_persona)
+	if request.method == 'POST':
+		persona_form=ImagenPerfilForm(request.POST,request.FILES, instance=persona)
+		if persona_form.is_valid():
+			persona_form.save()
+			return HttpResponseRedirect('/perfil/')
+		else:
+			persona=Persona.objects.get(idpersona=id_persona)
+			persona_form = PersonaEditarForm(instance=persona)
+			args['personaform']=persona_form
+
+
 
 	
