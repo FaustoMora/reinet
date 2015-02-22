@@ -55,10 +55,10 @@
             <a  href="{% url 'usuarios.views.inicio_view' %}" >Inicio </a>
           </li>
           <li class="dropdown hidden-sm">
-            <a href="/Ofertas/" >OFERTAS </a>
+            <a href="{% url 'ofertaDemanda.views.homeOfertas' %}" >OFERTAS </a>
           </li>
           <li class="dropdown hidden-sm">
-            <a href="/Demandas/" >DEMANDAS </a>
+            <a href="{% url 'ofertaDemanda.views.homeDemandas' %}" >DEMANDAS </a>
           </li>
           <li class="dropdown hidden-sm">
             <a href="{% url 'concursoIncubacion.views.homeConcursos' %}" >CONCURSOS </a>
