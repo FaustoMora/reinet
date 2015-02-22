@@ -43,6 +43,7 @@ class Persona(User):
     actividad = models.CharField(max_length=150L)
     fecha_nacimiento = models.DateField()
     areas_interes = models.CharField(max_length=50L)
+    imagen=models.ImageField(upload_to='usuarios_media')
     #idusuario = models.ForeignKey(AuthUser, db_column='id')
     class Meta:
         db_table = 'persona'

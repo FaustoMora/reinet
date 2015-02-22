@@ -47,7 +47,7 @@ def logout(request):
 
 def register(request):
 	if request.method=='POST':
-		form=PersonaForm(request.POST)
+		form=PersonaForm(request.POST, request.FILES)
 	
 		if form.is_valid():
 			form.save()
@@ -95,7 +95,7 @@ def perfil_view(request):
 	args['usuario']=user1
 	args['persona']=persona1
 	
-	return render_to_response('USUARIO_profile.html',args)
+	return render_to_response('USUARIO_profile.html',args,context_instance=RequestContext(request))
 
 
 @login_required(login_url='/ingresar/')
@@ -177,3 +177,9 @@ def my_404_view(request):
 	return render_to_response('404.html')
 
 
+
+@login_required(login_url='/ingresar/')
+def subir_imagen(request):
+	id_persona=request.session['id_persona']
+
+	
