@@ -100,7 +100,7 @@ class PersonaForm(UserCreationForm):
 		model=Persona
 		exclude=['last_login','is_superuser','user_permissions','is_staff','groups'
 		,'date_joined','idpersona','is_active','fecha_nacimiento','password']
-		fields=['username','first_name','last_name', 'email','identificacion',
+		fields=['username','first_name','last_name', 'email','imagen','identificacion',
 		'cargo','actividad','areas_interes','password1','password2']
 		widgets={
 			'password': forms.PasswordInput(attrs={'class': 'form-control','placeholder':'Password'}),
