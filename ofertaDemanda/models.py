@@ -7,18 +7,20 @@ from django.contrib.auth.models import User
 class Demanda(models.Model):    
     idDemanda = models.AutoField(primary_key=True)
     idusuario = models.ForeignKey(User, db_column='idusuario')
-    nombre = models.CharField(max_length=150L,blank=False)
-    descripcion = models.CharField(max_length=500L,blank=False)
-    dominio = models.IntegerField(blank=False)
-    subdominio = models.IntegerField(blank=False)
+    tipoDemanda= models.IntegerField()
+    estadoDemanda= models.IntegerField()
+    nombre = models.CharField(max_length=150L)
+    descripcion = models.CharField(max_length=500L)
+    dominio = models.IntegerField()
+    subdominio = models.IntegerField()
     palabras_claves = models.CharField(max_length=100L, db_column='palabras_Claves') # Field name made lowercase.
     tiempo_inicio_disponible = models.DateField(db_column='tiempo_Inicio_Disponible') # Field name made lowercase.
     tiempo_fin_disponible = models.DateField(db_column='tiempo_Fin_Disponible') # Field name made lowercase.
     lugar_aplicacion = models.CharField(max_length=200L, db_column='lugar_Aplicacion') # Field name made lowercase.
-    perfil_beneficiario = models.CharField(max_length=500L, db_column='perfil_Beneficiario') # Field name made lowercase.
-    perfil_cliente = models.CharField(max_length=500L, db_column='perfil_Cliente') # Field name made lowercase.
-    soluciones_alternativas = models.CharField(max_length=500L, db_column='soluciones_Alternativas') # Field name made lowercase.
-    importancia_solucion = models.CharField(max_length=500L, db_column='importancia_Solucion') # Field name made lowercase.
+    perfil_beneficiario = models.CharField(max_length=500L, db_column='perfil_Beneficiario',null=True) # Field name made lowercase.
+    perfil_cliente = models.CharField(max_length=500L, db_column='perfil_Cliente',null=True) # Field name made lowercase.
+    soluciones_alternativas = models.CharField(max_length=500L, db_column='soluciones_Alternativas',null=True) # Field name made lowercase.
+    importancia_solucion = models.CharField(max_length=500L, db_column='importancia_Solucion',null=True) # Field name made lowercase.
     class Meta:
         db_table = 'demanda'
 
@@ -41,26 +43,26 @@ class ImagenDemanda(models.Model):
 class Oferta(models.Model):
     idOferta = models.AutoField(primary_key=True)
     idusuario = models.ForeignKey(User, db_column='idusuario')
+    tipoOferta= models.IntegerField()
     estadoOferta= models.IntegerField()
     calificacionGeneral = models.IntegerField(null=True)
     ofertaPublicada = models.BooleanField()
-    nombre = models.CharField(max_length=150L,blank=False)
-    descripcion = models.CharField(max_length=500L,blank=False)
-    dominio = models.IntegerField(blank=False)
-    subdominio = models.IntegerField()
-    palabras_claves = models.CharField(max_length=100L, db_column='palabras_Claves') # Field name made lowercase.
+    nombre = models.CharField(max_length=150L)
+    descripcion = models.CharField(max_length=500L)
+    dominio = models.CharField(max_length=500L)
+    subdominio = models.CharField(max_length=200L)
+    palabras_claves = models.CharField(max_length=200L, db_column='palabras_Claves') # Field name made lowercase.
     tiempo_inicio_disponible = models.DateField(db_column='tiempo_Inicio_Disponible') # Field name made lowercase.
     tiempo_fin_disponible = models.DateField(db_column='tiempo_Fin_Disponible') # Field name made lowercase.
     lugar_aplicacion = models.CharField(max_length=200L, db_column='lugar_Aplicacion') # Field name made lowercase.
-    perfil_beneficiario = models.CharField(max_length=500L, db_column='perfil_Beneficiario') # Field name made lowercase.
-    perfil_cliente = models.CharField(max_length=500L, db_column='perfil_Cliente') # Field name made lowercase.
-    soluciones_alternativas = models.CharField(max_length=500L, db_column='soluciones_Alternativas', blank=True) # Field name made lowercase.
-    propuesta_valor = models.CharField(max_length=300L, db_column='propuesta_Valor', blank=True) # Field name made lowercase.
-    cuadro_competidores = models.CharField(max_length=100L, db_column='cuadro_Competidores', blank=True) # Field name made lowercase.
-    cuadro_tendencias_relevantes = models.CharField(max_length=100L, db_column='cuadro_Tendencias_Relevantes', blank=True) # Field name made lowercase.
-    estado_propiedad_intelectual = models.CharField(max_length=500L, db_column='estado_Propiedad_Intelectual', blank=True) # Field name made lowercase.
-    evidencia_traccion = models.CharField(max_length=500L, db_column='evidencia_Traccion', blank=True) # Field name made lowercase.
-    imagen = models.ImageField(upload_to='ofDem_media')
+    perfil_beneficiario = models.CharField(max_length=500L, db_column='perfil_Beneficiario',null=True) # Field name made lowercase.
+    perfil_cliente = models.CharField(max_length=500L, db_column='perfil_Cliente',null=True) # Field name made lowercase.
+    soluciones_alternativas = models.CharField(max_length=500L, db_column='soluciones_Alternativas', blank=True,null=True) # Field name made lowercase.
+    propuesta_valor = models.CharField(max_length=300L, db_column='propuesta_Valor', blank=True,null=True) # Field name made lowercase.
+    cuadro_competidores = models.CharField(max_length=100L, db_column='cuadro_Competidores', blank=True,null=True) # Field name made lowercase.
+    cuadro_tendencias_relevantes = models.CharField(max_length=100L, db_column='cuadro_Tendencias_Relevantes', blank=True,null=True) # Field name made lowercase.
+    estado_propiedad_intelectual = models.CharField(max_length=500L, db_column='estado_Propiedad_Intelectual', blank=True,null=True) # Field name made lowercase.
+    evidencia_traccion = models.CharField(max_length=500L, db_column='evidencia_Traccion', blank=True,null=True) # Field name made lowercase.
     class Meta:
         db_table = 'oferta'
 

@@ -28,7 +28,7 @@
               <ul>
                  
                 <li>
-                	<a class="btn btn-blue" href="OfertaCrear">
+                	<a class="btn btn-blue" href="/crearOferta/">
 						  <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>&nbsp;&nbsp;Nueva Oferta
 					</a>
                 </li>
@@ -57,7 +57,7 @@
           <div class="row faq-cats">
             <div class="col-md-4 col-md-offset-8 col-sm-12">
               <ul>                  
-                <li><a class="btn btn-blue btn-lg" href="OfertaCrear">
+                <li><a class="btn btn-blue btn-lg" href="/crearOferta/">
 						  <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>&nbsp;&nbsp;Nueva Oferta
 					</a>
 				</li>
@@ -75,39 +75,78 @@
        <div class="row">
       
 		<!-- Se presentan las ofertas--> 
+		<div class="container">
+			<div class="table-responsive">
+				<table class="table table-hover" id="misofertas">
+					<thead>
+						<tr>
+							<th >N&uacute;mero</th>
+						    <th>Nombre</th>	
+						    <th>Tipo</th> 
+						    <th>Calificaci&oacute;n </th>	    
+						    <th>Estado</th>    
+						    <th>Publicada</th>
+						    <th>Editar oferta<th>
+						    <th>Visualizar oferta<th>
+						</tr>
+					</thead>
+					<tbody>
 		
-	 {% for c in lst_ofertas %}
-+
-+            <div class="col-md-3 col-sm-6">
-+                <div class="thumbnail">                   
-+                  <img src="../static/img/imgDemandaOferta/works1.jpg " class="img-responsive" alt="Oferta">
-+                  <div class="visit"><a href="OfertaVer"><i class="fa fa-question-circle"></i> Ver Oferta</a></div>
-+                  <div class="caption">
-+                    <h4>{{c.nombre}}</h4>
-+                    <div class="rating">
-+                        {{c.calificacionGeneral}}
-+                        <i class="fa fa-star"></i> 
-+                        <i class="fa fa-star"></i> 
-+                        <i class="fa fa-star"></i> 
-+                        <i class="fa fa-star"></i> 
-+                        <i class="fa fa-star"></i>
-+                      </div>
-+                    <ul class="text-muted list-inline">
-+                      <li><i class="fa fa-user"></i> <a href="#">Administrator {{c.idusuario}}</a></li>
-+                      <li><i class="fa fa-calendar"></i> {{c.tiempo_inicio_disponible}}</li>
-+                      <li><i class="fa fa-comments-o"></i> 6 comments</li>
-+                    </ul>
-+                      
-+                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam.</p>
-+                  </div>
-+                </div>
-+            </div>
+	 					{% for c in lst_ofertas %}	 	
+						<tr>
+							<td class="numero">{{c.idOferta}}</td>
+						    <td>{{c.nombre}}</td>
+						    
+						    {% if c.tipoOferta == 1%}
+						    	<td>Emprendimiento</td> 
+						    {% elif c.tipoOferta == 2%}
+						    	<td>Prototipo</td>
+						    {% elif c.tipoOferta == 3%}
+						    	<td>Tecnolog&iacute;a</td>
+						    {% endif %}
+						    
+						    {% if c.calificacionGeneral == null%}
+						    	<td>Sin calificaciones</td>
+						    {% else %}
+						    	<td>{{c.calificacionGeneral}}</td>
+						    {% endif %}
+
+						    {% if c.estadoOferta == 1%}
+						    	<td>Activa</td>
+						    {% elif c.estadoOferta == 2%}
+						    	<td>Terminada</td>
+						    {% elif c.estadoOferta == 3%}
+						    	<td>Desactivada</td>
+						    {% else %}
+						    	<td>Censurada</td>
+						    {% endif %}
+
+						    {% if c.ofertaPublicada == 1%}
+						    	<td style="color:gray">Borrador</td>
+						    {% else %}
+						    	<td style="color:green">Publicada</td>
+						    {% endif %}
+
+						    <th style="text-align:center"><button type="button" class="btn btn-green">
+								  <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+								</button>
+						    <th>
+						    <th style="text-align:center"><button type="button" class="btn btn-amethyst">
+						    		<span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>
+						    	</button>
+						    <th>
+						  </tr>
+						 {% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
 
 
-+        {% endfor %}
+     
 
 
-             </div>
+</div>
 
 
          
