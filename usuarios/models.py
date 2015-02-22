@@ -36,7 +36,6 @@ class InstitucionPersona(models.Model):
     class Meta:
         db_table = 'institucion_persona'
 
-
 class Persona(User):
     idpersona = models.AutoField(primary_key=True)
     identificacion = models.CharField(max_length=20L)
@@ -50,10 +49,12 @@ class Persona(User):
 
 class Mensaje(models.Model):
     idEmisor=models.ForeignKey(Persona,db_column='idp_emisor', related_name='p_emisor')
-    idDestimo=models.ForeignKey(Persona,db_column='idp_destino', related_name='p_destino')
-    txtMensaje=models.CharField(max_length=250)
+    idDestino=models.ForeignKey(Persona,db_column='idp_destino', related_name='p_destino')
+    asunto=models.CharField(max_length=50)
+    txtMensaje=models.TextField(max_length=300)
     fecha=models.DateField()
     hora=models.TimeField()
+    leido=models.BooleanField()
     class Meta:
         db_table = 'mensaje'
 

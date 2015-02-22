@@ -97,9 +97,27 @@ def perfil_view(request):
 	
 	return render_to_response('USUARIO_profile.html',args)
 
+
+@login_required(login_url='/ingresar/')
+def enviar_mensaje(request):
+	if request.method=='POST':
+		form1=MensajeForm(request.POST)
+		if form1.is_valid():
+			form1.save()
+			return HttpResponseRedirect('/mensajes/')
+	else:
+		id_persona=request.session['id_persona']
+		form1=MensajeForm()
+	args={}
+	args.update(csrf(request))
+	args['form']=form1
+	return render_to_response('USUARIO_enviar-mensaje.html',args)
+
 @login_required(login_url='/ingresar/')
 def mensajes_view(request):
-	return render_to_response('USUARIO_inbox.html')
+	id_persona=request.session['id_persona']
+	args={}
+	return render_to_response('USUARIO_inbox.html',args)
 
 @login_required(login_url='/ingresar/')
 def inicio_view(request):
@@ -143,4 +161,5 @@ def editar_perfil_view(request):
 
 def my_404_view(request):
 	return render_to_response('404.html')
+
 

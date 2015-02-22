@@ -26,7 +26,7 @@ from django import forms
 from models import  *
 from django.contrib.auth.forms import *
 from django.contrib.auth.models import User
-
+from datetime import datetime
 """
 class UsuarioForm(forms.ModelForm):
 	
@@ -169,6 +169,17 @@ class PersonaEditarForm(forms.ModelForm):
 		return user
 		"""
 class MensajeForm(forms.ModelForm):
-
+	recibe=forms.CharField(label='Para')
 	class Meta:
 		model=Mensaje
+		fields=['recibe','asunto','txtMensaje']
+		
+		def save(self, commit=True):
+			mensaje=super(MensajeForm,self).save(commit=False)
+			mensaje.idEmisor=null
+			mensaje.fecha='2012-12-12'
+			mensaje.hora=null
+			mensaje.idDestino=null
+			if commit:
+				mensaje.save()
+			return mensaje

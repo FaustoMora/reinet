@@ -17,6 +17,7 @@ urlpatterns = patterns('',
         url(r'^$',index,name='index'),
         url(r'^perfil[/]?$',perfil_view),    
         url(r'^mensajes[/]?$',mensajes_view),   
+        url(r'^enviarmensaje[/]?$',enviar_mensaje),   
 
         url(r'^editarperfil[/]?$',editar_perfil_view),   
         
