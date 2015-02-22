@@ -27,6 +27,7 @@ class CrearOfertaForm(forms.ModelForm):
         'perfil_beneficiario','perfil_cliente',
         'redAsociados','asociacionesclave','recursosclave','propuestavalor','relacionclientes',
         'canalesDistribucion','segmentomercado','estructuracostos','fuenteingresos',
+        'rivalidadcompetidores','competidorespotenciales','proveedores','sustitutos','consumidores',
         'soluciones_alternativas','propuesta_valor','cuadro_competidores',
         'cuadro_tendencias_relevantes','estado_propiedad_intelectual','evidencia_traccion']
         labels = {
@@ -131,6 +132,7 @@ class CrearOfertaForm(forms.ModelForm):
     perfil_beneficiario = forms.CharField(
         required=False,
         label="Perfil del Beneficiario",
+        max_length=500,
         widget = forms.Textarea(
             attrs={'class':'form-control form-group',
             'placeholder':'Describa el perfil de los beneficiarios de su oferta si esta saliera al mercado','rows':'4','style':'resize:none', 'required':'False'}
@@ -139,6 +141,7 @@ class CrearOfertaForm(forms.ModelForm):
 
     perfil_cliente = forms.CharField(
         required=False,
+        max_length=500,
         label="Perfil del Cliente",
         widget = forms.Textarea(
             attrs={'class':'form-control form-group',
@@ -227,13 +230,10 @@ class CrearOfertaForm(forms.ModelForm):
         )
     )
 
-
-
-
-
     soluciones_alternativas = forms.CharField(
         required=False,
         label="Soluciones Alternativas",
+        max_length=500,
         widget = forms.Textarea(
             attrs={'class':'form-control form-group',
             'placeholder':'Escriba aqui','rows':'5','style':'resize:none','required':'False'}
@@ -243,6 +243,7 @@ class CrearOfertaForm(forms.ModelForm):
     propuesta_valor = forms.CharField(
         required=False,
         label="Propuestas de Valor",
+        max_length=300,
         widget = forms.Textarea(
             attrs={'class':'form-control form-group',
             'placeholder':'Escriba aqui','rows':'5','style':'resize:none','required':'False'}
@@ -252,6 +253,7 @@ class CrearOfertaForm(forms.ModelForm):
     estado_propiedad_intelectual = forms.CharField(
         required=False,
         label="Estado Propiedad Intelectual",
+        max_length=500,
         widget = forms.Textarea(
             attrs={'class':'form-control form-group',
             'placeholder':'Escriba aqui','rows':'5','style':'resize:none','required':'False'}
@@ -261,6 +263,7 @@ class CrearOfertaForm(forms.ModelForm):
     evidencia_traccion = forms.CharField(
         required=False,
         label="Evidencia de traccion",
+        max_length=500,
         widget = forms.Textarea(
             attrs={'class':'form-control form-group',
             'placeholder':'Explique la evidencia de Traccion','rows':'5','style':'resize:none','required':'False'}
@@ -270,6 +273,7 @@ class CrearOfertaForm(forms.ModelForm):
     cuadro_competidores = forms.CharField(
         required=False,
         label="Cuadro de Competidores",
+        max_length=500,
         widget = forms.Textarea(
             attrs={'class':'form-control form-group',
             'placeholder':'Describa el cuadro de Competidores','rows':'5','style':'resize:none','required':'False'}
@@ -279,13 +283,64 @@ class CrearOfertaForm(forms.ModelForm):
     cuadro_tendencias_relevantes = forms.CharField(
         required=False,
         label="Cuadro de Tendecias Relativas",
+        max_length=500,
         widget = forms.Textarea(
             attrs={'class':'form-control form-group',
             'placeholder':'Describa el cuadro de Tendencias Relativas','rows':'5','style':'resize:none','required':'False'}
         )
     )
 
-    
+    rivalidadcompetidores = forms.CharField(
+        required=False,
+        label="Rivalidad de Competidores",
+        max_length=200,
+        widget = forms.Textarea(
+            attrs={'class':'form-control form-group',
+            'placeholder':'Describa la rivalidad de los competidores del mercado','rows':'4','style':'resize:none;margin-bottom:0','required':'False'}
+        )
+    )
+
+    competidorespotenciales = forms.CharField(
+        required=False,
+        max_length=200,
+        label="Competidores Potenciales",
+        widget = forms.Textarea(
+            attrs={'class':'form-control form-group',
+            'placeholder':'Describa si hay nuevos competidores potenciales','rows':'4','style':'resize:none;margin-bottom:0','required':'False'}
+        )
+    )
+
+    proveedores = forms.CharField(
+        required=False,
+        label="Proveedores",
+        max_length=200,
+        widget = forms.Textarea(
+            attrs={'class':'form-control form-group',
+            'placeholder':'Describa sus proveedores','rows':'4','style':'resize:none;margin-bottom:0','required':'False'}
+        )
+    )
+
+    sustitutos = forms.CharField(
+        required=False,
+        label="Sustitutos",
+        max_length=200,
+        widget = forms.Textarea(
+            attrs={'class':'form-control form-group',
+            'placeholder':'Describa sus productos o servicios sustitutos','rows':'4','style':'resize:none;margin-bottom:0','required':'False'}
+        )
+    )
+
+    consumidores = forms.CharField(
+        required=False,
+        label="Consumidores",
+        max_length=200,
+        widget = forms.Textarea(
+            attrs={'class':'form-control form-group',
+            'placeholder':'Describa los consumidores de su producto','rows':'4','style':'resize:none;margin-bottom:0','required':'False'}
+        )
+    )
+
+
 
     def clean(self):
         return self.cleaned_data

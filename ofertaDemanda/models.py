@@ -59,8 +59,8 @@ class Oferta(models.Model):
     perfil_cliente = models.CharField(max_length=500L, db_column='perfil_Cliente',null=True) # Field name made lowercase.
     soluciones_alternativas = models.CharField(max_length=500L, db_column='soluciones_Alternativas', blank=True,null=True) # Field name made lowercase.
     propuesta_valor = models.CharField(max_length=300L, db_column='propuesta_Valor', blank=True,null=True) # Field name made lowercase.
-    cuadro_competidores = models.CharField(max_length=100L, db_column='cuadro_Competidores', blank=True,null=True) # Field name made lowercase.
-    cuadro_tendencias_relevantes = models.CharField(max_length=100L, db_column='cuadro_Tendencias_Relevantes', blank=True,null=True) # Field name made lowercase.
+    cuadro_competidores = models.CharField(max_length=500L, db_column='cuadro_Competidores', blank=True,null=True) # Field name made lowercase.
+    cuadro_tendencias_relevantes = models.CharField(max_length=500L, db_column='cuadro_Tendencias_Relevantes', blank=True,null=True) # Field name made lowercase.
     estado_propiedad_intelectual = models.CharField(max_length=500L, db_column='estado_Propiedad_Intelectual', blank=True,null=True) # Field name made lowercase.
     evidencia_traccion = models.CharField(max_length=500L, db_column='evidencia_Traccion', blank=True,null=True) # Field name made lowercase.
     class Meta:
