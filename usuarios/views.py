@@ -26,8 +26,11 @@ def auth_view(request):
 	if user is not None:
 		auth.login(request, user)
 		request.session['id_user']=request.user.id
-		personas=Persona.objects.raw('SELECT * FROM persona WHERE user_ptr_id =%s',request.user.id)
-		p=personas[0]
+		user=User.objects.get(id=request.user.id)
+		#personas=Persona.objects.raw('SELECT * FROM persona WHERE user_ptr_id =%s',request.user.id)
+		persona=Persona.objects.get(user_ptr=user)
+		#p=personas[0]
+		p=persona
 		request.session['id_persona']=p.idpersona
 		#print p.idpersona
 		return HttpResponseRedirect('/perfil')

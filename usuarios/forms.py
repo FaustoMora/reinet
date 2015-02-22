@@ -105,12 +105,6 @@ class PersonaForm(UserCreationForm):
 		widgets={
 			'password': forms.PasswordInput(attrs={'class': 'form-control','placeholder':'Password'}),
 			
-			'username': forms.TextInput(attrs={'class': 'form-control','placeholder':'Username'}),
-			
-			'first_name': forms.TextInput(attrs={'class': 'form-control','placeholder':'Nombre'}),
-			
-			'last_name': forms.TextInput(attrs={'class': 'form-control','placeholder':'Apellidos'}),
-			
 			'email': forms.TextInput(attrs={'class': 'form-control','placeholder':'Email'}),
 			
 			'identificacion': forms.TextInput(attrs={'class': 'form-control','placeholder':'Identificacion'}),
@@ -124,6 +118,10 @@ class PersonaForm(UserCreationForm):
 			'password1': forms.TextInput(attrs={'class': 'form-control','placeholder':'Password'}),
 			
 		}
+	username=forms.CharField(label='Usuario',widget=forms.TextInput(attrs={'class': 'form-control','placeholder':'Username'}))
+	first_name=forms.CharField(label='Nombres',widget=forms.TextInput(attrs={'class': 'form-control','placeholder':'Nombre'}))
+	last_name=forms.CharField(label='Apellidos',widget=forms.TextInput(attrs={'class': 'form-control','placeholder':'Apellidos'}))
+	password2=forms.CharField(label='Confirmacion password',widget=forms.PasswordInput(attrs={'class': 'form-control','placeholder':'Confirmacion'}))
 	#imagen = forms.ImageField(label="Imagen Perfil",widget=forms.FileInput(attrs={'class':'btn btn-default','data-trigger':'focus','data-placement':'left','data-toggle':'popover'}))
 
 	def save(self, commit=True):
@@ -174,7 +172,9 @@ class PersonaEditarForm(forms.ModelForm):
 		return user
 		"""
 class MensajeForm(forms.ModelForm):
-	recibe=forms.CharField(label='Para')
+	recibe=forms.CharField(label='Para', widget= forms.TextInput(attrs={'class': 'form-control','placeholder':'Destinatario'}))
+	txtMensaje=forms.CharField(label='Mensaje',widget=forms.Textarea(attrs={'class': 'form-control'}))
+	asunto=forms.CharField(label='Asunto',widget=forms.TextInput(attrs={'class': 'form-control','placeholder':'Asunto'}))
 	class Meta:
 		model=Mensaje
 		fields=['recibe','asunto','txtMensaje']
