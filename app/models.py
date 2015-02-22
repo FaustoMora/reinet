@@ -3,14 +3,15 @@ Definition of models.
 """
 
 from django.db import models
-from app.models import Catalogo
+from usuarios.models import Persona
+from django.contrib.auth.models import User
 # Create your models here. DE LA APP
 
 class Catalogo(models.Model):
-    id = models.AutoField(primary_key=True,null=False,db_column="idCatalogo")
-    codigo = models.CharField(max_length=10,blank=True,db_column="codigoCatalogo")
+    id = models.AutoField(primary_key=True, null=False, db_column="idCatalogo")
+    codigo = models.CharField(max_length=10,blank=True, db_column="codigoCatalogo")
     descripcion = models.CharField(max_length=100L, blank=True,db_column="descripcionCatalogo")
-    padre = models.ForeignKey(Catalogo, null=True, db_column='idcatalogopadre', null=True)
+    padre = models.ForeignKey('self', null=True, db_column='idcatalogopadre')
     class Meta:
         db_table = 'Catalogo'
 """
@@ -23,7 +24,6 @@ class Comentario(models.Model):
     class Meta:
         db_table = 'comentario'
 """
-"""
 class Publicacion(models.Model):
     idpublicacion = models.AutoField(unique=True,primary_key=True)
     idusuario = models.ForeignKey(User, db_column='idusuario')
@@ -33,5 +33,4 @@ class Publicacion(models.Model):
     subdominio = models.CharField(max_length=200L)
     class Meta:
         db_table = 'publicacion'
-"""
 
