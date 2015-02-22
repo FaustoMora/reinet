@@ -1,5 +1,19 @@
   {% extends "base.tpl.html" %}
 {%block content%}
+
+<style>
+  .fixpadding{
+    padding: 0;
+  }
+  .leftpadding{
+    padding-left:10px; 
+  }
+
+  .rightpadding{
+    padding-right:10px; 
+  }
+</style>
+
 <div class="section-header">
       <div class="container">
         <div class="row">
@@ -25,7 +39,7 @@
             </ul>
           </div>
         </div>
-        <div class="col-sm-8 col-md-6">
+        <div class="col-sm-9 col-md-8">
 
 
             {% if messages %}
@@ -48,11 +62,20 @@
               {% csrf_token %}
               {#{ form.as_p }#}
               
-              <div class="col-xs-10 col-xs-offset-1 tab-content" id="informacionG">
+              
+              <ul class="nav nav-tabs">
+                <li class="active"><a href="#informacionG" data-toggle="tab"><h5>Información General</h5></a></li>
+                <li><a href="#perfiles" data-toggle="tab"><h5>Perfiles</h5></a></li>
+                <li><a href="#canvas" data-toggle="tab"><h5>Canvas</h5></a></li>
+                <li><a href="#porter" data-toggle="tab"><h5>Porter</h5></a></li>
+                <li><a href="#otros" data-toggle="tab"><h5>Otros</h5></a></li>
+              </ul>
+              <div class="tab-content">
+              
 
-
-              {% for f in form %}
-                	{% if f.label == "Desde"%}
+              <div class="tab-pane col-xs-10 col-xs-offset-1 active" id="informacionG">
+              {% for f in form %}               
+                  {% if f.label == "Desde"%}
                     <label>Disponibilidad</label><br>
                 		<div class="form-group col-xs-6">
   							       <label>{{ f.label }}</label>
@@ -63,7 +86,7 @@
                        <label>{{ f.label }}</label>
                        {{ f }}
                     </div>
-                	{% else %}
+                	{% elif f.label == "Tipo de la oferta" or f.label == "Nombre" or f.label == "Descripcion" or f.label == "Dominio" or f.label == "Subdominio" or f.label == "Palabras Claves" or f.label == "Lugar de Aplicacion"%}
                 		<div class="form-group">
                 				<label>{{ f.label }}</label>
   							         {{ f }}
@@ -71,119 +94,133 @@
                 	{% endif %}
               {% endfor %}
               </div>
-            <!--
 
-           
-            <div class="form-group">
-              <label for="full-name">Nombre de la tecnolog&iacute;a, prototipo, o emprendimiento</label>
-              <input type="text" class="form-control" id="full-name" placeholder="Ingrese el nombre" required>
-            </div>
-         
-              <div class="form-group col-xs-6">
-              <label for="date-start">Fecha de inicio</label>
-              <input type="date" class="form-control" id="date-start" required>
-            </div>
-        
-            <div class="form-group col-xs-6">
-              <label for="date-end">Fecha de fin</label>
-              <input type="date" class="form-control" id="date-end" required>
-            </div>
-           
-            <div class="form-group">
-              <label for="description">Descripci&oacute;n resumida de la tecnolog&iacute;a, prototipo o emprendimiento</label>
-              <input type="text" class="form-control" id="description" placeholder="Ingrese una breve descripcion" required>
-            </div>
+              <div class="tab-pane col-xs-10 col-xs-offset-1" id="perfiles">
+              {% for f in form %} 
+                  {% if f.label == "Perfil del Beneficiario" or f.label == "Perfil del Cliente" %}
+                    <div class="form-group">
+                        <label>{{ f.label }}</label>
+                         {{ f }}
+                    </div>
+                  {% endif %}
+              {% endfor %}
+              </div>
 
-            <div class="form-group">
-              <label for="description">Palabras Claves para b&uacute;squeda rapida</label>
-              <input type="text" class="form-control" id="descPcl" placeholder="Ingrese la palabara clave" required>
-            </div>
+              <div class="tab-pane col-xs-12" id="canvas">
+              <div class="info-board info-board-green">
+                <p>Para definir el modelo de negocio de una empresa o proyecto se suele utilizar el denominado Modelo CANVAS, desarrollado por Alexander Osterwalder y que trata de hacer que el proceso de desarrollo de un nuevo modelo de negocio contemple todos los aspectos claves que la futura organizaci&oacute;n ha de tener en cuenta vi&eacute;ndolos de forma integrada en un gráfico.</p>
+              </div>             
 
-			<div class="form-group">
-              <label>Tipo de Oferta</label><br />
-              <label class="radio-inline" for="radios-0">
-                <input type="radio" name="radios" id="radios-0" value="Emprendimiento" checked="checked">
-                  Emprendimiento
-              </label><br />
-			   <label class="radio-inline" for="radios-0">
-                <input type="radio" name="radios" id="radios-0" value="Innovacion" checked="checked">
-                  Tecnologi&oacute;a
-              </label><br />
-              <label class="radio-inline" for="radios-1">
-                <input type="radio" name="radios" id="radios-1" value="Prototipo">
-                  Prototipo
-              </label>
-            </div>
+              {% for f in form %} 
+                  {% if f.label == "Red de Asociados" or f.label == "Proposicion de Valor" or f.label == "Segmentos de Clientes" %}
+                    <div class="col-md-2 fixpadding" id="fixpadding">
+                        {% if f.label == "Red de Asociados" %}
+                            <label style="height:25px"><br>{{ f.label }}</label>
+                            {{ f }}
+                        {% else %}
+                           <label style="height:25px">{{ f.label }}</label>
+                          {{ f }}
+                        {% endif %}
+                       
+                    </div>
+                  {% elif f.label == "Actividades Clave"%}
+                    <div class="col-md-3 ">
+                      <div class=" col-xs-12 fixpadding">
+                      <label><br>{{ f.label }}</label>
+                         {{ f }}
+                      </div>
+                      {% for f2 in form %} 
+                        {% if f2.label == "Recursos Clave" %}
+                          <div class="col-md-12 fixpadding">
+                          <label>{{ f2.label }}</label>
+                          {{ f2 }}
+                          </div>
+                        {% endif %}
+                       {% endfor %}   
+                    </div>
+                   {% elif f.label == "Relacion con los Clientes"%}
+                    <div class="col-md-3">
+                      <div class=" col-md-12 fixpadding">
+                      <label>{{ f.label }}</label>
+                         {{ f }}
+                      </div>
+                      {% for f2 in form %} 
+                        {% if f2.label == "Canales de Distribucion" %}
+                          <div class="col-md-12 fixpadding">
+                          <label>{{ f2.label }}</label>
+                          {{ f2 }}
+                          </div>
+                        {% endif %}  
+                       {% endfor %}   
+                    </div>
 
-            <div class="form-group">
-              <label for="description">Lugar</label>
-              <input type="text" class="form-control" id="lugarO" placeholder="Ingrese el lugar" required>
-            </div>
-    
-            <div class="form-group">
-              <label for="description">Perfil Beneficiario de la oferta</label>
-              <input type="text" class="form-control" id="perfilBe" placeholder="Ingrese el beneficiario" required>
-            </div>
-             
-            <div class="form-group">
-              <label for="description">Perfil del cliente para la oferta</label>
-              <input type="text" class="form-control" id="perfilCliente" placeholder="Ingrese el cliente" required>
-            </div>  
-         
-            <div class="form-group">
-              <label for="description">Descripci&oacute;n Alternativa de solucion existentes</label>
-              <input type="text" class="form-control" id="alterSol" placeholder="Ingrese la descripci&oacute;n" required>
-            </div>
+                  {%elif f.label == "Estructura de Costos"%}
+                    <div class="form-group col-md-6 fixpadding" >
+                        <label>{{ f.label }}</label>
+                         {{ f }}
+                    </div>
+                  {%elif f.label == "Fuente de Ingresos"%}
+                    <div class="form-group col-md-6 fixpadding leftpadding" >
+                        <label>{{ f.label }}</label>
+                         {{ f }}
+                    </div>
+                  {% endif %}
+              {% endfor %}
+              </div>
 
-            <div class="form-group">
-              <label for="description">Descripci&oacute;n de la propuesta por valor</label>
-              <input type="text" class="form-control" id="desProV" placeholder="Ingrese la descripci&oacute;n" required>
-            </div>
+              <div class="tab-pane col-xs-12" id="porter">
+                <div class="info-board info-board-green">
+                  Las Cinco Fuerzas de Porter es un modelo holístico que permite analizar cualquier industria en términos de rentabilidad. También llamado “Modelo de Competitividad Ampliada de Porter”, constituye una herramienta de gestión que permite realizar un análisis externo de una empresa a través del análisis de la industria o sector a la que pertenece.
+                </div>  
+                {% for f in form %} 
+                  {% if f.label == "Rivalidad de Competidores" or f.label == "Sustitutos" %}
+                    <div class="form-group col-md-4 col-md-offset-4 fixpadding" >
+                        <label>{{ f.label }}</label>
+                         {{ f }}
+                    </div>
+                  {%elif f.label == "Proveedores"%}
+                    <div class="form-group col-md-12" >
+                      <div class=" col-md-4 fixpadding rightpadding">
+                      <label>{{ f.label }}</label>
+                         {{ f }}
+                      </div>
+                      {% for f2 in form %} 
+                        {% if f2.label == "Competidores Potenciales" %}
+                          <div class="col-md-4 fixpadding">
+                          <label>{{ f2.label }}</label>
+                          {{ f2 }}
+                          </div>
+                          {% for f3 in form %} 
+                            {% if f3.label == "Consumidores" %}
+                              <div class="col-md-4 fixpadding leftpadding">
+                              <label>{{ f3.label }}</label>
+                              {{ f3 }}
+                              </div>
+                            {% endif %}  
+                          {% endfor %}
 
-            <div class="form-group">
-              <label for="description">Business Model Canvas</label>
-              <input type="text" class="form-control" id="bmc" placeholder="Ingrese Business Model Canvas" required>
-            </div>
-            
-            <div class="form-group">
-              <label for="description">Diagrama de Porter</label>
-              <input type="text" class="form-control" id="dPotter" placeholder="Ingrese diagrama" required>
-            </div>
+                        {% endif %}  
+                       {% endfor %} 
 
-            <div class="form-group">
-              <label for="description">Descripci&oacute;n de la propuesta por valor</label>
-              <input type="text" class="form-control" id="descriptionvalor" placeholder="Ingrese la descripci&oacute;n" required>
-            </div>
-            
-             <div class="form-group">
-              <label for="description">Fotos del prototipo o producto</label>
-              <input type="file" class="form-control" id="fotos" required>
-            </div>
-              
-           <div class="form-group" id="consultant">
-              <label for="consultor">Equipo (miembros de plataforma)</label>
-              <input type="text" class="form-control" id="consultor" placeholder="Ingrese el nombre del miembro" required>
-              <br /><button id="addConsultant" type="button" class="btn btn-dark">Agregar otro miembro</button> 
-            </div>
-              
-            <div class="form-group">
-              <label for="description">Estado de propiedad intelectual</label>
-              <input type="text" class="form-control" id="estadoIn" required>
-            </div>
-              
-            <div class="form-group">
-              <label for="description">Evidencia de tracc&aacute;ion si la hubiere</label>
-              <input type="text" class="form-control" id="eviTracc" required>
-            </div>
-              
-            <div class="form-group">
-              <label for="description">Rol de los miembros del Equipo (si las hubiere)</label>
-              <input type="text" class="form-control" id="rol1" placeholder="Ingrese los roles de los integrantes">
-              <input type="text" class="form-control" id="rol2" placeholder="Ingrese los roles de los integrantes">
-              <input type="text" class="form-control" id="rol3" placeholder="Ingrese los roles de los integrantes">
-              <input type="text" class="form-control" id="rol4" placeholder="Ingrese los roles de los integrantes">
-            </div>
-          -->
+                    </div>
+                  {% endif %}
+                {% endfor %}
+              </div>
+
+              <div class="tab-pane col-xs-10 col-xs-offset-1" id="otros">
+              {% for f in form %} 
+                  {% if f.label == "Soluciones Alternativas" or f.label == "Propuestas de Valor" or f.label == "Evidencia de traccion" or f.label == "Cuadro de Tendecias Relativas"%}
+                    <div class="form-group">
+                        <label>{{ f.label }}</label>
+                         {{ f }}
+                    </div>
+                  {% endif %}
+              {% endfor %}
+              </div>
+
+
+              </div>
+
 
                <input type="submit" class="btn btn-green pull-right" value="Crear Oferta"></input>
           </form>

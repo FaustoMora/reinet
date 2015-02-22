@@ -24,12 +24,13 @@ def verDemanda(request):
 
 @login_required(login_url='/ingresar/') 
 def misDemandas(request):
-    return render_to_response('DEMANDA_Inicio.html')    
+    return render_to_response('DEMANDA_mis_Demanda.html')    
 
 @login_required(login_url='/ingresar/') 
 def homeOfertas(request):
-	lst_ofertas = Oferta.objects.all()[:4]
-	return render_to_response('OFERTA_Inicio2.html', {'lst_ofertas' : lst_ofertas}, context_instance=RequestContext(request))
+    persona = Persona.objects.get(idpersona=request.session['id_persona'])
+    lst_ofertas = Oferta.objects.all()[:8]
+    return render_to_response('OFERTA_Inicio2.html',{'lst_ofertas': lst_ofertas,'persona':persona},context_instance=RequestContext(request))
 
 @login_required(login_url='/ingresar/')
 def crearOferta(request):
@@ -41,14 +42,12 @@ def crearOferta(request):
         nuevaOferta.estadoOferta=1
         nuevaOferta.ofertaPublicada = 1            
         nuevaOferta.save()
-        return HttpResponseRedirect('misOfertas')
+        return HttpResponseRedirect('/misOfertas/',nuevaOferta.idOferta)
 
     args={}
     args.update(csrf(request))
     args['form']=form
     return render_to_response('OFERTA_crear_oferta.html',args)
-
-
 	
 @login_required(login_url='/ingresar/') 
 def verOferta(request):
@@ -62,5 +61,6 @@ def editarOferta(request):
 
 @login_required(login_url='/ingresar/') 
 def misOfertas(request):
-	lst_ofertas = Oferta.objects.all()[:4]
-	return render_to_response('OFERTA_misOfertas.html', {'lst_ofertas' : lst_ofertas}, context_instance=RequestContext(request)) 
+    persona = Persona.objects.get(idpersona=request.session['id_persona'])
+    lst_ofertas = Oferta.objects.all()[:4]
+    return render_to_response('OFERTA_misOfertas.html', {'lst_ofertas' :lst_ofertas,'persona':persona}, context_instance=RequestContext(request)) 
