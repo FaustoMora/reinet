@@ -90,20 +90,20 @@
 						<tr>
 							<th >N&uacute;mero</th>
 						    <th>Nombre</th>	
-						    <th>Tipo</th> 
-						    <th>Calificaci&oacute;n </th>	    
+						    <th>Tipo</th> 	    
 						    <th>Estado</th>    
-						    <th>Publicada</th>
-						    <th>Editar oferta<th>
-						    <th>Visualizar oferta<th>
+						    <th>Editar demanda<th>
+						    <th>Visualizar demanda<th>
 						</tr>
 					</thead>
 					<tbody>
 		
 	 					{% for c in lst_demandas %}	 	
 						<tr>
-							<td class="numero">{{c.Demanda}}</td>
+							<td class="numero">{{c.idDemanda}}</td>
 						    <td>{{c.nombre}}</td>
+						    <td>{{c.tipoDemanda}}</td>
+						    <td>{{c.estadoDemanda}}</td>
 						    				
 
 						    <th style="text-align:center"><button type="button" class="btn btn-green">
