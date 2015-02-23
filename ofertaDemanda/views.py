@@ -64,3 +64,18 @@ def misOfertas(request):
     persona = Persona.objects.get(idpersona=request.session['id_persona'])
     lst_ofertas = Oferta.objects.all()[:4]
     return render_to_response('OFERTA_misOfertas.html', {'lst_ofertas' :lst_ofertas,'persona':persona}, context_instance=RequestContext(request)) 
+
+def search(request):
+    errors= []
+    if 'busquedaOfertaRed' in request.GET:
+        busquedaOfertaRed = request.GET['busquedaOfertaRed']
+        if not busquedaOfertaRed:
+            errors.append('Ingrese un termino a buscar')
+        elif len(busquedaOfertaRed)>25:
+            errors.append('por favor ingrese un termino no mas de 25 caracteres.')
+        else:
+            ofertas = Oferta.objects.filter(nombre__icontains=busquedaOfertaRed)
+            return render(request, 'OFERTA_Inicio2.html',
+                {'ofertas':ofertas,'nombre':busquedaOfertaRed})
+        return render(request,'OFERTA_Inicio2.html',{'errors':errors})    
+
