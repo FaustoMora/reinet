@@ -18,8 +18,8 @@ urlpatterns = patterns('',
         url(r'^perfil[/]?$',perfil_view),    
         url(r'^mensajes[/]?$',mensajes_view),   
         url(r'^enviarmensaje[/]?$',enviar_mensaje),   
-
+        url(r'^busqueda[/]?$',busqueda_view),
         url(r'^editarperfil[/]?$',editar_perfil_view),   
-        url(r'^actualizarFoto[/]?$',subir_imagen),   
+        url(r'^actualizarFoto[/]?$',subir_imagen)
         
 )

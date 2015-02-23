@@ -43,10 +43,18 @@
               <div class="col-md-10 col-sm-10">
                 <div class="input-group">
                   <label class="sr-only" for="search3">Search</label>
-                    <input type="text" class="form-control " id="search3" placeholder="Busque una de sus demandas creadas">
-                  <span class="input-group-btn">
-                    <button type="submit" class="btn btn-blue">Buscar</button>
-                  </span>
+
+					<form method='POST' action="/busqueda/">
+                    {%csrf_token%}
+
+                      <input type="text" class="form-control" name="q" id="search3" placeholder="Busque una de sus demandas creadas">
+                      <span class="input-group-btn">
+                        <a href="{% url 'usuarios.views.busqueda_view' %}">
+                        <input type="submit" class="btn btn-blue" value="Buscar">
+                        </a>
+                      </span>
+                    </form>
+
                 </div>
               </div>
             </div>
