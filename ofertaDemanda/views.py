@@ -10,6 +10,8 @@ from django.contrib import messages
 from django.core.context_processors import csrf
 from forms import *
 from django.db.models import Q
+from django.forms.util import ValidationError
+from django.core.urlresolvers import reverse
 
 @login_required(login_url='/ingresar/') 
 def homeDemandas(request):
@@ -36,19 +38,55 @@ def homeOfertas(request):
 @login_required(login_url='/ingresar/')
 def crearOferta(request):
     form = CrearOfertaForm(request.POST, request.FILES)
-
     if form.is_valid():
         nuevaOferta=super(CrearOfertaForm, form).save(commit=False)
         nuevaOferta.idusuario=Persona.objects.get(idpersona=request.session['id_persona'])
         nuevaOferta.estadoOferta=1
-        nuevaOferta.ofertaPublicada = 1            
+        nuevaOferta.ofertaPublicada =1            
         nuevaOferta.save()
-        return HttpResponseRedirect('/misOfertas/',nuevaOferta.idOferta)
-
+        return HttpResponseRedirect(reverse('completarOferta', args=(nuevaOferta.idOferta,)))
+        #return HttpResponseRedirect(reverse('completarOferta', args=(),kwargs={'ofertaid': nuevaOferta.idOferta}))
     args={}
     args.update(csrf(request))
     args['form']=form
     return render_to_response('OFERTA_crear_oferta.html',args)
+
+@login_required(login_url='/ingresar/')
+def completarOferta(request,ofertaid):
+    ofertaCompletar=Oferta.objects.get(idOferta = ofertaid)
+    form = CompletarOfertaForm(request.POST, request.FILES, instance=ofertaCompletar)
+    if form.is_valid():
+        return HttpResponseRedirect('/misOfertas/')
+
+    args={}
+    args.update(csrf(request))
+    args['form']=form
+    args['oferta']=Oferta.objects.get(idOferta=ofertaid)
+    return render_to_response('OFERTA_crear_oferta_completar.html', args, context_instance=RequestContext(request))
+
+@login_required(login_url='/ingresar/')
+def crearDiagramaCanvas(request,ofertaid):
+    form = CanvasForm(request.POST, request.FILES)
+    if form.is_valid():
+        return HttpResponseRedirect('/misOfertas/')
+
+    args={}
+    args.update(csrf(request))
+    args['form']=form
+    args['oferta']=Oferta.objects.get(idOferta=ofertaid)
+    return render_to_response('OFERTA_crear_oferta_completar.html', args, context_instance=RequestContext(request))
+
+@login_required(login_url='/ingresar/')
+def crearDiagramaPorter(request,ofertaid):
+    form = PorterForm(request.POST, request.FILES)
+    if form.is_valid():
+        return HttpResponseRedirect('/misOfertas/')
+
+    args={}
+    args.update(csrf(request))
+    args['form']=form
+    args['oferta']=Oferta.objects.get(idOferta=ofertaid)
+    return render_to_response('OFERTA_crear_oferta_completar.html', args, context_instance=RequestContext(request))
 
 @login_required(login_url='/ingresar/')
 def crearDemanda(request):
