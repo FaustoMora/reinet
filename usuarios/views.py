@@ -117,14 +117,19 @@ def enviar_mensaje(request):
 			ur=form1.cleaned_data['recibe']
 			print "aqui ur",ur
 			userReceptor=User.objects.get(username=ur)
-			print "aqui ureceptor",userReceptor
-			#receptor=Persona.objects.get(id_user)
-			mensaje.idEmisor=emisor
-			mensaje.idDestino=emisor
-			mensaje.fecha='2012-12-12'
-			mensaje.hora='12:00:00'
-			mensaje.save()
-			return HttpResponseRedirect('/mensajes/')
+			print "aqui ureceptor",userReceptor, "envia", emisor
+			if userReceptor is not None:
+				#receptor=Persona.objects.get(id_user)
+				mensaje.idEmisor=emisor
+				mensaje.idDestino=userReceptor
+				mensaje.fecha='2012-12-12'
+				mensaje.hora='12:00:00'
+				mensaje.leido='0'
+				mensaje.save()
+				return HttpResponseRedirect('/mensajes/')
+			else:
+				print "usuari no valido"
+				form1=MensajeForm()
 	else:
 		id_persona=request.session['id_persona']
 		form1=MensajeForm()
