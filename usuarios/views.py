@@ -205,7 +205,7 @@ def subir_imagen(request):
 @csrf_protect
 def busqueda_view(request):
 	id_persona=request.session['id_persona']
-	name = request.POST.get('q','')
+	name = request.GET.get('q','')
 	print "funciona",name
 	if name:
 		qset = (
@@ -215,13 +215,20 @@ def busqueda_view(request):
 		results1 = Oferta.objects.filter(qset).distinct()
 		results2 = Demanda.objects.filter(qset).distinct()
 		results3 = Concurso.objects.filter(qset).distinct()
-		
+		qset2=(
+			Q(first_name__icontains=name)
+
+			)
+		resultsUser=User.objects.filter(qset2).distinct()
+		print "usrs", resultsUser
 	else:
 		results1 = []
 		results2 = []
 		results3 = []
+		resultsUser=[]
 		
 	return render_to_response("USUARIO_busqueda.html",{
 		"results1": results1,"results2": results2,"results3": results3,
+		"resultsUser": resultsUser,
 		 "name": name},
 		context_instance = RequestContext(request))			

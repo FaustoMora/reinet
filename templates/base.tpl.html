@@ -101,8 +101,8 @@
             <div class="search-box hidden" id="search-box">
               <div class="input-group">
 
-                <form method='POST' action="/busqueda/">
-                  {%csrf_token%}
+                <form method='GET' action="/busqueda/">
+                  
 
                   <input type="text" name="q" class="form-control" placeholder="Búsqueda">
                   <span class="input-group-btn">

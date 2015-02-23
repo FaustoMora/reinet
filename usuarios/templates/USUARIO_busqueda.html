@@ -62,7 +62,7 @@
             <ul>
               {% if name %}
                 <h2>Resultados para "{{ name|escape }}":</h2>
-                {% if results1 or results2 or results3 %}
+                {% if results1 or results2 or results3 or resultsUser%}
 
                   {%for val in results1 %}
                   <li>
@@ -92,6 +92,17 @@
                       <h4><a href="/misOfertas/">{{ val.nombre|escape }}</a>    
                       <p>Descripción: {{val.descripcion|escape}}</p>
                       <p>Dominio: {{val.dominio|escape}}</p></h4>
+                    <div class="clearfix"></div>
+                    </p>
+                  </li>
+                  {%endfor%}
+                  
+                  {%for val in resultsUser%}
+                  <li>
+                    <p class="text-muted">
+                      <h4><a href="/misOfertas/">{{ val.first_name|escape }}{{ val.last_name|escape }}</a>    
+                      <p>Correo: {{val.email|escape}}</p>
+                      <p>Username: {{val.username|escape}}</p></h4>
                     <div class="clearfix"></div>
                     </p>
                   </li>
