@@ -42,7 +42,7 @@ def crearOferta(request):
         nuevaOferta=super(CrearOfertaForm, form).save(commit=False)
         nuevaOferta.idusuario=Persona.objects.get(idpersona=request.session['id_persona'])
         nuevaOferta.estadoOferta=1
-        nuevaOferta.ofertaPublicada = 1            
+        nuevaOferta.ofertaPublicada =1            
         nuevaOferta.save()
         return HttpResponseRedirect(reverse('completarOferta', args=(nuevaOferta.idOferta,)))
         #return HttpResponseRedirect(reverse('completarOferta', args=(),kwargs={'ofertaid': nuevaOferta.idOferta}))
