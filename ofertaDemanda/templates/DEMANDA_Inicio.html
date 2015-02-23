@@ -99,11 +99,35 @@
           <p>Has buscado por: <strong>{{ nombre }}</strong></p>
             {% if demandas %}
                 <p>Encontrado {{ demandas|length }} Demandas {{ ofertas|pluralize }}.</p>
-                <ul>
-                    {% for ofert in demandas %}
-                    <li>{{ ofert.nombre }}</li>
+                {% for ofert in demandas %}
+
+                    <div class="col-md-3 col-sm-6">
+                        <div class="thumbnail">
+                          <img class="img-responsive" src="{{MEDIA_URL}}{{ c.imagen }} " alt="Oferta">
+                          <div class="visit"><a href="verOferta"><i class="fa fa-question-circle"></i> Ver Demanda</a></div>
+                          <div class="caption">
+                            <h4>{{c.nombre}}</h4>
+                            <div class="rating">
+                                {{c.calificacionGeneral}}
+                                <i class="fa fa-star"></i> 
+                                <i class="fa fa-star"></i> 
+                                <i class="fa fa-star"></i> 
+                                <i class="fa fa-star"></i> 
+                                <i class="fa fa-star"></i>
+                              </div>
+                            <ul class="text-muted list-inline">
+                              <li><i class="fa fa-user"></i> <a href="#">Administrator {{c.idusuario}}</a></li>
+                              <li><i class="fa fa-calendar"></i> {{c.tiempo_inicio_disponible}}</li>
+                              <li><i class="fa fa-comments-o"></i> 6 comments</li>
+                            </ul>
+                              
+                            <p>{{c.descripcion}}</p>
+                          </div>
+                        </div>
+                    </div>
+
+
                     {% endfor %}
-                </ul>
             {% else %}
                 <p>Las Demandas no concuerda con sus criterios de búsqueda.</p>    
             {% endif %}

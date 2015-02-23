@@ -99,11 +99,35 @@
           <p>Has buscado por: <strong>{{ nombre }}</strong></p>
             {% if ofertas %}
                 <p>Encontrado {{ ofertas|length }} Ofertas {{ ofertas|pluralize }}.</p>
-                <ul>
-                    {% for ofert in ofertas %}
-                    <li>{{ ofert.nombre }}</li>
+                {% for ofert in ofertas %}
+
+                    <div class="col-md-3 col-sm-6">
+                        <div class="thumbnail">
+                          <img class="img-responsive" src="{{MEDIA_URL}}{{ c.imagen }} " alt="Oferta">
+                          <div class="visit"><a href="verOferta"><i class="fa fa-question-circle"></i> Ver Oferta</a></div>
+                          <div class="caption">
+                            <h4>{{c.nombre}}</h4>
+                            <div class="rating">
+                                {{c.calificacionGeneral}}
+                                <i class="fa fa-star"></i> 
+                                <i class="fa fa-star"></i> 
+                                <i class="fa fa-star"></i> 
+                                <i class="fa fa-star"></i> 
+                                <i class="fa fa-star"></i>
+                              </div>
+                            <ul class="text-muted list-inline">
+                              <li><i class="fa fa-user"></i> <a href="#">Administrator {{c.idusuario}}</a></li>
+                              <li><i class="fa fa-calendar"></i> {{c.tiempo_inicio_disponible}}</li>
+                              <li><i class="fa fa-comments-o"></i> 6 comments</li>
+                            </ul>
+                              
+                            <p>{{c.descripcion}}</p>
+                          </div>
+                        </div>
+                    </div>
+
+
                     {% endfor %}
-                </ul>
             {% else %}
                 <p>Las Ofertas no concuerda con sus criterios de búsqueda.</p>    
             {% endif %}

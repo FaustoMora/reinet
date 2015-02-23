@@ -120,7 +120,7 @@ def misOfertas(request):
     lst_ofertas = Oferta.objects.filter(idusuario = request.session['id_persona'])[:5]
     return render_to_response('OFERTA_misOfertas.html', {'lst_ofertas' :lst_ofertas,'persona':persona}, context_instance=RequestContext(request)) 
 
-def search(request):
+def searchOfertaRed(request):
     errors= []
     if 'busquedaOfertaRed' in request.GET:
         busquedaOfertaRed = request.GET['busquedaOfertaRed']
@@ -129,13 +129,13 @@ def search(request):
         elif len(busquedaOfertaRed)>25:
             errors.append('por favor ingrese un termino no mas de 25 caracteres.')
         else:
-            ofertas = Oferta.objects.filter(nombre__icontains=busquedaOfertaRed)
+            ofertas = Oferta.objects.filter(nombre__icontains=busquedaOfertaRed).exclude(idusuario = request.session['id_persona'])
             return render(request, 'OFERTA_Inicio2.html',
                 {'ofertas':ofertas,'nombre':busquedaOfertaRed,'buscarOfer':True})
         return render(request,'OFERTA_Inicio2.html',{'errors':errors})    
 
 
-def searchDemanda(request):
+def searchDemandaRed(request):
     errors= []
     if 'busquedaDemandaRed' in request.GET:
         busquedaDemandaRed = request.GET['busquedaDemandaRed']
@@ -144,7 +144,38 @@ def searchDemanda(request):
         elif len(busquedaDemandaRed)>25:
             errors.append('por favor ingrese un termino no mas de 25 caracteres.')
         else:
-            demandas = Demanda.objects.filter(nombre__icontains=busquedaDemandaRed)
+            demandas = Demanda.objects.filter(nombre__icontains=busquedaDemandaRed).exclude(idusuario = request.session['id_persona'])
             return render(request, 'DEMANDA_Inicio.html',
                 {'demandas':demandas,'nombre':busquedaDemandaRed,'buscarDema':True})
         return render(request,'DEMANDA_Inicio.html',{'errors':errors})
+
+
+
+def searchMisOferta(request):
+    errors= []
+    if 'busquedaMisOferta' in request.GET:
+        busquedaMisOferta = request.GET['busquedaMisOferta']
+        if not busquedaMisOferta:
+            errors.append('Ingrese un termino a buscar')
+        elif len(busquedaOfertaRed)>25:
+            errors.append('por favor ingrese un termino no mas de 25 caracteres.')
+        else:
+            ofertas = Oferta.objects.filter(nombre__icontains=busquedaOfertaRed).exclude(idusuario = request.session['id_persona'])
+            return render(request, 'OFERTA_misOfertas.html',
+                {'ofertas':ofertas,'nombre':busquedaMisOferta,'buscarMisOfer':True})
+        return render(request,'OFERTA_misOfertas.html',{'errors':errors})    
+
+
+def searchMisDemanda(request):
+    errors= []
+    if 'busquedaMisDemanda' in request.GET:
+        busquedaMisDemanda = request.GET['busquedaMisDemanda']
+        if not busquedaMisDemanda:
+            errors.append('Ingrese un termino a buscar')
+        elif len(busquedaMisDemanda)>25:
+            errors.append('por favor ingrese un termino no mas de 25 caracteres.')
+        else:
+            demandas = Demanda.objects.filter(nombre__icontains=busquedaMisDemanda).exclude(idusuario = request.session['id_persona'])
+            return render(request, 'DEMANDA_mis_Demanda.html',
+                {'demandas':demandas,'nombre':busquedaMisDemanda,'buscarMisDema':True})
+        return render(request,'DEMANDA_mis_Demanda.html',{'errors':errors})
