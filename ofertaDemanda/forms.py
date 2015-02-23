@@ -351,7 +351,7 @@ class CrearDemandaForm(forms.ModelForm):
     
     class Meta:
         model = Demanda
-        fields = ['nombre','descripcion','dominio','subdominio',
+        fields = ['tipoDemanda','nombre','descripcion','dominio','subdominio',
         'palabras_claves','lugar_aplicacion','tiempo_inicio_disponible',
         'tiempo_fin_disponible',
         'perfil_beneficiario','perfil_cliente', 
@@ -367,6 +367,20 @@ class CrearDemandaForm(forms.ModelForm):
              #   'max_length': _("This writer's name is too long."),
             #},
         }
+
+    tipoDemanda = forms.ChoiceField(
+        label="Tipo de demanda",
+        choices = (
+            ('0', "Seleccione el tipo de oferta"), 
+            ('1', "Emprendimiento"), 
+            ('2', "Prototipo"),
+            ('3', "Tecnologia")
+        ),
+        widget = forms.Select(
+                attrs={'class':'form-group form-control infoGener', 'required':''}
+            ),
+        initial = '0',
+    )
 
     nombre = forms.CharField(
         label="Nombre",

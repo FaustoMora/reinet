@@ -55,10 +55,9 @@ def crearDemanda(request):
     form = CrearDemandaForm(request.POST, request.FILES)
 
     if form.is_valid():
-        nuevaDemanda=super(CreaDemandaForm, form).save(commit=False)
+        nuevaDemanda=super(CrearDemandaForm, form).save(commit=False)
         nuevaDemanda.idusuario=Persona.objects.get(idpersona=request.session['id_persona'])
         nuevaDemanda.estadoDemanda=1
-        nuevaDemanda.DemandaPublicada = 1
         nuevaDemanda.save()
         return HttpResponseRedirect('/misDemandas/',nuevaDemanda.idDemanda)
 
