@@ -58,4 +58,10 @@ class Mensaje(models.Model):
     leido=models.BooleanField()
     class Meta:
         db_table = 'mensaje'
+    def imagenEmisor(self):
+        p=Persona.objects.get(user_ptr=self.idEmisor)
+        imagen=p.imagen
+        return imagen
+    imgEm=property(imagenEmisor)
+
 

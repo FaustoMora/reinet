@@ -116,18 +116,22 @@ def enviar_mensaje(request):
 			emisor=User.objects.get(id=id_user)
 			ur=form1.cleaned_data['recibe']
 			print "aqui ur",ur
-			userReceptor=User.objects.get(username=ur)
-			print "aqui ureceptor",userReceptor, "envia", emisor
-			if userReceptor is not None:
-				#receptor=Persona.objects.get(id_user)
-				mensaje.idEmisor=emisor
-				mensaje.idDestino=userReceptor
-				mensaje.fecha='2012-12-12'
-				mensaje.hora='12:00:00'
-				mensaje.leido='0'
-				mensaje.save()
-				return HttpResponseRedirect('/mensajesEnviados/')
-			else:
+			try:
+				userReceptor=User.objects.get(username=ur)
+				print "aqui ureceptor",userReceptor, "envia", emisor
+				if userReceptor is not None:
+					#receptor=Persona.objects.get(id_user)
+					mensaje.idEmisor=emisor
+					mensaje.idDestino=userReceptor
+					mensaje.fecha='2012-12-12'
+					mensaje.hora='12:00:00'
+					mensaje.leido='0'
+					mensaje.save()
+					return HttpResponseRedirect('/mensajesEnviados/')
+				else:
+					print "usuari no valido"
+					form1=MensajeForm()
+			except:
 				print "usuari no valido"
 				form1=MensajeForm()
 	else:
@@ -144,6 +148,7 @@ def mensajes_view(request):
 	mensajes = Mensaje.objects.all().filter(idDestino=request.session['id_user'])[:8]
 	args={}
 	args['mensajes']=mensajes
+	args['range']=range(len(mensajes))
 	return render_to_response('USUARIO_inbox.html',args)
 
 @login_required(login_url='/ingresar/')
@@ -215,7 +220,7 @@ def subir_imagen(request):
 			persona_form = PersonaEditarForm(instance=persona)
 			args['personaform']=persona_form
 
-
+"""
 @login_required(login_url='/ingresar/')
 @csrf_protect
 def busqueda_view(request):
@@ -248,7 +253,7 @@ def busqueda_view(request):
 		 "name": name},
 		context_instance = RequestContext(request))			
 
-
+"""
 @login_required(login_url='/ingresar/')
 def verPerfil(request):
 	idu = request.GET.get('q', '')
@@ -259,3 +264,158 @@ def verPerfil(request):
 	args['persona']=persona1
 	
 	return render_to_response('USUARIO_profile.html',args,context_instance=RequestContext(request))
+
+@login_required(login_url='/ingresar/')
+def verMensaje(request):
+	args = {}
+	try: 
+		idM = int(request.GET.get('q', ''))
+		msj=Mensaje.objects.get(id = idM)
+		print "mensaje",msj.id
+		user1=msj.idEmisor
+		#print "user",user1
+		persona=Persona.objects.get(user_ptr=user1)
+		#print "persona",persona
+		args['msj']=msj
+		args['user1']=user1
+		args['persona']=persona
+		return render_to_response('USUARIO_verMensaje.html',args,context_instance=RequestContext(request))
+	except:
+		return HttpResponseRedirect("/mensajes/")
+	
+	return render_to_response('USUARIO_verMensaje.html',args,context_instance=RequestContext(request))
+
+@login_required(login_url='/ingresar/')
+@csrf_protect
+def busqueda_view(request):
+	
+
+	id_persona=request.session['id_persona']
+	name = request.GET.get('q','')
+	print "funciona",name
+	if name:
+		qset = (
+			Q(nombre__icontains=name)|
+			Q(dominio__icontains=name)
+		)
+		results1 = Oferta.objects.filter(qset).distinct()
+		results2 = Demanda.objects.filter(qset).distinct()
+		results3 = Concurso.objects.filter(qset).distinct()
+		qset2=(
+			Q(first_name__icontains=name)
+
+			)
+		resultsUser=User.objects.filter(qset2).distinct()
+		print "usrs", resultsUser
+	else:
+		results1 = []
+		results2 = []
+		results3 = []
+		resultsUser=[]
+	tipo="Busqueda General"
+	args={
+		"results1": results1,"results2": results2,"results3": results3,
+		"resultsUser": resultsUser,"name":name, "tipo":tipo}	
+
+	return render_to_response("USUARIO_busqueda.html",args,
+		context_instance = RequestContext(request))			
+
+
+
+@login_required(login_url='/ingresar/')
+@csrf_protect
+def busqueda_oferta(request):
+	
+	id_persona=request.session['id_persona']
+	name = request.GET.get('q','')
+	print "funciona",name
+	if name:
+		qset = (
+			Q(nombre__icontains=name)|
+			Q(dominio__icontains=name)
+		)
+		results1 = Oferta.objects.filter(qset).distinct()
+	else:
+		results1 = []
+	tipo="Busqueda Ofertas"
+	args={
+		"results1": results1,
+		 "name": name,
+		 "tipo":tipo}	
+	return render_to_response("USUARIO_busqueda.html",args,
+		context_instance = RequestContext(request))			
+
+
+@login_required(login_url='/ingresar/')
+@csrf_protect
+def busqueda_demanda(request):
+
+	id_persona=request.session['id_persona']
+	name = request.GET.get('q','')
+	print "funciona",name
+	if name:
+		qset = (
+			Q(nombre__icontains=name)|
+			Q(dominio__icontains=name)
+		)
+		results2 = Demanda.objects.filter(qset).distinct()
+	else:
+		results2 = []
+	tipo="Busqueda Demanda"
+	args={
+		"results2": results2,
+		 "name": name,
+		 "tipo":tipo}	
+	return render_to_response("USUARIO_busqueda.html",args,
+		context_instance = RequestContext(request))			
+
+
+
+@login_required(login_url='/ingresar/')
+@csrf_protect
+def busqueda_concursos(request):
+
+	id_persona=request.session['id_persona']
+	name = request.GET.get('q','')
+	print "funciona",name
+	if name:
+		qset = (
+			Q(nombre__icontains=name)|
+			Q(dominio__icontains=name)
+		)
+		results3 = Concurso.objects.filter(qset).distinct()
+	else:
+		results3 = []
+
+	tipo="Busqueda Concursos"
+	args={
+		"results3": results3,
+		 "name": name,
+		 "tipo":tipo}	
+		 
+	return render_to_response("USUARIO_busqueda.html",args,
+		context_instance = RequestContext(request))			
+
+
+@login_required(login_url='/ingresar/')
+@csrf_protect
+def busqueda_usuario(request):
+
+	id_persona=request.session['id_persona']
+	name = request.GET.get('q','')
+	if name:
+		qset=(
+			Q(first_name__icontains=name)
+
+			)
+		resultsUser=User.objects.filter(qset).distinct()
+	else:
+		resultsUser = []
+	tipo="Busqueda Usuarios"
+	args={
+		"resultsUser": resultsUser,
+		 "name": name,
+		 "tipo":tipo}
+
+	return render_to_response("USUARIO_busqueda.html",args,
+		context_instance = RequestContext(request))			
