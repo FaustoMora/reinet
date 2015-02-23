@@ -24,7 +24,7 @@ class Institucion(User):
     telefono = models.CharField(max_length=15L)
     recursos = models.CharField(max_length=100L)
     miembros = models.ManyToManyField('Persona', through='InstitucionPersona')
-
+    imagen=models.ImageField(upload_to='usuarios_media')
     class Meta:
         db_table = 'institucion'
 
