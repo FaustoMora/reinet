@@ -1,15 +1,17 @@
     {% extends "base.tpl.html" %}
 {%block content%}
+
     <div class="section-header">
       <div class="container">
         <div class="row">
           <div class="col-sm-12">
             <!-- Remove the .animated class if you don't want things to move -->
-            <h1 class="animated slideInLeft"><span>Perfil</span></h1>
+            <h1 class="animated slideInLeft"><span>{% block seccion %}Perfil{% endblock %}</span></h1>
           </div>
         </div>
       </div>
     </div>
+
     <div class="container">
       <div class="row">
         {%block menuperfil%}

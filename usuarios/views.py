@@ -1,14 +1,19 @@
 # Create your views here.
 from django.shortcuts import render_to_response
+from django.db.models import Q
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib import auth
 from django.core.context_processors import csrf
 from forms import *
-from django.contrib.auth.forms import UserCreationForm
 from models import *
+from ofertaDemanda.models import *
+from concursoIncubacion.models import *
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
+from django.views.decorators.csrf import csrf_protect
+
 
 def index(request):
 	return render_to_response('USUARIO_index.html')
@@ -196,5 +201,27 @@ def subir_imagen(request):
 			args['personaform']=persona_form
 
 
-
-	
+@login_required(login_url='/ingresar/')
+@csrf_protect
+def busqueda_view(request):
+	id_persona=request.session['id_persona']
+	name = request.POST.get('q','')
+	print "funciona",name
+	if name:
+		qset = (
+			Q(nombre__icontains=name)|
+			Q(dominio__icontains=name)
+		)
+		results1 = Oferta.objects.filter(qset).distinct()
+		results2 = Demanda.objects.filter(qset).distinct()
+		results3 = Concurso.objects.filter(qset).distinct()
+		
+	else:
+		results1 = []
+		results2 = []
+		results3 = []
+		
+	return render_to_response("USUARIO_busqueda.html",{
+		"results1": results1,"results2": results2,"results3": results3,
+		 "name": name},
+		context_instance = RequestContext(request))			
