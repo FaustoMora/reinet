@@ -13,7 +13,9 @@ from django.db.models import Q
 
 @login_required(login_url='/ingresar/') 
 def homeDemandas(request):
-    return render_to_response('DEMANDA_Inicio.html')
+    persona = Persona.objects.get(idpersona=request.session['id_persona'])
+    lst_demandas = Demanda.objects.filter(~Q(idusuario = request.session['id_persona']))[:8]
+    return render_to_response('DEMANDA_Inicio.html',{'lst_demandas': lst_demandas,'persona':persona},context_instance=RequestContext(request))
 
 @login_required(login_url='/ingresar/') 
 def verDemanda(request):
@@ -21,7 +23,9 @@ def verDemanda(request):
 
 @login_required(login_url='/ingresar/') 
 def misDemandas(request):
-    return render_to_response('DEMANDA_mis_Demanda.html')    
+    persona = Persona.objects.get(idpersona=request.session['id_persona'])
+    lst_demandas = Demanda.objects.filter(idusuario = request.session['id_persona'])[:5]
+    return render_to_response('DEMANDA_mis_Demanda.html', {'lst_demandas' :lst_demandas,'persona':persona}, context_instance=RequestContext(request)) 
 
 @login_required(login_url='/ingresar/') 
 def homeOfertas(request):
@@ -61,7 +65,7 @@ def crearDemanda(request):
     args={}
     args.update(csrf(request))
     args['form']=form
-    return render_to_response('DEMANDA_mis_Demanda.html',args)    
+    return render_to_response('DEMANDA_crear_demanda.html',args)    
 	
 @login_required(login_url='/ingresar/') 
 def verOferta(request):
@@ -76,7 +80,7 @@ def editarOferta(request):
 @login_required(login_url='/ingresar/') 
 def misOfertas(request):
     persona = Persona.objects.get(idpersona=request.session['id_persona'])
-    lst_ofertas = Oferta.objects.all()
+    lst_ofertas = Oferta.objects.filter(idusuario = request.session['id_persona'])[:5]
     return render_to_response('OFERTA_misOfertas.html', {'lst_ofertas' :lst_ofertas,'persona':persona}, context_instance=RequestContext(request)) 
 
 def search(request):
