@@ -120,7 +120,7 @@
                   {%for val in resultsUser%}
                   <li>
                     <p class="text-muted">
-                      <h4><a href="/misOfertas/">{{ val.first_name|escape }}{{ val.last_name|escape }}</a>    
+                      <h4><a href="/verPerfil/?q={{val}}">{{ val.first_name|escape }}{{ val.last_name|escape }}</a>    
                       <p>Correo: {{val.email|escape}}</p>
                       <p>Username: {{val.username|escape}}</p></h4>
                     <div class="clearfix"></div>
