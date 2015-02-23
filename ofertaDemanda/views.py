@@ -16,10 +16,6 @@ def homeDemandas(request):
     return render_to_response('DEMANDA_Inicio.html')
 
 @login_required(login_url='/ingresar/') 
-def crearDemanda(request):
-    return render_to_response('DEMANDA_crear_demanda.html')
-
-@login_required(login_url='/ingresar/') 
 def verDemanda(request):
     return render_to_response('DEMANDA_perfil.html')
 
@@ -49,6 +45,23 @@ def crearOferta(request):
     args.update(csrf(request))
     args['form']=form
     return render_to_response('OFERTA_crear_oferta.html',args)
+
+@login_required(login_url='/ingresar/')
+def crearDemanda(request):
+    form = CrearDemandaForm(request.POST, request.FILES)
+
+    if form.is_valid():
+        nuevaDemanda=super(CreaDemandaForm, form).save(commit=False)
+        nuevaDemanda.idusuario=Persona.objects.get(idpersona=request.session['id_persona'])
+        nuevaDemanda.estadoDemanda=1
+        nuevaDemanda.DemandaPublicada = 1
+        nuevaDemanda.save()
+        return HttpResponseRedirect('/misDemandas/',nuevaDemanda.idDemanda)
+
+    args={}
+    args.update(csrf(request))
+    args['form']=form
+    return render_to_response('DEMANDA_mis_Demanda.html',args)    
 	
 @login_required(login_url='/ingresar/') 
 def verOferta(request):
@@ -80,3 +93,17 @@ def search(request):
                 {'ofertas':ofertas,'nombre':busquedaOfertaRed,'buscarOfer':True})
         return render(request,'OFERTA_Inicio2.html',{'errors':errors})    
 
+
+def searchDemanda(request):
+    errors= []
+    if 'busquedaDemandaRed' in request.GET:
+        busquedaDemandaRed = request.GET['busquedaDemandaRed']
+        if not busquedaDemandaRed:
+            errors.append('Ingrese un termino a buscar')
+        elif len(busquedaDemandaRed)>25:
+            errors.append('por favor ingrese un termino no mas de 25 caracteres.')
+        else:
+            demandas = Demanda.objects.filter(nombre__icontains=busquedaDemandaRed)
+            return render(request, 'DEMANDA_Inicio.html',
+                {'demandas':demandas,'nombre':busquedaDemandaRed,'buscarDema':True})
+        return render(request,'DEMANDA_Inicio.html',{'errors':errors})
