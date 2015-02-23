@@ -20,6 +20,9 @@ urlpatterns = patterns('',
         url(r'^enviarmensaje[/]?$',enviar_mensaje),   
         url(r'^busqueda[/]?$',busqueda_view),
         url(r'^editarperfil[/]?$',editar_perfil_view),   
-        url(r'^actualizarFoto[/]?$',subir_imagen)
+        url(r'^actualizarFoto[/]?$',subir_imagen),
+        url(r'^mensajesEnviados[/]?$',mensajesEnviados_view),
+        url(r'^verPerfil[/]?$',verPerfil),    
+        
         
 )

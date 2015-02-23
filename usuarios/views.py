@@ -126,7 +126,7 @@ def enviar_mensaje(request):
 				mensaje.hora='12:00:00'
 				mensaje.leido='0'
 				mensaje.save()
-				return HttpResponseRedirect('/mensajes/')
+				return HttpResponseRedirect('/mensajesEnviados/')
 			else:
 				print "usuari no valido"
 				form1=MensajeForm()
@@ -145,6 +145,16 @@ def mensajes_view(request):
 	args={}
 	args['mensajes']=mensajes
 	return render_to_response('USUARIO_inbox.html',args)
+
+@login_required(login_url='/ingresar/')
+def mensajesEnviados_view(request):
+	id_persona=request.session['id_persona']
+	mensajes = Mensaje.objects.all().filter(idEmisor=request.session['id_user'])[:8]
+	args={}
+	p=Persona.objects.get(idpersona=id_persona)
+	args['mensajes']=mensajes
+	args['persona']=p
+	return render_to_response('USUARIO_enviados.html',args)
 
 @login_required(login_url='/ingresar/')
 def inicio_view(request):
@@ -237,3 +247,15 @@ def busqueda_view(request):
 		"resultsUser": resultsUser,
 		 "name": name},
 		context_instance = RequestContext(request))			
+
+
+@login_required(login_url='/ingresar/')
+def verPerfil(request):
+	idu = request.GET.get('q', '')
+	user1=User.objects.get(username = idu)
+	persona1=Persona.objects.get(user_ptr=user1)
+	args = {}
+	args['usuario']=user1
+	args['persona']=persona1
+	
+	return render_to_response('USUARIO_profile.html',args,context_instance=RequestContext(request))

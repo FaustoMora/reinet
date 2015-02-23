@@ -19,7 +19,7 @@
                   <i class="sign fa fa-envelope bg-red"></i> Entrada <i class="fa fa-chevron-right pull-right"></i>
                 </a>  
               </li>
-                            <li>
+                  <li>
                 <a href="{% url 'usuarios.views.mensajesEnviados_view' %}">
                   <i class="sign fa fa-envelope bg-red"></i> Enviados <i class="fa fa-chevron-right pull-right"></i>
                 </a>  
@@ -38,7 +38,7 @@
         
         <div class="col-sm-8 col-md-7">
           <!-- List of recent dialogs -->
-          <h1>Mensajes Recibidos</h1>
+          <h1>Mensajes Enviados</h1>
           <div class="pm-search">
             <form role="form">
               <div class="row">
@@ -55,7 +55,7 @@
             </form>
           </div>
           <ul class="text-muted list-inline">
-           <!--   <li><i class="fa fa-comments-o"></i> 25 conversaciones</li> -->
+          <!--   <li><i class="fa fa-comments-o"></i> 25 conversaciones</li> -->
             <li><i class="fa fa-envelope-o"></i> {{mensajes|length}} mensajes</li>
           </ul>
           <div class="pm-list">
@@ -77,8 +77,8 @@
              
               <li>
                 <p class="text-muted">
-                  <img src="../static/img/face2.jpg" alt="...">
-                    From: <a href="verPerfil/?q={{msj.idEmisor}}">{{msj.idEmisor}}</a><br />
+                  <img src="/media/{{ MEDIA_URL }}{{ persona.imagen }}" alt="...">
+                    Para: <a href="verPerfil/?q={{msj.idDestino}}">{{msj.idDestino}}</a><br />
                     <small>5 days ago</small>
                 </p>
                 <p class="text-muted">
