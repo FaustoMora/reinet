@@ -268,6 +268,9 @@ def verPerfil(request):
 @login_required(login_url='/ingresar/')
 def verMensaje(request):
 	args = {}
+	id_persona=request.session['id_persona']
+	yo=Persona.objects.get(idpersona=id_persona)
+	args['yo']=yo
 	try: 
 		idM = int(request.GET.get('q', ''))
 		msj=Mensaje.objects.get(id = idM)
