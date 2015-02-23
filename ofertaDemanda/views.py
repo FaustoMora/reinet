@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.core.context_processors import csrf
 from forms import *
+from django.db.models import Q
 
 @login_required(login_url='/ingresar/') 
 def homeDemandas(request):
@@ -29,7 +30,7 @@ def misDemandas(request):
 @login_required(login_url='/ingresar/') 
 def homeOfertas(request):
     persona = Persona.objects.get(idpersona=request.session['id_persona'])
-    lst_ofertas = Oferta.objects.all()[:8]
+    lst_ofertas = Oferta.objects.filter(~Q(idusuario = request.session['id_persona']))[:8]
     return render_to_response('OFERTA_Inicio2.html',{'lst_ofertas': lst_ofertas,'persona':persona},context_instance=RequestContext(request))
 
 @login_required(login_url='/ingresar/')
@@ -62,7 +63,7 @@ def editarOferta(request):
 @login_required(login_url='/ingresar/') 
 def misOfertas(request):
     persona = Persona.objects.get(idpersona=request.session['id_persona'])
-    lst_ofertas = Oferta.objects.all()[:4]
+    lst_ofertas = Oferta.objects.all()
     return render_to_response('OFERTA_misOfertas.html', {'lst_ofertas' :lst_ofertas,'persona':persona}, context_instance=RequestContext(request)) 
 
 def search(request):
@@ -76,6 +77,6 @@ def search(request):
         else:
             ofertas = Oferta.objects.filter(nombre__icontains=busquedaOfertaRed)
             return render(request, 'OFERTA_Inicio2.html',
-                {'ofertas':ofertas,'nombre':busquedaOfertaRed})
+                {'ofertas':ofertas,'nombre':busquedaOfertaRed,'buscarOfer':True})
         return render(request,'OFERTA_Inicio2.html',{'errors':errors})    
 

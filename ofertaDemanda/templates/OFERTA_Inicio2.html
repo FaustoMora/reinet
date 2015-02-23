@@ -68,9 +68,7 @@
       <div class="row">
 
       <!-- Se presenta las ofertas --> 
-      {% if lst_ofertas|length > 0 or ofertas|length  == 0 %}
          {% for c in lst_ofertas %}
-             {% if c.idusuario|stringformat:"s" != persona|stringformat:"s"  %}
                 <div class="col-md-3 col-sm-6">
                     <div class="thumbnail">
                       <img class="img-responsive" src="{{MEDIA_URL}}{{ c.imagen }} " alt="Oferta">
@@ -95,25 +93,21 @@
                       </div>
                     </div>
                 </div>
-              {% else %}
-                  <p>No existen ofertas en la red</p>
-              {% endif %}
           {% endfor %}
-      {% elif lst_ofertas|length == 0 or ofertas|length  != 0%}
-          {{lst_ofertas|length}}
-          {{ofertas|length}}
+
+          {% if buscarOfer %}
           <p>Has buscado por: <strong>{{ nombre }}</strong></p>
-          {% if ofertas %}
-              <p>Encontrado {{ ofertas|length }} Ofertas {{ ofertas|pluralize }}.</p>
-              <ul>
-                  {% for ofert in ofertas %}
-                  <li>{{ ofert.nombre }}</li>
-                  {% endfor %}
-              </ul>
-          {% else %}
-          <p>Las Ofertas no concuerda con sus criterios de búsqueda.</p>    
-          {% endif %}
-      {% endif %}
+            {% if ofertas %}
+                <p>Encontrado {{ ofertas|length }} Ofertas {{ ofertas|pluralize }}.</p>
+                <ul>
+                    {% for ofert in ofertas %}
+                    <li>{{ ofert.nombre }}</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>Las Ofertas no concuerda con sus criterios de búsqueda.</p>    
+            {% endif %}
+          {%endif%}
         </div>      
         <div class="clearfix visible-sm"></div>               
       </div>
