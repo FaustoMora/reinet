@@ -43,14 +43,14 @@
 
 
             {% if messages %}
-				    {% for message in messages %}
-						<div class="col-md-12">
-							<div class="alert alert-success h4">
-							<p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
-							</div>
-						</div>
-				    {% endfor %}
-			{% endif %}
+            {% for message in messages %}
+            <div class="col-md-12">
+              <div class="alert alert-success h4">
+              <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+              </div>
+            </div>
+            {% endfor %}
+      {% endif %}
 
           <!-- Edit profile form -->
           <h3 class="hl">CREAR OFERTA</h3>
@@ -58,172 +58,35 @@
           <p class="text-muted">Por favor ingrese los datos principales de la Oferta</p>
           <hr>
           <h4 class="hl bottom-15">Informaci&oacute;n General</h4>
-          <form role="form" id="formulario" action="/crearOferta/" method="POST" enctype="multipart/form-data">             
+  
+          <div class="tab-pane col-xs-10 col-xs-offset-1 active" id="informacionG">
+          <form role="form" id="formulario" action="/crearOferta/" method="POST" enctype="multipart/form-data">         
               {% csrf_token %}
-              {#{ form.as_p }#}
+              {#{ form.as_p }#}             
               
-              
-              <ul class="nav nav-tabs">
-                <li class="active"><a href="#informacionG" data-toggle="tab"><h5>Información General</h5></a></li>
-                <li id='perfiles'><a href="#perfiles" data-toggle="tab"><h5>Perfiles</h5></a></li>
-                <li><a href="#canvas" data-toggle="tab"><h5>Canvas</h5></a></li>
-                <li><a href="#porter" data-toggle="tab"><h5>Porter</h5></a></li>
-                <li><a href="#otros" data-toggle="tab"><h5>Otros</h5></a></li>
-              </ul>
-              <div class="tab-content">
-              
-
-              <div class="tab-pane col-xs-10 col-xs-offset-1 active" id="informacionG">
               {% for f in form %}               
                   {% if f.label == "Desde"%}
                     <label>Disponibilidad</label><br>
-                		<div class="form-group col-xs-6">
-  							       <label>{{ f.label }}</label>
-  							       {{ f }}
-                		</div>
+                    <div class="form-group col-xs-6">
+                       <label>{{ f.label }}</label>
+                       {{ f }}
+                    </div>
                   {% elif f.label == "Hasta"%}
                     <div class="form-group col-xs-6">
                        <label>{{ f.label }}</label>
                        {{ f }}
                     </div>
-                	{% elif f.label == "Tipo de la oferta" or f.label == "Nombre" or f.label == "Descripcion" or f.label == "Dominio" or f.label == "Subdominio" or f.label == "Palabras Claves" or f.label == "Lugar de Aplicacion"%}
-                		<div class="form-group">
-                				<label>{{ f.label }}</label>
-  							         {{ f }}
-                		</div>
-                	{% endif %}
-              {% endfor %}
-              </div>
-
-              <div class="tab-pane col-xs-10 col-xs-offset-1" id="perfiles">
-              {% for f in form %} 
-                  {% if f.label == "Perfil del Beneficiario" or f.label == "Perfil del Cliente" %}
+                  {% elif f.label == "Tipo de la oferta" or f.label == "Nombre" or f.label == "Descripcion" or f.label == "Dominio" or f.label == "Subdominio" or f.label == "Palabras Claves" or f.label == "Lugar de Aplicacion"%}
                     <div class="form-group">
                         <label>{{ f.label }}</label>
                          {{ f }}
                     </div>
                   {% endif %}
               {% endfor %}
-              </div>
-
-              <div class="tab-pane col-xs-12" id="canvas">
-              <div class="info-board info-board-green">
-                <p>Para definir el modelo de negocio de una empresa o proyecto se suele utilizar el denominado Modelo CANVAS, desarrollado por Alexander Osterwalder y que trata de hacer que el proceso de desarrollo de un nuevo modelo de negocio contemple todos los aspectos claves que la futura organizaci&oacute;n ha de tener en cuenta vi&eacute;ndolos de forma integrada en un gráfico.</p>
-              </div>             
-
-              {% for f in form %} 
-                  {% if f.label == "Red de Asociados" or f.label == "Proposicion de Valor" or f.label == "Segmentos de Clientes" %}
-                    <div class="col-md-2 fixpadding" id="fixpadding">
-                        {% if f.label == "Red de Asociados" %}
-                            <label style="height:25px"><br>{{ f.label }}</label>
-                            {{ f }}
-                        {% else %}
-                           <label style="height:25px">{{ f.label }}</label>
-                          {{ f }}
-                        {% endif %}
-                       
-                    </div>
-                  {% elif f.label == "Actividades Clave"%}
-                    <div class="col-md-3 ">
-                      <div class=" col-xs-12 fixpadding">
-                      <label><br>{{ f.label }}</label>
-                         {{ f }}
-                      </div>
-                      {% for f2 in form %} 
-                        {% if f2.label == "Recursos Clave" %}
-                          <div class="col-md-12 fixpadding">
-                          <label>{{ f2.label }}</label>
-                          {{ f2 }}
-                          </div>
-                        {% endif %}
-                       {% endfor %}   
-                    </div>
-                   {% elif f.label == "Relacion con los Clientes"%}
-                    <div class="col-md-3">
-                      <div class=" col-md-12 fixpadding">
-                      <label>{{ f.label }}</label>
-                         {{ f }}
-                      </div>
-                      {% for f2 in form %} 
-                        {% if f2.label == "Canales de Distribucion" %}
-                          <div class="col-md-12 fixpadding">
-                          <label>{{ f2.label }}</label>
-                          {{ f2 }}
-                          </div>
-                        {% endif %}  
-                       {% endfor %}   
-                    </div>
-
-                  {%elif f.label == "Estructura de Costos"%}
-                    <div class="form-group col-md-6 fixpadding" >
-                        <label>{{ f.label }}</label>
-                         {{ f }}
-                    </div>
-                  {%elif f.label == "Fuente de Ingresos"%}
-                    <div class="form-group col-md-6 fixpadding leftpadding" >
-                        <label>{{ f.label }}</label>
-                         {{ f }}
-                    </div>
-                  {% endif %}
-              {% endfor %}
-              </div>
-
-              <div class="tab-pane col-xs-12" id="porter">
-                <div class="info-board info-board-green">
-                  Las Cinco Fuerzas de Porter es un modelo holístico que permite analizar cualquier industria en términos de rentabilidad. También llamado “Modelo de Competitividad Ampliada de Porter”, constituye una herramienta de gestión que permite realizar un análisis externo de una empresa a través del análisis de la industria o sector a la que pertenece.
-                </div>  
-                {% for f in form %} 
-                  {% if f.label == "Rivalidad de Competidores" or f.label == "Sustitutos" %}
-                    <div class="form-group col-md-4 col-md-offset-4 fixpadding" >
-                        <label>{{ f.label }}</label>
-                         {{ f }}
-                    </div>
-                  {%elif f.label == "Proveedores"%}
-                    <div class="form-group col-md-12" >
-                      <div class=" col-md-4 fixpadding rightpadding">
-                      <label>{{ f.label }}</label>
-                         {{ f }}
-                      </div>
-                      {% for f2 in form %} 
-                        {% if f2.label == "Competidores Potenciales" %}
-                          <div class="col-md-4 fixpadding">
-                          <label>{{ f2.label }}</label>
-                          {{ f2 }}
-                          </div>
-                          {% for f3 in form %} 
-                            {% if f3.label == "Consumidores" %}
-                              <div class="col-md-4 fixpadding leftpadding">
-                              <label>{{ f3.label }}</label>
-                              {{ f3 }}
-                              </div>
-                            {% endif %}  
-                          {% endfor %}
-
-                        {% endif %}  
-                       {% endfor %} 
-
-                    </div>
-                  {% endif %}
-                {% endfor %}
-              </div>
-
-              <div class="tab-pane col-xs-10 col-xs-offset-1" id="otros">
-              {% for f in form %} 
-                  {% if f.label == "Soluciones Alternativas" or f.label == "Propuestas de Valor" or f.label == "Evidencia de traccion" or f.label == "Cuadro de Tendecias Relativas"%}
-                    <div class="form-group">
-                        <label>{{ f.label }}</label>
-                         {{ f }}
-                    </div>
-                  {% endif %}
-              {% endfor %}
-              </div>
-
-
-              </div>
-
-               <input type="submit" class="btn btn-green pull-right" value="Crear Oferta"></input>
-               <input type="submit" class="btn btn-green pull-left" href='perfiles'value="Siguiete"></input> 
+          </div>
+          <input type="submit" class="btn btn-green pull-right" value="Crear Oferta"></input>
           </form>
+
         </div>
       </div>
     </div>

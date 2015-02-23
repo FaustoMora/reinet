@@ -13,18 +13,13 @@ urlpatterns = patterns('',
         url(r'^homeOfertas[/]?$',homeOfertas,name='homeOfertas'),
         url(r'^search[/]?$',search),
         url(r'^searchDemanda[/]?$',searchDemanda),
-        url(r'^crearOferta[/]?$',crearOferta,name='crearOferta'),  
-        url(r'^matricular/(?P<idalumno>\d+)/(?P<idcurso>\d+)/$',
-      'make_matricula',
-      name='modulo-matriculas-add'),
-
-        
+        url(r'^crearOferta[/]?$',crearOferta,name='crearOferta'),         
         url(r'^verOferta[/]?$',verOferta,name='verOferta'),
         url(r'^editarOferta[/]?$',editarOferta,name='editarOferta'),   
         url(r'^misOfertas[/]?$',misOfertas,name='misOfertas'),
         
 
-
+        url(r'^completarOferta/(\d+)/$',completarOferta, name='completarOferta'),
         url(r'^media/(?P<path>.*)$','django.views.static.serve',{'document_root':settings.MEDIA_ROOT})
         
 )

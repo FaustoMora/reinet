@@ -1,0 +1,272 @@
+[33mcommit 0f6c8d52d21805478d90d4ed94e3c38a9db6fb84[m
+Author: Leonel <leferami@espol.edu.ec>
+Date:   Mon Feb 23 08:40:09 2015 -0500
+
+    Visualizar Mis demandas
+
+[33mcommit 6995a3326ad447a15f504a343bf46f93112cdda0[m
+Author: Leonel <leferami@espol.edu.ec>
+Date:   Mon Feb 23 08:15:20 2015 -0500
+
+    Crear demanda
+
+[33mcommit 4fcda4c2acfa837c210cc485031c66571cf3b0bb[m
+Author: Leonel <leferami@espol.edu.ec>
+Date:   Mon Feb 23 07:28:36 2015 -0500
+
+    funcionalidades de ventana habilitada
+
+[33mcommit d4bfde5c2ba69204c6a1778defa947636919fdf6[m
+Author: Leonel <leferami@espol.edu.ec>
+Date:   Mon Feb 23 06:36:55 2015 -0500
+
+    Demanda modificado
+
+[33mcommit 058cf3415af2acc8ec3aa73866d70e565841d451[m
+Author: Jose Velez <vlezgmezjosantoniomgoo@hotmail.com>
+Date:   Mon Feb 23 04:54:32 2015 -0500
+
+    Visualizacion de las ofertas de la red y la Busqueda de oferta en la red optimizada
+
+[33mcommit 925019c4e00e886ca4073df18f1bf326162a4c42[m
+Author: Leonel <leferami@espol.edu.ec>
+Date:   Mon Feb 23 03:40:14 2015 -0500
+
+    funcion buscarOferta
+
+[33mcommit 7c5217a33538906c8dd525c908d53f3cb1d0001e[m
+Author: AngelGuale <angel.guale@cti.espol.edu.ec>
+Date:   Mon Feb 23 02:51:48 2015 -0500
+
+    busqueda 2
+
+[33mcommit aa43c99100e8aeafa06c5ac728bdd07eb5244d27[m
+Merge: 8bc3820 53a69ee
+Author: AngelGuale <angel.guale@cti.espol.edu.ec>
+Date:   Sun Feb 22 22:47:15 2015 -0500
+
+    Merge branch 'development' of github.com:jirodrig/reinet into development
+
+[33mcommit 8bc3820520e214a736e7cd6065a385a48320dffb[m
+Author: AngelGuale <angel.guale@cti.espol.edu.ec>
+Date:   Sun Feb 22 22:46:51 2015 -0500
+
+    merge
+
+[33mcommit 53a69ee07e2ea728cdbdb85837267a07c8953521[m
+Author: omnilasher <raywarcraft@hotmail.com>
+Date:   Sun Feb 22 22:22:08 2015 -0500
+
+    añadidas las opciones de busqueda del header
+
+[33mcommit c9a38499131f29ec1d9bc13dfaacf95f5dc1594e[m
+Author: AngelGuale <angel.guale@cti.espol.edu.ec>
+Date:   Sun Feb 22 16:42:38 2015 -0500
+
+    perfil con imagen
+
+[33mcommit c0db29be2441ab61172a32b20ace5d36b86b08d5[m
+Merge: 4ca4c30 daf35c8
+Author: Rene Balda <rabt89@gmail.com>
+Date:   Sun Feb 22 15:26:38 2015 -0500
+
+    Merge branch 'master' into development
+    
+    Conflicts:
+    	usuarios/views.py
+
+[33mcommit 4ca4c302bcd072d4b41d6ce6b12f953da9533b83[m
+Author: Rene Balda <rabt89@gmail.com>
+Date:   Sun Feb 22 15:23:05 2015 -0500
+
+    agregando modelos de incubacion y nuevo modulo incubacion
+
+[33mcommit 432ac086e749524d853b862b6c6e399d525a3f6b[m
+Author: Rene Balda <rabt89@gmail.com>
+Date:   Sun Feb 22 15:22:22 2015 -0500
+
+    incluyendo modulo de Incubacion
+
+[33mcommit c1a618f58eac4b4d77d88a8f61941c2ff4271bc9[m
+Author: Rene Balda <rabt89@gmail.com>
+Date:   Sun Feb 22 15:21:04 2015 -0500
+
+    habilitando el catalogo para ser usado
+
+[33mcommit daf35c858c0d24d3199ec6f73df3b63ee758866d[m
+Author: AngelGuale <angel.guale@cti.espol.edu.ec>
+Date:   Sun Feb 22 15:06:37 2015 -0500
+
+    login falla fix
+
+[33mcommit e5fade41c50196955a7b8b45b041138b526a9f70[m
+Merge: 4864d26 8c7ac6d
+Author: AngelGuale <angel.guale@cti.espol.edu.ec>
+Date:   Sun Feb 22 14:09:21 2015 -0500
+
+    Merge branch 'development' of github.com:jirodrig/reinet into development
+
+[33mcommit 8c7ac6d5fe89005f900c3be3b8d6fa310775b55d[m
+Author: leferami <leferami@espol.edu.ec>
+Date:   Sun Feb 22 13:20:30 2015 -0500
+
+    Ventanas de Demandas Modificadas
+
+[33mcommit 4864d262e0cf968dbac935ea363461209e242a9f[m
+Author: AngelGuale <angel.guale@cti.espol.edu.ec>
+Date:   Sun Feb 22 13:06:51 2015 -0500
+
+    arreglado problema de la pagina index
+
+[33mcommit 0ec53fbc7dfe32eaf94cf2d90c5e2d5ce7353382[m
+Author: AngelGuale <angel.guale@cti.espol.edu.ec>
+Date:   Sun Feb 22 12:22:43 2015 -0500
+
+    foto perfil
+
+[33mcommit 9320f863c3981005947413e747b99dbe844560ea[m
+Author: eslozano <eslozano@espol.edu.ec>
+Date:   Sun Feb 22 11:05:09 2015 -0500
+
+    formulario crear oferta diagrama Porter
+
+[33mcommit 4475ee847f3c0baeac8468097f9e84b976db817f[m
+Author: eslozano <eslozano@espol.edu.ec>
+Date:   Sun Feb 22 09:52:40 2015 -0500
+
+    arreglos
+
+[33mcommit c3dceaad3bee1fb8fd5135e4cf40e263fa2924b9[m
+Author: eslozano <eslozano@espol.edu.ec>
+Date:   Sun Feb 22 09:29:31 2015 -0500
+
+    Crear oferta formulario completo
+
+[33mcommit efd38954ea597d3e8a995e1c0e1d00cb58c7edd9[m
+Merge: 8eb0ff1 ea54622
+Author: AngelGuale <angel.guale@cti.espol.edu.ec>
+Date:   Sun Feb 22 03:50:19 2015 -0500
+
+    Merge branch 'development' of github.com:jirodrig/reinet into development
+
+[33mcommit 8eb0ff1a9eac2e9d4ad0a5479e6d944c6f238ce4[m
+Author: AngelGuale <angel.guale@cti.espol.edu.ec>
+Date:   Sun Feb 22 03:31:26 2015 -0500
+
+    mensajes
+
+[33mcommit ea54622de93250b9833e12e366f11ce6d29c1690[m
+Author: eslozano <eslozano@espol.edu.ec>
+Date:   Sun Feb 22 02:26:50 2015 -0500
+
+    Oferta, misofertas se ven en una tabla y crear oferta
+
+[33mcommit 9a30bb9a4935f886aecb1d8e09b77a1647880f74[m
+Author: eslozano <eslozano@espol.edu.ec>
+Date:   Sat Feb 21 22:34:03 2015 -0500
+
+    Corrigiendo models y las urls
+
+[33mcommit dd785c3bfe0ac8d2f995ea60568bf9c6d27483ac[m
+Author: AngelGuale <angel.guale@cti.espol.edu.ec>
+Date:   Sat Feb 21 22:32:54 2015 -0500
+
+    vista mensaje enviar
+
+[33mcommit 835d11c77440e5cdb3ab2029c1e41e05051e8d08[m
+Merge: e957322 28a1fb4
+Author: Rene Balda <rabt89@gmail.com>
+Date:   Sat Feb 21 16:53:45 2015 -0500
+
+    Merge branch 'master' into development
+    
+    Conflicts:
+    	usuarios/views.py
+
+[33mcommit 39c41012b32d1e6dfdd1db2f47b44195ebe10deb[m
+Author: AngelGuale <angel.guale@cti.espol.edu.ec>
+Date:   Sat Feb 21 16:47:50 2015 -0500
+
+    pagina not found disponible con debug igual false
+
+[33mcommit 28a1fb4aaa1302a2c2630d2a4840f0e461222bdc[m
+Author: Rene Balda <rabt89@gmail.com>
+Date:   Sat Feb 21 16:43:56 2015 -0500
+
+    Agregando Modulo Incubacion modificando .gitIgnore agregando algunos modelos en modulo de incubacion
+
+[33mcommit e957322f5d01e5675c1e1a6a40c908a46eb0be6e[m
+Author: AngelGuale <angel.guale@cti.espol.edu.ec>
+Date:   Sat Feb 21 14:22:03 2015 -0500
+
+    funciona editar perfil
+
+[33mcommit 25b3e3c29dbe7a7dccb84a613dad23bf5dbad85b[m
+Merge: 5a63aaa 8df0e26
+Author: AngelGuale <angel.guale@cti.espol.edu.ec>
+Date:   Sat Feb 21 12:25:22 2015 -0500
+
+    Merge branch 'development' of github.com:jirodrig/reinet into development
+
+[33mcommit 5a63aaa02d712912b7cc41d57edd5c6bef9f190d[m
+Author: AngelGuale <angel.guale@cti.espol.edu.ec>
+Date:   Sat Feb 21 12:24:58 2015 -0500
+
+    merge
+
+[33mcommit 8df0e26538ceb1a1e8c6c451b71a72fa3793fdcc[m
+Author: unknown <chupysanchez@gmail.com>
+Date:   Sat Feb 21 12:18:32 2015 -0500
+
+    Presentacion del avance 20 de feb
+
+[33mcommit 4c5001eb29b264c93baede756bddd89b197afba1[m
+Author: unknown <chupysanchez@gmail.com>
+Date:   Fri Feb 20 14:29:11 2015 -0500
+
+    Avance 20 de febrero 2015
+
+[33mcommit 6057a01979af482f95d65a143f50d1393dae0c98[m
+Author: unknown <chupysanchez@gmail.com>
+Date:   Fri Feb 20 14:09:40 2015 -0500
+
+    Crear Oferta
+
+[33mcommit 9721727420498bac0f4e35deaa8ba4a3e9fec86c[m
+Merge: 7c8fd25 852aea5
+Author: CrobbyStyle <CrobbyStyle@users.noreply.github.com>
+Date:   Fri Feb 20 14:04:51 2015 -0500
+
+    Merge branch 'development' of https://github.com/jirodrig/reinet into development
+
+[33mcommit 7c8fd25b61ec32a1ba83bce3694754b9e37335ad[m
+Author: CrobbyStyle <CrobbyStyle@users.noreply.github.com>
+Date:   Fri Feb 20 14:04:31 2015 -0500
+
+    implementacion editar en incubaciones
+
+[33mcommit d9236c0e08fe7742ad0a324adce168d2bcbd96ac[m
+Merge: bd377c0 852aea5
+Author: AngelGuale <angel.guale@cti.espol.edu.ec>
+Date:   Fri Feb 20 12:49:45 2015 -0500
+
+    Merge branch 'development' of github.com:jirodrig/reinet into development
+
+[33mcommit bd377c05ca6759e7bc94967599cdd9daf3a15b7b[m
+Author: AngelGuale <angel.guale@cti.espol.edu.ec>
+Date:   Fri Feb 20 12:49:38 2015 -0500
+
+    formularioeditar
+
+[33mcommit 852aea531ed7759d08a8acab29bbf2ba59784f8c[m
+Author: unknown <chupysanchez@gmail.com>
+Date:   Fri Feb 20 11:46:42 2015 -0500
+
+    cambio en crear oferta
+
+[33mcommit 7c5aaad7885743e671227f88bea94c4557644070[m
+Merge: 6c6e949 7210b47
+Author: unknown <chupysanchez@gmail.com>
+Date:   Fri Feb 20 11:33:21 2015 -0500
+
+    Merge branch 'development' of https://github.com
