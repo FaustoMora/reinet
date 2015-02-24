@@ -9,18 +9,37 @@
                 <a href="{% url 'usuarios.views.perfil_view' %}"  class="link" class="active" >
                   <i class="sign fa fa-user bg-green"></i> Mi Perfil <i class="fa fa-chevron-right pull-right"></i>
                 </a>  
-              </li> 
-              <li>
-                <a href="/enviarmensaje/">
-                  <i class="sign fa fa-edit bg-blue"></i> Enviar Mensaje<i class="fa fa-chevron-right pull-right"></i>
+              </li> -->
+               <li>
+                <a href="/busqueda/">
+                  <i class="sign fa fa-lightbulb-o bg-blue"></i> Busqueda General<i class="fa fa-chevron-right pull-right"></i>
                 </a>  
               </li>
               <li>
-                <a href="{% url 'usuarios.views.mensajes_view' %}">
-                  <i class="sign fa fa-envelope bg-red"></i> Entrada <i class="fa fa-chevron-right pull-right"></i>
+                <a href="/busquedaOferta/">
+                  <i class="sign fa fa-lightbulb-o bg-blue"></i> Oferta<i class="fa fa-chevron-right pull-right"></i>
                 </a>  
               </li>
+
               <li>
+                <a href="/busquedaDemanda/">
+                  <i class="sign fa fa-server bg-red"></i> Demanda <i class="fa fa-chevron-right pull-right"></i>
+                </a>  
+              </li>
+
+              <li>
+                <a href="/busquedaConcurso/">
+                  <i class="sign fa fa-trophy bg-amethyst"></i> Concurso<i class="fa fa-chevron-right pull-right"></i>
+                </a>  
+              </li>
+
+              <li>
+                <a href="/busquedaUsuario/">
+                  <i class="sign fa fa-user bg-green"></i> Usuarios <i class="fa fa-chevron-right pull-right"></i>
+                </a>  
+              </li>
+
+              <!--<li>
                 <a href="{% url 'usuarios.views.logout' %}">
                   <i class="sign fa fa-sign-out bg-amethyst"></i> Cerrar sesi&oacute;n <i class="fa fa-chevron-right pull-right"></i>
                 </a>  
@@ -34,6 +53,7 @@
         
         <div class="col-sm-8 col-md-7">
           <!-- List of recent dialogs -->
+          <h2><span>{{tipo}}</span></h2>
           <div class="pm-search">
             <form role="form">
               <div class="row">
@@ -41,14 +61,14 @@
                   <div class="input-group">
 
 
-                    <form method='POST' action="/busqueda/">
+                    <form method='GET'>
                     {%csrf_token%}
+
+                    
 
                       <input type="text" class="form-control" name="q" id="pm-search" placeholder="Ingresa tu búsqueda aquí">
                       <span class="input-group-btn">
-                        <a href="{% url 'usuarios.views.busqueda_view' %}">
-                        <input type="submit" class="btn btn-dark" value="Buscar">
-                        </a>
+                      <input type="submit" class="btn btn-dark" value="Buscar">
                       </span>
                     </form>
 
@@ -62,7 +82,7 @@
             <ul>
               {% if name %}
                 <h2>Resultados para "{{ name|escape }}":</h2>
-                {% if results1 or results2 or results3 or resultsUser%}
+                {% if results1 or results2 or results3 or resultsUser %}
 
                   {%for val in results1 %}
                   <li>
@@ -100,7 +120,7 @@
                   {%for val in resultsUser%}
                   <li>
                     <p class="text-muted">
-                      <h4><a href="/misOfertas/">{{ val.first_name|escape }}{{ val.last_name|escape }}</a>    
+                      <h4><a href="/verPerfil/?q={{val}}">{{ val.first_name|escape }}{{ val.last_name|escape }}</a>    
                       <p>Correo: {{val.email|escape}}</p>
                       <p>Username: {{val.username|escape}}</p></h4>
                     <div class="clearfix"></div>
@@ -117,7 +137,7 @@
               {% endif %}
             </ul>
           </div>
-          <!-- Pagination -->
+          <!-- Pagination 
           <ul class="pagination pull-right">
             <li class="disabled"><a href="#">&laquo;</a></li>
             <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
@@ -126,7 +146,7 @@
             <li><a href="#">4</a></li>
             <li><a href="#">5</a></li>
             <li><a href="#">&raquo;</a></li>
-          </ul>
+          </ul>-->
         </div>
 
 {%endblock%}

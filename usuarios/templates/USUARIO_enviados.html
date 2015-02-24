@@ -39,7 +39,8 @@
         <div class="col-sm-8 col-md-7">
           <!-- List of recent dialogs -->
           <h1>Mensajes Enviados</h1>
-          <div class="pm-search">
+          
+          <!-- <div class="pm-search">
             <form role="form">
               <div class="row">
                 <div class="col-sm-12 col-md-10">
@@ -53,7 +54,7 @@
                 </div>
               </div>
             </form>
-          </div>
+          </div> -->
           <ul class="text-muted list-inline">
           <!--   <li><i class="fa fa-comments-o"></i> 25 conversaciones</li> -->
             <li><i class="fa fa-envelope-o"></i> {{mensajes|length}} mensajes</li>
@@ -82,7 +83,7 @@
                     <small>5 days ago</small>
                 </p>
                 <p class="text-muted">
-                  <a href="inbox-dialog.html" class="inbox-dialog">{{msj.txtMensaje}}</a>
+                  <a href="/verMensaje/?q={{msj.id}}" class="inbox-dialog">{{msj.txtMensaje}}</a>
                 </p>
                 <div class="clearfix"></div>
               </li>
