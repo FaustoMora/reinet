@@ -1,6 +1,7 @@
 {% extends "base.tpl.html" %}
 {%block content%}
 
+
     <div class="section-header">
       <div class="container">
         <div class="row">
@@ -13,50 +14,105 @@
     </div>
 
     <div class="container">        
-      <div class="row">         <!-- -
-        <div class="col-sm-4 col-md-3">
-          <div class="user-menu bottom-15">
-            <ul>
-              <li>
-                <a href="../editarConcurso/?q={{ concurso.idConcurso}}">
-                  <i class="sign fa fa-edit bg-blue"></i> Editar Concurso <i class="fa fa-chevron-right pull-right"></i>
-                </a>  
-              </li>
-             
-            </ul>
-          </div>
-        </div>      -->
-        <div class="col-sm-10">            
-            <div class="col-sm-10">
+      <div class="row">
+
+
+      <div class="col-sm-12">
+
+        <div class="col-sm-8">
+            <div class="col-sm-12">
               <h3>
                 {{concurso.nombre}}
               </h3>
             </div>
-            <!-- Este es el codigo para el rating las estrellitas-->
+
             <div class="col-sm-12">
               <ul class="text-muted list-inline">
                 <li><i class="fa fa-flag"></i> {{ concurso.estado }}</li>
                 <li><i class="fa fa-user"></i> <a href="profile.html">{{ concurso.idusuario }}</a></li>
               </ul>
             </div>
-        </div>
-        <div class="col-sm-8">
-          <!-- Blog Post -->         
-          
+        
+
+          <div class="col-sm-12" style="word-wrap: break-word;">        
           <p class="blog-text">
             <div class="col-md-3 col-sm-6">
               <div class="thumbnail">
-                  <img src="/media/{{ concurso.imagen }} " class="img-responsive" alt="Oferta">
-                  <div class="visit"><a href="OfertaVer"><i class="fa fa-question-circle"></i> Galeria</a></div>
+                  <img src="/media/{{ concurso.imagen }} " class="img-responsive" alt="Concurso">
               </div>
             </div>
             {{ concurso.descripcion }} 
-      <br /><br />
-      
-    </p>
+            <br /><br />
+          </p>
+          </div>
 
-          
-          <div class="row">
+        </div>  
+
+        <div class="col-sm-4">
+
+          {{ concursousuario }}
+          {{ sessionid }}
+
+          {% ifequal concursousuario sessionid %}
+
+
+                <div class="user-menu bottom-15">
+                  <ul>
+                    <li>
+                      <a href="../editarConcurso/?q={{ concurso.idConcurso}}">
+                        <i class="sign fa fa-edit bg-blue"></i> Editar Concurso <i class="fa fa-chevron-right pull-right"></i>
+                      </a>  
+                    </li>
+                   
+                  </ul>
+                </div>
+
+
+          {% endifequal  %}
+
+
+          <div class="block-inverse">
+            <div class="head-inverse">
+              <div class="text-center">
+                <strong class="text-muted">Ranking</strong>
+                      <div class="thumbnail " style="margin-bottom:0;background-color:#F5F5F5">              
+                        <div class="caption">
+                          <div class="rating">
+
+                              {% if concurso.ranking > 5 %}
+                                <i class="fa fa-star"></i>
+                              {% endif %}
+                                
+                              {% if concurso.ranking > 15 %}
+                                <i class="fa fa-star"></i>
+                              {% endif %}
+                                
+                              {% if concurso.ranking > 35 %}
+                                <i class="fa fa-star"></i>
+                              {% endif %}
+                                
+                              {% if concurso.ranking > 65 %}
+                                <i class="fa fa-star"></i>
+                              {% endif %}
+                                 
+                              {% if concurso.ranking > 85 %}
+                                <i class="fa fa-star"></i>
+                              {% endif %}
+                                
+                      </div>                              
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> 
+
+      </div>
+
+
+
+
+      <div class="col-sm-12">
             <!-- Informacion general dominio,subdominio,disponibilidad, lugar de palicacion -->
             <div class="col-sm-12">
               <div class="block-header">
@@ -64,20 +120,20 @@
                   <span class="title">Informaci&oacute;n General</span><span class="decoration"></span><span class="decoration"></span><span class="decoration"></span>
                 </h2>
               </div>
-              <div class="col-sm-10">
+              <div class="col-sm-12">
                 <table class="table">
                   <tbody>
                     <tr>
                       <td class="text-muted">Dominio</td>
-                      <td colspan=4 style="text-align:center">{{ concurso.dominio }}</td>
+                      <td colspan=4>{{ concurso.dominio }}</td>
                     </tr>
                     <tr>
                       <td class="text-muted">Subdominio</td>
-                      <td colspan=4 style="text-align:center">{{ concurso.subdominio }}</td>
+                      <td colspan=4>{{ concurso.subdominio }}</td>
                     </tr>
                     <tr>
                       <td class="text-muted">Alcance</td>
-                      <td colspan=4 style="text-align:center">{{ concurso.alcance }}</td>
+                      <td colspan=4 style="position: relative; word-break:break-all;">{{ concurso.alcance }}</td>
                     </tr>
                     <tr>
                       <td class="text-muted">Fecha disponibilidad</td>
@@ -90,45 +146,54 @@
                 </table>  
               </div>
             </div>
+
              <!-- Perfil del beneficiario  y del cliente-->
-            <div class="col-sm-12">
+            <div class="col-sm-12" style="word-wrap: break-word;">
               <div class="block-header">
                 <h2>
                   <span class="title">Otros</span><span class="decoration"></span><span class="decoration"></span><span class="decoration"></span>
                 </h2>
               </div>
-              <div class="col-sm-10">
-                <table class="table">
-                  <tbody>
+              <div class="col-sm-12">
+                <table class="table" style="position: relative;">
+                  <tbody style="position: relative;">
                     <tr>
-                      <td class="text-muted" style="width: 360px;">Perfil</td>
-                      <td>{{ concurso.perfil }}</td>
+                      <td class="text-muted" >Perfil</td>
+                      <td >{{ concurso.perfil }}</td>
                     </tr>
                     <tr>
                       <td class="text-muted">Condiciones</td>
-                      <td>{{ concurso.condiciones }}</td>
+                      <td style="position: relative; word-break:break-all;">{{ concurso.condiciones }}</td>
                     </tr>
-          <tr>
+                    <tr>
                       <td class="text-muted">Tipo de Ofertas</td>
                       <td>{{ concurso.tipo_oferta }}</td>
                     </tr>
-          <tr>
+                    <tr>
                       <td class="text-muted">N&uacute;meros de Finalistas</td>
                       <td>{{ concurso.num_finalistas }}</td>
                     </tr>
                     <tr>
                       <td class="text-muted">Premios</td>
-                      <td>{{ concurso.premios }}</td>
+                      <td style="position: relative; word-break:break-all;">{{ concurso.premios }}</td>
+                    </tr>
+                    <tr>
+                      <td class="text-muted">Estado</td>
+                      <td>{% if concurso.estado == 1%} <p>Activo en convocatoria</p>{% endif %}</td>
                     </tr>
                   </tbody>
                 </table>  
               </div>
             </div>
-            <!-- Otros datos relevantes de la oferta-->
-            
-          </div>
 
-          <!-- New comment form -->
+      </div>
+    </div>
+  </div>
+
+
+
+
+          <!-- New comment form
           <div class="col-sm-10 col-sm-offset-1">
             <div class="new-comment">
               <form class="form-horizontal" role="form">
@@ -147,7 +212,9 @@
                 </div>
               </form>
             </div>
-            <!-- Comments list -->
+
+
+            Comments list 
             <h4>21 comments</h4>
             <hr>
             <div class="comment">
@@ -179,10 +246,6 @@
                   <ul class="text-muted list-inline">
                     <li><i class="fa fa-clock-o"></i> 1 hour ago</li>
                   </ul>
-                </div>
-              </div>
-            </div>
-            <div class="comment">
               <div class="media">
                 <a class="pull-left" href="#">
                   <img class="media-object" src="../static/img/face4.jpg" alt="...">
@@ -200,25 +263,9 @@
             </div>
           </div>
         </div>
+        -->
 
-        <div class="col-sm-4">
-          <div class="block-inverse">
-            <div class="head-inverse">
-              <div class="text-center">
-                <strong class="text-muted">Ranking</strong>
-                      <div class="thumbnail " style="margin-bottom:0;background-color:#F5F5F5">              
-                        <div class="caption">
-                          <div class="rating">
-                              <i class="fa fa-star"></i> 
-                              <i class="fa fa-star"></i> 
-                              <i class="fa fa-star"></i> 
-                              <i class="fa fa-star"></i> 
-                              <i class="fa fa-star"></i>
-                          </div>                              
-                        </div>
-                      </div>
-              </div>
-            </div>
+            <!--
             <div class="body-inverse">
               <p class="text-center">
                 <strong class="text-muted">My Gallery</strong>
@@ -238,7 +285,7 @@
           </div>
                      
 
-          <!-- Tags -->
+          
           <h3 class="hl">PALABRAS CLAVES</h3>
           <hr>
           <p class="tags">
@@ -250,8 +297,7 @@
             <a href="#">jQuery</a>
           </p>
           <br />
-          
-          <!-- Recently Added -->
+        
           <div class="panel panel-default">
             <div class="panel-heading">
               <h3 class="panel-title">Equipo</h3>
@@ -294,6 +340,6 @@
             </div>
           </div>
 
-</div>
+          -->
 
 {% endblock %}

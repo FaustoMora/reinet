@@ -8,19 +8,20 @@ class Concurso(models.Model):
     idConcurso = models.AutoField(db_column='idConcurso',unique=True,primary_key=True)
     idusuario = models.ForeignKey(User, db_column='idusuario')
     nombre = models.CharField(max_length=150L)
-    descripcion = models.CharField(max_length=500L)
-    condiciones = models.CharField(max_length=300L)
+    descripcion = models.TextField()
+    condiciones = models.TextField()
     dominio = models.CharField(max_length=200L)
     subdominio = models.CharField(max_length=200L)
     fecha_inicio=models.DateField(db_column='fechaInicio')
     fecha_fin=models.DateField(db_column='fechaFin')
-    premios = models.CharField(max_length=200)
-    alcance = models.CharField(max_length=300)
-    num_finalistas = models.IntegerField()
+    premios = models.TextField()
+    alcance = models.TextField()
+    num_finalistas = models.PositiveIntegerField()
     perfil = models.CharField(max_length=200)
     tipo_oferta = models.IntegerField()
     estado = models.IntegerField()
     imagen = models.ImageField(upload_to='conInc_media')
+    ranking = models.IntegerField()
 
     def __unicode__(self):
         return self.image.name
@@ -66,7 +67,7 @@ class MilestoneConcurso(models.Model):
     idConcurso = models.ForeignKey(Concurso, db_column='idConcurso')
     fecha_entrega = models.DateField()
     requerimiento = models.CharField(max_length=300)
-    peso = models.IntegerField()
+    peso = models.PositiveIntegerField()
     estado = models.IntegerField()
 
     class Meta:
@@ -97,7 +98,7 @@ class Calificacion(models.Model):
     idCalificacion = models.AutoField(primary_key=True)
     idJurado = models.ForeignKey(Jurado, db_column='idjurado')
     idMilestoneEntregable = models.ForeignKey(MilestoneEntregable, db_column='idmilestoneEntregable')
-    calificacion = models.IntegerField()
+    calificacion = models.PositiveIntegerField()
     comentario = models.CharField(max_length=150)
 
 
