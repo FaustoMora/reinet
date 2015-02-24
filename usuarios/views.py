@@ -516,3 +516,25 @@ def editar_perfil_institucion(request):
 		args['institucionform']=institucion_form
 	#return render_to_response('USUARIO_edit-profile.html', args)
 	return render_to_response('USUARIO_edit-profile-institucion.html', RequestContext(request,args))
+
+
+
+@login_required(login_url='/ingresar/')
+def verInicioF(request):
+	id_session=request.session['id_user']
+	id_persona=request.session['id_persona']
+
+	print id_session, id_persona
+	user1=User.objects.get(id=id_session)
+	persona1=Persona.objects.get(idpersona=id_persona)
+
+	lst_concursos = Concurso.objects.all()
+	lst_demandas = Demanda.objects.all()
+	lst_ofertas = Oferta.objects.all()
+	lst_incubaciones = Incubacion.objects.all()
+	args={"lst_concursos":lst_concursos,"lst_demandas":lst_demandas,
+		 "lst_ofertas":lst_ofertas,"lst_incubaciones":lst_incubaciones,
+		 "usuario":user1,"persona":persona1}
+	return render_to_response('USUARIO_inicioF.html',args,context_instance=RequestContext(request))
+
+

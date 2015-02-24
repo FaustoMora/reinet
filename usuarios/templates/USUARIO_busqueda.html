@@ -82,9 +82,10 @@
             <ul>
               {% if name %}
                 <h2>Resultados para "{{ name|escape }}":</h2>
-                {% if results1 or results2 or results3 or resultsUser %}
-
+                {% if results1 %}
+                  <h3>Ofertas</h3>
                   {%for val in results1 %}
+                  
                   <li>
                     <p class="text-muted">
                       <h4><a href="/misOfertas/">{{ val.nombre|escape }}</a>    
@@ -95,7 +96,10 @@
                   </li>
                   {%endfor%}
 
+                {% elif results2 %}
+                  <h3>Demandas</h3>
                   {%for val in results2%}
+
                   <li>
                     <p class="text-muted">
                       <h4><a href="/misDemandas/">{{ val.nombre|escape }}</a>    
@@ -106,6 +110,8 @@
                   </li>
                   {%endfor%}
 
+                {% elif results3 %}
+                  <h3>Concursos</h3>
                   {%for val in results3%}
                   <li>
 
@@ -117,7 +123,9 @@
                     </p>
                   </li>
                   {%endfor%}
-                  
+
+                 {% elif resultsUser %}
+                  <h3>Usuarios</h3>
                   {%for val in resultsUser%}
                   <li>
                     <p class="text-muted">
@@ -128,7 +136,6 @@
                     </p>
                   </li>
                   {%endfor%}
-                  
                   
                 {% else %}
                   <p>No se encontraron similitudes</p>
