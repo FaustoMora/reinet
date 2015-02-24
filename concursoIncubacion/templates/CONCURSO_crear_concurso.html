@@ -27,151 +27,179 @@
             </ul>
           </div>
         </div>
-        <div class="col-sm-8 col-md-6">
+        <div class="col-sm-9 col-md-8 col-xs-9">
                       
-			{% if messages %}
-				    {% for message in messages %}
-						<div class="col-md-12">
-							<div class="alert alert-success h4">
-							<p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
-							</div>
-						</div>
-				    {% endfor %}
-			{% endif %}
+      {% if messages %}
+            {% for message in messages %}
+            <div class="col-md-12">
+              <div class="alert alert-success h4">
+              <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+              </div>
+            </div>
+            {% endfor %}
+      {% endif %}
         
         
           <!-- Edit profile form -->
           <h3 class="hl">Crear <small>Concurso </small> </h3>
           <p class="text-muted">Por favor ingrese los datos del concurso.</p>
           <hr>
-          <h4 class="hl bottom-15">Informaci&oacute;n General</h4>
 
-            <form role="form" id="formulario" action="/crearConcurso/" method="POST" enctype="multipart/form-data">
+          <ul class="nav nav-tabs">
+            <li class="active"><a href="#informacionG" data-toggle="tab"><h5 class="hl bottom-15">Informaci&oacute;n General</h5></a></li>
+            <li ><a href="#jurado_consultor" data-toggle="tab"><h5 class="hl bottom-15">Invitar Jurado</h5></a></li>
+            <li><a href="#milestones" data-toggle="tab"><h5 class="hl bottom-15">Milestones</h5></a></li>
+          </ul>
+
+
+      <form role="form" id="formulario" action="/crearConcurso/" method="POST" enctype="multipart/form-data">
               {% csrf_token %}
               {#{ form.as_p }#}
-              
+
+          <div class="tab-content">
+
+            <div class="tab-pane col-xs-10 col-xs-offset-1 active" id="informacionG">
               {% for f in form %}
-              	{% if f.label == "Fecha Inicio" or f.label == "Fecha Final" %}
-              		<div class="form-group col-xs-6">
-							<label>{{ f.label }}</label>
-							<p>{{ f }}</p>
-              		</div>
-              	{% else %}
-              		<div class="form-group">
-              				<label>{{ f.label }}</label>
-							<p>{{ f }}</p>
-              		</div>
-              	{% endif %}
+                {% if f.label == "Fecha Inicio" or f.label == "Fecha Final" %}
+                  <div class="form-group col-xs-6">
+              <label>{{ f.label }}</label>
+              <p>{{ f }}</p>
+                  </div>
+                {% else %}
+                  <div class="form-group">
+                      <label>{{ f.label }}</label>
+              <p>{{ f }}</p>
+                  </div>
+                {% endif %}
               {% endfor %}
+            </div>
+
+            <div class="tab-pane col-xs-10 col-xs-offset-1" id="jurado_consultor">
+        <div id="jurados">
+          <div>
+            <label>Jurados:</label><br />
+            <button id="nuevoJurado" type='button'>Nuevo Jurado</button> <button id="menosJurado" type='button'>Eliminar Ultimo Jurado</button>
+            <br /><br />
+          </div>
+          <div>
+            <input class="form-control" type="text" name="jurado" value="" required/>
+            <br />
+          </div>
+        </div>
+            </div>
+
+            <div class="tab-pane col-xs-10 col-xs-offset-1" id="milestones">
+        <div id="miles">
+          <div>
+            <label>Crear Milestones:</label><br />
+            <button id="nuevoMile" type='button'>Nuevo Milestone</button> <button id="menosMile" type='button'>Eliminar Ultimo Milestone</button>
+            <br /><br />
+          </div>
+          <div>
+            <h4> Nuevo Milestone </h4>
+            <label>Requerimiento:</label><br />
+            <input class="form-control" type="text" name="mileReq" value="" required/>
+            <br />
+            <label>Peso:</label><br />
+            <input class="form-control" type="number" name="milePeso" value="" required/>
+            <br />
+            <label>Fecha de Entrega:</label><br />
+            <input class="form-control" type="date" name="mileFecha" value="" required/>
+            <br />
+          </div>
+        </div>
+            </div>
+      
+
+          </div>
+              
+
               
               
-              <!--      
-              <div class="form-group">
-                <label for="full-name">Nombre del concurso</label>
-                <input type="text" class="form-control" id="full-name" placeholder="Ingrese el nombre" required>
-              </div>
-              <div class="form-group col-xs-6">
-                <label for="date-start">Fecha de inicio</label>
-                <input type="date" class="form-control" id="date-start" required>
-              </div>
-              <div class="form-group col-xs-6">
-                <label for="date-end">Fecha de fin</label>
-                <input type="date" class="form-control" id="date-end" required>
-              </div>
-              <div class="form-group">
-                <label for="description">Descripci&oacute;n</label>
-                <input type="text" class="form-control" id="description" placeholder="Ingrese una breve descripcion del concurso" required>
-              </div>
-              <div class="form-group">
-                <label for="conditions">Condiciones</label>
-                <input type="text" class="form-control" id="conditions" placeholder="Ingrese las condiciones del concurso" required>
-              </div>
-              <div class="form-group">
-                <label for="dominio">Dominio</label>
-                <input type="text" class="form-control" id="dominio" placeholder="Describa el dominio del concurso" required>
-              </div>
-              <div class="form-group">
-                <label for="subdominio">Sub-Dominio</label>
-                <input type="text" class="form-control" id="subdominio" placeholder="Describa el sub-dominio del concurso"  required>
-              </div>
-              <div class="form-group">
-                <label for="offerProfile">Perfil de Ofertas</label>
-                <input type="text" class="form-control" id="offerProfile" placeholder="Ingrese un perfil de ofertas" required>
-              </div>
-  			<div class="form-group">
-                <label>Tipo de Ofertas</label><br />
-                <label class="radio-inline" for="radios-0">
-                  <input type="radio" name="radios" id="radios-0" value="Emprendimiento" checked="checked">
-                    Emprendimiento
-                </label><br />
-  			   <label class="radio-inline" for="radios-0">
-                  <input type="radio" name="radios" id="radios-0" value="Innovacion" checked="checked">
-                    Innovaci&oacute;n
-                </label><br />
-                <label class="radio-inline" for="radios-1">
-                  <input type="radio" name="radios" id="radios-1" value="Prototipo">
-                    Prototipo
-                </label>
-              </div>
-              <div class="form-group" id="scope">
-                <label for="scope">Dirigido a</label>
-                <select class="form-control" id="location">
-                  <option value="" selected="selected">Seleccione uno</option> 
-                  <option value="ESPOL">ESPOL</option>
-                  <option value="USM">USM</option>
-                  <option value="UEES">UEES</option>
-                </select><br />
-                <button id="addScope" type="button" class="btn btn-dark">Agregar otro</button> 
-              </div>
-              <div class="form-group" id="judge">
-                <label for="jurado">Jurado</label>
-                <input type="text" class="form-control" id="jurado" placeholder="Ingrese el nombre de un usuario para invitarlo como jurado" required><br />
-                <button id="addJudge" type="button" class="btn btn-dark">Invitar otro Jurado</button> 
-              </div>
-              <div class="form-group" id="consultant">
-                <label for="consultor">Consultores</label>
-                <input type="text" class="form-control" id="consultor" placeholder="Ingrese el nombre de un usuario para invitarlo como consultor" required>
-                <br /><button id="addConsultant" type="button" class="btn btn-dark">Invitar otro Consultor</button> 
-              </div>
-              <div class="form-group">
-                <label for="finalists">N&uacute;mero de Finalistas</label>
-                <input type="number" class="form-control" id="finalists" min="0" max="100" placeholder="Elija un numero" required>
-              </div>
-              <div class="form-group">
-                <label for="prizes">Alcance</label>
-                <input type="text" class="form-control" id="prizes" placeholder="Determine el alcance del concurso" required>
-              </div>
-              <div class="form-group">
-                <label for="prizes">Premios (Opcional)</label>
-                <input type="text" class="form-control" id="prizes" placeholder="Ingrese los premios">
-              </div>
-              <div class="clearfix"></div>
-              <h4 class="hl bottom-15">R&uacute;brica de Milestones</h4>
-              <hr>
-              <div class="form-group">
-                <label for="requirements">Requerimientos Generales</label>
-                <input type="text" class="form-control" id="requirements" placeholder="Ingrese los requerimientos de los Milestones" required>
-              </div>
-              <div class="form-group" id="milestones">
-                <h4>Milestone 1</h4>
-                <hr>
-                <div class="form-group">
-                  <label for="due-date">Fecha de entrega</label>
-                  <input type="date" class="form-control" id="due-date" required>
-                </div>
-                <div class="form-group">
-                  <label for="percent">Peso en porcentaje</label>
-                  <input type="number" class="form-control" id="percent" min="0" max="100" step="5" required>
-                </div>
-              </div>
-              <button id="addMilestone" type="button" class="btn btn-dark">Agregar Nuevo Milestone</button>
-               -->
-              <input type="submit" class="btn btn-green pull-right" value="Crear Concurso"></input>
-            </form>
+      
+        <input type="submit" class="btn btn-green pull-right" value="Crear Concurso"></input>
+     </form>
 
 
         </div>
       </div>
     </div>
+    <script>
+    function init() {
+      var newJurado = document.getElementById("nuevoJurado");
+      newJurado.addEventListener("click", nuevoJurado, false);
+      var noJurado = document.getElementById("menosJurado");
+      noJurado.addEventListener("click", eraseJurado, false);
+      var newmile = document.getElementById("nuevoMile");
+      newmile.addEventListener("click", nuevoMile, false);
+      var nomile = document.getElementById("menosMile");
+      nomile.addEventListener("click", eraseMile, false);
+    }
     
+    function eraseJurado(){
+      var jurados = document.getElementById("jurados");
+      if (jurados.childElementCount > 2){ 
+        jurados.removeChild(jurados.lastChild);
+      }
+    }
+    
+    function nuevoJurado(){
+      var input = document.createElement("input");
+      var div = document.createElement("div");
+      input.type = "text";
+      input.name = "jurado";
+      input.className = "form-control";
+      var jump = document.createElement("br");
+      div.appendChild(input);
+      div.appendChild(jump);
+      document.getElementById("jurados").appendChild(div);
+    }
+    
+    function eraseMile(){
+      var miles = document.getElementById("miles");
+      if (miles.childElementCount > 2){ 
+        miles.removeChild(miles.lastChild);
+      }
+    }
+    
+    function nuevoMile(){
+      var div = document.createElement("div");
+      var title = document.createElement("h4");
+      title.innerHTML = "Nuevo Milestone";
+      div.appendChild(title);
+      var label1 = document.createElement("label");
+      label1.innerHTML = "Requerimiento:";
+      var input1 = document.createElement("input");
+      input1.type = "text";
+      input1.name = "mileReq";
+      input1.className = "form-control";
+      var jump1 = document.createElement("br");
+      div.appendChild(label1);
+      div.appendChild(input1);
+      div.appendChild(jump1);
+      var label2 = document.createElement("label");
+      label2.innerHTML = "Peso:";
+      var input2 = document.createElement("input");
+      input2.type = "text";
+      input2.name = "milePeso";
+      input2.className = "form-control";
+      var jump2 = document.createElement("br");
+      div.appendChild(label2);
+      div.appendChild(input2);
+      div.appendChild(jump2);
+      var label3 = document.createElement("label");
+      label3.innerHTML = "Fecha:";
+      var input3 = document.createElement("input");
+      input3.type = "date";
+      input3.name = "mileFecha";
+      input3.className = "form-control";
+      var jump3 = document.createElement("br");
+      div.appendChild(label3);
+      div.appendChild(input3);
+      div.appendChild(jump3);
+      document.getElementById("miles").appendChild(div);
+    }
+    
+    window.addEventListener("load", init, false);
+  </script>
 {% endblock %}

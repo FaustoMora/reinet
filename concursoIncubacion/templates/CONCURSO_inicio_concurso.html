@@ -29,25 +29,36 @@
       <h3>MIS CONCURSOS</h3>
       <ul class="row list-inline gallery-list" id="isotope-container">
       
-		<!-- Se presenta los concursos en li--> 
-		
-		{% for c in lst_concursos%}
-		
-		 <li class="isotope-item cat-1 cat-2 cat-4">
-          <a href="verConcurso/?q={{c.idConcurso}}">
-            <span class="gallery-thumbnail">
-              <img class="img-responsive" src="{{MEDIA_URL}}{{ c.imagen }} " alt="...">
-            </span>
-            <span class="gallery-text">
-              <span class="gallery-title">{{ c.nombre }}</span>
-              {{ c.descripcion }} 
-            </span>
-          </a>
-        </li>
-		
-		{% endfor %}
-		
-		<!--     
+    <!-- Se presenta los concursos en li--> 
+
+    {% if lst_concursos %}
+
+      {% for c in lst_concursos%}
+      
+       <li class="isotope-item cat-1 cat-2 cat-4">
+            <a href="verConcurso/?q={{c.idConcurso}}">
+              <span class="gallery-thumbnail">
+                <img class="img-responsive" src="{{MEDIA_URL}}{{ c.imagen }} " alt="...">
+              </span>
+              <span class="gallery-text">
+                <span class="gallery-title">{{ c.nombre }}</span>
+                {{ c.descripcion }} 
+              </span>
+            </a>
+          </li>
+      
+      {% endfor %}
+
+
+    {% else %}
+      
+      <div style="background-color:white; color:white; margin:20px; padding:20px; display:block; visible:hidden;min-height:250px;min-width:75px;">
+
+      </div>
+
+    {% endif %}
+    
+    <!--     
         <li class="isotope-item cat-1 cat-2 cat-4">
           <a href="verConcurso">
             <span class="gallery-thumbnail">
@@ -96,11 +107,11 @@
                 
       </ul>
     </div>
-	
-	
-	<!-- Bloque de AREA DE INTERES-->
-	
-	<div class="container">
+  
+  
+  <!-- Bloque de AREA DE INTERES-->
+  <!--
+  <div class="container">
       <h3>Areas de inter&eacute;s</h3>
       <ul class="row list-inline gallery-list" id="isotope-container">
         <li class="isotope-item cat-1 cat-2 cat-4">
@@ -149,7 +160,8 @@
         </li>
       </ul>
     </div>
-	
+  -->
+  
 
     
 {% endblock %}
