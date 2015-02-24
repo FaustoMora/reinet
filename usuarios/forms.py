@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 """
 from django import forms
 from django.contrib.auth.models import User
@@ -27,6 +28,7 @@ from models import  *
 from django.contrib.auth.forms import *
 from django.contrib.auth.models import User
 from datetime import datetime
+#from phonenumber_field.modelfields import PhoneNumberField
 """
 class UsuarioForm(forms.ModelForm):
 	
@@ -64,8 +66,8 @@ class UsuarioForm2(UserCreationForm):
 		fields=['username','password1', 'password2']
 
 		widgets = {
-			'password1': forms.PasswordInput(attrs={'class':'form-control margin-bottom-xs', 'placeholder':'Password'}),
-			'password2': forms.PasswordInput(attrs={'class':'form-control margin-bottom-xs','placeholder':'Confirma Password'}),
+			'password1': forms.PasswordInput(attrs={'class':'form-control margin-bottom-xs', 'placeholder':'Contraseña'}),
+			'password2': forms.PasswordInput(attrs={'class':'form-control margin-bottom-xs','placeholder':'Confirmar Contraseña'}),
 			'username':forms.TextInput(attrs={'class':'form-control margin-bottom-xs'})
 			}
 
@@ -100,20 +102,21 @@ class PersonaForm(UserCreationForm):
 		model=Persona
 		exclude=['last_login','is_superuser','user_permissions','is_staff','groups'
 		,'date_joined','idpersona','is_active','fecha_nacimiento','password']
+
 		fields=['username','first_name','last_name', 'email','imagen','identificacion',
 		'cargo','actividad','areas_interes','password1','password2']
 		widgets={
-			'password': forms.PasswordInput(attrs={'class': 'form-control','placeholder':'Password'}),
+			'password': forms.PasswordInput(attrs={'class': 'form-control','placeholder':'Contraseña'}),
 			
 			'email': forms.TextInput(attrs={'class': 'form-control','placeholder':'Email'}),
 			
-			'identificacion': forms.TextInput(attrs={'class': 'form-control','placeholder':'Identificacion'}),
+			'identificacion': forms.TextInput(attrs={'class': 'form-control','placeholder':'Identificación'}),
 			
 			'cargo': forms.TextInput(attrs={'class': 'form-control','placeholder':'Cargo'}),
 			
 			'actividad': forms.TextInput(attrs={'class': 'form-control','placeholder':'Actividad'}),
 
-			'areas_interes': forms.TextInput(attrs={'class': 'form-control','placeholder':'Areas de Interes'}),
+			'areas_interes': forms.TextInput(attrs={'class': 'form-control','placeholder':'Areas de Interés'}),
 
 			'password1': forms.TextInput(attrs={'class': 'form-control','placeholder':'Password'}),
 			
@@ -121,7 +124,7 @@ class PersonaForm(UserCreationForm):
 	username=forms.CharField(label='Usuario',widget=forms.TextInput(attrs={'class': 'form-control','placeholder':'Username'}))
 	first_name=forms.CharField(label='Nombres',widget=forms.TextInput(attrs={'class': 'form-control','placeholder':'Nombre'}))
 	last_name=forms.CharField(label='Apellidos',widget=forms.TextInput(attrs={'class': 'form-control','placeholder':'Apellidos'}))
-	password2=forms.CharField(label='Confirmacion password',widget=forms.PasswordInput(attrs={'class': 'form-control','placeholder':'Confirmacion'}))
+	password2=forms.CharField(label='Confirmación de Contraseña',widget=forms.PasswordInput(attrs={'class': 'form-control','placeholder':'Confirmacion'}))
 	#imagen = forms.ImageField(label="Imagen Perfil",widget=forms.FileInput(attrs={'class':'btn btn-default','data-trigger':'focus','data-placement':'left','data-toggle':'popover'}))
 
 	def save(self, commit=True):
@@ -149,13 +152,13 @@ class PersonaEditarForm(forms.ModelForm):
 			
 			'email': forms.TextInput(attrs={'class': 'form-control','placeholder':'Email'}),
 			
-			'identificacion': forms.TextInput(attrs={'class': 'form-control','placeholder':'Identificacion'}),
+			'identificacion': forms.TextInput(attrs={'class': 'form-control','placeholder':'Identificación'}),
 			
 			'cargo': forms.TextInput(attrs={'class': 'form-control','placeholder':'Cargo'}),
 			
 			'actividad': forms.TextInput(attrs={'class': 'form-control','placeholder':'Actividad'}),
 
-			'areas_interes': forms.TextInput(attrs={'class': 'form-control','placeholder':'Areas de Interes'}),
+			'areas_interes': forms.TextInput(attrs={'class': 'form-control','placeholder':'Areas de Interés'}),
 
 		}
 
@@ -195,3 +198,70 @@ class ImagenPerfilForm(forms.ModelForm):
 	class Meta:
 		model=Persona
 		fields=['imagen']
+
+
+
+
+class InstitucionForm(UserCreationForm):
+
+	class Meta:
+		model=Institucion
+		exclude=['last_login','is_superuser','user_permissions','is_staff','groups'
+		,'date_joined','idinstitucion' ,'is_active','password','last_name']
+
+		fields=['username','first_name','nombre_corto','descripcion','mision','sitio_web',
+		'persona_que_registra','email','telefono','recursos','imagen','password1','password2']
+
+	username=forms.CharField(label='Usuario Institución',widget=forms.TextInput(attrs={'class': 'form-control','placeholder':'Username'}))
+	first_name=forms.CharField(max_length=50,label='Nombre de la Institución',widget=forms.TextInput(attrs={'class': 'form-control','placeholder':'Ingrese el nombre completo de su Institución'}))
+	nombre_corto=forms.CharField(label='Abreviatura',widget=forms.TextInput(attrs={'class': 'form-control','placeholder':'Nombre abreviado de la Institución'}))
+	descripcion = forms.CharField(label='Descripción',widget=forms.TextInput(attrs={'class': 'form-control','placeholder':'Ingrese una breve descripcion de la Institución'}))
+	mision = forms.CharField(label='Misión',widget=forms.TextInput(attrs={'class': 'form-control','placeholder':'Describa la Misión de su Institución'}))
+	sitio_web = forms.CharField(label='Sitio Web',widget=forms.TextInput(attrs={'class': 'form-control','placeholder':'URL del Sitio Web de su Institución'}))	
+	telefono = forms.CharField(label='Teléfono',widget=forms.TextInput(attrs={'class': 'form-control','placeholder':'Ingrese el número de teléfono de la Institución'}))
+	recursos = forms.CharField(label='Recursos',widget=forms.TextInput(attrs={'class': 'form-control','placeholder':'Recursos de la Institución'}))	
+	persona_que_registra=forms.CharField(label='Administrador de Institución',widget=forms.TextInput(attrs={'class': 'form-control','placeholder':'Dirección Email del Administrador de la Institución'}))
+	email=forms.CharField(label='Email de Administrador',widget=forms.TextInput(attrs={'class': 'form-control','placeholder':'Nombre del Usuario que administrará la Institución'}))
+	password2=forms.CharField(label='Confirmación de Contraseña',widget=forms.PasswordInput(attrs={'class': 'form-control','placeholder':'Confirmación'}))
+	#imagen = forms.ImageField(label="Imagen Perfil",widget=forms.FileInput(attrs={'class':'btn btn-default','data-trigger':'focus','data-placement':'left','data-toggle':'popover'}))
+
+	def save(self, commit=True):
+		user1=super(InstitucionForm, self).save(commit=False)
+		#user.idpersona='default'		
+		if commit:
+			user1.save()
+			
+		return user1
+
+
+class InstitucionEditarForm(forms.ModelForm):
+
+	class Meta:
+		model=Institucion
+		#exclude=['last_login','is_superuser','user_permissions','is_staff','groups'
+		#,'date_joined','idpersona','is_active','fecha_nacimiento','password','username','password1', 'password2']
+		fields=['first_name','nombre_corto','descripcion','mision','sitio_web',
+		'email','telefono','recursos','imagen']
+		
+	first_name=forms.CharField(max_length=50,label='Nombre de la Institución',widget=forms.TextInput(attrs={'class': 'form-control','placeholder':'Ingrese el nombre completo de su Institución'}))
+	nombre_corto=forms.CharField(label='Abreviatura',widget=forms.TextInput(attrs={'class': 'form-control','placeholder':'Nombre abreviado de la Institución'}))
+	descripcion = forms.CharField(label='Descripción',widget=forms.TextInput(attrs={'class': 'form-control','placeholder':'Ingrese una breve descripcion de la Institución'}))
+	mision = forms.CharField(label='Misión',widget=forms.TextInput(attrs={'class': 'form-control','placeholder':'Describa la Misión de su Institución'}))
+	sitio_web = forms.CharField(label='Sitio Web',widget=forms.TextInput(attrs={'class': 'form-control','placeholder':'URL del Sitio Web de su Institución'}))	
+	telefono = forms.CharField(label='Teléfono',widget=forms.TextInput(attrs={'class': 'form-control','placeholder':'Ingrese el número de teléfono de la Institución'}))
+	recursos = forms.CharField(label='Recursos',widget=forms.TextInput(attrs={'class': 'form-control','placeholder':'Recursos de la Institución'}))	
+	email=forms.CharField(label='Email de Administrador',widget=forms.TextInput(attrs={'class': 'form-control','placeholder':'Nombre del Usuario que administrará la Institución'}))
+
+
+	def clean(self):
+		return self.cleaned_data
+	"""
+	def save(self, commit=True):
+		#user=super(PersonaForm, self).save(commit=False)
+		#user.idpersona='default'
+		user.fecha_nacimiento='2012-12-12'
+		if commit:
+			user.save()
+			
+		return user
+		"""

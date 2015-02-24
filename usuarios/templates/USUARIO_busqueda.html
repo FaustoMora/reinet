@@ -12,7 +12,7 @@
               </li> -->
                <li>
                 <a href="/busqueda/">
-                  <i class="sign fa fa-lightbulb-o bg-blue"></i> Busqueda General<i class="fa fa-chevron-right pull-right"></i>
+                  <i class="sign fa fa-search bg-blue"></i> Búsqueda General<i class="fa fa-chevron-right pull-right"></i>
                 </a>  
               </li>
               <li>
@@ -23,7 +23,7 @@
 
               <li>
                 <a href="/busquedaDemanda/">
-                  <i class="sign fa fa-server bg-red"></i> Demanda <i class="fa fa-chevron-right pull-right"></i>
+                  <i class="sign fa fa-hand-o-up bg-red"></i> Demanda <i class="fa fa-chevron-right pull-right"></i>
                 </a>  
               </li>
 
@@ -120,7 +120,7 @@
                   {%for val in resultsUser%}
                   <li>
                     <p class="text-muted">
-                      <h4><a href="/verPerfil/?q={{val}}">{{ val.first_name|escape }}{{ val.last_name|escape }}</a>    
+                      <h4><a href="/verPerfil/?q={{val}}">{{ val.first_name|escape }} {{ val.last_name|escape }}</a>    
                       <p>Correo: {{val.email|escape}}</p>
                       <p>Username: {{val.username|escape}}</p></h4>
                     <div class="clearfix"></div>

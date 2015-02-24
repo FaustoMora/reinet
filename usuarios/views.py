@@ -305,8 +305,9 @@ def busqueda_view(request):
 		results2 = Demanda.objects.filter(qset).distinct()
 		results3 = Concurso.objects.filter(qset).distinct()
 		qset2=(
-			Q(first_name__icontains=name)
-
+			Q(first_name__icontains=name)|
+			Q(last_name__icontains=name)|
+			Q(username__icontains=name)
 			)
 		resultsUser=User.objects.filter(qset2).distinct()
 		print "usrs", resultsUser
@@ -408,8 +409,9 @@ def busqueda_usuario(request):
 	name = request.GET.get('q','')
 	if name:
 		qset=(
-			Q(first_name__icontains=name)
-
+			Q(first_name__icontains=name)|
+			Q(last_name__icontains=name)|
+			Q(username__icontains=name)
 			)
 		resultsUser=User.objects.filter(qset).distinct()
 	else:
@@ -422,3 +424,95 @@ def busqueda_usuario(request):
 
 	return render_to_response("USUARIO_busqueda.html",args,
 		context_instance = RequestContext(request))			
+
+
+"""VISTAS DE INSTITUCION"""
+
+def registerInst(request):
+	if request.method=='POST':
+		form1=InstitucionForm(request.POST, request.FILES)
+	
+		if form1.is_valid():
+			form1.save()
+			return HttpResponseRedirect('/ingresar/')
+		else:
+			print form1.is_valid()
+	else:
+		form1=InstitucionForm()
+
+	args={}
+	args.update(csrf(request))
+	for fi in form1:
+		print fi.id_for_label
+	args['form1']=form1
+	return render_to_response('USUARIO_creaInstitucion.html', args)
+
+@login_required(login_url='/ingresar/')
+def perfil_institucion(request):
+	id_session=request.session['id_user']
+	
+	id_institucion=request.session['id_institucion']
+	print id_session, id_institucion
+	user1=User.objects.get(id=id_session)
+	institucion1=Institucion.objects.get(idinstitucion=id_institucion)
+	args={}
+	args['usuario']=user1
+	args['institucion']=institucion1
+	
+	return render_to_response('USUARIO_perfilinstitucion.html',args,context_instance=RequestContext(request))
+
+
+def auth_institucion(request):
+	name=request.POST.get('Email', '')
+	password=request.POST.get('password', '')
+	user=auth.authenticate(username=name, password=password)
+		
+	if user is not None:
+		auth.login(request, user)
+		request.session['id_user']=request.user.id
+		user=User.objects.get(id=request.user.id)
+		#personas=Persona.objects.raw('SELECT * FROM persona WHERE user_ptr_id =%s',request.user.id)
+		institucion=Institucion.objects.get(user_ptr=user)
+		#p=personas[0]
+		ins=institucion
+		request.session['id_institucion']=ins.idinstitucion
+		#print p.idpersona
+		return HttpResponseRedirect('/perfilInst')
+	else:
+		return HttpResponseRedirect('/invalid')
+
+
+
+@login_required(login_url='/ingresar/')
+def editar_perfil_institucion(request):
+	id_session=request.session['id_user']
+	id_institucion=request.session['id_institucion']
+	args={}
+	if request.method == 'POST':
+		id_session=request.session['id_user']
+		id_institucion=request.session['id_institucion']
+		#user=User.objects.get(id=id_session)
+		institucion=Institucion.objects.get(idinstitucion=id_institucion)
+		#user_form = UserCreationForm(request.POST,  request.FILES,instance=user)
+		institucion_form = InstitucionEditarForm(request.POST, request.FILES, instance=institucion)
+		print "validacioneees", institucion_form.is_valid()
+		if  institucion_form.is_valid():
+			#user_form.save()
+			institucion_form.save()
+			return HttpResponseRedirect('/perfilInst/')
+		else:
+			#user=User.objects.get(id=id_session)
+			institucion=Institucion.objects.get(idinstitucion=id_institucion)
+			#user_form = UserCreationForm(instance=user)
+			institucion_form = InstitucionEditarForm(instance=institucion)
+			#args['userform']=user_form
+			args['institucionform']=institucion_form
+	else:
+		#user=User.objects.get(id=id_session)
+		institucion=Institucion.objects.get(idinstitucion=id_institucion)
+		#user_form = UserCreationForm(instance=user)
+		institucion_form = InstitucionEditarForm(instance=institucion)
+		#args['userform']=user_form
+		args['institucionform']=institucion_form
+	#return render_to_response('USUARIO_edit-profile.html', args)
+	return render_to_response('USUARIO_edit-profile-institucion.html', RequestContext(request,args))

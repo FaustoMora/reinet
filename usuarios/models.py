@@ -20,7 +20,7 @@ class Institucion(User):
     mision = models.CharField(max_length=900L)
     sitio_web = models.CharField(max_length=200L)
     persona_que_registra = models.CharField(max_length=200L)
-    idadministrador = models.IntegerField(db_column='idAdministrador') # Field name made lowercase.
+    #idadministrador = models.AutoField(primary_key=True,db_column='idAdministrador') # Field name made lowercase.
     telefono = models.CharField(max_length=15L)
     recursos = models.CharField(max_length=100L)
     miembros = models.ManyToManyField('Persona', through='InstitucionPersona')
