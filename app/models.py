@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 
 class Catalogo(models.Model):
     id = models.AutoField(primary_key=True, null=False, db_column="idCatalogo")
-    codigo = models.CharField(max_length=10,blank=True, db_column="codigoCatalogo")
+    codigo = models.CharField(max_length=30,blank=True, db_column="codigoCatalogo")
     descripcion = models.CharField(max_length=100L, blank=True,db_column="descripcionCatalogo")
     padre = models.ForeignKey('self', null=True, db_column='idcatalogopadre')
     class Meta:

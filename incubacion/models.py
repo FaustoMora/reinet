@@ -31,13 +31,16 @@ class Incubacion(models.Model):
     autor = models.ForeignKey(Institucion, null=False, db_column="institucionAutor", related_name="autor")
     invitaciones_consultores = models.ManyToManyField(Persona, through="InvitacionConsultor", related_name="invitaciones_consultores")
     consultores = models.ManyToManyField(Consultor, through="IncubacionConsultor")
+
     class Meta:
         db_table = "Incubacion"
+
 
 class IncubacionConsultor(models.Model):
     id = models.AutoField(db_column="idIncubacion_Consultor", primary_key=True, null=False)
     incubacion = models.ForeignKey(Incubacion, null=False, db_column="incubacion_idIncubacion")
     consultor = models.ForeignKey(Consultor, null=False, db_column="consultor_idConsultor")
+
     class Meta:
         db_table = "Incubacion_Consultor"
 
@@ -68,6 +71,7 @@ class Incubada(models.Model):
     oferta = models.ForeignKey(Oferta, null=False, db_column="oferta_idOferta")
     consultores = models.ManyToManyField(Consultor, through="ConsultorIncubada")
     milestones = models.ManyToManyField(Milestone, through="IncubadaMilestone")
+
     class Meta:
         db_table = "Incubada"
 
@@ -115,7 +119,7 @@ class Retroalimentacion(models.Model):
 class ConvocatoriaIncubacion(models.Model):
     id = models.AutoField(primary_key=True, null=False, db_column="ConvocatoriaIncubacion")
     incubacion = models.ForeignKey(Incubacion, null=False, db_column="incubacion_idIncubacion")
-    fechaInicio=models.DateField(null=False, db_column="fechaInicioConvocatoria")
+    fechaInicio = models.DateField(null=False, db_column="fechaInicioConvocatoria")
     fechaFin = models.DateField(null=False, db_column="fechaFinConvocatoria")
 
     class Meta:

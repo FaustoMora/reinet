@@ -9,6 +9,7 @@ from django.contrib.auth.forms import UserCreationForm
 from models import *
 from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
+from django.core.exceptions import ObjectDoesNotExist
 
 def index(request):
 	return render_to_response('USUARIO_index.html')
@@ -19,23 +20,24 @@ def ingresar(request):
 	return render_to_response('USUARIO_sign-in.html',c)
 
 def auth_view(request):
-	name=request.POST.get('Email', '')
-	password=request.POST.get('password', '')
-	user=auth.authenticate(username=name, password=password)
-		
-	if user is not None:
-		auth.login(request, user)
-		request.session['id_user']=request.user.id
-		user=User.objects.get(id=request.user.id)
-		#personas=Persona.objects.raw('SELECT * FROM persona WHERE user_ptr_id =%s',request.user.id)
-		persona=Persona.objects.get(user_ptr=user)
-		#p=personas[0]
-		p=persona
-		request.session['id_persona']=p.idpersona
-		#print p.idpersona
-		return HttpResponseRedirect('/perfil')
-	else:
-		return HttpResponseRedirect('/invalid')
+    name=request.POST.get('Email', '')
+    password=request.POST.get('password', '')
+    user=auth.authenticate(username=name, password=password)
+    if user is not None:
+        auth.login(request, user)
+        request.session['id_user']=request.user.id
+        user=User.objects.get(id=request.user.id)
+        try:
+            persona=Persona.objects.get(user_ptr=user)
+            p=persona
+            request.session['id_persona']=p.idpersona
+            redir='/perfil'
+        except ObjectDoesNotExist:
+            request.session['id_institucion']=Institucion.objects.get(user_ptr=request.user).idinstitucion
+            redir='/'
+        return HttpResponseRedirect(redir)
+    else:
+        return HttpResponseRedirect('/invalid')
 	
 def loggedin(request):
 	print request.session['id_user']
@@ -89,7 +91,6 @@ def create(request):
 @login_required(login_url='/ingresar/')
 def perfil_view(request):
 	id_session=request.session['id_user']
-	
 	id_persona=request.session['id_persona']
 	print id_session, id_persona
 	user1=User.objects.get(id=id_session)
