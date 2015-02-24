@@ -12,14 +12,15 @@ urlpatterns = patterns('',
         url(r'^loggedin[/]?$',loggedin,name='index'),
         url(r'^invalid[/]?$',invalid,name='index'),
         url(r'^register[/]?$',register,name='index'),
+        url(r'^register_success[/]?$',register_success,name='index'),
+
 
         url(r'^registerInst[/]?$',registerInst,name='index'),
         url(r'^perfilInst[/]?$',perfil_institucion),
-        url(r'^authInst[/]?$',auth_institucion,name='index'),
         url(r'^editarperfilInst[/]?$',editar_perfil_institucion),
 
-        url(r'^register_success[/]?$',register_success,name='index'),
-        url(r'^inicio_view[/]?$',inicio_view,name='index'),
+        url(r'^inicio_view[/]?$',verInicioF,name='index'),
+
         url(r'^$',index,name='index'),
         url(r'^perfil[/]?$',perfil_view),    
         url(r'^mensajes[/]?$',mensajes_view),   
@@ -34,5 +35,5 @@ urlpatterns = patterns('',
         url(r'^busquedaDemanda[/]?$',busqueda_demanda),
         url(r'^busquedaConcurso[/]?$',busqueda_concursos),
         url(r'^busquedaUsuario[/]?$',busqueda_usuario), 
-                
+  
 )
