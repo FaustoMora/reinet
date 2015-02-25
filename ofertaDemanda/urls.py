@@ -11,8 +11,16 @@ urlpatterns = patterns('',
         url(r'^crearDemanda[/]?$',crearDemanda,name='crearDemanda'),    
         url(r'^misDemandas[/]?$',misDemandas,name='misDemandas'),            
         url(r'^homeOfertas[/]?$',homeOfertas,name='homeOfertas'),
+<<<<<<< HEAD
         url(r'^search[/]?$',searchOfertaRed),
-        url(r'^searchDemanda[/]?$',searchDemandaRed),
+        url(r'^searchDemandaRed[/]?$',searchDemandaRed),
+        url(r'^searchMisDemanda[/]?$',searchMisDemanda),
+=======
+        url(r'^searchOfertaRed[/]?$',searchOfertaRed),
+        url(r'^searchDemandaRed[/]?$',searchDemandaRed),
+        url(r'^searchMisDemanda[/]?$',searchMisDemanda),
+        url(r'^searchMisOferta[/]?$',searchMisOferta),
+>>>>>>> c36d82b436ee69ed6f5cc9d2effc867ef16e19d7
         url(r'^crearOferta[/]?$',crearOferta,name='crearOferta'),         
         url(r'^verOferta[/]?$',verOferta,name='verOferta'),
         url(r'^editarOferta[/]?$',editarOferta,name='editarOferta'),   
