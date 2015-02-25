@@ -18,9 +18,7 @@ urlpatterns = patterns('',
         url(r'^registerInst[/]?$',registerInst,name='index'),
         url(r'^perfilInst[/]?$',perfil_institucion),
         url(r'^editarperfilInst[/]?$',editar_perfil_institucion),
-
         url(r'^inicio_view[/]?$',verInicioF,name='index'),
-
         url(r'^$',index,name='index'),
         url(r'^perfil[/]?$',perfil_view),    
         url(r'^mensajes[/]?$',mensajes_view),   

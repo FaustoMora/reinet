@@ -361,9 +361,11 @@ def busqueda_view(request):
 		results3 = []
 		resultsUser=[]
 	tipoB="Busqueda General"
+	linkTipo="busqueda"
 	args={
 		"results1": results1,"results2": results2,"results3": results3,
-		"resultsUser": resultsUser,"name":name, "tipoB":tipoB}	
+		"resultsUser": resultsUser,"name":name, "tipoB":tipoB,
+		"linkTipo":linkTipo}	
 
 	return render_to_response("USUARIO_busqueda.html",args,
 		context_instance = RequestContext(request))			
@@ -390,10 +392,12 @@ def busqueda_oferta(request):
 	else:
 		results1 = []
 	tipoB="Busqueda Ofertas"
+	linkTipo="busquedaOferta"
 	args={
 		"results1": results1,
 		 "name": name,
-		 "tipoB":tipoB}	
+		 "tipoB":tipoB,
+		 "linkTipo":linkTipo}	
 	return render_to_response("USUARIO_busqueda.html",args,
 		context_instance = RequestContext(request))			
 
@@ -419,10 +423,12 @@ def busqueda_demanda(request):
 	else:
 		results2 = []
 	tipoB="Busqueda Demanda"
+	linkTipo="busquedaDemanda"
 	args={
 		"results2": results2,
 		 "name": name,
-		 "tipoB":tipoB}	
+		 "tipoB":tipoB,
+		 "linkTipo":linkTipo}	
 	return render_to_response("USUARIO_busqueda.html",args,
 		context_instance = RequestContext(request))			
 
@@ -449,10 +455,12 @@ def busqueda_concursos(request):
 		results3 = []
 
 	tipoB="Busqueda Concursos"
+	linkTipo="busquedaConcurso"
 	args={
 		"results3": results3,
 		 "name": name,
-		 "tipoB":tipoB}	
+		 "tipoB":tipoB,
+		 "linkTipo":linkTipo}	
 		 
 	return render_to_response("USUARIO_busqueda.html",args,
 		context_instance = RequestContext(request))			
@@ -479,10 +487,12 @@ def busqueda_usuario(request):
 	else:
 		resultsUser = []
 	tipoB="Busqueda Usuarios"
+	linkTipo="busquedaUsuario"
 	args={
 		"resultsUser": resultsUser,
 		 "name": name,
-		 "tipoB":tipoB}
+		 "tipoB":tipoB,
+		 "linkTipo":linkTipo}
 
 	return render_to_response("USUARIO_busqueda.html",args,
 		context_instance = RequestContext(request))			
