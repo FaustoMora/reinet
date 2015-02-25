@@ -170,12 +170,12 @@ def searchMisOferta(request):
         busquedaMisOferta = request.GET['busquedaMisOferta']
         if not busquedaMisOferta:
             errors.append('Ingrese un termino a buscar')
-        elif len(busquedaOfertaRed)>25:
+        elif len(busquedaMisOferta)>25:
             errors.append('por favor ingrese un termino no mas de 25 caracteres.')
         else:
-            ofertas = Oferta.objects.filter(nombre__icontains=busquedaOfertaRed).exclude(idusuario = request.session['id_persona'])
+            ofertas = Oferta.objects.filter(nombre__icontains=busquedaMisOferta).filter(idusuario = request.session['id_persona'])
             return render(request, 'OFERTA_misOfertas.html',
-                {'ofertas':ofertas,'nombre':busquedaMisOferta,'buscarMisOfer':True})
+                {'ofertas':ofertas,'nombre':busquedaMisOferta,'buscarMisOfer':True,'mostrarOfertas':False})
         return render(request,'OFERTA_misOfertas.html',{'errors':errors})    
 
 
@@ -184,11 +184,11 @@ def searchMisDemanda(request):
     if 'busquedaMisDemanda' in request.GET:
         busquedaMisDemanda = request.GET['busquedaMisDemanda']
         if not busquedaMisDemanda:
-            errors.append('Ingrese un termino a buscar')
+            errors.append('Ingrese un termino a buscar')  
         elif len(busquedaMisDemanda)>25:
             errors.append('por favor ingrese un termino no mas de 25 caracteres.')
         else:
-            demandas = Demanda.objects.filter(nombre__icontains=busquedaMisDemanda).exclude(idusuario = request.session['id_persona'])
+            demandas = Demanda.objects.filter(nombre__icontains=busquedaMisDemanda).filter(idusuario = request.session['id_persona'])
             return render(request, 'DEMANDA_mis_Demanda.html',
-                {'demandas':demandas,'nombre':busquedaMisDemanda,'buscarMisDema':True})
+                {'demandas':demandas,'nombre':busquedaMisDemanda,'buscarMisDema':True,'mostrarDemanda':False})
         return render(request,'DEMANDA_mis_Demanda.html',{'errors':errors})
