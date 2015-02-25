@@ -1,5 +1,5 @@
 from django.db import models
-from usuarios.models import Persona
+from usuarios.models import *
 from django.contrib.auth.models import User
 from ofertaDemanda.models import Oferta
 
@@ -29,28 +29,6 @@ class Concurso(models.Model):
     class Meta:
         db_table = 'concursos'
         
-
-class Incubacion(models.Model):
-    idIncubacion = models.AutoField(db_column='idDetalleIncubacion', unique=True,primary_key=True)  # Field name made lowercase.
-    idusuario = models.ForeignKey(User, db_column='idusuario')
-    nombre = models.CharField(max_length=150L)
-    descripcion = models.CharField(max_length=500L)
-    dominio = models.CharField(max_length=200L)
-    subdominio = models.CharField(max_length=200L)
-    fecha_inicio=models.DateField(db_column='fechaInicio')
-    condiciones = models.CharField(max_length=300)
-    perfil_oferta = models.CharField(max_length=200)
-    tipo_oferta = models.IntegerField()
-    estado = models.IntegerField()
-    imagen = models.ImageField(upload_to='conInc_media')
-
-    def __unicode__(self):
-        return self.image.name
-
-    class Meta:
-        db_table = 'incubacion'
-
-
 class Inscripcion(models.Model):
     idInscripcion = models.AutoField(primary_key=True)
     idConcurso = models.ForeignKey(Concurso, db_column='idconcurso')
