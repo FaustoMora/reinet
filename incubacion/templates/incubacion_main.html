@@ -11,7 +11,7 @@
       </div>
     </div>
     <div class="container" >
-
+      {% ifequal tipo_user "institucion" %}
         <div class="col-sm-4 col-md-3">
             <div class="user-menu bottom-15">
             <ul>
@@ -21,8 +21,8 @@
                 </a>
             </ul>
           </div>
-
           </div>
+        {% endifequal %}
       <div class="row">
 
         <div class="col-sm-8 blog-summary-list" ng-controller="IncubacionController as InCtrl">

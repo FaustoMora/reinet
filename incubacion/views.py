@@ -62,6 +62,7 @@ class ListIncubaciones(Endpoint, BasicHttpAuthMixin):
 
 @decorators.login_required(login_url='/ingresar/')
 def homeIncubacion(request):
+    
     return render(request, 'incubacion_main.html')
 
 
