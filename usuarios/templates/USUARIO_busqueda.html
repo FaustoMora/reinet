@@ -83,7 +83,7 @@
                   
                   <li>
                     <p class="text-muted">
-                      <h4><a href="/misOfertas/">{{ val.nombre|escape }}</a>    
+                      <h4><a href="/verOferta/?q={{val.idOferta}}">{{ val.nombre|escape }}</a>    
                       <p>Descripción: {{val.descripcion|escape}}</p>
                       <p>Dominio: {{val.dominio|escape}}</p></h4>
                     <div class="clearfix"></div>
@@ -97,7 +97,7 @@
 
                   <li>
                     <p class="text-muted">
-                      <h4><a href="/misDemandas/">{{ val.nombre|escape }}</a>    
+                      <h4><a href="/verDemanda/?q={{val.idDemanda}}">{{ val.nombre|escape }}</a>    
                       <p>Descripción: {{val.descripcion|escape}}</p>
                       <p>Dominio: {{val.dominio|escape}}</p></h4>
                     <div class="clearfix"></div>
