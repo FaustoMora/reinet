@@ -9,6 +9,7 @@ from forms import *
 from models import *
 from ofertaDemanda.models import *
 from concursoIncubacion.models import *
+from incubacion.models import *
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
