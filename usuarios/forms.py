@@ -218,8 +218,8 @@ class InstitucionForm(UserCreationForm):
 	sitio_web = forms.CharField(label='Sitio Web',widget=forms.TextInput(attrs={'class': 'form-control','placeholder':'URL del Sitio Web de su Institución'}))	
 	telefono = forms.CharField(label='Teléfono',widget=forms.TextInput(attrs={'class': 'form-control','placeholder':'Ingrese el número de teléfono de la Institución'}))
 	recursos = forms.CharField(label='Recursos',widget=forms.TextInput(attrs={'class': 'form-control','placeholder':'Recursos de la Institución'}))	
-	persona_que_registra=forms.CharField(label='Administrador de Institución',widget=forms.TextInput(attrs={'class': 'form-control','placeholder':'Dirección Email del Administrador de la Institución'}))
-	email=forms.CharField(label='Email de Administrador',widget=forms.TextInput(attrs={'class': 'form-control','placeholder':'Nombre del Usuario que administrará la Institución'}))
+	persona_que_registra=forms.CharField(label='Administrador de Institución',widget=forms.TextInput(attrs={'class': 'form-control','placeholder':'Nombre del Usuario que administrará la Institución'}))
+	email=forms.CharField(label='Email de Administrador',widget=forms.TextInput(attrs={'class': 'form-control','placeholder':'Dirección Email del Administrador de la Institución'}))
 	password2=forms.CharField(label='Confirmación de Contraseña',widget=forms.PasswordInput(attrs={'class': 'form-control','placeholder':'Confirmación'}))
 	#imagen = forms.ImageField(label="Imagen Perfil",widget=forms.FileInput(attrs={'class':'btn btn-default','data-trigger':'focus','data-placement':'left','data-toggle':'popover'}))
 
