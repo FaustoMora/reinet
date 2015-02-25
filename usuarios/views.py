@@ -54,12 +54,12 @@ def auth_view(request):
 			p=persona
 			request.session['id_persona']=p.idpersona
 			request.session['tipo']="persona"
-			return HttpResponseRedirect('/perfil')
+			return HttpResponseRedirect('/inicio_view')
 		elif institucion is not None:
 			ins=institucion
 			request.session['id_institucion']=ins.idinstitucion
 			request.session['tipo']="institucion"
-			return HttpResponseRedirect('/perfilInst')	
+			return HttpResponseRedirect('/inicio_view')	
 		else:
 			return HttpResponseRedirect('/invalid')	
 
@@ -596,6 +596,8 @@ def verInicioF(request):
 	lst_demandas = Demanda.objects.all()
 	lst_ofertas = Oferta.objects.all()
 	lst_incubaciones = Incubacion.objects.all()
+	print "demandas",lst_demandas
+	print "ofertas", lst_ofertas
 	args={"lst_concursos":lst_concursos,"lst_demandas":lst_demandas,
 		 "lst_ofertas":lst_ofertas,"lst_incubaciones":lst_incubaciones,
 		 "usuario":user1}
