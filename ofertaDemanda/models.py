@@ -21,6 +21,8 @@ class Demanda(models.Model):
     perfil_cliente = models.CharField(max_length=500L, db_column='perfil_Cliente',null=True) # Field name made lowercase.
     soluciones_alternativas = models.CharField(max_length=500L, db_column='soluciones_Alternativas',null=True) # Field name made lowercase.
     importancia_solucion = models.CharField(max_length=500L, db_column='importancia_Solucion',null=True) # Field name made lowercase.
+    imagen=models.ImageField(upload_to='ofDem_media')
+    
     class Meta:
         db_table = 'demanda'
 
@@ -63,6 +65,7 @@ class Oferta(models.Model):
     cuadro_tendencias_relevantes = models.CharField(max_length=500L, db_column='cuadro_Tendencias_Relevantes', blank=True,null=True) # Field name made lowercase.
     estado_propiedad_intelectual = models.CharField(max_length=500L, db_column='estado_Propiedad_Intelectual', blank=True,null=True) # Field name made lowercase.
     evidencia_traccion = models.CharField(max_length=500L, db_column='evidencia_Traccion', blank=True,null=True) # Field name made lowercase.
+    imagen=models.ImageField(upload_to='ofDem_media')
     class Meta:
         db_table = 'oferta'
 

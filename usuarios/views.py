@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 # Create your views here.
 from django.shortcuts import render_to_response
 from django.db.models import Q
@@ -14,7 +15,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
 from django.views.decorators.csrf import csrf_protect
-
+from datetime import datetime
 
 def index(request):
 	return render_to_response('USUARIO_index.html')
@@ -63,7 +64,10 @@ def auth_view(request):
 			return HttpResponseRedirect('/invalid')	
 
 	else:
-		return HttpResponseRedirect('/invalid')
+		c={}
+		c['fallaLogin']="Usuario o Contraseña incorrectos"
+		c.update(csrf(request))
+		return render_to_response('USUARIO_sign-in.html',c)
 
 def loggedin(request):
 	print request.session['id_user']
@@ -159,7 +163,7 @@ def enviar_mensaje(request):
 					#receptor=Persona.objects.get(id_user)
 					mensaje.idEmisor=emisor
 					mensaje.idDestino=userReceptor
-					mensaje.fecha='2012-12-12'
+					mensaje.fecha=datetime.now()
 					mensaje.hora='12:00:00'
 					mensaje.leido='0'
 					mensaje.save()
@@ -282,33 +286,34 @@ def subir_imagen(request):
 @login_required(login_url='/ingresar/')
 def verPerfil(request):
 	idu = request.GET.get('q', '')
-	user1=User.objects.get(username = idu)
-	tipo = request.session['tipo']
-
-	if tipo == "persona":
-		id_persona=request.session['id_persona']
-		persona1=Persona.objects.get(idpersona=id_persona)
-		institucion1=None
-	elif tipo == "institucion":
-		id_institucion=request.session['id_institucion']
-		institucion1=Institucion.objects.get(idinstitucion=id_institucion)
-		persona1=None
-
-	args = {}
-	args['usuario']=user1
-	if persona1 is not None:
-		args['persona']=persona1	
-	else:
-		args['institucion']=institucion1
-	
-	return render_to_response('USUARIO_perfilOtro.html',args,context_instance=RequestContext(request))
-
-
+	try:
+		user1=User.objects.get(username = idu)
+		args={}
+		args['usuario']=user1
+		tipo = request.session['tipo']
+		try:
+			print "persona perfil otro"
+			persona1=Persona.objects.get(user_ptr=user1)
+			args['persona']=persona1
+			return render_to_response('USUARIO_perfilOtro.html',args,context_instance=RequestContext(request))
+		except:
+			institucion1=Institucion.objects.get(user_ptr=user1)
+			args['institucion']=institucion1
+			return render_to_response('USUARIO_perfilinstitucionOtro.html',args,context_instance=RequestContext(request))
+	except:
+		return HttpResponseRedirect('/RNNotFound/')	
 @login_required(login_url='/ingresar/')
 def verMensaje(request):
 	args = {}
-	id_persona=request.session['id_persona']
-	yo=Persona.objects.get(idpersona=id_persona)
+	tipo = request.session['tipo']
+	if tipo == "persona":
+		id_persona=request.session['id_persona']
+		yo=Persona.objects.get(idpersona=id_persona)
+		
+	elif tipo == "institucion":
+		id_institucion=request.session['id_institucion']
+		yo=Institucion.objects.get(idinstitucion=id_institucion)
+	
 	args['yo']=yo
 	try: 
 		idM = int(request.GET.get('q', ''))
@@ -316,11 +321,11 @@ def verMensaje(request):
 		print "mensaje",msj.id
 		user1=msj.idEmisor
 		#print "user",user1
-		persona=Persona.objects.get(user_ptr=user1)
+		#persona=Persona.objects.get(user_ptr=user1)
 		#print "persona",persona
 		args['msj']=msj
 		args['user1']=user1
-		args['persona']=persona
+		#args['persona']=persona
 		return render_to_response('USUARIO_verMensaje.html',args,context_instance=RequestContext(request))
 	except:
 		return HttpResponseRedirect("/mensajes/")
@@ -331,13 +336,14 @@ def verMensaje(request):
 @login_required(login_url='/ingresar/')
 @csrf_protect
 def busqueda_view(request):
+	"""
 	tipo = request.session['tipo']
 	if tipo == "persona":
 		id_persona=request.session['id_persona']
 		
 	elif tipo == "institucion":
 		id_institucion=request.session['id_institucion']
-	
+	"""
 	name = request.GET.get('q','')
 	print "funciona",name
 	if name:
@@ -365,7 +371,8 @@ def busqueda_view(request):
 	args={
 		"results1": results1,"results2": results2,"results3": results3,
 		"resultsUser": resultsUser,"name":name, "tipoB":tipoB,
-		"linkTipo":linkTipo}	
+		"linkTipo":linkTipo}
+	print resultsUser	
 
 	return render_to_response("USUARIO_busqueda.html",args,
 		context_instance = RequestContext(request))			

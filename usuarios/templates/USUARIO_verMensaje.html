@@ -44,18 +44,18 @@
           <div class="pm bottom-15">
             <div class="media">
               <a class="pull-left" href="#">
-                <img class="media-object" src="{{MEDIA_URL}}{{persona.imagen}}" alt="...">
+                <img class="media-object" src="{{MEDIA_URL}}{{msj.imgEm}}" alt="...">
               </a>
               <div class="media-body">
                 <p><a href="/verPerfil/?q={{msj.idEmisor}}">{{user1.first_name}} {{user1.last_name}} </a></p>
                 <p>
                   {{msj.txtMensaje}}
                 </p>
-              <!--   <ul class="text-muted list-inline">
-                  <li><i class="fa fa-clock-o"></i> 55 minutes ago</li>
-                  <li><i class="fa fa-trash-o"></i> <a href="#">Delete</a></li>
-                  <li><i class="fa fa-ban"></i> <a href="#">Block this user</a></li>
-                </ul> -->
+                 <ul class="text-muted list-inline">
+                  <li><i class="fa fa-clock-o"></i> {{msj.fecha}}</li>
+                 <!--  <li><i class="fa fa-trash-o"></i> <a href="#">Delete</a></li>
+                  <li><i class="fa fa-ban"></i> <a href="#">Block this user</a></li> -->
+                </ul> 
               </div>
             </div>
           </div>

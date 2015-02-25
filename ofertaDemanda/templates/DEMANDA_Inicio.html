@@ -18,15 +18,17 @@
     
     <div class="container">
       <div class="row">
-        <div class=" ">
-          <div class="row faq-cats">
-            <div class="col-xs-6 col-xs-offset-6 visible-xs">
-              <ul>
-                <li><i class="fa fa-home fa-2x"></i><a href="/misDemandas/">Visualizar mis Demandas</a></li>
-              </ul>
+
+     
+            <div class=" ">
+              <div class="row faq-cats">
+                <div class="col-xs-6 col-xs-offset-6 visible-xs">
+                  <ul>
+                    <li><i class="fa fa-home fa-2x"></i><a href="/misDemandas/">Visualizar mis Demandas</a></li>
+                  </ul>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
 
         <div class="col-md-6 col-sm-9">
         {%if errors%}
@@ -52,6 +54,7 @@
           </form><br />
         </div>
 
+     {% ifequal tipo_user "persona" %}
         <div class="col-md-6 col-sm-3 hidden-xs">
           <div class="row faq-cats">
             <div class="col-md-6 col-md-offset-6 col-sm-12">
@@ -61,6 +64,8 @@
             </div>
           </div>
         </div>
+
+          {% endifequal %}
       </div>
     </div>
 
@@ -71,7 +76,7 @@
          {% for c in lst_demandas %}
                 <div class="col-md-3 col-sm-6">
                     <div class="thumbnail">
-                      <img class="img-responsive" src="{{MEDIA_URL}}{{ c.imagen }} " alt="Oferta">
+                      <img class="img-responsive" src="{{MEDIA_URL}}{{c.imagen}} " alt="Oferta">
                       <div class="visit"><a href="verOferta"><i class="fa fa-question-circle"></i> Ver Demanda</a></div>
                       <div class="caption">
                         <h4>{{c.nombre}}</h4>

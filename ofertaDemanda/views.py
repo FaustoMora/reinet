@@ -15,9 +15,15 @@ from django.core.urlresolvers import reverse
 
 @login_required(login_url='/ingresar/') 
 def homeDemandas(request):
-    persona = Persona.objects.get(idpersona=request.session['id_persona'])
-    lst_demandas = Demanda.objects.filter(~Q(idusuario = request.session['id_persona']))[:8]
-    return render_to_response('DEMANDA_Inicio.html',{'lst_demandas': lst_demandas,'persona':persona},context_instance=RequestContext(request))
+    tipo_user = request.session['tipo']
+    print tipo_user
+    if tipo_user=="persona":
+        persona = Persona.objects.get(idpersona=request.session['id_persona'])
+        lst_demandas = Demanda.objects.filter(~Q(idusuario = request.session['id_user']))[:8]
+        return render_to_response('DEMANDA_Inicio.html',{'lst_demandas': lst_demandas,'persona':persona,'tipo_user':tipo_user},context_instance=RequestContext(request))
+    elif tipo_user=="institucion":
+        lst_demandas = Demanda.objects.all()[:8]
+    return render_to_response('DEMANDA_Inicio.html',{'lst_demandas': lst_demandas,'tipo_user':tipo_user},context_instance=RequestContext(request))
 
 @login_required(login_url='/ingresar/') 
 def verDemanda(request):
@@ -26,14 +32,20 @@ def verDemanda(request):
 @login_required(login_url='/ingresar/') 
 def misDemandas(request):
     persona = Persona.objects.get(idpersona=request.session['id_persona'])
-    lst_demandas = Demanda.objects.filter(idusuario = request.session['id_persona'])[:5]
+    lst_demandas = Demanda.objects.filter(idusuario = request.session['id_user'])[:5]
+    print lst_demandas
     return render_to_response('DEMANDA_mis_Demanda.html', {'lst_demandas' :lst_demandas,'persona':persona}, context_instance=RequestContext(request)) 
 
 @login_required(login_url='/ingresar/') 
 def homeOfertas(request):
-    persona = Persona.objects.get(idpersona=request.session['id_persona'])
-    lst_ofertas = Oferta.objects.filter(~Q(idusuario = request.session['id_persona']))[:8]
-    return render_to_response('OFERTA_Inicio2.html',{'lst_ofertas': lst_ofertas,'persona':persona},context_instance=RequestContext(request))
+    tipo_user = request.session['tipo']
+    if tipo_user=="persona":
+        persona = Persona.objects.get(idpersona=request.session['id_persona'])
+        lst_ofertas = Oferta.objects.filter(~Q(idusuario = request.session['id_user']))[:8]
+        return render_to_response('OFERTA_Inicio2.html',{'lst_ofertas': lst_ofertas,'persona':persona,'tipo_user':tipo_user},context_instance=RequestContext(request))
+    elif tipo_user=="institucion":
+        lst_ofertas = Oferta.objects.all()[:8]
+    return render_to_response('OFERTA_Inicio2.html',{'lst_ofertas': lst_ofertas,'tipo_user':tipo_user},context_instance=RequestContext(request))
 
 @login_required(login_url='/ingresar/')
 def crearOferta(request):
@@ -110,8 +122,10 @@ def crearDemanda(request):
         nuevaDemanda.idusuario=Persona.objects.get(idpersona=request.session['id_persona'])
         nuevaDemanda.estadoDemanda=1
         nuevaDemanda.save()
-        return HttpResponseRedirect('/misDemandas/',nuevaDemanda.idDemanda)
-
+        print "todo esta bien"
+        return HttpResponseRedirect('/misDemandas/')
+    else:
+        print "algo paso"
     args={}
     args.update(csrf(request))
     args['form']=form
@@ -121,7 +135,6 @@ def crearDemanda(request):
 def verOferta(request):
     return render_to_response('OFERTA_perfil.html')
 
-
 @login_required(login_url='/ingresar/') 
 def editarOferta(request):    
     return render_to_response('OFERTA_perfil.html')
@@ -130,7 +143,7 @@ def editarOferta(request):
 @login_required(login_url='/ingresar/') 
 def misOfertas(request):
     persona = Persona.objects.get(idpersona=request.session['id_persona'])
-    lst_ofertas = Oferta.objects.filter(idusuario = request.session['id_persona'])[:5]
+    lst_ofertas = Oferta.objects.filter(idusuario = request.session['id_user'])[:5]
     return render_to_response('OFERTA_misOfertas.html', {'lst_ofertas' :lst_ofertas,'persona':persona}, context_instance=RequestContext(request)) 
 
 def searchOfertaRed(request):

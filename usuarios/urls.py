@@ -34,5 +34,9 @@ urlpatterns = patterns('',
         url(r'^busquedaConcurso[/]?$',busqueda_concursos),
         url(r'^busquedaUsuario[/]?$',busqueda_usuario), 
         url(r'^terminosCondiciones[/]?$',terminos), 
-  
+        
+
+
+        url(r'^RNNotFound[/]?$',my_404_view), 
+        
 )

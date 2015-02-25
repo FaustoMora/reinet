@@ -21,7 +21,7 @@ class CrearOfertaForm(forms.ModelForm):
     
     class Meta:
         model = Oferta
-        fields = ['tipoOferta','nombre','descripcion','dominio','subdominio',
+        fields = ['tipoOferta','nombre','imagen','descripcion','dominio','subdominio',
         'palabras_claves','lugar_aplicacion','tiempo_inicio_disponible',
         'tiempo_fin_disponible','perfil_beneficiario','perfil_cliente',
         'soluciones_alternativas','propuesta_valor','cuadro_competidores',
@@ -414,7 +414,7 @@ class CrearDemandaForm(forms.ModelForm):
     
     class Meta:
         model = Demanda
-        fields = ['tipoDemanda','nombre','descripcion','dominio','subdominio',
+        fields = ['tipoDemanda','nombre','imagen','descripcion','dominio','subdominio',
         'palabras_claves','lugar_aplicacion','tiempo_inicio_disponible',
         'tiempo_fin_disponible',
         'perfil_beneficiario','perfil_cliente', 
