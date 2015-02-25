@@ -19,7 +19,7 @@
         <div class="row">
           <div class="col-sm-12">
             <!-- Remove the .animated class if you don't want things to move -->
-            <h1 class="animated slideInLeft"><span>Crear Ofertas</span></h1>
+            <h1 class="animated slideInLeft"><span>Editar Ofertas</span></h1>
           </div>
         </div>
       </div>
@@ -58,7 +58,7 @@
           <!-- Edit profile form -->
           <h3 class="hl">EDITAR OFERTA</h3>
 
-          <p class="text-muted">Por favor llena correctamente los campos para editar su oferta.</p>
+          <p class="text-muted">Por favor ingrese los datos principales para editar su Oferta</p>
           <hr>
           <h4 class="hl bottom-15">Informaci&oacute;n General</h4>
           
@@ -86,7 +86,7 @@
                            <label>{{ f.label }}</label>
                            {{ f }}
                         </div>
-                      {% elif f.label == "Tipo de la oferta" or f.label == "Nombre" or f.label == "Descripcion" or f.label == "Dominio" or f.label == "Subdominio" or f.label == "Palabras Claves" or f.label == "Lugar de Aplicacion"%}
+                      {% elif f.label == "Tipo de la oferta" or f.label == "Nombre" or f.label == "Imagen"  or f.label == "Descripcion" or f.label == "Dominio" or f.label == "Subdominio" or f.label == "Palabras Claves" or f.label == "Lugar de Aplicacion"%}
                         <div class="form-group">
                             <label>{{ f.label }}</label>
                              {{ f }}
@@ -116,9 +116,11 @@
                         </div>
                       {% endif %}
                   {% endfor %}
+                      <input type="submit" class="btn btn-green pull-right" value="Editar Oferta"></input>
+            
               </div>
+
             </div>
-              <input type="submit" class="btn btn-green pull-right" value="Crear Oferta"></input>
             </form>
           </div>
         </div>
