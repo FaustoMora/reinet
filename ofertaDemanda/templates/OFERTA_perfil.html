@@ -36,7 +36,7 @@
             <div class="col-sm-12">
               <ul class="text-muted list-inline">
                 <li><i class="fa fa-flag"></i> {{ oferta.estadoOferta }}</li>
-                <li><i class="fa fa-user"></i> <a href="profile.html">{{ oferta.idusuario }}</a></li>
+                <li><i class="fa fa-user"></i> <a href="/verPerfil/?q={{oferta.idusuario}}">{{ oferta.idusuario }}</a></li>
                 <li><i class="fa fa-calendar"></i> {{oferta.tiempo_inicio_disponible}}</li>
                 <li><i class="fa fa-comments-o"></i> 21 comments</li>
               </ul>
@@ -48,7 +48,7 @@
           <p class="blog-text">
             <div class="col-md-3 col-sm-6">
               <div class="thumbnail">
-                  <img src="{{ imagenes.enlace_imagen }}" class="img-responsive" alt="Oferta">
+                  <img src="/media/{{MEDIA_URL}}{{ oferta.imagen }}" class="img-responsive" alt="Oferta">
                   <div class="visit"><a href="OfertaVer"><i class="fa fa-question-circle"></i> Galeria</a></div>
               </div>
             </div>
