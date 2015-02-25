@@ -69,7 +69,7 @@
           </ul>
           
           
-            <form role="form" id="formulario" action="/crearOferta/" method="POST" enctype="multipart/form-data">         
+            <form role="form" id="formulario" action="/editarOferta/?q={{of.idOferta}}"  method="POST" enctype="multipart/form-data">         
               {% csrf_token %}
               {#{ form.as_p }#} 
               <div class="tab-content">

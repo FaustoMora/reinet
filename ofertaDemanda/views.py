@@ -176,22 +176,24 @@ def verOferta(request):
 @login_required(login_url='/ingresar/') 
 def editarOferta(request):
     id_persona=request.session['id_persona']
+    idof = int(request.GET.get('q', ''))
+    oferta=Oferta.objects.get(idOferta = idof)
     args={}
+    args["of"]=oferta
     if request.method == 'POST':
-        id_persona=request.session['id_persona']
-        persona=Persona.objects.get(idpersona=id_persona)
-        persona_form = EditarOfertaForm(request.POST, request.FILES, instance=persona)
+        id_user=request.session['id_user']
+        persona_form = EditarOfertaForm(request.POST, request.FILES, instance=oferta)
         if  persona_form.is_valid():
             persona_form.save()
-            return HttpResponseRedirect('/perfil/')
+            return HttpResponseRedirect('/misOfertas/')
         else:
-            persona=Persona.objects.get(idpersona=id_persona)
-            persona_form = EditarOfertaForm(instance=persona)
-            args['personaform']=persona_form
+            oferta=Oferta.objects.get(idOferta = idof)
+            persona_form = EditarOfertaForm(instance=oferta)
+            args['form']=persona_form
     else:
-        persona=Persona.objects.get(idpersona=id_persona)
-        persona_form = EditarOfertaForm(instance=persona)
-        args['personaform']=persona_form
+        oferta=Oferta.objects.get(idOferta = idof)
+        persona_form = EditarOfertaForm(instance=oferta)
+        args['form']=persona_form
     return render_to_response('OFERTA_Editar_Oferta.html', RequestContext(request,args))
 
 @login_required(login_url='/ingresar/') 
