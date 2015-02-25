@@ -105,7 +105,7 @@
           <p>Has buscado por: <strong>{{ nombre }}</strong></p>
             {% if demandas %}
                 <p>Encontrado {{ demandas|length }} Demandas {{ ofertas|pluralize }}.</p>
-                {% for ofert in demandas %}
+                {% for c in demandas %}
 
                     <div class="col-md-3 col-sm-6">
                         <div class="thumbnail">
