@@ -326,6 +326,7 @@ def verMensaje(request):
 		args['msj']=msj
 		args['user1']=user1
 		#args['persona']=persona
+		
 		return render_to_response('USUARIO_verMensaje.html',args,context_instance=RequestContext(request))
 	except:
 		return HttpResponseRedirect("/mensajes/")

@@ -61,12 +61,15 @@
           </div>
           <div class="message-answer">
             <img src="{{MEDIA_URL}}{{yo.imagen}}" alt="..." class="hidden-xs">
-            <form role="form">
+            <form role="form" method="POST" action="/enviarmensaje/">
+              {%csrf_token%}
               <div class="form-group">
-                <label for="message" class="sr-only">Message</label>
-                <textarea class="form-control" rows="3" id="message" placeholder="Use this form to send your answer"></textarea>
+                <input id="id_recibe" name="recibe" type="hidden" value="{{msj.idEmisor}}"/>
+                <input name="asunto" id="id_asunto" type="hidden" value="{{msj.asunto}}"/>
+                <label for="message" class="sr-only">Mensaje</label>
+                <textarea class="form-control" rows="3" id="id_txtMensaje" name="txtMensaje" placeholder="Usa este espacio para tu respuesta"></textarea>
               </div>
-              <button type="button" class="btn btn-green">Send message</button>
+              <button type="submit" class="btn btn-green">Responder</button>
             </form>
             <div class="clearfix"></div>
           </div>
