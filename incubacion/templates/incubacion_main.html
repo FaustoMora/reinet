@@ -11,15 +11,17 @@
       </div>
     </div>
     <div class="container" >
+
         <div class="col-sm-4 col-md-3">
             <div class="user-menu bottom-15">
             <ul>
               <li>
-                <a href="#/institucion/incubaciones/crear">
+                <a href="{% url 'incubacion.views.crearIncubacion' %}">
                   <i class="sign fa fa-plus bg-amethyst"></i>Crear Incubacion
-                </a>  
+                </a>
             </ul>
           </div>
+
           </div>
       <div class="row">
 
@@ -32,7 +34,7 @@
               <h4 ng-class="{'new-story':inc.isToday(inc.fechaInicio)}"><a href="./{{ inc.id }}">{{ inc.nombre }}</a></h4>
               <ul class="text-muted list-inline">
                 <li><i class="fa fa-calendar"></i> {{ inc.fechaInicio|date }}</li>
-                <li><i class="fa fa-tasks"></i> 5 Incubadas</li>
+                <li><i class="fa fa-tasks"></i> {{ inc.ofertasIncubadas }} Incubadas</li>
               </ul>
               <hr>
               <p class="blog-text">
@@ -42,6 +44,10 @@
               <p class="tags">
                 <a href="" ng-repeat="tipo in inc.tipoOfertas">{{ tipo.codigo|lowercase }}</a>
               </p>
+            </div>
+            <br/>
+            <div class="alert alert-danger alert-dismissable" ng-show="InCtrl.incubaciones.length==0">
+                <p>No hay ninguna Incubaci&oacute;n disponible</p>
             </div>
             {% endverbatim %}
           <!-- Pagination -->

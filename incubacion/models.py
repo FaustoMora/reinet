@@ -31,10 +31,14 @@ class Incubacion(models.Model):
     autor = models.ForeignKey(Institucion, null=False, db_column="institucionAutor", related_name="autor")
     invitaciones_consultores = models.ManyToManyField(Persona, through="InvitacionConsultor", related_name="invitaciones_consultores")
     consultores = models.ManyToManyField(Consultor, through="IncubacionConsultor")
+    imagen = models.ImageField(upload_to='incubacion_media',db_column="imagenIncubacion",null=True)
 
     class Meta:
         db_table = "Incubacion"
 
+    def countIncubadas(self):
+        list = self.incubadas.all()
+        return len(list)
 
 class IncubacionConsultor(models.Model):
     id = models.AutoField(db_column="idIncubacion_Consultor", primary_key=True, null=False)
@@ -67,7 +71,7 @@ class Milestone(models.Model):
 
 class Incubada(models.Model):
     id = models.AutoField(primary_key=True, null=False, db_column="idIncubada")
-    incubacion = models.ForeignKey(Incubacion, null=False, db_column="incubacion_id_incubacion")
+    incubacion = models.ForeignKey(Incubacion, null=False, db_column="incubacion_id_incubacion",related_name="incubadas")
     oferta = models.ForeignKey(Oferta, null=False, db_column="oferta_idOferta")
     consultores = models.ManyToManyField(Consultor, through="ConsultorIncubada")
     milestones = models.ManyToManyField(Milestone, through="IncubadaMilestone")
