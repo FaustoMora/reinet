@@ -21,7 +21,26 @@ def homeDemandas(request):
 
 @login_required(login_url='/ingresar/') 
 def verDemanda(request):
-    return render_to_response('DEMANDA_perfil.html')
+    iddem = int(request.GET.get('q', ''))
+    demanda=Demanda.objects.get(idDemanda = iddem)
+    imagenes= ImagenDemanda.objects.all().filter(idDemanda = iddem)
+    demandaUsuario=Demanda.objects.get(idDemanda = iddem).idusuario.id
+	
+    args = {}
+    args['demanda'] = demanda
+
+    if (demandaUsuario == request.session['id_user']):
+	    val = True;
+    else:
+	    val = False;
+    print "Probado"
+    print demandaUsuario
+    print request.session['id_user']
+    print val
+    args['val'] = val
+    args['imagenes'] = imagenes
+    args['nums'] = range(len(imagenes))
+    return render_to_response('DEMANDA_perfil.html', args)
 
 @login_required(login_url='/ingresar/') 
 def misDemandas(request):
