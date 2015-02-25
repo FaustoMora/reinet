@@ -174,8 +174,46 @@ def verOferta(request):
     return render_to_response('OFERTA_perfil.html', args)
 
 @login_required(login_url='/ingresar/') 
-def editarOferta(request):    
-    return render_to_response('OFERTA_perfil.html')
+def editarOferta(request):
+    id_persona=request.session['id_persona']
+    args={}
+    if request.method == 'POST':
+        id_persona=request.session['id_persona']
+        persona=Persona.objects.get(idpersona=id_persona)
+        persona_form = EditarOfertaForm(request.POST, request.FILES, instance=persona)
+        if  persona_form.is_valid():
+            persona_form.save()
+            return HttpResponseRedirect('/perfil/')
+        else:
+            persona=Persona.objects.get(idpersona=id_persona)
+            persona_form = EditarOfertaForm(instance=persona)
+            args['personaform']=persona_form
+    else:
+        persona=Persona.objects.get(idpersona=id_persona)
+        persona_form = EditarOfertaForm(instance=persona)
+        args['personaform']=persona_form
+    return render_to_response('OFERTA_Editar_Oferta.html', RequestContext(request,args))
+
+@login_required(login_url='/ingresar/') 
+def editarDemanda(request):
+    id_persona=request.session['id_persona']
+    args={}
+    if request.method == 'POST':
+        id_persona=request.session['id_persona']
+        persona=Persona.objects.get(idpersona=id_persona)
+        persona_form = EditarDemandaForm(request.POST, request.FILES, instance=persona)
+        if  persona_form.is_valid():
+            persona_form.save()
+            return HttpResponseRedirect('/perfil/')
+        else:
+            persona=Persona.objects.get(idpersona=id_persona)
+            persona_form = EditarDemandaForm(instance=persona)
+            args['personaform']=persona_form
+    else:
+        persona=Persona.objects.get(idpersona=id_persona)
+        persona_form = EditarDemandaForm(instance=persona)
+        args['personaform']=persona_form
+    return render_to_response('DEMANDA_Editar_Demanda.html', RequestContext(request,args))
 
 
 @login_required(login_url='/ingresar/') 
