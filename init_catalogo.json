@@ -1,0 +1,191 @@
+[
+  {
+    "model": "app.catalogo",
+    "pk": 1,
+    "fields": {
+      "codigo": "ALCANCE_INCUBACION",
+      "descripcion": "Alcance de Incubacion",
+      "padre":null
+    }
+  },
+  {
+    "model": "app.catalogo",
+    "pk": 2,
+    "fields": {
+      "codigo": "INSTITUCION",
+      "descripcion": "Alcance Incubacion Institucion",
+      "padre":1
+    }
+  },
+  {
+    "model": "app.catalogo",
+    "pk": 3,
+    "fields": {
+      "codigo": "GRUPO",
+      "descripcion": "Alcance de Incubacion Grupo",
+      "padre":1
+    }
+  },
+  {
+    "model": "app.catalogo",
+    "pk": 4,
+    "fields": {
+      "codigo": "TODOS",
+      "descripcion": "Alcance de Incubacion Todos",
+      "padre":1
+    }
+  },
+  {
+    "model": "app.catalogo",
+    "pk": 5,
+    "fields": {
+      "codigo": "INCUBACION_ESTADO",
+      "descripcion": "Estado de Incubacion",
+      "padre":null
+    }
+  },
+  {
+    "model": "app.catalogo",
+    "pk": 6,
+    "fields": {
+      "codigo": "TERMINADA",
+      "descripcion": "Estado Terminada de Incubacion",
+      "padre":5
+    }
+  },
+  {
+    "model": "app.catalogo",
+    "pk": 7,
+    "fields": {
+      "codigo": "SUSPENDIDA",
+      "descripcion": "Estado de Incubacion",
+      "padre":5
+    }
+  },
+  {
+    "model": "app.catalogo",
+    "pk": 8,
+    "fields": {
+      "codigo": "HABILITADA",
+      "descripcion": "Estado de Incubacion",
+      "padre":5
+    }
+  },
+  {
+    "model": "app.catalogo",
+    "pk": 9,
+    "fields": {
+      "codigo": "TIPOS_OFERTA",
+      "descripcion": "Tipos de Ofertas",
+      "padre":null
+    }
+  },
+  {
+    "model": "app.catalogo",
+    "pk": 10,
+    "fields": {
+      "codigo": "EMPRENDIMIENTO",
+      "descripcion": "Tipo de Oferta Emprendimiento",
+      "padre":9
+    }
+  },
+  {
+    "model": "app.catalogo",
+    "pk": 11,
+    "fields": {
+      "codigo": "TECNOLOGIA",
+      "descripcion": "Tipo de Oferta Tecnologia",
+      "padre":9
+    }
+  },
+  {
+    "model": "app.catalogo",
+    "pk": 12,
+    "fields": {
+      "codigo": "PROTOTIPO",
+      "descripcion": "Tipo de Oferta Prototipo",
+      "padre":9
+    }
+  },
+  {
+    "model": "app.catalogo",
+    "pk": 13,
+    "fields": {
+      "codigo": "ESTADO_SOLICITUD",
+      "descripcion": "estado de solicitud",
+      "padre":null
+    }
+  },
+  {
+    "model": "app.catalogo",
+    "pk": 14,
+    "fields": {
+      "codigo": "PENDIENTE",
+      "descripcion": "estado pendiente solicitud",
+      "padre":13
+    }
+  },
+  {
+    "model": "app.catalogo",
+    "pk": 15,
+    "fields": {
+      "codigo": "ACEPTADA",
+      "descripcion": "estado Aceptada solicitud",
+      "padre":13
+    }
+  },
+  {
+    "model": "app.catalogo",
+    "pk": 16,
+    "fields": {
+      "codigo": "CANCELADA",
+      "descripcion": "estado Cancelada solicitud",
+      "padre":13
+    }
+  },
+  {
+    "model": "app.catalogo",
+    "pk": 17,
+    "fields": {
+      "codigo": "RECHAZADA",
+      "descripcion": "estado Rechazada solicitud",
+      "padre":13
+    }
+  },
+  {
+    "model": "app.catalogo",
+    "pk": 18,
+    "fields": {
+      "codigo": "PRIORIDAD",
+      "descripcion": "Estados de Prioridad",
+      "padre":null
+    }
+  },
+  {
+    "model": "app.catalogo",
+    "pk": 19,
+    "fields": {
+      "codigo": "ALTA",
+      "descripcion":"Estados alto de Prioridad",
+      "padre":18
+    }
+  },
+  {
+    "model": "app.catalogo",
+    "pk": 20,
+    "fields": {
+      "codigo": "MEDIA",
+      "descripcion": "Estados medio de Prioridad",
+      "padre":18
+    }
+  },
+  {
+    "model": "app.catalogo",
+    "pk": 21,
+    "fields": {
+      "codigo": "BAJA",
+      "descripcion": "Estados bajo de Prioridad",
+      "padre":18
+    }
+  } 
+]
