@@ -161,6 +161,12 @@ class PersonaEditarForm(forms.ModelForm):
 
 		}
 
+	first_name=forms.CharField(label='Nombres',widget=forms.TextInput(attrs={'class': 'form-control','placeholder':'Nombre'}))
+	last_name=forms.CharField(label='Apellidos',widget=forms.TextInput(attrs={'class': 'form-control','placeholder':'Apellidos'}))
+	email=forms.EmailField(label='Correo Electrónico',widget=forms.TextInput(attrs={'class': 'form-control','placeholder':'Ingrese su dirección de Correo electrónico'}))	
+	identificacion=forms. IntegerField(label='Identificación',widget=forms.TextInput(attrs={'class': 'form-control','pattern':"[0-9]{1,15}",'placeholder':'Número de cédula o pasaporte'}))	
+	
+
 	def clean(self):
 		return self.cleaned_data
 	"""
