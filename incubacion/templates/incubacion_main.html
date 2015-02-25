@@ -30,8 +30,8 @@
               <input type="text" placeholder="Buscar...." ng-model="buscarInc" class="form-control">
           </div>
           <!-- First blog post -->{% verbatim %}
-            <div class="blog-summary" ng-repeat=" inc in InCtrl.incubaciones|filter:buscarInc">
-              <h4 ng-class="{'new-story':inc.isToday(inc.fechaInicio)}"><a href="./{{ inc.id }}">{{ inc.nombre }}</a></h4>
+            <div class="blog-summary" ng-repeat=" inc in InCtrl.incubaciones|filter:buscarInc |orderBy:inc.fecha:reverse">
+              <h4 ng-class="{'new-story':inc.isToday(inc.fechaInicio)}"><a href="./incubacion/{{ inc.id }}">{{ inc.nombre }}</a></h4>
               <ul class="text-muted list-inline">
                 <li><i class="fa fa-calendar"></i> {{ inc.fechaInicio|date }}</li>
                 <li><i class="fa fa-tasks"></i> {{ inc.ofertasIncubadas }} Incubadas</li>

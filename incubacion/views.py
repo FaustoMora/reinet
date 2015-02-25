@@ -88,4 +88,12 @@ def createIncubacion(request):
         y = TiposOfertasIncubacion()
         y.incubacion=i
         y.tipo = Catalogo.objects.get(id=int(a))
+        y.save()
     return HttpResponseRedirect('/incubacion')
+
+@decorators.login_required(login_url='/ingresar/')
+def incubacionDetails(request,identifier):
+    i = Incubacion.objects.get(id=int(identifier))
+    context = {"incubacion":i,}
+
+    return render(request,"incubacion_institucion.html",context)

@@ -4,7 +4,7 @@ redInn.controller('IncubacionController',['$scope','Incubacion',function($scope,
     this.incubaciones = Incubacion.query();
 
     this.isToday = function(fecha){
-        return fecha = Date.now();
+        return Date(fecha) == Date.now();
     }
 }])
 
