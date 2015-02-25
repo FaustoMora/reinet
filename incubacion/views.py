@@ -1,11 +1,13 @@
 from django.core.exceptions import FieldError
 from django.shortcuts import render
 from django.core import serializers
-from django.http import HttpResponse, Http404,HttpResponseNotFound
+from django.http import HttpResponse, Http404,HttpResponseNotFound,HttpResponseRedirect
 from django.contrib.auth import decorators
+from django.utils.dateparse import parse_date
+from app.models import Catalogo
 from ofertaDemanda.models import Oferta
 from usuarios.models import Institucion, Persona
-from incubacion.models import Incubacion, Incubada
+from incubacion.models import Incubacion, Incubada, TiposOfertasIncubacion
 from restless.modelviews import Endpoint
 from restless.auth import BasicHttpAuthMixin,login_required
 from restless.models import serialize
@@ -52,7 +54,10 @@ class ListIncubaciones(Endpoint, BasicHttpAuthMixin):
                     'codigo',
                     'descripcion',
                 ]
-            ))])
+            )),
+            ('ofertasIncubadas',
+             lambda a: a.countIncubadas()
+            )])
 
 
 @decorators.login_required(login_url='/ingresar/')
@@ -62,4 +67,25 @@ def homeIncubacion(request):
 
 @decorators.login_required(login_url='/ingresar/')
 def crearIncubacion(request):
-    return render()
+    return render(request, 'crear_incubacion.html')
+
+@decorators.login_required(login_url='/ingresar/')
+def createIncubacion(request):
+    i = Incubacion()
+    i.nombre = request.POST.get('nombre')
+    i.descripcion = request.POST.get('descripcion')
+    i.condiciones = request.POST.get('condiciones')
+    i.perfiles = request.POST.get('perfiles')
+    #i.alcance = Catalogo.objects.get(request.POST.get("alcanc"))
+    i.alcance = Catalogo.objects.get(id=2)
+    temp = request.POST.getlist('tipoOf')
+    autor = Institucion.objects.get(idinstitucion=request.session['id_institucion'])
+    i.autor = autor
+    i.estado = Catalogo.objects.get(id=8)
+    i.save()
+
+    for a in temp:
+        y = TiposOfertasIncubacion()
+        y.incubacion=i
+        y.tipo = Catalogo.objects.get(id=int(a))
+    return HttpResponseRedirect('/incubacion')

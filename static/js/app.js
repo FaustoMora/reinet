@@ -12,3 +12,13 @@ redInn.controller('IncubacionController',['$scope','Incubacion',function($scope,
 redInn.factory('Incubacion',['$resource',function($resource){
     return $resource('../list-incubaciones',{},{query:{method:"GET",params:{},isArray:true}});
 }])
+
+redInn.controller('crearIncubacionController',['$scope','$filter',function($scope) {
+    this.fecha=new Date();
+    this.nombre=null;
+    this.descripcion=null;
+    this.condiciones=null;
+    this.perfiles=null;
+    this.tipos={};
+    this.alcance=0;
+}])
