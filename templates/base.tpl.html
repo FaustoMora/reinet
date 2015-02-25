@@ -1,5 +1,6 @@
   <!DOCTYPE html>
 <html lang="en">
+<html lang="en" ng-app="redInn">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -65,7 +66,11 @@
             <a href="{% url 'concursoIncubacion.views.homeConcursos' %}" >CONCURSOS </a>
           </li>
           <li class="dropdown hidden-sm">
+<<<<<<< HEAD
             <a href="#">INCUBACIONES </a>
+=======
+            <a href="{% url 'incubacion.views.homeIncubacion' %}">INCUBACIONES </a>
+>>>>>>> b06e9c1c7ecfc52aca8a86f41823da2fd493b177
           </li>
           <li class="visible-xs"><a href="{% url 'usuarios.views.ingresar' %}">Sign In</a></li>
           <li  class="visible-xs"><a href="#">Sign Out</a></li>
@@ -139,8 +144,8 @@
             <p>
               Guayaquil, GYE<br />
               Nueva Prosperina<br />
-              Phone: +0 000 000 00 00<br />             
-              Email: <a href="#">admin@espol.edu.ec</a>
+              Tel&eacute;fono: 042123456<br />             
+              Email: <a href="#">adguale@espol.edu.ec</a>
             </p>
           </div>
         </div>
@@ -151,9 +156,9 @@
           <div class="content social">
             <p>Mantente en contacto:</p>
             <ul>
-              <li><a href="#"><i class="fa fa-twitter"></i></a>
+              <li><a href="twitter.com"><i class="fa fa-twitter"></i></a>
               </li>
-              <li><a href="#"><i class="fa fa-facebook"></i></a>
+              <li><a href="facebook.com"><i class="fa fa-facebook"></i></a>
               </li>
               <li><a href="#"><i class="fa fa-pinterest"></i></a>
               </li>
@@ -201,7 +206,7 @@
     <div class="container">
       <div class="row">
         <div class="col-sm-12">
-          <p>&copy; REI-NET 2014. <a href="#">Políticas de Privacidad</a> | <a href="#">T&eacute;rminos del servicio</a></p>
+          <p>&copy; REI-NET 2014. <a href="/terminosCondiciones/">Políticas de Privacidad y T&eacute;rminos del servicio</a></p>
         </div>
       </div>
     </div>
@@ -213,8 +218,10 @@
   <script src="{% static 'js/bootstrap.min.js' %}"></script>
   <script src="{% static 'js/custom.js' %}"></script>
   <script src="{% static 'js/scrolltopcontrol.js' %}"></script><!-- Scroll to top javascript -->
-  <!--<script src="{% static 'js/angular.js' %}"></script>
-  <script src="js/angular-route.js"></script>
-  <script src="js/app.js"></script>-->
+  <script src="{% static 'js/angular.js' %}"></script>
+  <script src="{% static 'js/angular-route.js'%}"></script>
+  <script src="{% static 'js/angular-resource.js'%}"></script>
+  <script src="{% static 'js/angular-animate.js'%}"></script>
+  <script src="{% static 'js/app.js'%}"></script>
 </body>
 </html>
