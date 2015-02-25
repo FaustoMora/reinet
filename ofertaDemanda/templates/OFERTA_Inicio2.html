@@ -79,6 +79,7 @@
                         <h4>{{c.nombre}}</h4>
                         <div class="rating">
                             {{c.calificacionGeneral}}
+                            <br/>
                             <i class="fa fa-star"></i> 
                             <i class="fa fa-star"></i> 
                             <i class="fa fa-star"></i> 
@@ -86,9 +87,9 @@
                             <i class="fa fa-star"></i>
                           </div>
                         <ul class="text-muted list-inline">
-                          <li><i class="fa fa-user"></i> <a href="#">Administrator {{c.idusuario}}</a></li>
+                          <li><i class="fa fa-user"></i> <a href="#">{{c.idusuario}}</a></li>
                           <li><i class="fa fa-calendar"></i> {{c.tiempo_inicio_disponible}}</li>
-                          <li><i class="fa fa-comments-o"></i> 6 comments</li>
+                          
                         </ul>
                           
                         <p>{{c.descripcion}}</p>
@@ -118,9 +119,9 @@
                                 <i class="fa fa-star"></i>
                               </div>
                             <ul class="text-muted list-inline">
-                              <li><i class="fa fa-user"></i> <a href="#">Administrator {{c.idusuario}}</a></li>
+                              <li><i class="fa fa-user"></i> <a href="#">{{c.idusuario}}</a></li>
                               <li><i class="fa fa-calendar"></i> {{c.tiempo_inicio_disponible}}</li>
-                              <li><i class="fa fa-comments-o"></i> 6 comments</li>
+                              
                             </ul>
                               
                             <p>{{c.descripcion}}</p>
