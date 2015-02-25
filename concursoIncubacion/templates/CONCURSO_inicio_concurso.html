@@ -22,15 +22,17 @@
     <div class="row"> 
       <div class="col-sm-12">
         {% ifequal tipo_user "institucion" %}
-          <ul class="row list-inline gallery-list" id="isotope-container">
-            <li class="isotope-item cat-3 cat-1">
-              <a href="crearConcurso">
-                <span class="gallery-text">
-                  <span class="gallery-title"> + Crear Concurso</span>
-                </span>
-              </a>
-            </li>
-          </ul>
+                  <div class="col-sm-4 col-md-3">
+            <div class="user-menu bottom-15">
+            <ul>
+              <li>
+                <a href="#/institucion/incubaciones/crear">
+                  <i class="sign fa fa-plus bg-amethyst"></i>Crear Incubacion
+                </a> 
+                </li> 
+            </ul>
+          </div>
+          </div>
         {% endifequal %}
       </div>
     
@@ -59,8 +61,12 @@
 
     <div class="container">
 
-
-      <h3>MIS CONCURSOS</h3>
+    {% ifequal tipo_user "institucion" %}
+    <h3>MIS CONCURSOS</h3>
+    {% endifequal %}
+    {% ifequal tipo_user "persona" %}
+    <h3>CONCURSOS</h3>
+    {% endifequal %}
       <ul class="row list-inline gallery-list" id="isotope-container">
       
     <!-- Se presenta los concursos en li--> 
@@ -94,12 +100,109 @@
 
     {% endif %}
     
-  
+    <!--     
+        <li class="isotope-item cat-1 cat-2 cat-4">
+          <a href="verConcurso">
+            <span class="gallery-thumbnail">
+              <img class="img-responsive" src="../../static/img/works1.jpg" alt="...">
+            </span>
+            <span class="gallery-text">
+              <span class="gallery-title">Proyecto Manhattan</span>
+              Nullam id ipsum varius, tincidunt odio nec, placerat enim.
+            </span>
+          </a>
+        </li>
+        <li class="isotope-item cat-2 cat-4">
+          <a href="verConcurso">
+            <span class="gallery-thumbnail">
+              <img class="img-responsive" src="../../static/img/works2.jpg" alt="...">
+            </span>
+            <span class="gallery-text">
+              <span class="gallery-title">Robots parlantes</span>
+              Nullam id ipsum varius, tincidunt odio nec, placerat enim.
+            </span>
+          </a>
+        </li>
+        <li class="isotope-item cat-3 cat-1">
+          <a href="verConcurso">
+            <span class="gallery-thumbnail">
+              <img class="img-responsive" src="../../static/img/works3.jpg" alt="...">
+            </span>
+            <span class="gallery-text">
+              <span class="gallery-title">Falsificador de notas</span>
+              Nullam id ipsum varius, tincidunt odio nec, placerat enim.
+            </span>
+          </a>
+        </li>
+        <li class="isotope-item cat-2 cat-4">
+          <a href="verConcurso">
+            <span class="gallery-thumbnail">
+              <img class="img-responsive" src="../../static/img/works4.jpg" alt="...">
+            </span>
+            <span class="gallery-text">
+              <span class="gallery-title">Paseador de perros</span>
+              Nullam id ipsum varius, tincidunt odio nec, placerat enim.
+            </span>
+          </a>
+        </li>
+        -->
                 
       </ul>
     </div>
   
   
+  <!-- Bloque de AREA DE INTERES-->
+  <!--
+  <div class="container">
+      <h3>Areas de inter&eacute;s</h3>
+      <ul class="row list-inline gallery-list" id="isotope-container">
+        <li class="isotope-item cat-1 cat-2 cat-4">
+          <a href="verConcurso">
+            <span class="gallery-thumbnail">
+              <img class="img-responsive" src="../../static/img/works1.jpg" alt="...">
+            </span>
+            <span class="gallery-text">
+              <span class="gallery-title">Proyecto Manhattan</span>
+              Nullam id ipsum varius, tincidunt odio nec, placerat enim.
+            </span>
+          </a>
+        </li>
+        <li class="isotope-item cat-2 cat-4">
+          <a href="verConcurso">
+            <span class="gallery-thumbnail">
+              <img class="img-responsive" src="../../static/img/works2.jpg" alt="...">
+            </span>
+            <span class="gallery-text">
+              <span class="gallery-title">Robots parlantes</span>
+              Nullam id ipsum varius, tincidunt odio nec, placerat enim.
+            </span>
+          </a>
+        </li>
+        <li class="isotope-item cat-3 cat-1">
+          <a href="verConcurso">
+            <span class="gallery-thumbnail">
+              <img class="img-responsive" src="../../static/img/works3.jpg" alt="...">
+            </span>
+            <span class="gallery-text">
+              <span class="gallery-title">Falsificador de notas</span>
+              Nullam id ipsum varius, tincidunt odio nec, placerat enim.
+            </span>
+          </a>
+        </li>
+        <li class="isotope-item cat-2 cat-4">
+          <a href="verConcurso">
+            <span class="gallery-thumbnail">
+              <img class="img-responsive" src="../../static/img/works4.jpg" alt="...">
+            </span>
+            <span class="gallery-text">
+              <span class="gallery-title">Paseador de perros</span>
+              Nullam id ipsum varius, tincidunt odio nec, placerat enim.
+            </span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  -->
   
 
     
