@@ -32,7 +32,7 @@
       {% if messages %}
             {% for message in messages %}
             <div class="col-md-12">
-              <div class="alert alert-success h4">
+              <div class="alert alert-danger h4">
               <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
               </div>
             </div>
@@ -108,16 +108,12 @@
             <br />
           </div>
         </div>
+    <input type="submit" class="btn btn-green pull-right" value="Crear Concurso"></input>
             </div>
       
 
           </div>
-              
-
-              
-              
-      
-        <input type="submit" class="btn btn-green pull-right" value="Crear Concurso"></input>
+ 
      </form>
 
 

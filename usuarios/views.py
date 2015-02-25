@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 # Create your views here.
 from django.shortcuts import render_to_response
 from django.db.models import Q
@@ -9,11 +10,12 @@ from forms import *
 from models import *
 from ofertaDemanda.models import *
 from concursoIncubacion.models import *
+from incubacion.models import *
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
 from django.views.decorators.csrf import csrf_protect
-
+from datetime import datetime
 
 def index(request):
 	return render_to_response('USUARIO_index.html')
@@ -52,17 +54,20 @@ def auth_view(request):
 			p=persona
 			request.session['id_persona']=p.idpersona
 			request.session['tipo']="persona"
-			return HttpResponseRedirect('/perfil')
+			return HttpResponseRedirect('/inicio_view')
 		elif institucion is not None:
 			ins=institucion
 			request.session['id_institucion']=ins.idinstitucion
 			request.session['tipo']="institucion"
-			return HttpResponseRedirect('/perfilInst')	
+			return HttpResponseRedirect('/inicio_view')	
 		else:
 			return HttpResponseRedirect('/invalid')	
 
 	else:
-		return HttpResponseRedirect('/invalid')
+		c={}
+		c['fallaLogin']="Usuario o Contraseña incorrectos"
+		c.update(csrf(request))
+		return render_to_response('USUARIO_sign-in.html',c)
 
 def loggedin(request):
 	print request.session['id_user']
@@ -158,7 +163,7 @@ def enviar_mensaje(request):
 					#receptor=Persona.objects.get(id_user)
 					mensaje.idEmisor=emisor
 					mensaje.idDestino=userReceptor
-					mensaje.fecha='2012-12-12'
+					mensaje.fecha=datetime.now()
 					mensaje.hora='12:00:00'
 					mensaje.leido='0'
 					mensaje.save()
@@ -281,33 +286,34 @@ def subir_imagen(request):
 @login_required(login_url='/ingresar/')
 def verPerfil(request):
 	idu = request.GET.get('q', '')
-	user1=User.objects.get(username = idu)
-	tipo = request.session['tipo']
-
-	if tipo == "persona":
-		id_persona=request.session['id_persona']
-		persona1=Persona.objects.get(idpersona=id_persona)
-		institucion1=None
-	elif tipo == "institucion":
-		id_institucion=request.session['id_institucion']
-		institucion1=Institucion.objects.get(idinstitucion=id_institucion)
-		persona1=None
-
-	args = {}
-	args['usuario']=user1
-	if persona1 is not None:
-		args['persona']=persona1	
-	else:
-		args['institucion']=institucion1
-	
-	return render_to_response('USUARIO_profile.html',args,context_instance=RequestContext(request))
-
-
+	try:
+		user1=User.objects.get(username = idu)
+		args={}
+		args['usuario']=user1
+		tipo = request.session['tipo']
+		try:
+			print "persona perfil otro"
+			persona1=Persona.objects.get(user_ptr=user1)
+			args['persona']=persona1
+			return render_to_response('USUARIO_perfilOtro.html',args,context_instance=RequestContext(request))
+		except:
+			institucion1=Institucion.objects.get(user_ptr=user1)
+			args['institucion']=institucion1
+			return render_to_response('USUARIO_perfilinstitucionOtro.html',args,context_instance=RequestContext(request))
+	except:
+		return HttpResponseRedirect('/RNNotFound/')	
 @login_required(login_url='/ingresar/')
 def verMensaje(request):
 	args = {}
-	id_persona=request.session['id_persona']
-	yo=Persona.objects.get(idpersona=id_persona)
+	tipo = request.session['tipo']
+	if tipo == "persona":
+		id_persona=request.session['id_persona']
+		yo=Persona.objects.get(idpersona=id_persona)
+		
+	elif tipo == "institucion":
+		id_institucion=request.session['id_institucion']
+		yo=Institucion.objects.get(idinstitucion=id_institucion)
+	
 	args['yo']=yo
 	try: 
 		idM = int(request.GET.get('q', ''))
@@ -315,11 +321,12 @@ def verMensaje(request):
 		print "mensaje",msj.id
 		user1=msj.idEmisor
 		#print "user",user1
-		persona=Persona.objects.get(user_ptr=user1)
+		#persona=Persona.objects.get(user_ptr=user1)
 		#print "persona",persona
 		args['msj']=msj
 		args['user1']=user1
-		args['persona']=persona
+		#args['persona']=persona
+		
 		return render_to_response('USUARIO_verMensaje.html',args,context_instance=RequestContext(request))
 	except:
 		return HttpResponseRedirect("/mensajes/")
@@ -330,13 +337,14 @@ def verMensaje(request):
 @login_required(login_url='/ingresar/')
 @csrf_protect
 def busqueda_view(request):
+	"""
 	tipo = request.session['tipo']
 	if tipo == "persona":
 		id_persona=request.session['id_persona']
 		
 	elif tipo == "institucion":
 		id_institucion=request.session['id_institucion']
-	
+	"""
 	name = request.GET.get('q','')
 	print "funciona",name
 	if name:
@@ -360,9 +368,12 @@ def busqueda_view(request):
 		results3 = []
 		resultsUser=[]
 	tipoB="Busqueda General"
+	linkTipo="busqueda"
 	args={
 		"results1": results1,"results2": results2,"results3": results3,
-		"resultsUser": resultsUser,"name":name, "tipoB":tipoB}	
+		"resultsUser": resultsUser,"name":name, "tipoB":tipoB,
+		"linkTipo":linkTipo}
+	print resultsUser	
 
 	return render_to_response("USUARIO_busqueda.html",args,
 		context_instance = RequestContext(request))			
@@ -389,10 +400,12 @@ def busqueda_oferta(request):
 	else:
 		results1 = []
 	tipoB="Busqueda Ofertas"
+	linkTipo="busquedaOferta"
 	args={
 		"results1": results1,
 		 "name": name,
-		 "tipoB":tipoB}	
+		 "tipoB":tipoB,
+		 "linkTipo":linkTipo}	
 	return render_to_response("USUARIO_busqueda.html",args,
 		context_instance = RequestContext(request))			
 
@@ -418,10 +431,12 @@ def busqueda_demanda(request):
 	else:
 		results2 = []
 	tipoB="Busqueda Demanda"
+	linkTipo="busquedaDemanda"
 	args={
 		"results2": results2,
 		 "name": name,
-		 "tipoB":tipoB}	
+		 "tipoB":tipoB,
+		 "linkTipo":linkTipo}	
 	return render_to_response("USUARIO_busqueda.html",args,
 		context_instance = RequestContext(request))			
 
@@ -448,10 +463,12 @@ def busqueda_concursos(request):
 		results3 = []
 
 	tipoB="Busqueda Concursos"
+	linkTipo="busquedaConcurso"
 	args={
 		"results3": results3,
 		 "name": name,
-		 "tipoB":tipoB}	
+		 "tipoB":tipoB,
+		 "linkTipo":linkTipo}	
 		 
 	return render_to_response("USUARIO_busqueda.html",args,
 		context_instance = RequestContext(request))			
@@ -478,10 +495,12 @@ def busqueda_usuario(request):
 	else:
 		resultsUser = []
 	tipoB="Busqueda Usuarios"
+	linkTipo="busquedaUsuario"
 	args={
 		"resultsUser": resultsUser,
 		 "name": name,
-		 "tipoB":tipoB}
+		 "tipoB":tipoB,
+		 "linkTipo":linkTipo}
 
 	return render_to_response("USUARIO_busqueda.html",args,
 		context_instance = RequestContext(request))			
@@ -577,6 +596,8 @@ def verInicioF(request):
 	lst_demandas = Demanda.objects.all()
 	lst_ofertas = Oferta.objects.all()
 	lst_incubaciones = Incubacion.objects.all()
+	print "demandas",lst_demandas
+	print "ofertas", lst_ofertas
 	args={"lst_concursos":lst_concursos,"lst_demandas":lst_demandas,
 		 "lst_ofertas":lst_ofertas,"lst_incubaciones":lst_incubaciones,
 		 "usuario":user1}
@@ -588,3 +609,5 @@ def verInicioF(request):
 	return render_to_response('USUARIO_inicioF.html',args,context_instance=RequestContext(request))
 
 
+def terminos(request):
+	return render_to_response("terms.html")

@@ -16,12 +16,12 @@
         <!-- Profile Menu -->
         <div class="col-sm-4 col-md-3">
           <div class="user-menu bottom-15">
-            <ul>
+            <ul><!-- 
               <li>
                 <a href="DemandaCrear">
                   <i class="sign fa fa-edit bg-blue"></i> CREAR DEMANDA <i class="fa fa-chevron-right pull-right"></i>
                 </a>  
-              </li>
+              </li>-->
              
             </ul>
           </div>
@@ -33,44 +33,21 @@
               <div class="thumbnail">
                 <div class="avatar">
                   <a href="#" class="thumbnail bottom-15" data-toggle="modal" data-target="#upload-avatar">
-                    <img src="../static/img/imgDemandaOferta/face1.jpg" alt="...">
+                    <img src="/media/{{MEDIA_URL}}{{demanda.imagen}}" alt="...">
                   </a>
                   <!-- Upload new avatar bubble -->
                   <div class="avatar-bubble">
-                    <a href="#" data-toggle="modal" data-target="#upload-avatar"><i class="fa fa-plus"></i> New avatar</a>
+                  
                   </div>
                 </div>
               </div>
-              <!-- Modal window: Send a private message -->
-                <div class="modal fade" id="upload-avatar" tabindex="-1" role="dialog" aria-labelledby="upload-avatar-title" aria-hidden="true">
-                  <div class="modal-dialog">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title" id="upload-avatar-title">Upload new avatar</h4>
-                      </div>
-                      <div class="modal-body">
-                        <p>Please choose a file to upload. JPG, PNG, GIF only.</p>
-                        <form role="form">
-                          <div class="form-group">
-                            <label for="file">File input</label>
-                            <input type="file" id="file">
-                            <p class="help-block">Files up to 5Mb only.</p>
-                          </div>
-                          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                          <button type="button" class="btn btn-green" data-dismiss="modal">Upload</button>
-                        </form>
-                      </div>
-                    </div><!-- /.modal-content -->
-                  </div><!-- /.modal-dialog -->
-                </div><!-- /.modal -->
-                <!-- End of modal window -->
+             
             </div>
         
 
             <!-- Main profile info -->
             <div class="col-sm-8">
-              <h3 class="hl">DEMANDA 1</h3>
+              <h3 class="hl">{{ demanda.nombre }}</h3>
               <hr>
               
               <div class="bottom-15">
@@ -136,7 +113,7 @@
           <div class="row">
             <div class="col-sm-12">
               <h4 class="hl"><i class="fa fa-info-circle"></i> Nombre de la demanada</h4>
-              <p class="bottom-15">Nombre de la necesidfad o problema</p>
+              <p class="bottom-15">{{ demanda.nombre }}</p>
               <hr>
             </div>
           </div>
@@ -145,7 +122,7 @@
           <div class="row">
             <div class="col-sm-12">
               <h4 class="hl"><i class="fa fa-info-circle"></i> Descripcion de la demanda</h4>
-              <p class="bottom-15">Descripcion de la necesidad o problema</p>
+              <p class="bottom-15">{{ demanda.descripcion }}</p>
               <hr>
             </div>
           </div>
@@ -153,17 +130,23 @@
            <!-- About Me -->
           <div class="row">
             <div class="col-sm-12">
-              <h4 class="hl"><i class="fa fa-info-circle"></i> Dominios o Subdominios de la demanda</h4>
-              <p class="bottom-15"> Dominios o Subdominios al que pertenece el problema</p>
+              <h4 class="hl"><i class="fa fa-info-circle"></i> Dominio de la demanda</h4>
+              <p class="bottom-15">{{ demanda.dominio }}</p>
               <hr>
             </div>
           </div>
-          
+          <div class="row">
+            <div class="col-sm-12">
+              <h4 class="hl"><i class="fa fa-info-circle"></i> Subdominio de la demanda</h4>
+              <p class="bottom-15">{{ demanda.subdominio }}</p>
+              <hr>
+            </div>
+          </div>
            <!-- About Me -->
           <div class="row">
             <div class="col-sm-12">
               <h4 class="hl"><i class="fa  fa-calendar"></i> Tiempo de la demanda</h4>
-              <p class="bottom-15"> Tiempo que se necesita disponer de ella</p>
+              <p class="bottom-15"> {{ demanda.tiempo_fin_disponible }}</p>
               <hr>
             </div>
           </div>
@@ -172,7 +155,7 @@
           <div class="row">
             <div class="col-sm-12">
               <h4 class="hl"><i class="fa fa-map-marker"></i> Lugar donde se necesita de la demanda</h4>
-              <p class="bottom-15"> Lugar donde se necesita</p>
+              <p class="bottom-15"> {{ demanda.lugar_aplicacion }}</p>
               <hr>
             </div>
           </div>
@@ -181,7 +164,7 @@
           <div class="row">
             <div class="col-sm-12">
               <h4 class="hl"><i class="fa fa-user"></i> Perfil Beneficiario</h4>
-              <p class="bottom-15"> Perfil Beneficiario de la necesidad</p>
+              <p class="bottom-15">{{ demanda.perfil_beneficiario }}</p>
               <hr>
             </div>
           </div>
@@ -190,7 +173,7 @@
           <div class="row">
             <div class="col-sm-12">
               <h4 class="hl"><i class="fa fa-user"></i>  Perfil Cliente</h4>
-              <p class="bottom-15"> Perfil del cleiente de la necesidad</p>
+              <p class="bottom-15"> {{ demanda.perfil_cliente }}</p>
               <hr>
             </div>
           </div>

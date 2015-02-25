@@ -15,41 +15,85 @@ from django.core.urlresolvers import reverse
 
 @login_required(login_url='/ingresar/') 
 def homeDemandas(request):
-    persona = Persona.objects.get(idpersona=request.session['id_persona'])
-    lst_demandas = Demanda.objects.filter(~Q(idusuario = request.session['id_persona']))[:8]
-    return render_to_response('DEMANDA_Inicio.html',{'lst_demandas': lst_demandas,'persona':persona},context_instance=RequestContext(request))
+    tipo_user = request.session['tipo']
+    print tipo_user
+    if tipo_user=="persona":
+        persona = Persona.objects.get(idpersona=request.session['id_persona'])
+        lst_demandas = Demanda.objects.filter(~Q(idusuario = request.session['id_user']))[:8]
+        return render_to_response('DEMANDA_Inicio.html',{'lst_demandas': lst_demandas,'persona':persona,'tipo_user':tipo_user},context_instance=RequestContext(request))
+    elif tipo_user=="institucion":
+        lst_demandas = Demanda.objects.all()[:8]
+    return render_to_response('DEMANDA_Inicio.html',{'lst_demandas': lst_demandas,'tipo_user':tipo_user},context_instance=RequestContext(request))
 
 @login_required(login_url='/ingresar/') 
 def verDemanda(request):
-    return render_to_response('DEMANDA_perfil.html')
+    iddem = int(request.GET.get('q', ''))
+    demanda=Demanda.objects.get(idDemanda = iddem)
+    imagenes= ImagenDemanda.objects.all().filter(idDemanda = iddem)
+    demandaUsuario=Demanda.objects.get(idDemanda = iddem).idusuario.id
+	
+    args = {}
+    args['demanda'] = demanda
+
+    if (demandaUsuario == request.session['id_user']):
+	    val = True;
+    else:
+	    val = False;
+    print "Probado"
+    print demandaUsuario
+    print request.session['id_user']
+    print val
+    args['val'] = val
+    args['imagenes'] = imagenes
+    args['nums'] = range(len(imagenes))
+    return render_to_response('DEMANDA_perfil.html', args)
 
 @login_required(login_url='/ingresar/') 
 def misDemandas(request):
     persona = Persona.objects.get(idpersona=request.session['id_persona'])
-    lst_demandas = Demanda.objects.filter(idusuario = request.session['id_persona'])[:5]
+    lst_demandas = Demanda.objects.filter(idusuario = request.session['id_user'])[:5]
+    print lst_demandas
     return render_to_response('DEMANDA_mis_Demanda.html', {'lst_demandas' :lst_demandas,'persona':persona}, context_instance=RequestContext(request)) 
 
 @login_required(login_url='/ingresar/') 
 def homeOfertas(request):
-    persona = Persona.objects.get(idpersona=request.session['id_persona'])
-    lst_ofertas = Oferta.objects.filter(~Q(idusuario = request.session['id_persona']))[:8]
-    return render_to_response('OFERTA_Inicio2.html',{'lst_ofertas': lst_ofertas,'persona':persona},context_instance=RequestContext(request))
+    tipo_user = request.session['tipo']
+    if tipo_user=="persona":
+        persona = Persona.objects.get(idpersona=request.session['id_persona'])
+        lst_ofertas = Oferta.objects.filter(~Q(idusuario = request.session['id_user']))[:8]
+        return render_to_response('OFERTA_Inicio2.html',{'lst_ofertas': lst_ofertas,'persona':persona,'tipo_user':tipo_user},context_instance=RequestContext(request))
+    elif tipo_user=="institucion":
+        lst_ofertas = Oferta.objects.all()[:8]
+    return render_to_response('OFERTA_Inicio2.html',{'lst_ofertas': lst_ofertas,'tipo_user':tipo_user},context_instance=RequestContext(request))
 
 @login_required(login_url='/ingresar/')
 def crearOferta(request):
-    form = CrearOfertaForm(request.POST, request.FILES)
-    if form.is_valid():
-        nuevaOferta=super(CrearOfertaForm, form).save(commit=False)
-        nuevaOferta.idusuario=Persona.objects.get(idpersona=request.session['id_persona'])
-        nuevaOferta.estadoOferta=1
-        nuevaOferta.ofertaPublicada =1            
-        nuevaOferta.save()
-        return HttpResponseRedirect(reverse('completarOferta', args=(nuevaOferta.idOferta,)))
-        #return HttpResponseRedirect(reverse('completarOferta', args=(),kwargs={'ofertaid': nuevaOferta.idOferta}))
+    if request.POST: #POST
+        form = CrearOfertaForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            nuevaOferta=super(CrearOfertaForm, form).save(commit=False)
+            nuevaOferta.idusuario=Persona.objects.get(idpersona=request.session['id_persona'])
+            nuevaOferta.estadoOferta=1
+            nuevaOferta.ofertaPublicada =1 
+            nuevaOferta.recienCreada=True          
+            nuevaOferta.save()
+                       
+            info="Oferta creada correctamente"
+        else:
+            info="Error al ingresar los datos"
+
+        form = CrearOfertaForm()
+        messages.success(request, info)
+        return HttpResponseRedirect('/misOfertas')
+    else:
+        form=CrearOfertaForm()
+
     args={}
     args.update(csrf(request))
     args['form']=form
     return render_to_response('OFERTA_crear_oferta.html',args)
+
 
 @login_required(login_url='/ingresar/')
 def completarOferta(request,ofertaid):
@@ -97,27 +141,85 @@ def crearDemanda(request):
         nuevaDemanda.idusuario=Persona.objects.get(idpersona=request.session['id_persona'])
         nuevaDemanda.estadoDemanda=1
         nuevaDemanda.save()
-        return HttpResponseRedirect('/misDemandas/',nuevaDemanda.idDemanda)
-
+        print "todo esta bien"
+        return HttpResponseRedirect('/misDemandas/')
+    else:
+        print "algo paso"
     args={}
     args.update(csrf(request))
     args['form']=form
     return render_to_response('DEMANDA_crear_demanda.html',args)    
 	
-@login_required(login_url='/ingresar/') 
+@login_required(login_url='/ingresar/')
 def verOferta(request):
-    return render_to_response('OFERTA_perfil.html')
+    idof = int(request.GET.get('q', ''))
+    oferta=Oferta.objects.get(idOferta = idof)
+    imagenes= ImagenOferta.objects.all().filter(idOferta = idof)
+    ofertaUsuario=Oferta.objects.get(idOferta = idof).idusuario.id
+	
+    args = {}
+    args['oferta'] = oferta
 
+    if (ofertaUsuario == request.session['id_user']):
+	    val = True;
+    else:
+	    val = False;
+    print "Probado"
+    print ofertaUsuario
+    print request.session['id_user']
+    print val
+    args['val'] = val
+    args['imagenes'] = imagenes
+    args['nums'] = range(len(imagenes))
+    return render_to_response('OFERTA_perfil.html', args)
 
 @login_required(login_url='/ingresar/') 
-def editarOferta(request):    
-    return render_to_response('OFERTA_perfil.html')
+def editarOferta(request):
+    id_persona=request.session['id_persona']
+    args={}
+    if request.method == 'POST':
+        id_persona=request.session['id_persona']
+        persona=Persona.objects.get(idpersona=id_persona)
+        persona_form = EditarOfertaForm(request.POST, request.FILES, instance=persona)
+        if  persona_form.is_valid():
+            persona_form.save()
+            return HttpResponseRedirect('/perfil/')
+        else:
+            persona=Persona.objects.get(idpersona=id_persona)
+            persona_form = EditarOfertaForm(instance=persona)
+            args['personaform']=persona_form
+    else:
+        persona=Persona.objects.get(idpersona=id_persona)
+        persona_form = EditarOfertaForm(instance=persona)
+        args['personaform']=persona_form
+    return render_to_response('OFERTA_Editar_Oferta.html', RequestContext(request,args))
+
+@login_required(login_url='/ingresar/') 
+def editarDemanda(request):
+    id_persona=request.session['id_persona']
+    args={}
+    if request.method == 'POST':
+        id_persona=request.session['id_persona']
+        persona=Persona.objects.get(idpersona=id_persona)
+        persona_form = EditarDemandaForm(request.POST, request.FILES, instance=persona)
+        if  persona_form.is_valid():
+            persona_form.save()
+            return HttpResponseRedirect('/perfil/')
+        else:
+            persona=Persona.objects.get(idpersona=id_persona)
+            persona_form = EditarDemandaForm(instance=persona)
+            args['personaform']=persona_form
+    else:
+        persona=Persona.objects.get(idpersona=id_persona)
+        persona_form = EditarDemandaForm(instance=persona)
+        args['personaform']=persona_form
+    return render_to_response('DEMANDA_Editar_Demanda.html', RequestContext(request,args))
 
 
 @login_required(login_url='/ingresar/') 
 def misOfertas(request):
     persona = Persona.objects.get(idpersona=request.session['id_persona'])
-    lst_ofertas = Oferta.objects.filter(idusuario = request.session['id_persona'])[:5]
+    lst_ofertas = Oferta.objects.filter(idusuario = request.session['id_user'])[:5]
     return render_to_response('OFERTA_misOfertas.html', {'lst_ofertas' :lst_ofertas,'persona':persona}, context_instance=RequestContext(request)) 
 
 def searchOfertaRed(request):
@@ -157,12 +259,12 @@ def searchMisOferta(request):
         busquedaMisOferta = request.GET['busquedaMisOferta']
         if not busquedaMisOferta:
             errors.append('Ingrese un termino a buscar')
-        elif len(busquedaOfertaRed)>25:
+        elif len(busquedaMisOferta)>25:
             errors.append('por favor ingrese un termino no mas de 25 caracteres.')
         else:
-            ofertas = Oferta.objects.filter(nombre__icontains=busquedaOfertaRed).exclude(idusuario = request.session['id_persona'])
+            ofertas = Oferta.objects.filter(nombre__icontains=busquedaMisOferta).filter(idusuario = request.session['id_persona'])
             return render(request, 'OFERTA_misOfertas.html',
-                {'ofertas':ofertas,'nombre':busquedaMisOferta,'buscarMisOfer':True})
+                {'ofertas':ofertas,'nombre':busquedaMisOferta,'buscarMisOfer':True,'mostrarOfertas':False})
         return render(request,'OFERTA_misOfertas.html',{'errors':errors})    
 
 
@@ -171,11 +273,11 @@ def searchMisDemanda(request):
     if 'busquedaMisDemanda' in request.GET:
         busquedaMisDemanda = request.GET['busquedaMisDemanda']
         if not busquedaMisDemanda:
-            errors.append('Ingrese un termino a buscar')
+            errors.append('Ingrese un termino a buscar')  
         elif len(busquedaMisDemanda)>25:
             errors.append('por favor ingrese un termino no mas de 25 caracteres.')
         else:
-            demandas = Demanda.objects.filter(nombre__icontains=busquedaMisDemanda).exclude(idusuario = request.session['id_persona'])
+            demandas = Demanda.objects.filter(nombre__icontains=busquedaMisDemanda).filter(idusuario = request.session['id_persona'])
             return render(request, 'DEMANDA_mis_Demanda.html',
-                {'demandas':demandas,'nombre':busquedaMisDemanda,'buscarMisDema':True})
+                {'demandas':demandas,'nombre':busquedaMisDemanda,'buscarMisDema':True,'mostrarDemanda':False})
         return render(request,'DEMANDA_mis_Demanda.html',{'errors':errors})

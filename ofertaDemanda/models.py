@@ -11,8 +11,8 @@ class Demanda(models.Model):
     estadoDemanda= models.IntegerField()
     nombre = models.CharField(max_length=150L)
     descripcion = models.CharField(max_length=500L)
-    dominio = models.IntegerField()
-    subdominio = models.IntegerField()
+    dominio = models.CharField(max_length=500L)
+    subdominio = models.CharField(max_length=200L)
     palabras_claves = models.CharField(max_length=100L, db_column='palabras_Claves') # Field name made lowercase.
     tiempo_inicio_disponible = models.DateField(db_column='tiempo_Inicio_Disponible') # Field name made lowercase.
     tiempo_fin_disponible = models.DateField(db_column='tiempo_Fin_Disponible') # Field name made lowercase.
@@ -21,6 +21,8 @@ class Demanda(models.Model):
     perfil_cliente = models.CharField(max_length=500L, db_column='perfil_Cliente',null=True) # Field name made lowercase.
     soluciones_alternativas = models.CharField(max_length=500L, db_column='soluciones_Alternativas',null=True) # Field name made lowercase.
     importancia_solucion = models.CharField(max_length=500L, db_column='importancia_Solucion',null=True) # Field name made lowercase.
+    imagen=models.ImageField(upload_to='ofDem_media')
+    
     class Meta:
         db_table = 'demanda'
 
@@ -63,6 +65,7 @@ class Oferta(models.Model):
     cuadro_tendencias_relevantes = models.CharField(max_length=500L, db_column='cuadro_Tendencias_Relevantes', blank=True,null=True) # Field name made lowercase.
     estado_propiedad_intelectual = models.CharField(max_length=500L, db_column='estado_Propiedad_Intelectual', blank=True,null=True) # Field name made lowercase.
     evidencia_traccion = models.CharField(max_length=500L, db_column='evidencia_Traccion', blank=True,null=True) # Field name made lowercase.
+    imagen=models.ImageField(upload_to='ofDem_media')
     class Meta:
         db_table = 'oferta'
 

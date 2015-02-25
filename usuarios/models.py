@@ -59,8 +59,14 @@ class Mensaje(models.Model):
     class Meta:
         db_table = 'mensaje'
     def imagenEmisor(self):
-        p=Persona.objects.get(user_ptr=self.idEmisor)
-        imagen=p.imagen
+        try:
+            p=Persona.objects.get(user_ptr=self.idEmisor)
+            imagen=p.imagen
+            print "JAJAJA",imagen
+        except:
+            i=Institucion.objects.get(user_ptr=self.idEmisor)
+            imagen=i.imagen
+            print imagen
         return imagen
     imgEm=property(imagenEmisor)
 

@@ -16,17 +16,57 @@
         </div>
       </div>
     </div>
+
     <div class="container">
-      <ul class="row list-inline gallery-list" id="isotope-container">
-        <li class="isotope-item cat-3 cat-1">
-          <a href="crearConcurso">
-            <span class="gallery-text">
-              <span class="gallery-title"> + Crear Concurso</span>
-            </span>
-          </a>
-        </li>
-      </ul>
-      <h3>MIS CONCURSOS</h3>
+
+    <div class="row"> 
+      <div class="col-sm-12">
+        {% ifequal tipo_user "institucion" %}
+                  <div class="col-sm-4 col-md-3">
+            <div class="user-menu bottom-15">
+            <ul>
+              <li>
+                <a href="/crearConcurso/">
+                  <i class="sign fa fa-plus bg-amethyst"></i>Crear Concurso
+                </a> 
+                </li> 
+            </ul>
+          </div>
+          </div>
+        {% endifequal %}
+      </div>
+    
+
+    <div class="col-md-6 col-sm-3 hidden-xs">
+      {% ifequal tipo_user "persona" %}
+          <div class="row faq-cats">
+            <div class="col-xs-6 col-xs-offset-6 visible-xs">
+              <ul>
+                <li><i class="fa fa-home fa-2x"></i><a href="#">Concursos que Participo</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="row faq-cats">
+            <div class="col-xs-6 col-xs-offset-6 visible-xs">
+              <ul>
+                <li><i class="fa fa-home fa-2x"></i><a href="#">Concursos en los que soy Jurado</a></li>
+              </ul>
+            </div>
+          </div>
+      {% endifequal %}
+    </div>
+
+    </div>
+    </div>
+
+    <div class="container">
+
+    {% ifequal tipo_user "institucion" %}
+    <h3>MIS CONCURSOS</h3>
+    {% endifequal %}
+    {% ifequal tipo_user "persona" %}
+    <h3>CONCURSOS</h3>
+    {% endifequal %}
       <ul class="row list-inline gallery-list" id="isotope-container">
       
     <!-- Se presenta los concursos en li--> 
@@ -40,10 +80,12 @@
               <span class="gallery-thumbnail">
                 <img class="img-responsive" src="{{MEDIA_URL}}{{ c.imagen }} " alt="...">
               </span>
+              <div style="word-wrap: break-word;">
               <span class="gallery-text">
                 <span class="gallery-title">{{ c.nombre }}</span>
                 {{ c.descripcion }} 
               </span>
+            </div>
             </a>
           </li>
       

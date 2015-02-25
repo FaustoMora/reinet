@@ -6,7 +6,7 @@
         <div class="row">
           <div class="col-sm-12">
             <!-- Remove the .animated class if you don't want things to move -->
-            <h1 class="animated slideInLeft"><span>Blog Post</span></h1>
+            <h1 class="animated slideInLeft"><span>Oferta {{oferta.nombre}}</span></h1>
           </div>
         </div>
       </div>
@@ -29,16 +29,16 @@
         <div class="col-sm-10">            
             <div class="col-sm-10">
               <h3>
-                HighLand - a new responsive Bootstrap 3 template
+                {{oferta.nombre}}
               </h3>
             </div>
             <!-- Este es el codigo para el rating las estrellitas-->
             <div class="col-sm-12">
               <ul class="text-muted list-inline">
-                <li><i class="fa fa-flag"></i> Disponible</li>
-                <li><i class="fa fa-user"></i> <a href="profile.html">Nombre del dueño de la oferta</a></li>
-                <li><i class="fa fa-calendar"></i> November 10, 2013</li>
-                <li><i class="fa fa-comments-o"></i> 21 comments</li>
+                <li><i class="fa fa-flag"></i> {{ oferta.estadoOferta }}</li>
+                <li><i class="fa fa-user"></i> <a href="/verPerfil/?q={{oferta.idusuario}}">{{ oferta.idusuario }}</a></li>
+                <li><i class="fa fa-calendar"></i> {{oferta.tiempo_inicio_disponible}}</li>
+                
               </ul>
             </div>
         </div>
@@ -48,14 +48,14 @@
           <p class="blog-text">
             <div class="col-md-3 col-sm-6">
               <div class="thumbnail">
-                  <img src="../static/img/imgDemandaOferta/works1.jpg" class="img-responsive" alt="Oferta">
+                  <img src="/media/{{MEDIA_URL}}{{ oferta.imagen }}" class="img-responsive" alt="Oferta">
                   <div class="visit"><a href="OfertaVer"><i class="fa fa-question-circle"></i> Galeria</a></div>
               </div>
             </div>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc consectetur urna at neque mollis sagittis. Vivamus viverra justo in dui vulputate tincidunt in eu magna. Ut ut risus pretium, varius felis a, congue metus. Nam aliquam pretium eros, et venenatis sapien porttitor at. Nunc bibendum ipsum sit amet euismod sodales. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam varius justo sed velit dictum feugiat. Sed tempus eros quis eleifend posuere. Fusce tempus euismod sem vitae porta. Vestibulum eget mi suscipit, ultrices turpis quis, ultricies ipsum. Pellentesque et facilisis odio. Vivamus et mauris consequat, rhoncus risus vitae, porttitor dui.
+            {{ oferta.descripcion }}
             <br /><br />
-            Maecenas non laoreet ipsum, id mattis nunc. Vestibulum viverra sapien a porta venenatis. Morbi in dignissim quam, eu malesuada lorem. Integer quis cursus ligula. Proin elementum, massa egestas rhoncus blandit, tortor mauris pellentesque eros, eget volutpat ligula nunc quis sapien. Integer eget cursus turpis. Sed non aliquam odio. Nullam et arcu sed felis interdum aliquam. Fusce euismod, mauris non lacinia porttitor, enim tortor porttitor diam, sit amet fringilla felis orci bibendum erat. Praesent lectus mauris, volutpat eu blandit auctor, varius faucibus est.
-          </p>
+              {{ oferta.dominio }}
+            </p>
 
           
           <div class="row">
@@ -71,22 +71,19 @@
                   <tbody>
                     <tr>
                       <td class="text-muted">Dominio</td>
-                      <td colspan=4 style="text-align:center">Tecnología</td>
+                      <td colspan=4 style="text-align:center">{{ oferta.dominio }}</td>
                     </tr>
-                    <tr>
-                      <td class="text-muted">Subdominio</td>
-                      <td colspan=4 style="text-align:center">Electricidad con celdas fotovoltaicas que  vuelan</td>
-                    </tr>
+                    
                     <tr>
                       <td class="text-muted">Lugar de Aplicación</td>
-                      <td colspan=4 style="text-align:center">Ecuador y más alla</td>
+                      <td colspan=4 style="text-align:center">{{ oferta.lugar_aplicacion }}</td>
                     </tr>
                     <tr>
                       <td class="text-muted">Fecha disponibilidad</td>
                       <td class="text-muted">Desde:</td>
-                      <td>01/02/2015</td>
+                      <td>{{oferta.tiempo_inicio_disponible}}</td>
                       <td class="text-muted">Hasta:</td>
-                      <td>01/12/2015</td>
+                      <td>{{oferta.tiempo_fin_disponible}}</td>
                     </tr>
                   </tbody>
                 </table>  
@@ -104,12 +101,10 @@
                   <tbody>
                     <tr>
                       <td class="text-muted">Beneficiario</td>
-                      <td>El beneficiario es una persona de escasos recursos económicos que no puede pagar la universidad y necesita electricidad para su celular</td>
-                    </tr>
+                      <td>{{oferta.perfil_beneficiario}}</tr>
                     <tr>
                       <td class="text-muted">Cliente</td>
-                      <td>El beneficiario es una persona de escasos recursos económicos que no puede pagar la universidad y necesita electricidad para su celular</td>
-                    </tr>
+                      <td>{{oferta.perfil_cliente}}</tr>
                   </tbody>
                 </table>  
               </div>
@@ -126,27 +121,23 @@
                   <tbody>
                     <tr>
                       <td class="text-muted">Soluciones Alternativas</td>
-                      <td>El beneficiario es una persona de escasos recursos económicos que no puede pagar la universidad y necesita electricidad para su celular</td>
-                    </tr>
+                      <td>{{oferta.soluciones_alternativas}}</tr>
                     <tr>
                       <td class="text-muted">Propuesta de Valor</td>
-                      <td>El beneficiario es una persona de escasos recursos económicos que no puede pagar la universidad y necesita electricidad para su celular</td>
-                    </tr>
+                      <td>{{oferta.propuesta_valor}}</tr>
                     <tr>
                       <td class="text-muted">Estado Propiedad Intelectual</td>
-                      <td>El beneficiario es una persona de escasos recursos económicos que no puede pagar la universidad y necesita electricidad para su celular</td>
-                    </tr>
+                      <td>{{oferta.estado_propiedad_intelectual}}</tr>
                     <tr>
                       <td class="text-muted">Evidencia de Tracción</td>
-                      <td>El beneficiario es una persona de escasos recursos económicos que no puede pagar la universidad y necesita electricidad para su celular</td>
-                    </tr>
+                      <td>{{oferta.evidencia_traccion}}</tr>
                   </tbody>
                 </table>  
               </div>
             </div>
           </div>
 
-          <!-- New comment form -->
+          <!-- New comment form 
           <div class="col-sm-10 col-sm-offset-1">
             <div class="new-comment">
               <form class="form-horizontal" role="form">
@@ -165,9 +156,11 @@
                 </div>
               </form>
             </div>
-            <!-- Comments list -->
+             Comments list -->
+              <!--
             <h4>21 comments</h4>
             <hr>
+
             <div class="comment">
               <div class="media">
                 <a class="pull-left" href="#">
@@ -216,9 +209,11 @@
                 </div>
               </div>
             </div>
+              -->
           </div>
         </div>
 
+        <!--
         <div class="col-sm-4">
           <div class="block-inverse">
             <div class="head-inverse">
@@ -256,8 +251,7 @@
           </div>
                      
 
-          <!-- Tags -->
-          <h3 class="hl">PALABRAS CLAVES</h3>
+          Tags           <h3 class="hl">PALABRAS CLAVES</h3>
           <hr>
           <p class="tags">
             <a href="#">Bootstrap</a>
@@ -269,7 +263,7 @@
           </p>
           <br />
           
-          <!-- Recently Added -->
+           Recently Added 
           <div class="panel panel-default">
             <div class="panel-heading">
               <h3 class="panel-title">Equipo</h3>
@@ -311,6 +305,7 @@
               </div>
             </div>
           </div>
+-->
 
 </div>
 

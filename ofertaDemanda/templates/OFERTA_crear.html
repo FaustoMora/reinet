@@ -1,0 +1,151 @@
+{% extends "base.tpl.html" %}
+{% block home %}
+        <a class="navbar-brand" href="{% url 'usuarios.views.index' %}" class="link">REI-NET</a>
+{% endblock %}
+{% block signin %}
+<li id="sign-up" class="show"><a href="{% url 'usuarios.views.register' %}">Registrarse</a></li>
+<li id="sign-in" class="show"><a href="{% url 'usuarios.views.ingresar' %}">Iniciar Sesión</a></li>
+{% endblock %}
+{% block content %}
+ 
+    <!-- Page Tip -->
+    <div class="page-tip animated slideInDown">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12">
+            <p>LLena correctamente los campos para crear una Oferta.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Main Form -->
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3 signup">
+          <h2 class="hl top-zero">Crear Oferta</h2>
+          <hr>
+          <form role="form" action="/crearOferta/" method="post" enctype="multipart/form-data">{%csrf_token%}
+
+<!--
+            <div class="form-group">
+              <input required type="text" class="form-control" id="exampleInputName1"  placeholder="Nombres" data-toggle="popover" data-placement="left" data-trigger="focus" data-content="Ingresa tu nombre aquí." data-original-title="Nombre">
+            </div>
+            <div class="form-group">
+              <input required type="text" class="form-control" id="exampleInputApellido1" placeholder="Apellidos" data-toggle="popover" data-placement="left" data-trigger="focus" data-content="Ingresa tus apellidos aquí." data-original-title="Apellidos">
+            </div>
+           
+            <div class="form-group">
+              <input required type="text" pattern="([0-9]{1,15})" class="form-control" id="exampleInputId" placeholder="Identificación" data-toggle="popover" data-placement="left" data-trigger="focus" data-content="Ingresa tu cédula o pasaporte aquí." data-original-title="Identificación">
+            </div>
+            
+            <div class="form-group">
+            <select class="form-control">
+				<optgroup label="Institución a la que pertenece">
+                     <option>Independiente</option>
+                    <option>Espol</option>
+                    <option>UCSG</option>
+                    <option>La estatal</option>
+                    </optgroup>
+             </select>
+            </div>
+           
+            <div class="form-group">
+              <input type="text" class="form-control" id="exampleInputCargo1" placeholder="Cargo" data-toggle="popover"  data-placement="left" data-trigger="focus" data-content="Ingresa tu cargo aquí." data-original-title="Cargo">
+            </div>
+            
+            
+            <div class="form-group">
+              <input type="text" class="form-control" id="exampleInputActividad1" placeholder="Actividad que realiza" data-toggle="popover" data-placement="left" data-trigger="focus" data-content="Ingresa la actividad que realizas aquí." data-original-title="Actividad">
+            </div>
+            
+             <div class="form-group">
+              <input type="url" class="form-control" id="exampleInputSitioWeb1" placeholder="Sitio Web" data-toggle="popover" data-placement="left" data-trigger="focus" data-content="Ingresa tu sitio web aquí." data-original-title="Sitio Web">
+            </div> 
+            
+                       
+            <div class="form-group">
+              <input required type="email" class="form-control" id="exampleInputEmail1" placeholder="Email" data-toggle="popover" data-placement="left" data-trigger="focus" data-content="Ingresa un email valido." data-original-title="Email">
+            </div>
+            
+            <div class="form-group">
+              <input type="text" class="form-control" id="exampleInputCiudad1" placeholder="Ciudad" data-toggle="popover" data-placement="left" data-trigger="focus" data-content="Ingresa tu ciudad aquí." data-original-title="Ciudad">
+            </div> 
+            
+             <div class="form-group">
+              <input type="text" class="form-control" id="exampleInputFecha1" placeholder="Fecha de nacimiento" onfocus="(this.type='date')" onblur="(this.type='text')" data-toggle="popover" data-placement="left" data-trigger="focus" data-content="Ingresa tu fecha de nacimiento aquí." data-original-title="Nombre">
+            </div>
+            
+             <div class="form-group">
+              <input type="text" class="form-control" id="exampleInputInteres1" placeholder="Áreas de interés" data-toggle="popover" data-placement="left" data-trigger="focus" data-content="Ingresa tus áreas de interés aquí." data-original-title="Nombre">
+            </div>
+            
+            <div class="form-group">
+              <div class="row">
+                <div class="col-sm-6">
+                  <input required type="password" class="form-control margin-bottom-xs" id="exampleInputPassword1" placeholder="Password" data-toggle="popover" data-placement="left" data-trigger="focus" data-content="Three symbols minimum." data-original-title="Password">
+                </div>
+                <div class="col-sm-6">
+                  <input required type="password" class="form-control" id="exampleInputPassword2" placeholder="Repeat Password" data-toggle="popover" data-trigger="focus" data-content="Make sure you still remember it." data-original-title="Repeat Password">
+                </div>
+              </div>
+            </div>
+-->
+			 {{ form.non_field_errors }}
+			{%for f in form%}
+<!-- 
+    <div  class="form-group">
+       {{f.errors}}
+      {{f.label_tag}}<br>
+     {{f}}
+    </div> -->
+
+ {%if f.id_for_label == "id_username"%}
+
+ <div class="form-group">
+ {{f.errors}}
+ {{f.label_tag}}<br>
+ <input type="text" class="form-control" id="id_username" name="username" placeholder="Nombre de Usuario" pattern="[A-Za-z]{1}[A-Za-z0-9]{1,20}"/>
+ </div>
+ {%elif f.id_for_label == "id_password1"%}
+ <div class="form-group">
+ {{f.errors}}
+ {{f.label_tag}}<br>
+ <input type="password" class="form-control" id="id_password1" name="password1" placeholder="Contraseña" />
+</div>
+ {%elif f.id_for_label == "id_password2"%}
+<div class="form-group">
+
+{{f.errors}}
+
+{{f.label_tag}}<br>
+
+ <input type="password" class="form-control" id="id_password2" name="password2" placeholder="Confirme Contraseña"/>
+
+</div>
+ {%else%}
+
+ <div class="form-group">
+ 
+ {{f.errors}}
+
+ {{f.label_tag}}<br>
+ {{ f }}
+ </div>
+ {%endif%}
+		{%endfor%} 
+
+            <div class="checkbox">
+
+              <label>
+                <input required="" type="checkbox"> Estoy de acuerdo con los <a href="/terminosCondiciones/">Términos del servicio y las pol&iacute;ticas de privacidad</a>
+              </label>
+            </div>
+            <button type="submit" class="btn btn-green">Crear una cuenta</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  
+  
+
+{% endblock %}

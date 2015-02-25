@@ -41,27 +41,23 @@
         
         
           <!-- Edit profile form -->
-          <h3 class="hl">Crear <small>Concurso </small> </h3>
-          <p class="text-muted">Por favor ingrese los datos del concurso.</p>
+          <h3 class="hl">Editar <small>Concurso </small> </h3>
+          <p class="text-muted">Por favor ingrese los datos a editar del concurso.</p>
           <hr>
           <h4 class="hl bottom-15">Informaci&oacute;n General</h4>
 
-            <form role="form" id="formulario" method="POST" enctype="multipart/form-data">
+            <form role="form" id="formulario" action="/editarConcurso/?q={{idconcu}}"method="POST" enctype="multipart/form-data">
               {% csrf_token %}
               {#{ form.as_p }#}
               
               {% for f in form %}
-              	{% if f.label == "Fecha Inicio" or f.label == "Fecha Final" %}
-              		<div class="form-group col-xs-6">
-							<label>{{ f.label }}</label>
-							<p>{{ f }}</p>
-              		</div>
-              	{% else %}
+              
               		<div class="form-group">
               				<label>{{ f.label }}</label>
 							<p>{{ f }}</p>
               		</div>
-              	{% endif %}
+            
+				
               {% endfor %}
               
 

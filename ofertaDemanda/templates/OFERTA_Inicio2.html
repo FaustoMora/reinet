@@ -36,7 +36,7 @@
             {% endfor %}
           </ul>
         {% endif %}
-          <form class="form-inline" action="/search/" method="GET" role="form">
+          <form class="form-inline" action="/homeOfertas/" method="GET" role="form">
             <div class="row">
               <div class="col-md-10 col-sm-10">
                 <div class="input-group">
@@ -52,6 +52,7 @@
           </form><br />
         </div>
 
+          {% ifequal tipo_user "persona" %}
         <div class="col-md-6 col-sm-3 hidden-xs">
           <div class="row faq-cats">
             <div class="col-md-6 col-md-offset-6 col-sm-12">
@@ -61,6 +62,7 @@
             </div>
           </div>
         </div>
+         {% endifequal %}
       </div>
     </div>
 
@@ -72,11 +74,12 @@
                 <div class="col-md-3 col-sm-6">
                     <div class="thumbnail">
                       <img class="img-responsive" src="{{MEDIA_URL}}{{ c.imagen }} " alt="Oferta">
-                      <div class="visit"><a href="verOferta"><i class="fa fa-question-circle"></i> Ver Oferta</a></div>
+                      <div class="visit"><a href="verOferta/?q={{c.idOferta}}"><i class="fa fa-question-circle"></i> Ver Oferta</a></div>
                       <div class="caption">
                         <h4>{{c.nombre}}</h4>
                         <div class="rating">
                             {{c.calificacionGeneral}}
+                            <br/>
                             <i class="fa fa-star"></i> 
                             <i class="fa fa-star"></i> 
                             <i class="fa fa-star"></i> 
@@ -84,9 +87,9 @@
                             <i class="fa fa-star"></i>
                           </div>
                         <ul class="text-muted list-inline">
-                          <li><i class="fa fa-user"></i> <a href="#">Administrator {{c.idusuario}}</a></li>
+                          <li><i class="fa fa-user"></i> <a href="#">{{c.idusuario}}</a></li>
                           <li><i class="fa fa-calendar"></i> {{c.tiempo_inicio_disponible}}</li>
-                          <li><i class="fa fa-comments-o"></i> 6 comments</li>
+                          
                         </ul>
                           
                         <p>{{c.descripcion}}</p>
@@ -104,7 +107,7 @@
                     <div class="col-md-3 col-sm-6">
                         <div class="thumbnail">
                           <img class="img-responsive" src="{{MEDIA_URL}}{{ c.imagen }} " alt="Oferta">
-                          <div class="visit"><a href="verOferta"><i class="fa fa-question-circle"></i> Ver Oferta</a></div>
+                          <div class="visit"><a href="verOferta/?q={{c.idOferta}}"><i class="fa fa-question-circle"></i> Ver Oferta</a></div>
                           <div class="caption">
                             <h4>{{c.nombre}}</h4>
                             <div class="rating">
@@ -116,9 +119,9 @@
                                 <i class="fa fa-star"></i>
                               </div>
                             <ul class="text-muted list-inline">
-                              <li><i class="fa fa-user"></i> <a href="#">Administrator {{c.idusuario}}</a></li>
+                              <li><i class="fa fa-user"></i> <a href="#">{{c.idusuario}}</a></li>
                               <li><i class="fa fa-calendar"></i> {{c.tiempo_inicio_disponible}}</li>
-                              <li><i class="fa fa-comments-o"></i> 6 comments</li>
+                              
                             </ul>
                               
                             <p>{{c.descripcion}}</p>

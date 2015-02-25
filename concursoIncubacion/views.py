@@ -13,142 +13,135 @@ from django.core.context_processors import csrf
 
 @login_required(login_url='/ingresar/')
 def homeConcursos(request):
-    lst_concursos = Concurso.objects.all().filter(idusuario=request.session['id_user'])[:8]
-    return render_to_response('CONCURSO_inicio_concurso.html',{'lst_concursos' : lst_concursos},context_instance=RequestContext(request))
+	tipo_user = request.session['tipo']
+	if (tipo_user=="persona"):
+		lst_concursos = Concurso.objects.all()[:8]
+	elif (tipo_user=="institucion"):
+		lst_concursos = Concurso.objects.all().filter(idusuario=request.session['id_user'])[:8]
+	return render_to_response('CONCURSO_inicio_concurso.html',{'lst_concursos' : lst_concursos,'tipo_user':tipo_user},context_instance=RequestContext(request))
 
 @login_required(login_url='/ingresar/')
-def crearConcurso(request): 
-	if request.POST: #POST
-		form = CrearConcursoForm(request.POST, request.FILES)
+def crearConcurso(request):
+	if(request.session["tipo"]=="institucion"):
+		if request.POST: #POST
+			form = CrearConcursoForm(request.POST, request.FILES)
 
-		if form.is_valid():
-			nuevoConcurso=super(CrearConcursoForm, form).save(commit=False)
-			nuevoConcurso.idusuario=Persona.objects.get(idpersona=request.session['id_persona'])
-			nuevoConcurso.estado=1
-			nuevoConcurso.save()
+			if form.is_valid():
+
+				val = validarfechas(form.cleaned_data['fecha_inicio'],form.cleaned_data['fecha_fin'])
+				print val
+
+				if val:
+					nuevoConcurso=super(CrearConcursoForm, form).save(commit=False)
+					nuevoConcurso.idusuario=Institucion.objects.get(idinstitucion=request.session['id_institucion'])
+					nuevoConcurso.estado=1
+					nuevoConcurso.ranking=0
+					nuevoConcurso.save()
+
+					lenl = 0;
+					lenl = len(request.POST.getlist("mileReq"))
+
+					print lenl
+					for i in range(0, lenl):
+						mile = MilestoneConcurso()
+						mile.fecha_entrega= request.POST.getlist("mileFecha")[i]
+						mile.peso = request.POST.getlist("milePeso")[i]
+						mile.requerimiento = request.POST.getlist("mileReq")[i]
+						mile.estado = 1;
+						mile.idConcurso = nuevoConcurso;
+						mile.save()
+
+					info="Concurso creado correctamente"
+					return HttpResponseRedirect('/homeConcursos')
+
+				else:
+					info="Error Datos incorrectos"
+			else:
+				info="Error Datos incorrectos"
+
+			form = CrearConcursoForm()
+			messages.success(request, info)
+			return HttpResponseRedirect('/crearConcurso')
 			
-			lenl = 0;
-			lenl = len(request.POST.getlist("mileReq"))
-			
-			print lenl
-			for i in range(0, lenl):
-				mile = MilestoneConcurso()
-				mile.fecha_entrega='2000-12-12'
-				mile.peso = request.POST.getlist("milePeso")[i]
-				mile.requerimiento = request.POST.getlist("mileReq")[i]
-				mile.estado = 1;
-				mile.idConcurso = nuevoConcurso;
-				mile.save()
-			
-			info="Concurso creado correctamente"
-			return HttpResponseRedirect('/homeConcursos')
 		else:
-			info="Error Datos incorrectos"
+			form=CrearConcursoForm()
 
-		form = CrearConcursoForm()
-		messages.success(request, info)
-		return HttpResponseRedirect('/crearConcurso')
+		args={}
+		args.update(csrf(request))
+		args['form']=form
+		return render_to_response('CONCURSO_crear_concurso.html', args,context_instance=RequestContext(request))
 	else:
-		form=CrearConcursoForm()
-
-	args={}
-	args.update(csrf(request))
-	args['form']=form
-	return render_to_response('CONCURSO_crear_concurso.html', args,context_instance=RequestContext(request))
+		return HttpResponseRedirect('/homeConcursos')
 
 @login_required(login_url='/ingresar/')
 def verConcurso(request):
 	idcon = int(request.GET.get('q', ''))
 	concurso=Concurso.objects.get(idConcurso = idcon)
+	milestones = MilestoneConcurso.objects.all().filter(idConcurso = idcon)
+	concursousuario=Concurso.objects.get(idConcurso = idcon).idusuario.id
 	args = {}
 	args['concurso'] = concurso
-	print concurso.descripcion
+
+	if (concursousuario == request.session['id_user']):
+		val = True;
+	else:
+		val = False;
+	print "Probado"
+	print concursousuario
+	print request.session['id_user']
+	print val
+	args['val'] = val
+	args['milestones'] = milestones
+	args['nums'] = range(len(milestones))
 	return render_to_response('CONCURSO_perfil.html', args)
 
 @login_required(login_url='/ingresar/')
 def editarConcurso(request):
-	idcon = int(request.GET.get('q', ''))
-	print 'HERE HELLO!!!'
-	print idcon
-	if request.method == 'POST':
-		concurso=Concurso.objects.get(idConcurso = idcon)
-		form = CrearConcursoForm(request.POST, request.FILES, instance=concurso)
-		if form.is_valid() :
-			print 'Yeah'
-			form.save()
-			return HttpResponseRedirect('/homeConcursos')
+	if(request.session["tipo"]=="institucion"):
+		idcon = int(request.GET.get('q', ''))
+		print 'HERE HELLO!!!'
+		print idcon
+		if request.method == 'POST':
+			concurso=Concurso.objects.get(idConcurso = idcon)
+			form = EditarConcursoForm(request.POST, request.FILES, instance=concurso)
+			if form.is_valid() :
+				print 'Yeah'
+				form.save()
+				return HttpResponseRedirect('/homeConcursos')
+			else:
+				concursoForm = EditarConcursoForm(instance=concurso)
 		else:
-			concursoForm = CrearConcursoForm(instance=concurso)
+			print 'oh no'
+			concurso=Concurso.objects.get(idConcurso = idcon)
+			print concurso.idusuario
+			print request.session['id_user']
+			if (concurso.idusuario.id != request.session['id_user']):
+				return HttpResponseRedirect('/homeConcursos')
+			concursoForm = EditarConcursoForm(instance=concurso)
+			
+		args={}
+		args.update(csrf(request))
+		args['form']=concursoForm
+		args['idconcu'] = idcon
+		print concurso.nombre
+		return render_to_response('CONCURSO_editar_concurso.html', args)
 	else:
-		print 'oh no'
-		concurso=Concurso.objects.get(idConcurso = idcon)
-		concursoForm = CrearConcursoForm(instance=concurso)
-		
-	args={}
-	args.update(csrf(request))
-	args['form']=concursoForm
-	print concurso.nombre
-	return render_to_response('CONCURSO_editar_concurso.html', args)
-
-@login_required(login_url='/ingresar/')
-def homeIncubacion(request):
-	lst_incubacion = Incubacion.objects.all().filter(idusuario=request.session['id_user'])[:8]
-	return render_to_response('INCUBACION_inicio.html',{'lst_incubacion' : lst_incubacion},context_instance=RequestContext(request))
-
-    
-@login_required(login_url='/ingresar/')
-def verIncubacion(request):
-	idincu = int(request.GET.get('q', ''))
-	incubacion=Incubacion.objects.get(idIncubacion = idincu)
-	args = {}
-	args['incubacion'] = incubacion
-	print incubacion.descripcion
-	return render_to_response('INCUBACION_perfil.html',args)
-    
-@login_required(login_url='/ingresar/')    
-def crearIncubacion(request):
-	if request.POST: #POST
-		form = CrearIncubacionForm(request.POST, request.FILES)
-
-		if form.is_valid():
-			nuevoIncubacion=super(CrearIncubacionForm, form).save(commit=False)
-			nuevoIncubacion.idusuario=Persona.objects.get(idpersona=request.session['id_persona'])
-			nuevoIncubacion.estado=1
-			nuevoIncubacion.save()
-			return HttpResponseRedirect('/homeIncubacion')
-		else:
-			form = CrearIncubacionForm()
-	else:
-		form=CrearIncubacionForm()
-
-	args={}
-	args.update(csrf(request))
-	args['form']=form
-	return render_to_response('INCUBACION_crear.html', args)
+		return HttpResponseRedirect('/homeConcursos')
 
 
-@login_required(login_url='/ingresar/')
-def editarIncubacion(request):
-	idincu = int(request.GET.get('q', ''))
-	print 'HERE HELLO!!!'
-	print idincu
-	if request.method == 'POST':
-		incubacion=Incubacion.objects.get(idIncubacion = idincu)
-		form = CrearIncubacionForm(request.POST, request.FILES, instance=incubacion)
-		if form.is_valid() :
-			print 'Yeah'
-			form.save()
-			return HttpResponseRedirect('/homeIncubacion')
-		else:
-			incubacionForm = CrearIncubacionForm(instance=incubacion)
-	else:
-		print 'oh no'
-		incubacion=Incubacion.objects.get(idIncubacion = idincu)
-		incubacionForm = CrearIncubacionForm(instance=incubacion)
-		
-	args={}
-	args.update(csrf(request))
-	args['form']=incubacionForm
-	print incubacion.nombre
-	return render_to_response('INCUBACION_editar_incubacion.html', args)
+def validarfechas(fechaIn, fechaOut):
+	if fechaIn:
+		if fechaOut:
+			if fechaIn < fechaOut:
+				return True
+	return False
+
+def compararIds(idA, idB):
+	print idA
+	print idB
+	if idA is idB:
+		return True
+	return False
+
+
 

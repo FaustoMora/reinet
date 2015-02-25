@@ -121,9 +121,10 @@ class PersonaForm(UserCreationForm):
 	first_name=forms.CharField(label='Nombres',widget=forms.TextInput(attrs={'class': 'form-control','placeholder':'Nombre'}))
 	last_name=forms.CharField(label='Apellidos',widget=forms.TextInput(attrs={'class': 'form-control','placeholder':'Apellidos'}))
 	email=forms.EmailField(label='Correo Electrónico',widget=forms.TextInput(attrs={'class': 'form-control','placeholder':'Ingrese su dirección de Correo electrónico'}))	
-	identificacion=forms. IntegerField(label='Identificación',widget=forms.TextInput(attrs={'class': 'form-control','placeholder':'Número de cédula o pasaporte'}))	
+	identificacion=forms. IntegerField(label='Identificación',widget=forms.TextInput(attrs={'class': 'form-control','pattern':"[0-9]{1,15}",'placeholder':'Número de cédula o pasaporte'}))	
+	password1=forms.CharField(label='Contraseña',widget=forms.PasswordInput(attrs={'class': 'form-control','placeholder':'Confirmacion'}))
 	password2=forms.CharField(label='Confirmación de Contraseña',widget=forms.PasswordInput(attrs={'class': 'form-control','placeholder':'Confirmacion'}))
-	#imagen = forms.ImageField(label="Imagen Perfil",widget=forms.FileInput(attrs={'class':'btn btn-default','data-trigger':'focus','data-placement':'left','data-toggle':'popover'}))
+	imagen = forms.ImageField(label="Imagen de Perfil",widget=forms.FileInput())
 
 	def save(self, commit=True):
 		user=super(PersonaForm, self).save(commit=False)
@@ -159,6 +160,12 @@ class PersonaEditarForm(forms.ModelForm):
 			'areas_interes': forms.TextInput(attrs={'class': 'form-control','placeholder':'Areas de Interés'}),
 
 		}
+
+	first_name=forms.CharField(label='Nombres',widget=forms.TextInput(attrs={'class': 'form-control','placeholder':'Nombre'}))
+	last_name=forms.CharField(label='Apellidos',widget=forms.TextInput(attrs={'class': 'form-control','placeholder':'Apellidos'}))
+	email=forms.EmailField(label='Correo Electrónico',widget=forms.TextInput(attrs={'class': 'form-control','placeholder':'Ingrese su dirección de Correo electrónico'}))	
+	identificacion=forms. IntegerField(label='Identificación',widget=forms.TextInput(attrs={'class': 'form-control','pattern':"[0-9]{1,15}",'placeholder':'Número de cédula o pasaporte'}))	
+	
 
 	def clean(self):
 		return self.cleaned_data

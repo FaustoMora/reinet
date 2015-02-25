@@ -78,9 +78,9 @@
              
               <li>
                 <p class="text-muted">
-                  <img src="/media/{{ MEDIA_URL }}{{ persona.imagen }}" alt="...">
+                  <img src="/media/{{ MEDIA_URL }}{{ msj.imgEm }}" alt="...">
                     Para: <a href="verPerfil/?q={{msj.idDestino}}">{{msj.idDestino}}</a><br />
-                    <small>5 days ago</small>
+                    <small>{{msj.fecha}}</small>
                 </p>
                 <p class="text-muted">
                   <a href="/verMensaje/?q={{msj.id}}" class="inbox-dialog">{{msj.txtMensaje}}</a>

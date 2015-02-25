@@ -44,29 +44,32 @@
           <div class="pm bottom-15">
             <div class="media">
               <a class="pull-left" href="#">
-                <img class="media-object" src="{{MEDIA_URL}}{{persona.imagen}}" alt="...">
+                <img class="media-object" src="{{MEDIA_URL}}{{msj.imgEm}}" alt="...">
               </a>
               <div class="media-body">
                 <p><a href="/verPerfil/?q={{msj.idEmisor}}">{{user1.first_name}} {{user1.last_name}} </a></p>
                 <p>
                   {{msj.txtMensaje}}
                 </p>
-              <!--   <ul class="text-muted list-inline">
-                  <li><i class="fa fa-clock-o"></i> 55 minutes ago</li>
-                  <li><i class="fa fa-trash-o"></i> <a href="#">Delete</a></li>
-                  <li><i class="fa fa-ban"></i> <a href="#">Block this user</a></li>
-                </ul> -->
+                 <ul class="text-muted list-inline">
+                  <li><i class="fa fa-clock-o"></i> {{msj.fecha}}</li>
+                 <!--  <li><i class="fa fa-trash-o"></i> <a href="#">Delete</a></li>
+                  <li><i class="fa fa-ban"></i> <a href="#">Block this user</a></li> -->
+                </ul> 
               </div>
             </div>
           </div>
           <div class="message-answer">
             <img src="{{MEDIA_URL}}{{yo.imagen}}" alt="..." class="hidden-xs">
-            <form role="form">
+            <form role="form" method="POST" action="/enviarmensaje/">
+              {%csrf_token%}
               <div class="form-group">
-                <label for="message" class="sr-only">Message</label>
-                <textarea class="form-control" rows="3" id="message" placeholder="Use this form to send your answer"></textarea>
+                <input id="id_recibe" name="recibe" type="hidden" value="{{msj.idEmisor}}"/>
+                <input name="asunto" id="id_asunto" type="hidden" value="{{msj.asunto}}"/>
+                <label for="message" class="sr-only">Mensaje</label>
+                <textarea class="form-control" rows="3" id="id_txtMensaje" name="txtMensaje" placeholder="Usa este espacio para tu respuesta"></textarea>
               </div>
-              <button type="button" class="btn btn-green">Send message</button>
+              <button type="submit" class="btn btn-green">Responder</button>
             </form>
             <div class="clearfix"></div>
           </div>

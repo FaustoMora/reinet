@@ -55,23 +55,17 @@
           <!-- List of recent dialogs -->
           <h2><span>{{tipoB}}</span></h2>
           <div class="pm-search">
-            <form role="form">
+            <form role="form" method='GET' action="/{{linkTipo}}/">
               <div class="row">
                 <div class="col-sm-12 col-md-10">
                   <div class="input-group">
 
-
-                    <form method='GET'>
-                    {%csrf_token%}
-
-                    
-
-                      <input type="text" class="form-control" name="q" id="pm-search" placeholder="Ingresa tu búsqueda aquí">
+                      
+                     <input type="text" class="form-control" name="q" id="pm-search" placeholder="Ingresa tu búsqueda aquí">
                       <span class="input-group-btn">
                       <input type="submit" class="btn btn-dark" value="Buscar">
                       </span>
-                    </form>
-
+                    
 
                   </div>
                 </div>
@@ -82,35 +76,36 @@
             <ul>
               {% if name %}
                 <h2>Resultados para "{{ name|escape }}":</h2>
+                {%if results1 or results2 or results3 or resultsUser %}
                 {% if results1 %}
                   <h3>Ofertas</h3>
                   {%for val in results1 %}
                   
                   <li>
                     <p class="text-muted">
-                      <h4><a href="/misOfertas/">{{ val.nombre|escape }}</a>    
+                      <h4><a href="/verOferta/?q={{val.idOferta}}">{{ val.nombre|escape }}</a>    
                       <p>Descripción: {{val.descripcion|escape}}</p>
                       <p>Dominio: {{val.dominio|escape}}</p></h4>
                     <div class="clearfix"></div>
                     </p>
                   </li>
                   {%endfor%}
-
-                {% elif results2 %}
+                  {%endif%}
+                {% if results2 %}
                   <h3>Demandas</h3>
                   {%for val in results2%}
 
                   <li>
                     <p class="text-muted">
-                      <h4><a href="/misDemandas/">{{ val.nombre|escape }}</a>    
+                      <h4><a href="/verDemanda/?q={{val.idDemanda}}">{{ val.nombre|escape }}</a>    
                       <p>Descripción: {{val.descripcion|escape}}</p>
                       <p>Dominio: {{val.dominio|escape}}</p></h4>
                     <div class="clearfix"></div>
                     </p>
                   </li>
                   {%endfor%}
-
-                {% elif results3 %}
+                  {%endif%}
+                {% if results3 %}
                   <h3>Concursos</h3>
                   {%for val in results3%}
                   <li>
@@ -123,8 +118,8 @@
                     </p>
                   </li>
                   {%endfor%}
-
-                 {% elif resultsUser %}
+                  {%endif%}
+                 {% if resultsUser %}
                   <h3>Usuarios</h3>
                   {%for val in resultsUser%}
                   <li>
@@ -136,7 +131,7 @@
                     </p>
                   </li>
                   {%endfor%}
-                  
+                  {%endif%}
                 {% else %}
                   <p>No se encontraron similitudes</p>
                 {% endif %}

@@ -28,14 +28,21 @@
           -->
         </div>
       </div>
+      
       <ul class="row list-inline gallery-list" id="isotope-container">
         {% if lst_concursos %}
-        <h3>Concursos</h3>
-        <p>Es tu turno de participar en cualquiera de los concursos que aparecen a continuación.</p>
+        <div class="row">
+        <div class="col-md-12 block-header">
+          <h2>
+            <span class="title">Concursos destacados</span><span class="decoration"></span><span class="decoration"></span><span class="decoration"></span>
+          </h2>
+        </div>
+      </div>
+        <p> &nbsp;&nbsp;&nbsp;&nbsp;Es tu turno de participar en cualquiera de los concursos que aparecen a continuación.</p>
           {% for c in lst_concursos%}
           
            <li class="isotope-item cat-1 cat-2 cat-4">
-                <a href="verConcurso/?q={{c.idConcurso}}">
+                <a href="/verConcurso/?q={{c.idConcurso}}">
                   <span class="gallery-thumbnail">
                     <img class="img-responsive" src="{{MEDIA_URL}}{{ c.imagen }} " alt="...">
                   </span>
@@ -47,33 +54,46 @@
               </li>
           
           {% endfor %}
-
-        {% elif lst_demandas %}
-        <h3>Demandas</h3>
+          {%endif%}
+        {% if lst_demandas %}
+        <div class="row">
+        <div class="col-md-12 block-header">
+          <h2>
+            <span class="title">Demandas destacadas</span><span class="decoration"></span><span class="decoration"></span><span class="decoration"></span>
+          </h2>
+        </div>
+        </div>
           {% for d in lst_demandas%}
           
            <li class="isotope-item cat-1 cat-2 cat-4">
-                <a href="verDemanda/">
+                <a href="/verDemanda/?q={{d.idDemanda}}">
                   <span class="gallery-thumbnail">
-                    <!--<img class="img-responsive" src="{{MEDIA_URL}}{{ d.imagen }} " alt="...">-->
+                    <img class="img-responsive" src="{{MEDIA_URL}}{{ d.imagen }} " alt="...">
                   </span>
                   <span class="gallery-text">
                     <span class="gallery-title">{{ d.nombre }}</span>
-                    {{ d.descripcion }} 
+                    Descripci&oacute;n: {{ d.descripcion }} 
                   </span>
                 </a>
               </li>
           
           {% endfor %}
+          {%endif%}
+        {% if lst_ofertas %}
 
-        {% elif lst_ofertas %}
-        <h3>Ofertas</h3>
+        <div class="row">
+        <div class="col-md-12 block-header">
+          <h2>
+            <span class="title">Ofertas destacadas</span><span class="decoration"></span><span class="decoration"></span><span class="decoration"></span>
+          </h2>
+        </div>
+        </div>
           {% for o in lst_ofertas%}
           
            <li class="isotope-item cat-1 cat-2 cat-4">
-                <a href="verOferta/">
+                <a href="verOferta/?q={{o.idOferta}}">
                   <span class="gallery-thumbnail">
-                    <!--<img class="img-responsive" src="{{MEDIA_URL}}{{ d.imagen }} " alt="...">-->
+                    <img class="img-responsive" src="{{MEDIA_URL}}{{o.imagen }} " alt="...">
                   </span>
                   <span class="gallery-text">
                     <span class="gallery-title">{{ o.nombre }}</span>
@@ -83,8 +103,9 @@
               </li>
           
           {% endfor %}
+
         {% elif lst_incubaciones %}
-        <h3>Incubaciones</h3>
+        <h3>&nbsp;&nbsp;&nbsp;&nbsp;Incubaciones</h3>
           {% for i in lst_incubaciones%}
           
            <li class="isotope-item cat-1 cat-2 cat-4">
