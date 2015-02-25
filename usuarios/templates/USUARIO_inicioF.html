@@ -28,10 +28,17 @@
           -->
         </div>
       </div>
+      
       <ul class="row list-inline gallery-list" id="isotope-container">
         {% if lst_concursos %}
-        <h3>Concursos</h3>
-        <p>Es tu turno de participar en cualquiera de los concursos que aparecen a continuación.</p>
+        <div class="row">
+        <div class="col-md-12 block-header">
+          <h2>
+            <span class="title">Concursos destacados</span><span class="decoration"></span><span class="decoration"></span><span class="decoration"></span>
+          </h2>
+        </div>
+      </div>
+        <p> &nbsp;&nbsp;&nbsp;&nbsp;Es tu turno de participar en cualquiera de los concursos que aparecen a continuación.</p>
           {% for c in lst_concursos%}
           
            <li class="isotope-item cat-1 cat-2 cat-4">
@@ -49,7 +56,8 @@
           {% endfor %}
 
         {% elif lst_demandas %}
-        <h3>Demandas</h3>
+        
+        <h3>&nbsp;&nbsp;&nbsp;&nbsp;Demandas</h3>
           {% for d in lst_demandas%}
           
            <li class="isotope-item cat-1 cat-2 cat-4">
@@ -67,11 +75,11 @@
           {% endfor %}
 
         {% elif lst_ofertas %}
-        <h3>Ofertas</h3>
+        <h3>&nbsp;&nbsp;&nbsp;&nbsp;Ofertas</h3>
           {% for o in lst_ofertas%}
           
            <li class="isotope-item cat-1 cat-2 cat-4">
-                <a href="verOferta/">
+                <a href="verOferta/?q={{o.idOferta}}">
                   <span class="gallery-thumbnail">
                     <!--<img class="img-responsive" src="{{MEDIA_URL}}{{ d.imagen }} " alt="...">-->
                   </span>
@@ -84,7 +92,7 @@
           
           {% endfor %}
         {% elif lst_incubaciones %}
-        <h3>Incubaciones</h3>
+        <h3>&nbsp;&nbsp;&nbsp;&nbsp;Incubaciones</h3>
           {% for i in lst_incubaciones%}
           
            <li class="isotope-item cat-1 cat-2 cat-4">

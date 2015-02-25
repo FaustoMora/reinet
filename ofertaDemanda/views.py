@@ -117,9 +117,28 @@ def crearDemanda(request):
     args['form']=form
     return render_to_response('DEMANDA_crear_demanda.html',args)    
 	
-@login_required(login_url='/ingresar/') 
+@login_required(login_url='/ingresar/')
 def verOferta(request):
-    return render_to_response('OFERTA_perfil.html')
+    idof = int(request.GET.get('q', ''))
+    oferta=Oferta.objects.get(idOferta = idof)
+    imagenes= ImagenOferta.objects.all().filter(idOferta = idof)
+    ofertaUsuario=Oferta.objects.get(idOferta = idof).idusuario.id
+	
+    args = {}
+    args['oferta'] = oferta
+
+    if (ofertaUsuario == request.session['id_user']):
+	    val = True;
+    else:
+	    val = False;
+    print "Probado"
+    print ofertaUsuario
+    print request.session['id_user']
+    print val
+    args['val'] = val
+    args['imagenes'] = imagenes
+    args['nums'] = range(len(imagenes))
+    return render_to_response('OFERTA_perfil.html', args)
 
 
 @login_required(login_url='/ingresar/') 
