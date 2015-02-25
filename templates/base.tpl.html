@@ -22,6 +22,7 @@
   <link href="{% static 'css/custom.css' %}" type="text/css" rel="stylesheet"/>
   <link href="{% static 'fonts/font-awesome-4.0.3/css/font-awesome.min.css' %}" type="text/css" rel="stylesheet"/>
   <link href="{% static 'isotope/css/style.css'%}" rel="stylesheet">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
   <!--<link rel="stylesheet" type="text/css" href="css/animate.css" />
   <link rel="stylesheet" type="text/css" href="css/elements.css" />
   <link rel="stylesheet" type="text/css" href="css/custom.css" />
@@ -47,13 +48,13 @@
           <span class="icon-bar"></span>
         </button>
         {% block home %}
-        <a class="navbar-brand" href="{% url 'usuarios.views.inicio_view' %}" class="link">REI-NET</a>
+        <a class="navbar-brand" href="{% url 'usuarios.views.verInicioF' %}" class="link">REI-NET</a>
         {% endblock %}
       </div>
       <div class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
           <li class="dropdown active">
-            <a  href="{% url 'usuarios.views.inicio_view' %}" >Inicio </a>
+            <a  href="{% url 'usuarios.views.verInicioF' %}" >Inicio </a>
           </li>
           <li class="dropdown hidden-sm">
             <a href="{% url 'ofertaDemanda.views.homeOfertas' %}" >OFERTAS </a>
@@ -94,18 +95,30 @@
 </li>
 <li id="mensajes" class="show"><a href="{% url 'usuarios.views.mensajes_view' %}" class="link">Mensajes</a></li>
 {% endblock %}
+
+{% block search %}
           <!-- Search Button -->
           <li id="search">
-            <a href="#" id="search-btn"><i class="fa fa-search" id="search-icon"></i> Search</a>
+            <a href="#" id="search-btn"><i class="fa fa-search" id="search-icon"></i> Buscar</a>
             <div class="search-box hidden" id="search-box">
               <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search">
-                <span class="input-group-btn">
-                  <button class="btn btn-default" type="button">Go!</button>
-                </span>
+
+                <form method='GET' action="/busqueda/">
+                  
+
+                  <input type="text" name="q" class="form-control" placeholder="Búsqueda">
+                  <span class="input-group-btn">
+                    
+                      <input class="btn btn-default" type="submit" value="Ir!">
+                    
+                  </span>
+                </form>
+
               </div>
             </div>
           </li>
+{% endblock %}
+
         </ul>
       </div>
     </div>
@@ -125,11 +138,10 @@
           <div class="headline"><h3>Cont&aacute;ctanos</h3></div>
           <div class="content">
             <p>
-              San Francisco, CA 94101<br />
-              1987 Lincoln Street<br />
-              Phone: +0 000 000 00 00<br />
-              Fax: +0 000 000 00 00<br />
-              Email: <a href="#">admin@mysite.com</a>
+              Guayaquil, GYE<br />
+              Nueva Prosperina<br />
+              Phone: +0 000 000 00 00<br />             
+              Email: <a href="#">admin@espol.edu.ec</a>
             </p>
           </div>
         </div>

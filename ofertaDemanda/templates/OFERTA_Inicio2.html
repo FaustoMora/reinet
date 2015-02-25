@@ -1,11 +1,11 @@
 
 {% extends "base.tpl.html" %}
 {% block home %}
-<a class="navbar-brand" href="{% url 'usuarios.views.inicio_view' %}" class="link">REI-NET</a>
+<a class="navbar-brand" href="{% url 'usuarios.views.verInicioF' %}" class="link">REI-NET</a>
 {% endblock %}
 {% block content %}
 
-	 <div class="section-header">
+   <div class="section-header">
       <div class="container">
         <div class="row">
           <div class="col-sm-12">
@@ -29,14 +29,22 @@
         </div>
 
         <div class="col-md-6 col-sm-9">
-          <form class="form-inline" role="form">
+        {%if errors%}
+          <ul style="color:red">
+            {%for error in errors %}
+            <li>{{error}}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+          <form class="form-inline" action="/search/" method="GET" role="form">
             <div class="row">
               <div class="col-md-10 col-sm-10">
                 <div class="input-group">
                   <label class="sr-only" for="search3">Search</label>
-                    <input type="text" class="form-control " id="search3" placeholder="Encuentre ofertas de su inter&eacute;s">
+                    <input type="text" class="form-control " id="search3" name="busquedaOfertaRed" placeholder="Encuentre ofertas de su inter&eacute;s">
                   <span class="input-group-btn">
-                    <button type="submit" class="btn btn-blue">Buscar</button>
+                    <input type="submit" class="btn btn-blue" value="Buscar">
+                    <!--<button type="submit" class="btn btn-blue">Buscar</button>-->
                   </span>
                 </div>
               </div>
@@ -61,47 +69,71 @@
 
       <!-- Se presenta las ofertas --> 
          {% for c in lst_ofertas %}
-
-         {% if c.idusuario|stringformat:"s" != persona|stringformat:"s"  %}
-
-            <div class="col-md-3 col-sm-6">
-                <div class="thumbnail">
-                  <img class="img-responsive" src="{{MEDIA_URL}}{{ c.imagen }} " alt="Oferta">
-                  <div class="visit"><a href="verOferta"><i class="fa fa-question-circle"></i> Ver Oferta</a></div>
-                  <div class="caption">
-                    <h4>{{c.nombre}}</h4>
-                    <div class="rating">
-                        {{c.calificacionGeneral}}
-                        <i class="fa fa-star"></i> 
-                        <i class="fa fa-star"></i> 
-                        <i class="fa fa-star"></i> 
-                        <i class="fa fa-star"></i> 
-                        <i class="fa fa-star"></i>
+                <div class="col-md-3 col-sm-6">
+                    <div class="thumbnail">
+                      <img class="img-responsive" src="{{MEDIA_URL}}{{ c.imagen }} " alt="Oferta">
+                      <div class="visit"><a href="verOferta"><i class="fa fa-question-circle"></i> Ver Oferta</a></div>
+                      <div class="caption">
+                        <h4>{{c.nombre}}</h4>
+                        <div class="rating">
+                            {{c.calificacionGeneral}}
+                            <i class="fa fa-star"></i> 
+                            <i class="fa fa-star"></i> 
+                            <i class="fa fa-star"></i> 
+                            <i class="fa fa-star"></i> 
+                            <i class="fa fa-star"></i>
+                          </div>
+                        <ul class="text-muted list-inline">
+                          <li><i class="fa fa-user"></i> <a href="#">Administrator {{c.idusuario}}</a></li>
+                          <li><i class="fa fa-calendar"></i> {{c.tiempo_inicio_disponible}}</li>
+                          <li><i class="fa fa-comments-o"></i> 6 comments</li>
+                        </ul>
+                          
+                        <p>{{c.descripcion}}</p>
                       </div>
-                    <ul class="text-muted list-inline">
-                      <li><i class="fa fa-user"></i> <a href="#">Administrator {{c.idusuario}}</a></li>
-                      <li><i class="fa fa-calendar"></i> {{c.tiempo_inicio_disponible}}</li>
-                      <li><i class="fa fa-comments-o"></i> 6 comments</li>
-                    </ul>
-                      
-                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam.</p>
-                  </div>
+                    </div>
                 </div>
-            </div>
+          {% endfor %}
+
+          {% if buscarOfer %}
+          <p>Has buscado por: <strong>{{ nombre }}</strong></p>
+            {% if ofertas %}
+                <p>Encontrado {{ ofertas|length }} Ofertas {{ ofertas|pluralize }}.</p>
+                {% for ofert in ofertas %}
+
+                    <div class="col-md-3 col-sm-6">
+                        <div class="thumbnail">
+                          <img class="img-responsive" src="{{MEDIA_URL}}{{ c.imagen }} " alt="Oferta">
+                          <div class="visit"><a href="verOferta"><i class="fa fa-question-circle"></i> Ver Oferta</a></div>
+                          <div class="caption">
+                            <h4>{{c.nombre}}</h4>
+                            <div class="rating">
+                                {{c.calificacionGeneral}}
+                                <i class="fa fa-star"></i> 
+                                <i class="fa fa-star"></i> 
+                                <i class="fa fa-star"></i> 
+                                <i class="fa fa-star"></i> 
+                                <i class="fa fa-star"></i>
+                              </div>
+                            <ul class="text-muted list-inline">
+                              <li><i class="fa fa-user"></i> <a href="#">Administrator {{c.idusuario}}</a></li>
+                              <li><i class="fa fa-calendar"></i> {{c.tiempo_inicio_disponible}}</li>
+                              <li><i class="fa fa-comments-o"></i> 6 comments</li>
+                            </ul>
+                              
+                            <p>{{c.descripcion}}</p>
+                          </div>
+                        </div>
+                    </div>
 
 
-          {% endif %}
-        {% endfor %}
-
+                    {% endfor %}
+            {% else %}
+                <p>Las Ofertas no concuerda con sus criterios de búsqueda.</p>    
+            {% endif %}
+          {%endif%}
         </div>      
         <div class="clearfix visible-sm"></div>               
       </div>
-
-
-                
-     
-
-      
-
     </div>  
   {% endblock %}

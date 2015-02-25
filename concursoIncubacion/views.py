@@ -26,16 +26,35 @@ def crearConcurso(request):
 			nuevoConcurso.idusuario=Persona.objects.get(idpersona=request.session['id_persona'])
 			nuevoConcurso.estado=1
 			nuevoConcurso.save()
+			
+			lenl = 0;
+			lenl = len(request.POST.getlist("mileReq"))
+			
+			print lenl
+			for i in range(0, lenl):
+				mile = MilestoneConcurso()
+				mile.fecha_entrega='2000-12-12'
+				mile.peso = request.POST.getlist("milePeso")[i]
+				mile.requerimiento = request.POST.getlist("mileReq")[i]
+				mile.estado = 1;
+				mile.idConcurso = nuevoConcurso;
+				mile.save()
+			
+			info="Concurso creado correctamente"
 			return HttpResponseRedirect('/homeConcursos')
 		else:
-			form = CrearConcursoForm()
+			info="Error Datos incorrectos"
+
+		form = CrearConcursoForm()
+		messages.success(request, info)
+		return HttpResponseRedirect('/crearConcurso')
 	else:
 		form=CrearConcursoForm()
 
 	args={}
 	args.update(csrf(request))
 	args['form']=form
-	return render_to_response('CONCURSO_crear_concurso.html', args)
+	return render_to_response('CONCURSO_crear_concurso.html', args,context_instance=RequestContext(request))
 
 @login_required(login_url='/ingresar/')
 def verConcurso(request):

@@ -1,0 +1,97 @@
+{% extends "USUARIO_perfilinstitucion.html" %}
+{% block contenidoUsuario %}
+        <div class="col-sm-8 col-md-6">
+          <!-- Edit profile form -->
+          <h3 class="hl" id="tituloNombre">Editar Perfil de Institución</h3>
+          <p class="text-muted">Por favor llena correctamente los campos para editar tu perfil.</p>
+          <hr>
+          <h4 class="hl bottom-15">Informaci&oacute;n General</h4>
+          <form role="form" action="/editarperfil/" method="POST" enctype="multipart/form-data">
+            {%csrf_token%}
+            {%for f in institucionform %}
+                    
+                             {%if f.id_for_label == "id_username"%}
+
+                         <!--     <div class="form-group">
+                             {{f.errors}}
+                             {{f.label_tag}}<br>
+                             <input type="text" class="form-control" id="id_username" name="username" placeholder="Username"/>
+                             </div> -->
+                             {%elif f.id_for_label == "id_password1"%}
+                            <!--  <div class="form-group">
+                             {{f.errors}}
+                             {{f.label_tag}}<br>
+                             <input type="password" class="form-control" id="id_password1" name="password1" placeholder="Password" />
+                            </div> -->
+                             {%elif f.id_for_label == "id_password2"%}
+                           <!--  <div class="form-group">
+
+                            {{f.errors}}
+
+                            {{f.label_tag}}<br>
+
+                             <input type="password" class="form-control" id="id_password2" name="password2" placeholder="Confirma Password"/>
+
+                            </div> -->
+                             {%else%}
+
+                             <div class="form-group">
+                             
+                             {{f.errors}}
+
+                             {{f.label_tag}}<br>
+                             {{ f }}
+                             </div>
+                             {%endif%}
+                    {%endfor%} 
+                  
+                  {% if form.errors %}
+                   {% for field in form %}
+                      {% for error in field.errors %}
+                      <div >
+                          <strong>{{ error|escape }}</strong>
+                      </div>
+                   {% endfor %}
+                  {% endfor %}
+                   {% for error in form.non_field_errors %}
+                       <div >
+                              <strong>{{ error|escape }}</strong>
+                          </div>
+                      {% endfor %}
+                  {% endif %}
+            <button type="submit" class="btn btn-green pull-right">Aceptar</button>
+            <div class="clearfix"></div>
+          </form>
+          <!-- <h4 class="hl bottom-15">Configuraci&oacute;n del Perfil</h4>
+          <hr>
+          <form role="form">
+            <div class="form-group">
+              <label>Notificaciones</label>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox"> Marque esta casilla si desea dejar de recibir notificaciones.
+                </label>
+              </div>
+            </div>
+            <hr>
+            <div class="form-group">
+              <label>Aceptar e-mails</label>
+              <p class="text-muted">Desea recibir e-mails de otros usuarios?</p>
+              <label class="radio-inline" for="radios-0">
+                <input type="radio" name="radios" id="radios-0" value="Si" checked="checked">
+                  Yes
+              </label>
+              <label class="radio-inline" for="radios-1">
+                <input type="radio" name="radios" id="radios-1" value="No">
+                  No
+              </label>
+            </div>
+            <hr>
+            <button type="submit" class="btn btn-green pull-right">Aceptar</button>
+          </form> -->
+
+        </div>
+{%endblock%}
+
+ {%block galeriaUsuario%}
+ {%endblock%}

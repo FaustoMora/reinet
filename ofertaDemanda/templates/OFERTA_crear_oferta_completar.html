@@ -1,0 +1,142 @@
+ {% extends "base.tpl.html" %}
+{%block content%}
+
+<style>
+  .fixpadding{
+    padding: 0;
+  }
+  .leftpadding{
+    padding-left:10px; 
+  }
+
+  .rightpadding{
+    padding-right:10px; 
+  }
+</style>
+
+<div class="section-header">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12">
+            <!-- Remove the .animated class if you don't want things to move -->
+            <h1 class="animated slideInLeft"><span>Crear Ofertas</span></h1>
+          </div>
+        </div>
+      </div>
+    </div>
+<div class="container">
+      <!-- Help Center -->
+      <div class="row">
+        <!-- Profile Menu -->
+        <div class="col-sm-3 col-md-3 col-xs-3">
+          <div class="user-menu bottom-15">
+            <ul>
+              <li>
+                <a href="/homeOfertas/">
+                  <i class="sign fa fa-sign-out bg-amethyst"></i> Cancelar <i class="fa fa-chevron-right pull-right"></i>
+                </a>  
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-sm-9 col-md-8 col-xs-9">
+
+            {% if messages %}
+				    {% for message in messages %}
+						<div class="col-md-12">
+							<div class="alert alert-success h4">
+							<p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+							</div>
+						</div>
+				    {% endfor %}
+			     {% endif %}
+
+          <!-- Edit profile form -->
+          <h3 class="hl">CREAR OFERTA</h3>
+
+          <p class="text-muted">Por favor complete los datos de su Oferta</p>
+          <hr>
+          <ul class="nav nav-tabs">
+                <li class="active"><a href="#informacionG" data-toggle="tab"><h5>Información General</h5></a></li>
+                <li ><a href="#perfiles" data-toggle="tab"><h5>Perfiles</h5></a></li>
+                <li><a href="#otros" data-toggle="tab"><h5>Otra informaci&oacute;n</h5></a></li>
+              </ul>
+  
+
+        <form role="form" id="formulario" action="/completarOferta/" method="POST" enctype="multipart/form-data" notvalidate>   
+
+             <div class="tab-content">
+           <div class="tab-pane col-xs-10 col-xs-offset-1 active" id="informacionG">
+                <table class="table">
+                      <tbody>
+                          <tr>
+                            <td class="text-muted">Tipo</td>
+                            <td colspan=4 style="text-align:center">{{oferta.tipoOferta}}</td>
+                          </tr>
+                           <tr>
+                            <td class="text-muted">Nombre</td>
+                            <td colspan=4 style="text-align:center">{{oferta.nombre}}</td>
+                          </tr>
+                          <tr>
+                            <td class="text-muted">Descripcion</td>
+                            <td colspan=4 style="text-align:center">{{oferta.descripcion}}</td>
+                          </tr>
+                          <tr>
+                            <td class="text-muted">Dominio</td>
+                            <td colspan=4 style="text-align:center">{{oferta.dominio}}</td>
+                          </tr>
+                          <tr>
+                            <td class="text-muted">Subdominio</td>
+                            <td colspan=4 style="text-align:center">{{oferta.subdominio}}</td>
+                          </tr>
+                          <tr>
+                            <td class="text-muted">Palabras claves</td>
+                            <td colspan=4 style="text-align:center">{{oferta.palabras_claves}}</td>
+                          </tr>
+                          <tr>
+                            <td class="text-muted">Lugar de Aplicación</td>
+                            <td colspan=4 style="text-align:center">{{oferta.lugar_aplicacion}}</td>
+                          </tr>
+                          <tr>
+                            <td class="text-muted">Fecha disponibilidad</td>
+                            <td class="text-muted">Desde:</td>
+                            <td>{{oferta.tiempo_inicio_disponible}}</td>
+                            <td class="text-muted">Hasta:</td>
+                            <td>{{oferta.tiempo_fin_disponible}}</td>
+                          </tr>
+                      </tbody>
+                </table>  
+            </div>
+                               
+
+              {% csrf_token %}
+              {#{ form.as_p }#} 
+            <div class="tab-pane col-xs-10 col-xs-offset-1 " id="perfiles">
+              {% for f in form %} 
+                  {% if f.label == "Perfil del Beneficiario" or f.label == "Perfil del Cliente" %}
+                    <div class="form-group">
+                        <label>{{ f.label }}</label>
+                         {{ f }}
+                    </div>                  
+                  {% endif %}
+              {% endfor %}              
+            </div>   
+
+            <div class="tab-pane col-xs-10 col-xs-offset-1" id="otros">
+              {% for f in form %}
+                  {% if f.label == "Soluciones Alternativas" or f.label == "Propuestas de Valor" or f.label == "Evidencia de traccion" or f.label == "Cuadro de Tendencias Relativas"%}
+                    <div class="form-group">
+                        <label>{{ f.label }}</label>
+                         {{ f }}
+                    </div>
+                  {% endif %}
+              {% endfor %}
+              
+              </div>  
+
+              <input type="submit" class="btn btn-green pull-right" value="Completar Oferta"></input>      
+            </div> 
+        </form>
+        
+</div>
+{% endblock %}

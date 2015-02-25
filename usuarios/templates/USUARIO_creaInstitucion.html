@@ -22,9 +22,9 @@
     <div class="container">
       <div class="row">
         <div class="col-md-6 col-md-offset-3 signup">
-          <h3 class="hl top-zero">Registro</h3>
+          <h3 class="hl top-zero">Registro de Institución</h3>
           <hr>
-          <form role="form" action="/register/" method="post" enctype="multipart/form-data">{%csrf_token%}
+          <form role="form" action="/registerInst/" method="post" enctype="multipart/form-data">{%csrf_token%}
 
 <!--
             <div class="form-group">
@@ -90,8 +90,8 @@
               </div>
             </div>
 -->
-			 {{ form.non_field_errors }}
-			{%for f in form%}
+			 {{ form1.non_field_errors }}
+			{%for fi in form1 %}
 <!-- 
     <div  class="form-group">
        {{f.errors}}
@@ -99,25 +99,25 @@
      {{f}}
     </div> -->
 
- {%if f.id_for_label == "id_username"%}
+ {%if fi.id_for_label == "id_username"%}
 
  <div class="form-group">
- {{f.errors}}
- {{f.label_tag}}<br>
- <input type="text" class="form-control" id="id_username" name="username" placeholder="Nombre de Usuario"/>
+ {{fi.errors}}
+ {{fi.label_tag}}<br>
+ <input type="text" class="form-control" id="id_username" name="username" placeholder="Nombre de Usuario de Institución"/>
  </div>
- {%elif f.id_for_label == "id_password1"%}
+ {%elif fi.id_for_label == "id_password1"%}
  <div class="form-group">
- {{f.errors}}
- {{f.label_tag}}<br>
+ {{fi.errors}}
+ {{fi.label_tag}}<br>
  <input type="password" class="form-control" id="id_password1" name="password1" placeholder="Contraseña" />
 </div>
- {%elif f.id_for_label == "id_password2"%}
+ {%elif fi.id_for_label == "id_password2"%}
 <div class="form-group">
 
-{{f.errors}}
+{{fi.errors}}
 
-{{f.label_tag}}<br>
+{{fi.label_tag}}<br>
 
  <input type="password" class="form-control" id="id_password2" name="password2" placeholder="Confirme Contraseña"/>
 
@@ -126,10 +126,10 @@
 
  <div class="form-group">
  
- {{f.errors}}
+ {{fi.errors}}
 
- {{f.label_tag}}<br>
- {{ f }}
+ {{fi.label_tag}}<br>
+ {{ fi }}
  </div>
  {%endif%}
 		{%endfor%} 
