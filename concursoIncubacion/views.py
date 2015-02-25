@@ -113,7 +113,6 @@ def editarConcurso(request):
 		else:
 			print 'oh no'
 			concurso=Concurso.objects.get(idConcurso = idcon)
-			print "debug"
 			print concurso.idusuario
 			print request.session['id_user']
 			if (concurso.idusuario.id != request.session['id_user']):
@@ -123,6 +122,7 @@ def editarConcurso(request):
 		args={}
 		args.update(csrf(request))
 		args['form']=concursoForm
+		args['idconcu'] = idcon
 		print concurso.nombre
 		return render_to_response('CONCURSO_editar_concurso.html', args)
 	else:

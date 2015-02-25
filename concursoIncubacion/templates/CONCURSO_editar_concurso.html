@@ -29,15 +29,15 @@
         </div>
         <div class="col-sm-8 col-md-6">
                       
-      {% if messages %}
-            {% for message in messages %}
-            <div class="col-md-12">
-              <div class="alert alert-success h4">
-              <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
-              </div>
-            </div>
-            {% endfor %}
-      {% endif %}
+			{% if messages %}
+				    {% for message in messages %}
+						<div class="col-md-12">
+							<div class="alert alert-success h4">
+							<p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+							</div>
+						</div>
+				    {% endfor %}
+			{% endif %}
         
         
           <!-- Edit profile form -->
@@ -46,18 +46,18 @@
           <hr>
           <h4 class="hl bottom-15">Informaci&oacute;n General</h4>
 
-            <form role="form" id="formulario" method="POST" enctype="multipart/form-data">
+            <form role="form" id="formulario" action="/editarConcurso/?q={{idconcu}}"method="POST" enctype="multipart/form-data">
               {% csrf_token %}
               {#{ form.as_p }#}
               
               {% for f in form %}
               
-                  <div class="form-group">
-                      <label>{{ f.label }}</label>
-              <p>{{ f }}</p>
-                  </div>
+              		<div class="form-group">
+              				<label>{{ f.label }}</label>
+							<p>{{ f }}</p>
+              		</div>
             
-        
+				
               {% endfor %}
               
 
