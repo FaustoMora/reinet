@@ -69,7 +69,7 @@ class CrearOfertaForm(forms.ModelForm):
 
     dominio = forms.CharField(
         label="Dominio",
-        max_length=500,
+       # max_length=500,
         widget=forms.TextInput(
             attrs={'class':'form-control form-group infoGener', 'placeholder':'Ingrese el nombre de su oferta', 'required':'true'}
         )
@@ -77,7 +77,7 @@ class CrearOfertaForm(forms.ModelForm):
 
     subdominio = forms.CharField(
         label="Subdominio",
-        max_length=200,
+        #max_length=200,
         widget=forms.TextInput(
             attrs={'class':'form-control form-group infoGener', 'placeholder':'Ingrese el nombre de su oferta', 'required':'true'}
         )

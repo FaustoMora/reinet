@@ -11,8 +11,8 @@ class Demanda(models.Model):
     estadoDemanda= models.IntegerField()
     nombre = models.CharField(max_length=150L)
     descripcion = models.CharField(max_length=500L)
-    dominio = models.IntegerField()
-    subdominio = models.IntegerField()
+    dominio = models.CharField(max_length=500L)
+    subdominio = models.CharField(max_length=200L)
     palabras_claves = models.CharField(max_length=100L, db_column='palabras_Claves') # Field name made lowercase.
     tiempo_inicio_disponible = models.DateField(db_column='tiempo_Inicio_Disponible') # Field name made lowercase.
     tiempo_fin_disponible = models.DateField(db_column='tiempo_Fin_Disponible') # Field name made lowercase.
