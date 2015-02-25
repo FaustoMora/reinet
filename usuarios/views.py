@@ -18,10 +18,12 @@ from django.views.decorators.csrf import csrf_protect
 def index(request):
 	return render_to_response('USUARIO_index.html')
 
+
 def ingresar(request):
 	c={}
 	c.update(csrf(request))
 	return render_to_response('USUARIO_sign-in.html',c)
+
 
 def auth_view(request):
 	name=request.POST.get('Email', '')
