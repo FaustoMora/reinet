@@ -300,7 +300,7 @@ def verPerfil(request):
 	else:
 		args['institucion']=institucion1
 	
-	return render_to_response('USUARIO_profile.html',args,context_instance=RequestContext(request))
+	return render_to_response('USUARIO_perfilOtro.html',args,context_instance=RequestContext(request))
 
 
 @login_required(login_url='/ingresar/')
