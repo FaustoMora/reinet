@@ -1,4 +1,3 @@
-# -*- encoding: utf-8 -*-
 '''
 Created on 11/2/2015
 
@@ -24,7 +23,9 @@ class CrearOfertaForm(forms.ModelForm):
         model = Oferta
         fields = ['tipoOferta','nombre','descripcion','dominio','subdominio',
         'palabras_claves','lugar_aplicacion','tiempo_inicio_disponible',
-        'tiempo_fin_disponible']
+        'tiempo_fin_disponible','perfil_beneficiario','perfil_cliente',
+        'soluciones_alternativas','propuesta_valor','cuadro_competidores',
+        'cuadro_tendencias_relevantes','estado_propiedad_intelectual','evidencia_traccion']
         labels = {
             #'nombre': _('Writer'),
         }
@@ -60,9 +61,9 @@ class CrearOfertaForm(forms.ModelForm):
 
     descripcion = forms.CharField(
         max_length=500,
-        label="Descripción",
+        label="Descripcion",
         widget = forms.Textarea(
-            attrs={'class':'form-control form-group infoGener', 'placeholder':'Ingrese una descripción general de su oferta','rows':'4','style':'resize:none', 'required':'true'}
+            attrs={'class':'form-control form-group infoGener', 'placeholder':'Ingrese una descripcion general de su oferta','rows':'4','style':'resize:none', 'required':'true'}
         )
     )
 
@@ -91,7 +92,7 @@ class CrearOfertaForm(forms.ModelForm):
     )
 
     lugar_aplicacion = forms.ChoiceField(
-        label="Lugar de Aplicación",
+        label="Lugar de Aplicacion",
         choices = (
             ('1', "Azuay"),('2', "Bolivar"),('3', "Caniar"),
             ('4', "Carchi"),('5', "Chimborazo"),('6', "Cotopaxi"),('7', "El Oro"),
@@ -123,35 +124,13 @@ class CrearOfertaForm(forms.ModelForm):
         )
     ) 
 
-    def clean(self):
-        return self.cleaned_data
-
-
-class CompletarOfertaForm(forms.ModelForm):
-    
-    class Meta:
-        model = Oferta
-        fields = ['perfil_beneficiario','perfil_cliente',
-        'soluciones_alternativas','propuesta_valor','cuadro_competidores',
-        'cuadro_tendencias_relevantes','estado_propiedad_intelectual','evidencia_traccion']
-        labels = {
-            #'nombre': _('Writer'),
-        }
-        help_texts = {
-            #'nombre': _('Some useful help text.'),
-        }
-        error_messages = {
-            #'nombre': {
-             #   'max_length': _("Debe escribir un nombre corto"),
-            #},
-        }
 
     perfil_beneficiario = forms.CharField(
         label="Perfil del Beneficiario",
         max_length=500,
         widget = forms.Textarea(
             attrs={'class':'form-control form-group',
-            'placeholder':'Describa el perfil de los beneficiarios de su oferta sí esta saliera al mercado','rows':'3','style':'resize:none'}
+            'placeholder':'Describa el perfil de los beneficiarios de su oferta si esta saliera al mercado','rows':'3','style':'resize:none'}
         )
     )
 
@@ -161,7 +140,7 @@ class CompletarOfertaForm(forms.ModelForm):
         label="Perfil del Cliente",
         widget = forms.Textarea(
             attrs={'class':'form-control form-group',
-            'placeholder':'Describa el perfil de los clientes de su oferta sí esta saliera al mercado','rows':'3','style':'resize:none','required':'false'}
+            'placeholder':'Describa el perfil de los clientes de su oferta si esta saliera al mercado','rows':'3','style':'resize:none','required':'false'}
         )
     )
 
@@ -180,7 +159,7 @@ class CompletarOfertaForm(forms.ModelForm):
         max_length=300,
         widget = forms.Textarea(
             attrs={'class':'form-control form-group',
-            'placeholder':'Escriba aquí','rows':'3','style':'resize:none','required':'false'}
+            'placeholder':'Escriba aqui','rows':'3','style':'resize:none','required':'false'}
         )
     )
 
@@ -190,17 +169,17 @@ class CompletarOfertaForm(forms.ModelForm):
         max_length=500,
         widget = forms.Textarea(
             attrs={'class':'form-control form-group',
-            'placeholder':'Escriba aquí','rows':'4','style':'resize:none','required':'false'}
+            'placeholder':'Escriba aqui','rows':'4','style':'resize:none','required':'false'}
         )
     )
 
     evidencia_traccion = forms.CharField(
         required=False,
-        label="Evidencia de tracción",
+        label="Evidencia de traccion",
         max_length=500,
         widget = forms.Textarea(
             attrs={'class':'form-control form-group',
-            'placeholder':'Explique la evidencia de Tracción','rows':'4','style':'resize:none','required':'false'}
+            'placeholder':'Explique la evidencia de Traccion','rows':'4','style':'resize:none','required':'false'}
         )
     )   
 
@@ -250,7 +229,7 @@ class CanvasForm(forms.ModelForm):
         required=False,
         widget = forms.Textarea(
             attrs={'class':'form-control form-group',
-            'placeholder':'Escriba aquí','rows':'13','style':'resize:none','required':'false'}
+            'placeholder':'Escriba aqui','rows':'13','style':'resize:none','required':'false'}
         )
     )
 
@@ -259,7 +238,7 @@ class CanvasForm(forms.ModelForm):
         required=False,
         widget = forms.Textarea(
             attrs={'class':'form-control form-group',
-            'placeholder':'Escriba aquí','rows':'5','style':'resize:none','required':'false'}
+            'placeholder':'Escriba aqui','rows':'5','style':'resize:none','required':'false'}
         )
     )
 
@@ -268,7 +247,7 @@ class CanvasForm(forms.ModelForm):
         required=False,
         widget = forms.Textarea(
             attrs={'class':'form-control form-group',
-            'placeholder':'Escriba aquí','rows':'5','style':'resize:none','required':'false'}
+            'placeholder':'Escriba aqui','rows':'5','style':'resize:none','required':'false'}
         )
     )
 
@@ -277,25 +256,25 @@ class CanvasForm(forms.ModelForm):
         required=False,
         widget = forms.Textarea(
             attrs={'class':'form-control form-group',
-            'placeholder':'Escriba aquí','rows':'13','style':'resize:none','required':'false'}
+            'placeholder':'Escriba aqui','rows':'13','style':'resize:none','required':'false'}
         )
     )
 
     relacionclientes = forms.CharField(
-        label="Relación con los Clientes",
+        label="Relacion con los Clientes",
         required=False,
         widget = forms.Textarea(
             attrs={'class':'form-control form-group',
-            'placeholder':'Escriba aquí','rows':'5','style':'resize:none','required':'false'}
+            'placeholder':'Escriba aqui','rows':'5','style':'resize:none','required':'false'}
         )
     )
 
     canalesDistribucion = forms.CharField(
-        label="Canales de Distribución",
+        label="Canales de Distribucion",
         required=False,
         widget = forms.Textarea(
             attrs={'class':'form-control form-group',
-            'placeholder':'Escriba aquí','rows':'5','style':'resize:none','required':'false'}
+            'placeholder':'Escriba aqui','rows':'5','style':'resize:none','required':'false'}
         )
     )
 
@@ -304,7 +283,7 @@ class CanvasForm(forms.ModelForm):
         required=False,
         widget = forms.Textarea(
             attrs={'class':'form-control form-group',
-            'placeholder':'Escriba aquí','rows':'13','style':'resize:none','required':'false'}
+            'placeholder':'Escriba aqui','rows':'13','style':'resize:none','required':'false'}
         )
     )
 
@@ -313,7 +292,7 @@ class CanvasForm(forms.ModelForm):
         required=False,
         widget = forms.Textarea(
             attrs={'class':'form-control form-group',
-            'placeholder':'Escriba aquí','rows':'5','style':'resize:none','required':'false'}
+            'placeholder':'Escriba aqui','rows':'5','style':'resize:none','required':'false'}
         )
     )
 
@@ -332,7 +311,7 @@ class CanvasForm(forms.ModelForm):
         max_length=500,
         widget = forms.Textarea(
             attrs={'class':'form-control form-group',
-            'placeholder':'Escriba aquí','rows':'5','style':'resize:none','required':'false'}
+            'placeholder':'Escriba aqui','rows':'5','style':'resize:none','required':'false'}
         )
     )
     
@@ -431,7 +410,6 @@ class PorterForm(forms.ModelForm):
         return self.cleaned_data
 
 
-
 class CrearDemandaForm(forms.ModelForm):
     
     class Meta:
@@ -507,7 +485,7 @@ class CrearDemandaForm(forms.ModelForm):
     )
 
     lugar_aplicacion = forms.ChoiceField(
-        label="Lugar de Aplicación",
+        label="Lugar de Aplicacion",
         choices = (
             ('0', "Seleccione la provincia"),('1', "Azuay"),('2', "Bolivar"),('3', "Caniar"),
             ('4', "Carchi"),('5', "Chimborazo"),('6', "Cotopaxi"),('7', "El Oro"),
@@ -561,7 +539,7 @@ class CrearDemandaForm(forms.ModelForm):
 
     soluciones_alternativas = forms.CharField(
         required=False,
-        label="Descripción Alternativa",
+        label="Descripcion Alternativas",
         max_length=200,
         widget = forms.Textarea(
             attrs={'class':'form-control form-group',
@@ -571,11 +549,11 @@ class CrearDemandaForm(forms.ModelForm):
     
     importancia_solucion = forms.CharField(
         required=False,
-        label="Descripción de la Importancia",
+        label="Descripcion de la Importancia",
         max_length=200,
         widget = forms.Textarea(
             attrs={'class':'form-control form-group',
-            'placeholder':'Escriba la descripción de la importacia','rows':'4','style':'resize:none;margin-bottom:0','required':'False'}
+            'placeholder':'Describa la descripcion de la importacia','rows':'4','style':'resize:none;margin-bottom:0','required':'False'}
         )
     )
 

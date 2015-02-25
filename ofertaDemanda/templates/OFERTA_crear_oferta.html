@@ -23,8 +23,10 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="container">
+</div>
+
+
+<div class="container">
       <!-- Help Center -->
       <div class="row">
         <!-- Profile Menu -->
@@ -39,18 +41,19 @@
             </ul>
           </div>
         </div>
+
+
         <div class="col-sm-9 col-md-8">
 
-
             {% if messages %}
-            {% for message in messages %}
+              {% for message in messages %}
             <div class="col-md-12">
               <div class="alert alert-success h4">
-              <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+                  <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
               </div>
             </div>
-            {% endfor %}
-      {% endif %}
+              {% endfor %}
+            {% endif %}
 
           <!-- Edit profile form -->
           <h3 class="hl">CREAR OFERTA</h3>
@@ -58,36 +61,69 @@
           <p class="text-muted">Por favor ingrese los datos principales de la Oferta</p>
           <hr>
           <h4 class="hl bottom-15">Informaci&oacute;n General</h4>
-  
-          <div class="tab-pane col-xs-10 col-xs-offset-1 active" id="informacionG">
-          <form role="form" id="formulario" action="/crearOferta/" method="POST" enctype="multipart/form-data">         
+          
+          <ul class="nav nav-tabs">
+                <li class="active"><a href="#informacionG" data-toggle="tab"><h5>Información General</h5></a></li>
+                <li ><a href="#perfiles" data-toggle="tab"><h5>Perfiles</h5></a></li>
+                <li><a href="#otros" data-toggle="tab"><h5>Otra informaci&oacute;n</h5></a></li>
+          </ul>
+          
+          
+            <form role="form" id="formulario" action="/crearOferta/" method="POST" enctype="multipart/form-data">         
               {% csrf_token %}
-              {#{ form.as_p }#}             
-              
-              {% for f in form %}               
-                  {% if f.label == "Desde"%}
-                    <label>Disponibilidad</label><br>
-                    <div class="form-group col-xs-6">
-                       <label>{{ f.label }}</label>
-                       {{ f }}
-                    </div>
-                  {% elif f.label == "Hasta"%}
-                    <div class="form-group col-xs-6">
-                       <label>{{ f.label }}</label>
-                       {{ f }}
-                    </div>
-                  {% elif f.label == "Tipo de la oferta" or f.label == "Nombre" or f.label == "Descripcion" or f.label == "Dominio" or f.label == "Subdominio" or f.label == "Palabras Claves" or f.label == "Lugar de Aplicacion"%}
-                    <div class="form-group">
-                        <label>{{ f.label }}</label>
-                         {{ f }}
-                    </div>
-                  {% endif %}
-              {% endfor %}
-          </div>
-          <input type="submit" class="btn btn-green pull-right" value="Crear Oferta"></input>
-          </form>
+              {#{ form.as_p }#} 
+              <div class="tab-content">
+                <div class="tab-pane col-xs-10 col-xs-woroffset-1 active" id="informacionG">
+                  {% for f in form %}               
+                      {% if f.label == "Desde"%}
+                        <label>Disponibilidad</label><br>
+                        <div class="form-group col-xs-6">
+                           <label>{{ f.label }}</label>
+                           {{ f }}
+                        </div>
+                      {% elif f.label == "Hasta"%}
+                        <div class="form-group col-xs-6">
+                           <label>{{ f.label }}</label>
+                           {{ f }}
+                        </div>
+                      {% elif f.label == "Tipo de la oferta" or f.label == "Nombre" or f.label == "Descripcion" or f.label == "Dominio" or f.label == "Subdominio" or f.label == "Palabras Claves" or f.label == "Lugar de Aplicacion"%}
+                        <div class="form-group">
+                            <label>{{ f.label }}</label>
+                             {{ f }}
+                        </div>
+                      {% endif %}
+                  {% endfor %}
+                </div>
 
+
+                <div class="tab-pane col-xs-10 col-xs-offset-1 " id="perfiles">
+                  {% for f in form %} 
+                      {% if f.label == "Perfil del Beneficiario" or f.label == "Perfil del Cliente" %}
+                        <div class="form-group">
+                            <label>{{ f.label }}</label>
+                             {{ f }}
+                        </div>                  
+                      {% endif %}
+                  {% endfor %}              
+                </div>   
+
+                <div class="tab-pane col-xs-10 col-xs-offset-1" id="otros">
+                  {% for f in form %}
+                      {% if f.label == "Soluciones Alternativas" or f.label == "Propuestas de Valor" or f.label == "Evidencia de traccion" or f.label == "Cuadro de Tendencias Relativas"%}
+                        <div class="form-group">
+                            <label>{{ f.label }}</label>
+                             {{ f }}
+                        </div>
+                      {% endif %}
+                  {% endfor %}
+              </div>
+            </div>
+              <input type="submit" class="btn btn-green pull-right" value="Crear Oferta"></input>
+            </form>
+          </div>
         </div>
+
       </div>
-    </div>
-      {% endblock %}
+</div>
+
+{% endblock %}

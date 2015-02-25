@@ -18,8 +18,6 @@ urlpatterns = patterns('',
         url(r'^editarOferta[/]?$',editarOferta,name='editarOferta'),   
         url(r'^misOfertas[/]?$',misOfertas,name='misOfertas'),
         
-
-        url(r'^completarOferta/(\d+)/$',completarOferta, name='completarOferta'),
         url(r'^media/(?P<path>.*)$','django.views.static.serve',{'document_root':settings.MEDIA_ROOT})
         
 )

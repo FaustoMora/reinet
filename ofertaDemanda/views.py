@@ -37,19 +37,32 @@ def homeOfertas(request):
 
 @login_required(login_url='/ingresar/')
 def crearOferta(request):
-    form = CrearOfertaForm(request.POST, request.FILES)
-    if form.is_valid():
-        nuevaOferta=super(CrearOfertaForm, form).save(commit=False)
-        nuevaOferta.idusuario=Persona.objects.get(idpersona=request.session['id_persona'])
-        nuevaOferta.estadoOferta=1
-        nuevaOferta.ofertaPublicada =1            
-        nuevaOferta.save()
-        return HttpResponseRedirect(reverse('completarOferta', args=(nuevaOferta.idOferta,)))
-        #return HttpResponseRedirect(reverse('completarOferta', args=(),kwargs={'ofertaid': nuevaOferta.idOferta}))
+    if request.POST: #POST
+        form = CrearOfertaForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            nuevaOferta=super(CrearOfertaForm, form).save(commit=False)
+            nuevaOferta.idusuario=Persona.objects.get(idpersona=request.session['id_persona'])
+            nuevaOferta.estadoOferta=1
+            nuevaOferta.ofertaPublicada =1 
+            nuevaOferta.recienCreada=True          
+            nuevaOferta.save()
+                       
+            info="Oferta creada correctamente"
+        else:
+            info="Error al ingresar los datos"
+
+        form = CrearOfertaForm()
+        messages.success(request, info)
+        return HttpResponseRedirect('/misOfertas')
+    else:
+        form=CrearOfertaForm()
+
     args={}
     args.update(csrf(request))
     args['form']=form
     return render_to_response('OFERTA_crear_oferta.html',args)
+
 
 @login_required(login_url='/ingresar/')
 def completarOferta(request,ofertaid):
