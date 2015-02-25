@@ -586,3 +586,5 @@ def verInicioF(request):
 	return render_to_response('USUARIO_inicioF.html',args,context_instance=RequestContext(request))
 
 
+def terminos(request):
+	return render_to_response("terms.html")

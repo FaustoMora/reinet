@@ -35,5 +35,6 @@ urlpatterns = patterns('',
         url(r'^busquedaDemanda[/]?$',busqueda_demanda),
         url(r'^busquedaConcurso[/]?$',busqueda_concursos),
         url(r'^busquedaUsuario[/]?$',busqueda_usuario), 
+        url(r'^terminosCondiciones[/]?$',terminos), 
   
 )
