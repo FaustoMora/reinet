@@ -29,13 +29,6 @@ class Institucion(User):
         db_table = 'institucion'
 
 
-class InstitucionPersona(models.Model):
-    idpersona = models.ForeignKey('Persona', db_column='idpersona')
-    idinstitucion = models.ForeignKey(Institucion, db_column='idinstitucion')
-    cargoPersona = models.CharField(max_length=50, )
-    class Meta:
-        db_table = 'institucion_persona'
-
 class Persona(User):
     idpersona = models.AutoField(primary_key=True)
     identificacion = models.CharField(max_length=20L)
@@ -47,6 +40,13 @@ class Persona(User):
     #idusuario = models.ForeignKey(AuthUser, db_column='id')
     class Meta:
         db_table = 'persona'
+
+class InstitucionPersona(models.Model):
+    idpersona = models.ForeignKey(Persona, db_column='idpersona')
+    idinstitucion = models.ForeignKey(Institucion, db_column='idinstitucion')
+    cargoPersona = models.CharField(max_length=50, )
+    class Meta:
+        db_table = 'institucion_persona'
 
 class Mensaje(models.Model):
     idEmisor=models.ForeignKey(User,db_column='idp_emisor', related_name='p_emisor')

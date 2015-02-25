@@ -32,16 +32,36 @@ def auth_view(request):
 		auth.login(request, user)
 		request.session['id_user']=request.user.id
 		user=User.objects.get(id=request.user.id)
-		#personas=Persona.objects.raw('SELECT * FROM persona WHERE user_ptr_id =%s',request.user.id)
-		persona=Persona.objects.get(user_ptr=user)
-		#p=personas[0]
-		p=persona
-		request.session['id_persona']=p.idpersona
-		#print p.idpersona
-		return HttpResponseRedirect('/perfil')
+		try:
+			print "entro persona"
+			#Persona
+			persona=Persona.objects.get(user_ptr=user)	
+		except Persona.DoesNotExist:
+			persona=None
+		try:
+			print "entro inst"
+			#Institucion
+			institucion=Institucion.objects.get(user_ptr=user)
+		except Institucion.DoesNotExist:
+			institucion=None
+
+		if persona is not None:
+			print "asigno persona"
+			p=persona
+			request.session['id_persona']=p.idpersona
+			request.session['tipo']="persona"
+			return HttpResponseRedirect('/perfil')
+		elif institucion is not None:
+			ins=institucion
+			request.session['id_institucion']=ins.idinstitucion
+			request.session['tipo']="institucion"
+			return HttpResponseRedirect('/perfilInst')	
+		else:
+			return HttpResponseRedirect('/invalid')	
+
 	else:
 		return HttpResponseRedirect('/invalid')
-	
+
 def loggedin(request):
 	print request.session['id_user']
 	return render_to_response('USUARIO_profile.html', {'full_name': request.user.username})
@@ -72,17 +92,17 @@ def register(request):
 	args['form']=form
 	return render_to_response('USUARIO_sign-up.html', args)
 
+
 def register_success(request):
 	return render_to_response('USUARIO_index.html')
+
 
 def create(request):
 	if request.POST:
 		form=UsuarioForm2(request.POST)
 		if form.is_valid():
-			form.save()
-			
-			return HttpResponseRedirect('/usuarios/all')
-	
+			form.save()			
+			return HttpResponseRedirect('/usuarios/all')	
 	else:
 		form=UsuarioForm2()
 	
@@ -91,23 +111,36 @@ def create(request):
 	args['form']= form
 	return render_to_response('USUARIO_sign-up.html', args)
 
+
 @login_required(login_url='/ingresar/')
 def perfil_view(request):
 	id_session=request.session['id_user']
-	
-	id_persona=request.session['id_persona']
-	print id_session, id_persona
+	tipo = request.session['tipo']
 	user1=User.objects.get(id=id_session)
-	persona1=Persona.objects.get(idpersona=id_persona)
+
+	if tipo == "persona":
+		id_persona=request.session['id_persona']
+		persona1=Persona.objects.get(idpersona=id_persona)
+		institucion1=None
+	elif tipo == "institucion":
+		id_institucion=request.session['id_institucion']
+		institucion1=Institucion.objects.get(idinstitucion=id_institucion)
+		persona1=None
+
 	args={}
 	args['usuario']=user1
-	args['persona']=persona1
+	if persona1 is not None:
+		args['persona']=persona1
+		return render_to_response('USUARIO_profile.html',args,context_instance=RequestContext(request))
+	else:
+		args['institucion']=institucion1
+		return render_to_response('USUARIO_perfilinstitucion.html',args,context_instance=RequestContext(request))
 	
-	return render_to_response('USUARIO_profile.html',args,context_instance=RequestContext(request))
 
 
 @login_required(login_url='/ingresar/')
 def enviar_mensaje(request):
+	tipo = request.session['tipo']
 	id_user=request.session['id_user']
 	if request.method=='POST':
 		form1=MensajeForm(request.POST)
@@ -135,31 +168,53 @@ def enviar_mensaje(request):
 				print "usuari no valido"
 				form1=MensajeForm()
 	else:
-		id_persona=request.session['id_persona']
+		if tipo == "persona":
+			id_persona=request.session['id_persona']		
+		elif tipo == "institucion":
+			id_institucion=request.session['id_institucion']
 		form1=MensajeForm()
 	args={}
 	args.update(csrf(request))
 	args['form']=form1
 	return render_to_response('USUARIO_enviar-mensaje.html',args)
 
+
 @login_required(login_url='/ingresar/')
 def mensajes_view(request):
-	id_persona=request.session['id_persona']
+	tipo=request.session['tipo']
+	if tipo == "persona":
+		id_persona=request.session['id_persona']
+	elif tipo == "institucion":
+		id_institucion=request.session['id_institucion']
+
 	mensajes = Mensaje.objects.all().filter(idDestino=request.session['id_user'])[:8]
 	args={}
 	args['mensajes']=mensajes
 	args['range']=range(len(mensajes))
 	return render_to_response('USUARIO_inbox.html',args)
 
+
 @login_required(login_url='/ingresar/')
 def mensajesEnviados_view(request):
-	id_persona=request.session['id_persona']
+	tipo = request.session['tipo']
+
+	if tipo == "persona":
+		id_persona=request.session['id_persona']
+		persona1=Persona.objects.get(idpersona=id_persona)
+		institucion1=None
+	elif tipo == "institucion":
+		id_institucion=request.session['id_institucion']
+		institucion1=Institucion.objects.get(idinstitucion=id_institucion)
+		persona1=None
 	mensajes = Mensaje.objects.all().filter(idEmisor=request.session['id_user'])[:8]
 	args={}
-	p=Persona.objects.get(idpersona=id_persona)
 	args['mensajes']=mensajes
-	args['persona']=p
+	if persona1 is not None:
+		args['persona']=persona1	
+	else:
+		args['institucion']=institucion1
 	return render_to_response('USUARIO_enviados.html',args)
+
 
 @login_required(login_url='/ingresar/')
 def inicio_view(request):
@@ -201,9 +256,9 @@ def editar_perfil_view(request):
 	#return render_to_response('USUARIO_edit-profile.html', args)
 	return render_to_response('USUARIO_edit-profile.html', RequestContext(request,args))
 
+
 def my_404_view(request):
 	return render_to_response('404.html')
-
 
 
 @login_required(login_url='/ingresar/')
@@ -220,50 +275,31 @@ def subir_imagen(request):
 			persona_form = PersonaEditarForm(instance=persona)
 			args['personaform']=persona_form
 
-"""
-@login_required(login_url='/ingresar/')
-@csrf_protect
-def busqueda_view(request):
-	id_persona=request.session['id_persona']
-	name = request.GET.get('q','')
-	print "funciona",name
-	if name:
-		qset = (
-			Q(nombre__icontains=name)|
-			Q(dominio__icontains=name)
-		)
-		results1 = Oferta.objects.filter(qset).distinct()
-		results2 = Demanda.objects.filter(qset).distinct()
-		results3 = Concurso.objects.filter(qset).distinct()
-		qset2=(
-			Q(first_name__icontains=name)
 
-			)
-		resultsUser=User.objects.filter(qset2).distinct()
-		print "usrs", resultsUser
-	else:
-		results1 = []
-		results2 = []
-		results3 = []
-		resultsUser=[]
-		
-	return render_to_response("USUARIO_busqueda.html",{
-		"results1": results1,"results2": results2,"results3": results3,
-		"resultsUser": resultsUser,
-		 "name": name},
-		context_instance = RequestContext(request))			
-
-"""
 @login_required(login_url='/ingresar/')
 def verPerfil(request):
 	idu = request.GET.get('q', '')
 	user1=User.objects.get(username = idu)
-	persona1=Persona.objects.get(user_ptr=user1)
+	tipo = request.session['tipo']
+
+	if tipo == "persona":
+		id_persona=request.session['id_persona']
+		persona1=Persona.objects.get(idpersona=id_persona)
+		institucion1=None
+	elif tipo == "institucion":
+		id_institucion=request.session['id_institucion']
+		institucion1=Institucion.objects.get(idinstitucion=id_institucion)
+		persona1=None
+
 	args = {}
 	args['usuario']=user1
-	args['persona']=persona1
+	if persona1 is not None:
+		args['persona']=persona1	
+	else:
+		args['institucion']=institucion1
 	
 	return render_to_response('USUARIO_profile.html',args,context_instance=RequestContext(request))
+
 
 @login_required(login_url='/ingresar/')
 def verMensaje(request):
@@ -288,12 +324,17 @@ def verMensaje(request):
 	
 	return render_to_response('USUARIO_verMensaje.html',args,context_instance=RequestContext(request))
 
+
 @login_required(login_url='/ingresar/')
 @csrf_protect
 def busqueda_view(request):
+	tipo = request.session['tipo']
+	if tipo == "persona":
+		id_persona=request.session['id_persona']
+		
+	elif tipo == "institucion":
+		id_institucion=request.session['id_institucion']
 	
-
-	id_persona=request.session['id_persona']
 	name = request.GET.get('q','')
 	print "funciona",name
 	if name:
@@ -316,21 +357,25 @@ def busqueda_view(request):
 		results2 = []
 		results3 = []
 		resultsUser=[]
-	tipo="Busqueda General"
+	tipoB="Busqueda General"
 	args={
 		"results1": results1,"results2": results2,"results3": results3,
-		"resultsUser": resultsUser,"name":name, "tipo":tipo}	
+		"resultsUser": resultsUser,"name":name, "tipoB":tipoB}	
 
 	return render_to_response("USUARIO_busqueda.html",args,
 		context_instance = RequestContext(request))			
-
 
 
 @login_required(login_url='/ingresar/')
 @csrf_protect
 def busqueda_oferta(request):
 	
-	id_persona=request.session['id_persona']
+	tipo = request.session['tipo']
+	if tipo == "persona":
+		id_persona=request.session['id_persona']
+		
+	elif tipo == "institucion":
+		id_institucion=request.session['id_institucion']
 	name = request.GET.get('q','')
 	print "funciona",name
 	if name:
@@ -341,11 +386,11 @@ def busqueda_oferta(request):
 		results1 = Oferta.objects.filter(qset).distinct()
 	else:
 		results1 = []
-	tipo="Busqueda Ofertas"
+	tipoB="Busqueda Ofertas"
 	args={
 		"results1": results1,
 		 "name": name,
-		 "tipo":tipo}	
+		 "tipoB":tipoB}	
 	return render_to_response("USUARIO_busqueda.html",args,
 		context_instance = RequestContext(request))			
 
@@ -354,7 +399,12 @@ def busqueda_oferta(request):
 @csrf_protect
 def busqueda_demanda(request):
 
-	id_persona=request.session['id_persona']
+	tipo = request.session['tipo']
+	if tipo == "persona":
+		id_persona=request.session['id_persona']
+		
+	elif tipo == "institucion":
+		id_institucion=request.session['id_institucion']
 	name = request.GET.get('q','')
 	print "funciona",name
 	if name:
@@ -365,21 +415,25 @@ def busqueda_demanda(request):
 		results2 = Demanda.objects.filter(qset).distinct()
 	else:
 		results2 = []
-	tipo="Busqueda Demanda"
+	tipoB="Busqueda Demanda"
 	args={
 		"results2": results2,
 		 "name": name,
-		 "tipo":tipo}	
+		 "tipoB":tipoB}	
 	return render_to_response("USUARIO_busqueda.html",args,
 		context_instance = RequestContext(request))			
-
 
 
 @login_required(login_url='/ingresar/')
 @csrf_protect
 def busqueda_concursos(request):
 
-	id_persona=request.session['id_persona']
+	tipo = request.session['tipo']
+	if tipo == "persona":
+		id_persona=request.session['id_persona']
+		
+	elif tipo == "institucion":
+		id_institucion=request.session['id_institucion']
 	name = request.GET.get('q','')
 	print "funciona",name
 	if name:
@@ -391,11 +445,11 @@ def busqueda_concursos(request):
 	else:
 		results3 = []
 
-	tipo="Busqueda Concursos"
+	tipoB="Busqueda Concursos"
 	args={
 		"results3": results3,
 		 "name": name,
-		 "tipo":tipo}	
+		 "tipoB":tipoB}	
 		 
 	return render_to_response("USUARIO_busqueda.html",args,
 		context_instance = RequestContext(request))			
@@ -405,7 +459,12 @@ def busqueda_concursos(request):
 @csrf_protect
 def busqueda_usuario(request):
 
-	id_persona=request.session['id_persona']
+	tipo = request.session['tipo']
+	if tipo == "persona":
+		id_persona=request.session['id_persona']
+		
+	elif tipo == "institucion":
+		id_institucion=request.session['id_institucion']
 	name = request.GET.get('q','')
 	if name:
 		qset=(
@@ -416,15 +475,14 @@ def busqueda_usuario(request):
 		resultsUser=User.objects.filter(qset).distinct()
 	else:
 		resultsUser = []
-	tipo="Busqueda Usuarios"
+	tipoB="Busqueda Usuarios"
 	args={
 		"resultsUser": resultsUser,
 		 "name": name,
-		 "tipo":tipo}
+		 "tipoB":tipoB}
 
 	return render_to_response("USUARIO_busqueda.html",args,
 		context_instance = RequestContext(request))			
-
 
 """VISTAS DE INSTITUCION"""
 
@@ -447,6 +505,7 @@ def registerInst(request):
 	args['form1']=form1
 	return render_to_response('USUARIO_creaInstitucion.html', args)
 
+
 @login_required(login_url='/ingresar/')
 def perfil_institucion(request):
 	id_session=request.session['id_user']
@@ -460,27 +519,6 @@ def perfil_institucion(request):
 	args['institucion']=institucion1
 	
 	return render_to_response('USUARIO_perfilinstitucion.html',args,context_instance=RequestContext(request))
-
-
-def auth_institucion(request):
-	name=request.POST.get('Email', '')
-	password=request.POST.get('password', '')
-	user=auth.authenticate(username=name, password=password)
-		
-	if user is not None:
-		auth.login(request, user)
-		request.session['id_user']=request.user.id
-		user=User.objects.get(id=request.user.id)
-		#personas=Persona.objects.raw('SELECT * FROM persona WHERE user_ptr_id =%s',request.user.id)
-		institucion=Institucion.objects.get(user_ptr=user)
-		#p=personas[0]
-		ins=institucion
-		request.session['id_institucion']=ins.idinstitucion
-		#print p.idpersona
-		return HttpResponseRedirect('/perfilInst')
-	else:
-		return HttpResponseRedirect('/invalid')
-
 
 
 @login_required(login_url='/ingresar/')
@@ -516,3 +554,35 @@ def editar_perfil_institucion(request):
 		args['institucionform']=institucion_form
 	#return render_to_response('USUARIO_edit-profile.html', args)
 	return render_to_response('USUARIO_edit-profile-institucion.html', RequestContext(request,args))
+
+
+@login_required(login_url='/ingresar/')
+def verInicioF(request):
+	id_session=request.session['id_user']
+	tipo = request.session['tipo']
+
+	user1=User.objects.get(id=id_session)
+	if tipo == "persona":
+		id_persona=request.session['id_persona']
+		persona1=Persona.objects.get(idpersona=id_persona)
+		institucion1=None
+	elif tipo == "institucion":
+		id_institucion=request.session['id_institucion']
+		institucion1=Institucion.objects.get(idinstitucion=id_institucion)
+		persona1=None
+		
+	lst_concursos = Concurso.objects.all()
+	lst_demandas = Demanda.objects.all()
+	lst_ofertas = Oferta.objects.all()
+	lst_incubaciones = Incubacion.objects.all()
+	args={"lst_concursos":lst_concursos,"lst_demandas":lst_demandas,
+		 "lst_ofertas":lst_ofertas,"lst_incubaciones":lst_incubaciones,
+		 "usuario":user1}
+	if persona1 is not None:
+		args['persona']=persona1	
+	else:
+		args['institucion']=institucion1
+
+	return render_to_response('USUARIO_inicioF.html',args,context_instance=RequestContext(request))
+
+

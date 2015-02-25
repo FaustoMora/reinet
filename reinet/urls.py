@@ -40,6 +40,7 @@ urlpatterns = patterns('',
     url(r'^',include('usuarios.urls')),
     url(r'^',include('concursoIncubacion.urls')),
     url(r'^',include('ofertaDemanda.urls')),
+    url(r'^' , include('incubacion.urls')),
 
 
     # Uncomment the admin/doc line below to enable admin documentation:

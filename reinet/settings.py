@@ -134,6 +134,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'restless',
     'app',
     'concursoIncubacion',
     'usuarios',

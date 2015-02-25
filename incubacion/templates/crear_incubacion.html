@@ -1,0 +1,80 @@
+<!-- Main body
+================== -->
+    <div class="section-header">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <!-- Remove the .animated class if you don't want things to move -->
+            <h1 class="animated slideInLeft"><span>Nueva Incubacion</span></h1>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+        <div class="col-sm-4 col-md-3">
+            <div class="user-menu bottom-15">
+            <ul>
+                <li>
+                <a href="#/institucion/incubaciones">
+                  <i class="sign fa fa-times bg-red"></i>Cancelar
+                </a>  
+              </li>
+            </ul>
+          </div>
+        </div>
+      <div class="row">
+        <!-- Contact us form -->
+        <div class="col-sm-8">
+          <h2 class="hl top-zero">Crear Nueva Incubacion</h2>
+          <hr>
+            <form role="form" action="crearIncubacion">
+                <div class="form-group">
+                <label for="fecha">Fecha de Inicio</label>
+                <input type="date" class="form-control" id="fecha">
+              </div>
+              <div class="form-group">
+                <label for="nombre">Nombre</label>
+                <input type="text" class="form-control" id="nombre" placeholder="Ingrese Nombre de la incubacion">
+              </div>
+              <div class="form-group">
+                <label for="descripcion">Descripcion</label>
+                <textarea class="form-control" rows="3" id="descripcion" placeholder="Ingrese la Descripcion"></textarea>
+              </div>
+                <div class="form-group">
+                <label for="condiciones">Condiciones</label>
+                <textarea class="form-control" rows="3" id="message" placeholder="Ingrese Condiciones"></textarea>
+              </div>
+                <div class="form-group">
+                <label for="perfil">Perfil de Ofertas</label>
+                <input type="text" class="form-control" id="perfil" placeholder="Ingrese Perfil de las Ofertas">
+                </div>
+                <div class="form-group">
+                <label for="typoOferta">Tipos de Ofertas</label>
+                    <br>
+                    <input type="radio" name="tipoOf" value="emprendimiento" checked>Emprendimiento
+                    <br>
+                    <input type="radio" name="tipoOf" value="innovacion">Innovacion
+                    <br>
+                    <input type="radio" name="tipoOf" value="prototipo">Prototipo
+                </div>
+                <div class="form-group">
+                    <label for="alcance">Alcance</label>
+                    <br>
+                    <input type="radio" ng-model="alcance" name="alcanc" value="institucion" checked>Institucion
+                    <br>
+                    <input type="radio" ng-model="alcance" name="alcanc" value="grupos">Grupos
+                    <div ng-show="alcance==='grupos'">
+                    <input type="text" id="grupos" placeholder="Especifique los grupos aqui"> 
+                    </div>
+                    <br ng-show="alcance!=='grupos'">
+                    <input type="radio" ng-model="alcance" name="alcanc" value="todos">Todos
+                
+                </div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-green">CREAR</button>
+                <button type="reset" class="btn btn-red">RESET</button>
+            </div>
+            </form>
+        </div>
+        </div>
+      </div>

@@ -1,0 +1,191 @@
+{% extends "base.tpl.html" %}
+{% block home %}
+<a class="navbar-brand" href="{% url 'usuarios.views.verInicioF' %}" class="link">REI-NET</a>
+{% endblock %}
+{% block content %}
+    <div class="section-header">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12">
+            <!-- Remove the .animated class if you don't want things to move 
+            <h1 class="animated slideInLeft"><span>Inicio</span></h1></br>-->
+            <h1 class="animated slideInRight"><span>Bienvenido {{usuario.first_name}}</span></h1>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <!--
+          <div class="btn-group" id="filters">
+            <a href="#" class="btn btn-default" data-filter="*">All</a>
+            <a href="#" class="btn btn-default" data-filter=".cat-1"><span class="hidden-xs">Ofertas</span> </a>
+            <a href="#" class="btn btn-default" data-filter=".cat-2"><span class="hidden-xs">Demandas</span></a>
+            <a href="#" class="btn btn-default" data-filter=".cat-3"><span class="hidden-xs">Concursos</span></a>
+            <a href="#" class="btn btn-default" data-filter=".cat-4"><span class="hidden-xs">Incubaciones</span> </a>
+          </div>
+          -->
+        </div>
+      </div>
+      <ul class="row list-inline gallery-list" id="isotope-container">
+        {% if lst_concursos %}
+        <h3>Concursos</h3>
+        <p>Es tu turno de participar en cualquiera de los concursos que aparecen a continuación.</p>
+          {% for c in lst_concursos%}
+          
+           <li class="isotope-item cat-1 cat-2 cat-4">
+                <a href="verConcurso/?q={{c.idConcurso}}">
+                  <span class="gallery-thumbnail">
+                    <img class="img-responsive" src="{{MEDIA_URL}}{{ c.imagen }} " alt="...">
+                  </span>
+                  <span class="gallery-text">
+                    <span class="gallery-title">{{ c.nombre }}</span>
+                    {{ c.descripcion }} 
+                  </span>
+                </a>
+              </li>
+          
+          {% endfor %}
+
+        {% elif lst_demandas %}
+        <h3>Demandas</h3>
+          {% for d in lst_demandas%}
+          
+           <li class="isotope-item cat-1 cat-2 cat-4">
+                <a href="verDemanda/">
+                  <span class="gallery-thumbnail">
+                    <!--<img class="img-responsive" src="{{MEDIA_URL}}{{ d.imagen }} " alt="...">-->
+                  </span>
+                  <span class="gallery-text">
+                    <span class="gallery-title">{{ d.nombre }}</span>
+                    {{ d.descripcion }} 
+                  </span>
+                </a>
+              </li>
+          
+          {% endfor %}
+
+        {% elif lst_ofertas %}
+        <h3>Ofertas</h3>
+          {% for o in lst_ofertas%}
+          
+           <li class="isotope-item cat-1 cat-2 cat-4">
+                <a href="verOferta/">
+                  <span class="gallery-thumbnail">
+                    <!--<img class="img-responsive" src="{{MEDIA_URL}}{{ d.imagen }} " alt="...">-->
+                  </span>
+                  <span class="gallery-text">
+                    <span class="gallery-title">{{ o.nombre }}</span>
+                    {{ o.descripcion }} 
+                  </span>
+                </a>
+              </li>
+          
+          {% endfor %}
+        {% elif lst_incubaciones %}
+        <h3>Incubaciones</h3>
+          {% for i in lst_incubaciones%}
+          
+           <li class="isotope-item cat-1 cat-2 cat-4">
+                <a href="verIncubacion/?q={{i.idIncubacion}}">
+                  <span class="gallery-thumbnail">
+                    <img class="img-responsive" src="{{MEDIA_URL}}{{ i.imagen }} " alt="...">
+                  </span>
+                  <span class="gallery-text">
+                    <span class="gallery-title">{{ i.nombre }}</span>
+                    {{ i.descripcion }} 
+                  </span>
+                </a>
+              </li>
+          
+          {% endfor %}
+        {% else %}
+
+          <div style="background-color:white; color:white; margin:20px; padding:20px; display:block; visible:hidden;min-height:250px;min-width:75px;">
+
+          </div>
+
+        {% endif %}
+        <!--<li class="isotope-item cat-2 cat-4">
+          <a href="DEMANDA_perfil.html">
+            <span class="gallery-thumbnail">
+              <img class="img-responsive" src="../static/img/works2.jpg" alt="...">
+            </span>
+            <span class="gallery-text">
+              <span class="gallery-title">Robots parlantes</span>
+              Nullam id ipsum varius, tincidunt odio nec, placerat enim.
+            </span>
+          </a>
+        </li>
+        <li class="isotope-item cat-3 cat-1">
+          <a href="CONCURSO_perfil.html">
+            <span class="gallery-thumbnail">
+              <img class="img-responsive" src="../static/img/works3.jpg" alt="...">
+            </span>
+            <span class="gallery-text">
+              <span class="gallery-title">Falsificador de notas</span>
+              Nullam id ipsum varius, tincidunt odio nec, placerat enim.
+            </span>
+          </a>
+        </li>
+        <li class="isotope-item cat-2 cat-4">
+          <a href="DEMANDA_perfil.html">
+            <span class="gallery-thumbnail">
+              <img class="img-responsive" src="../static/img/works4.jpg" alt="...">
+            </span>
+            <span class="gallery-text">
+              <span class="gallery-title">Paseador de perros</span>
+              Nullam id ipsum varius, tincidunt odio nec, placerat enim.
+            </span>
+          </a>
+        </li>
+        <li class="isotope-item cat-3 cat-1">
+          <a href="CONCURSO_perfil.html">
+            <span class="gallery-thumbnail">
+              <img class="img-responsive" src="../static/img/works2.jpg" alt="...">
+            </span>
+            <span class="gallery-text">
+              <span class="gallery-title">Mesa que toma fotos</span>
+              Nullam id ipsum varius, tincidunt odio nec, placerat enim.
+            </span>
+          </a>
+        </li>
+        <li class="isotope-item cat-1 cat-2">
+          <a href="OFERTA_perfil.html">
+            <span class="gallery-thumbnail">
+              <img class="img-responsive" src="../static/img/works3.jpg" alt="...">
+            </span>
+            <span class="gallery-text">
+              <span class="gallery-title">Computadoras smart </span>
+              Nullam id ipsum varius, tincidunt odio nec, placerat enim.
+            </span>
+          </a>
+        </li>
+        <li class="isotope-item cat-1 cat-4">
+          <a href="OFERTA_perfil.html">
+            <span class="gallery-thumbnail">
+              <img class="img-responsive" src="../static/img/works4.jpg" alt="...">
+            </span>
+            <span class="gallery-text">
+              <span class="gallery-title">Proyecto X</span>
+              Nullam id ipsum varius, tincidunt odio nec, placerat enim.
+            </span>
+          </a>
+        </li>
+        <li class="isotope-item cat-2">
+          <a href="OFERTA_perfil.html">
+            <span class="gallery-thumbnail">
+              <img class="img-responsive" src="../static/img/works1.jpg" alt="...">
+            </span>
+            <span class="gallery-text">
+              <span class="gallery-title">Innovacion4</span>
+              Nullam id ipsum varius, tincidunt odio nec, placerat enim.
+            </span>
+          </a>
+        </li>
+      -->
+      </ul>
+    </div>
+
+{%endblock%}

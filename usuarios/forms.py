@@ -108,10 +108,6 @@ class PersonaForm(UserCreationForm):
 		widgets={
 			'password': forms.PasswordInput(attrs={'class': 'form-control','placeholder':'Contraseña'}),
 			
-			'email': forms.TextInput(attrs={'class': 'form-control','placeholder':'Email'}),
-			
-			'identificacion': forms.TextInput(attrs={'class': 'form-control','placeholder':'Identificación'}),
-			
 			'cargo': forms.TextInput(attrs={'class': 'form-control','placeholder':'Cargo'}),
 			
 			'actividad': forms.TextInput(attrs={'class': 'form-control','placeholder':'Actividad'}),
@@ -124,6 +120,8 @@ class PersonaForm(UserCreationForm):
 	username=forms.CharField(label='Usuario',widget=forms.TextInput(attrs={'class': 'form-control','placeholder':'Username'}))
 	first_name=forms.CharField(label='Nombres',widget=forms.TextInput(attrs={'class': 'form-control','placeholder':'Nombre'}))
 	last_name=forms.CharField(label='Apellidos',widget=forms.TextInput(attrs={'class': 'form-control','placeholder':'Apellidos'}))
+	email=forms.EmailField(label='Correo Electrónico',widget=forms.TextInput(attrs={'class': 'form-control','placeholder':'Ingrese su dirección de Correo electrónico'}))	
+	identificacion=forms. IntegerField(label='Identificación',widget=forms.TextInput(attrs={'class': 'form-control','placeholder':'Número de cédula o pasaporte'}))	
 	password2=forms.CharField(label='Confirmación de Contraseña',widget=forms.PasswordInput(attrs={'class': 'form-control','placeholder':'Confirmacion'}))
 	#imagen = forms.ImageField(label="Imagen Perfil",widget=forms.FileInput(attrs={'class':'btn btn-default','data-trigger':'focus','data-placement':'left','data-toggle':'popover'}))
 
