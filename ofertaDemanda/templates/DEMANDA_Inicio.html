@@ -67,12 +67,12 @@
     <div class="container">   
       <div class="row">
 
-      <!-- Se presenta las ofertas --> 
+      <!-- Se presenta las demandas --> 
          {% for c in lst_demandas %}
                 <div class="col-md-3 col-sm-6">
                     <div class="thumbnail">
                       <img class="img-responsive" src="{{MEDIA_URL}}{{ c.imagen }} " alt="Oferta">
-                      <div class="visit"><a href="verOferta"><i class="fa fa-question-circle"></i> Ver Demanda</a></div>
+                      <div class="visit"><a href="verDemanda/?q={{c.idDemanda}}"><i class="fa fa-question-circle"></i> Ver Demanda</a></div>
                       <div class="caption">
                         <h4>{{c.nombre}}</h4>
                         <div class="rating">
@@ -104,7 +104,7 @@
                     <div class="col-md-3 col-sm-6">
                         <div class="thumbnail">
                           <img class="img-responsive" src="{{MEDIA_URL}}{{ c.imagen }} " alt="Oferta">
-                          <div class="visit"><a href="verOferta"><i class="fa fa-question-circle"></i> Ver Demanda</a></div>
+                          <div class="visit"><a href="verDemanda/?q={{c.idDemanda}}"><i class="fa fa-question-circle"></i> Ver Demanda</a></div>
                           <div class="caption">
                             <h4>{{c.nombre}}</h4>
                             <div class="rating">

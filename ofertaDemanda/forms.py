@@ -434,7 +434,7 @@ class CrearDemandaForm(forms.ModelForm):
     tipoDemanda = forms.ChoiceField(
         label="Tipo de demanda",
         choices = (
-            ('0', "Seleccione el tipo de oferta"), 
+            ('0', "Seleccione el tipo de demanda"), 
             ('1', "Emprendimiento"), 
             ('2', "Prototipo"),
             ('3', "Tecnologia")
@@ -461,19 +461,29 @@ class CrearDemandaForm(forms.ModelForm):
         )
     )
 
-    dominio = forms.CharField(
-        label="Dominio",
-        max_length=500,
-        widget=forms.TextInput(
-            attrs={'class':'form-control form-group infoGener', 'placeholder':'Ingrese el nombre de su demanda', 'required':''}
-        )
+    dominio = forms.ChoiceField(
+    label="Dominio",
+        choices = (
+            ('0', "Mundial"), 
+            ('1', "Regional"), 
+            ('2', "Nivel Pais"),            
+        ),
+        widget = forms.Select(
+                attrs={'class':'form-group form-control infoGener', 'required':''}
+            ),
+        initial = '0',
     )
-    subdominio = forms.CharField(
-        label="Subdominio",
-        max_length=200,
-        widget=forms.TextInput(
-            attrs={'class':'form-control form-group infoGener', 'placeholder':'Ingrese el nombre de su demanda', 'required':''}
-        )
+    subdominio = forms.ChoiceField(
+    label="Subdominio",
+        choices = (
+            ('0', "Todos los usuarios"), 
+            ('1', "Solo usuarios de institucion"), 
+            ('2', "Solo usuarios independientes"),
+        ),
+        widget = forms.Select(
+                attrs={'class':'form-group form-control infoGener', 'required':''}
+            ),
+        initial = '0',
     )
 
     palabras_claves = forms.CharField(
