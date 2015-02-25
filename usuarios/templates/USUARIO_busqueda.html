@@ -55,23 +55,19 @@
           <!-- List of recent dialogs -->
           <h2><span>{{tipoB}}</span></h2>
           <div class="pm-search">
-            <form role="form">
+            <form role="form" method='GET' action="/{{linkTipo}}/">
               <div class="row">
                 <div class="col-sm-12 col-md-10">
                   <div class="input-group">
 
 
-                    <form method='GET'>
-                    {%csrf_token%}
+                                 
 
-                    
-
-                      <input type="text" class="form-control" name="q" id="pm-search" placeholder="Ingresa tu búsqueda aquí">
+                     <input type="text" class="form-control" name="q" id="pm-search" placeholder="Ingresa tu búsqueda aquí">
                       <span class="input-group-btn">
                       <input type="submit" class="btn btn-dark" value="Buscar">
                       </span>
-                    </form>
-
+                    
 
                   </div>
                 </div>
