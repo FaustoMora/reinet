@@ -265,7 +265,17 @@ def editar_perfil_view(request):
 
 
 def my_404_view(request):
-	return render_to_response('404.html')
+	try:
+		id_session=request.session['id_user']
+	except:
+		id_session=None
+	args={}
+	if id_session is not None:
+		tipo404="inicio_view"
+	else:
+		tipo404="index"
+	args['tipo404']=tipo404
+	return render_to_response('404.html',args,context_instance=RequestContext(request))
 
 
 @login_required(login_url='/ingresar/')
