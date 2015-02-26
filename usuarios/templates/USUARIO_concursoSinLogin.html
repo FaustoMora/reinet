@@ -1,0 +1,76 @@
+{% extends "base.tpl.html" %}
+{% block home %}
+<a class="navbar-brand" href="{% url 'usuarios.views.index' %}" class="link">REI-NET</a>
+{% endblock %}
+{% block signin %}
+<li id="sign-up" class="show"><a href="{% url 'usuarios.views.register' %}">Registrarse</a></li>
+<li id="sign-in" class="show"><a href="{% url 'usuarios.views.ingresar' %}">Iniciar Sesión</a></li>
+{% endblock %}
+
+{% block content %}
+    <div class="section-header">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12">
+            <!-- Remove the .animated class if you don't want things to move 
+            <h1 class="animated slideInLeft"><span>Inicio</span></h1></br>-->
+            <h1 class="animated slideInRight"><span>CONCURSOS DESTACADOS DE LA RED</span></h1>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <!--
+          <div class="btn-group" id="filters">
+            <a href="#" class="btn btn-default" data-filter="*">All</a>
+            <a href="#" class="btn btn-default" data-filter=".cat-1"><span class="hidden-xs">Ofertas</span> </a>
+            <a href="#" class="btn btn-default" data-filter=".cat-2"><span class="hidden-xs">Demandas</span></a>
+            <a href="#" class="btn btn-default" data-filter=".cat-3"><span class="hidden-xs">Concursos</span></a>
+            <a href="#" class="btn btn-default" data-filter=".cat-4"><span class="hidden-xs">Incubaciones</span> </a>
+          </div>
+          -->
+        </div>
+      </div>
+      
+      <ul class="row list-inline gallery-list" id="isotope-container">
+        
+        {% if lst_concursos %}
+        <p> &nbsp;&nbsp;&nbsp;&nbsp;Si desea visualizar los concursos. Por favor <a href="/ingresar/">Inicie Sesión.</a></p>
+        <!--
+        <div class="row">
+        <div class="col-md-12 block-header">
+          <h2>
+            <span class="title">Ofertas destacadas</span><span class="decoration"></span><span class="decoration"></span><span class="decoration"></span>
+          </h2>
+        </div>
+        </div>
+      -->
+          {% for c in lst_concursos%}
+          
+           <li class="isotope-item cat-1 cat-2 cat-4">
+                <a href="#">
+                  <span class="gallery-thumbnail">
+                    <img style="width=300vh;" class="img-responsive" src="{{MEDIA_URL}}{{c.imagen }} " alt="...">
+                  </span>
+                  <span class="gallery-text">
+                    <span class="gallery-title">{{ c.nombre }}</span>
+                    {{ c.descripcion }} 
+                  </span>
+                </a>
+              </li>
+          
+          {% endfor %}
+        
+        {% else %}
+
+          <div style="background-color:white; color:white; margin:20px; padding:20px; display:block; visible:hidden;min-height:250px;min-width:75px;">
+
+          </div>
+
+        {% endif %}
+      </ul>
+    </div>
+
+{%endblock%}

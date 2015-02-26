@@ -36,7 +36,7 @@
             {% endfor %}
           </ul>
         {% endif %}
-          <form class="form-inline" action="/homeOfertas/" method="GET" role="form">
+          <form class="form-inline" action="/searchOfertaRed/" method="GET" role="form">
             <div class="row">
               <div class="col-md-10 col-sm-10">
                 <div class="input-group">
@@ -74,7 +74,7 @@
                 <div class="col-md-3 col-sm-6">
                     <div class="thumbnail">
                       <img class="img-responsive" src="{{MEDIA_URL}}{{ c.imagen }} " alt="Oferta">
-                      <div class="visit"><a href="verOferta/?q={{c.idOferta}}"><i class="fa fa-question-circle"></i> Ver Oferta</a></div>
+                      <div class="visit"><a href="/verOferta/?q={{c.idOferta}}"><i class="fa fa-question-circle"></i> Ver Oferta</a></div>
                       <div class="caption">
                         <h4>{{c.nombre}}</h4>
                         <div class="rating">
@@ -87,7 +87,7 @@
                             <i class="fa fa-star"></i>
                           </div>
                         <ul class="text-muted list-inline">
-                          <li><i class="fa fa-user"></i> <a href="#">{{c.idusuario}}</a></li>
+                          <li><i class="fa fa-user"></i> <a href="/verPerfil/?q={{c.idusuario}}">{{c.idusuario}}</a></li>
                           <li><i class="fa fa-calendar"></i> {{c.tiempo_inicio_disponible}}</li>
                           
                         </ul>
@@ -102,12 +102,12 @@
           <p>Has buscado por: <strong>{{ nombre }}</strong></p>
             {% if ofertas %}
                 <p>Encontrado {{ ofertas|length }} Ofertas {{ ofertas|pluralize }}.</p>
-                {% for ofert in ofertas %}
+                {% for c in ofertas %}
 
                     <div class="col-md-3 col-sm-6">
                         <div class="thumbnail">
                           <img class="img-responsive" src="{{MEDIA_URL}}{{ c.imagen }} " alt="Oferta">
-                          <div class="visit"><a href="verOferta/?q={{c.idOferta}}"><i class="fa fa-question-circle"></i> Ver Oferta</a></div>
+                          <div class="visit"><a href="/verOferta/?q={{c.idOferta}}"><i class="fa fa-question-circle"></i> Ver Oferta</a></div>
                           <div class="caption">
                             <h4>{{c.nombre}}</h4>
                             <div class="rating">

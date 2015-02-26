@@ -22,7 +22,7 @@ class ListIncubaciones(ListEndpoint, BasicHttpAuthMixin):
     model = Incubacion
     @login_required
     def get(self, request):
-        incs = []
+        incs=[]
         try:
             temp = request.session['id_institucion']
             inst = Institucion.objects.get(idinstitucion=temp)
@@ -40,6 +40,12 @@ class ListIncubaciones(ListEndpoint, BasicHttpAuthMixin):
                     'descripcion',
                     ]
             )),
+            ('estado',dict(
+                fields=[
+                    'codigo',
+                    'descripcion',
+                ]
+            )),
             ('autor',dict(
                 fields=[
                     'nombre_corto'
@@ -53,8 +59,7 @@ class ListIncubaciones(ListEndpoint, BasicHttpAuthMixin):
             )),
             ('ofertasIncubadas',
              lambda a: a.countIncubadas()
-            )
-        ])
+            )])
 
 
 @decorators.login_required(login_url='/ingresar/')

@@ -6,6 +6,7 @@
       <div class="container">
         <div class="row">
           <div class="col-sm-12">
+
             <!-- Remove the .animated class if you don't want things to move -->
             <h1 class="animated slideInLeft"><span>Editar Concurso </span></h1>
           </div>
@@ -32,7 +33,7 @@
 			{% if messages %}
 				    {% for message in messages %}
 						<div class="col-md-12">
-							<div class="alert alert-success h4">
+							<div class="alert alert-danger h5">
 							<p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
 							</div>
 						</div>

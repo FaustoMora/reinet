@@ -265,7 +265,17 @@ def editar_perfil_view(request):
 
 
 def my_404_view(request):
-	return render_to_response('404.html')
+	try:
+		id_session=request.session['id_user']
+	except:
+		id_session=None
+	args={}
+	if id_session is not None:
+		tipo404="inicio_view"
+	else:
+		tipo404="index"
+	args['tipo404']=tipo404
+	return render_to_response('404.html',args,context_instance=RequestContext(request))
 
 
 @login_required(login_url='/ingresar/')
@@ -611,3 +621,32 @@ def verInicioF(request):
 
 def terminos(request):
 	return render_to_response("terms.html")
+
+
+
+"""VISTAS INDEX """
+
+def ofertaSinLogin(request):
+	lst_ofertas = Oferta.objects.all()
+	args={"lst_ofertas":lst_ofertas}
+	return render_to_response('USUARIO_ofertaSinLogin.html',args,context_instance=RequestContext(request))
+
+def demandaSinLogin(request):
+	lst_demandas = Demanda.objects.all()
+	args={"lst_demandas":lst_demandas}
+	return render_to_response('USUARIO_demandaSinLogin.html',args,context_instance=RequestContext(request))
+
+def concursoSinLogin(request):
+	lst_concursos = Concurso.objects.all()
+	args={"lst_concursos":lst_concursos}
+	return render_to_response('USUARIO_concursoSinLogin.html',args,context_instance=RequestContext(request))
+
+def incubacionSinLogin(request):
+	lst_incubaciones = Incubacion.objects.all()
+	args={"lst_incubaciones":lst_incubaciones}
+	return render_to_response('USUARIO_incubacionSinLogin.html',args,context_instance=RequestContext(request))
+
+def institucionSinLogin(request):
+	lst_inst = Institucion.objects.all()
+	args={"lst_inst":lst_inst}
+	return render_to_response('USUARIO_institucionSinLogin.html',args,context_instance=RequestContext(request))

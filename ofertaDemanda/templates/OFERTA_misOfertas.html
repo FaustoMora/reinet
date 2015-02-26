@@ -82,14 +82,13 @@
       
 		<!-- Se presentan las ofertas--> 
 		<div class="container">
-
 			<div class="table-responsive">
 				<table class="table table-hover" id="misofertas">
 					{% if buscarMisOfer %}
-				          <p>Has buscado por: <strong>{{ nombre }}</strong></p>
+				            <p>Has buscado por: <strong>{{ nombre }}</strong></p>
 				            {% if ofertas %}
 				            <h3>MIS OFERTAS</h3>
-					            <thead>
+					        <thead>
 									<tr>
 										<th >N&uacute;mero</th>
 									    <th>Nombre</th>	
@@ -100,10 +99,9 @@
 									    <th>Editar oferta<th>
 									    <th>Visualizar oferta<th>
 									</tr>
-								</thead>
-								<tbody>
-									{% for c in ofertas %}	 
-				 					
+							</thead>
+							<tbody>
+								{% for c in ofertas %}	 
 									<tr>
 										<td class="numero">{{c.idOferta}}</td>
 									    <td>{{c.nombre}}</td>
@@ -147,14 +145,13 @@
 									    	</button>
 									    <th>
 									  </tr>
-									 
-									 {% endfor %}
+								{% endfor %}
 								</tbody>
 				            {% else %}
 				                <p>Las Ofertas no concuerda con sus criterios de búsqueda.</p>  	                  
 				            {% endif %}
 				    {%endif%}
-				    	{% if mostrarOfertas %}
+				    {% if mostrarOfertas %}
 				    	<h3>MIS OFERTAS</h3>
 				    	<thead>
 						<tr>
@@ -168,64 +165,62 @@
 						    <th>Visualizar oferta<th>
 							</tr>
 						</thead>
-						{%endif%}
+					{%endif%}
 						<body>  
-
 		 					{% for c in lst_ofertas %}	 
-		 					
-							<tr>
-								<td class="numero">{{c.idOferta}}</td>
-							    <td>{{c.nombre}}</td>
-							    
-							    {% if c.tipoOferta == 1%}
-							    	<td>Emprendimiento</td> 
-							    {% elif c.tipoOferta == 2%}
-							    	<td>Prototipo</td>
-							    {% elif c.tipoOferta == 3%}
-							    	<td>Tecnolog&iacute;a</td>
-							    {% endif %}
-							    
-							    {% if c.calificacionGeneral == null%}
-							    	<td>Sin calificaciones</td>
-							    {% else %}
-							    	<td>{{c.calificacionGeneral}}</td>
-							    {% endif %}
+		 						<tr>
+									<td class="numero">{{c.idOferta}}</td>
+								    <td>{{c.nombre}}</td>
+								    
+								    {% if c.tipoOferta == 1%}
+								    	<td>Emprendimiento</td> 
+								    {% elif c.tipoOferta == 2%}
+								    	<td>Prototipo</td>
+								    {% elif c.tipoOferta == 3%}
+								    	<td>Tecnolog&iacute;a</td>
+								    {% endif %}
+								    
+								    {% if c.calificacionGeneral == null%}
+								    	<td>Sin calificaciones</td>
+								    {% else %}
+								    	<td>{{c.calificacionGeneral}}</td>
+								    {% endif %}
 
-							    {% if c.estadoOferta == 1%}
-							    	<td>Activa</td>
-							    {% elif c.estadoOferta == 2%}
-							    	<td>Terminada</td>
-							    {% elif c.estadoOferta == 3%}
-							    	<td>Desactivada</td>
-							    {% else %}
-							    	<td>Censurada</td>
-							    {% endif %}
+								    {% if c.estadoOferta == 1%}
+								    	<td>Activa</td>
+								    {% elif c.estadoOferta == 2%}
+								    	<td>Terminada</td>
+								    {% elif c.estadoOferta == 3%}
+								    	<td>Desactivada</td>
+								    {% else %}
+								    	<td>Censurada</td>
+								    {% endif %}
 
-							    {% if c.ofertaPublicada == 1%}
-							    	<td style="color:gray">Borrador</td>
-							    {% else %}
-							    	<td style="color:green">Publicada</td>
-							    {% endif %}
+								    {% if c.ofertaPublicada == 1%}
+								    	<td style="color:gray">Borrador</td>
+								    {% else %}
+								    	<td style="color:green">Publicada</td>
+								    {% endif %}
 
-							    <th style="text-align:center">
-							    	<a href="/editarOferta/?q={{c.idPersona}}"
-							    	<button type="button" class="btn btn-green">
-									  <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-									</button></a>
-							    <th>
-							    <th style="text-align:center">
-							    	<a href="/verOferta/?q={{c.idOferta}}"
-							    	<button type="button" class="btn btn-amethyst">
-							    		<span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>
-							    	</button></a>
-							    <th>
-							  </tr>
-							 
-							 {% endfor %}
+								    <th style="text-align:center">
+								    	<a href="/editarOferta/?q={{c.idOferta}}">
+								    	<button type="button" class="btn btn-green">
+										  <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+										</button></a>
+								    <th>
+								    <th style="text-align:center">
+								    	<a href="/verOferta/?q={{c.idOferta}}"
+								    	<button type="button" class="btn btn-amethyst">
+								    		<span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>
+								    	</button></a>
+								    <th>
+							  	</tr>
+							{% endfor %}
 						</tbody>
 					</table>
 				</div>
 			</div>
+		</div>
 </div>
 
 {% endblock %}

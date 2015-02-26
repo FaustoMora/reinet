@@ -28,6 +28,8 @@ from models import  *
 from django.contrib.auth.forms import *
 from django.contrib.auth.models import User
 from datetime import datetime
+
+
 #from phonenumber_field.modelfields import PhoneNumberField
 """
 class UsuarioForm(forms.ModelForm):
@@ -91,10 +93,9 @@ class UsuarioForm2(UserCreationForm):
 			p.idUsuario='null';
 			p.user_id=user.id
 			p.save()
-			
-		
-		
 		return user
+
+	
 
 class PersonaForm(UserCreationForm):
 
@@ -103,8 +104,8 @@ class PersonaForm(UserCreationForm):
 		exclude=['last_login','is_superuser','user_permissions','is_staff','groups'
 		,'date_joined','idpersona','is_active','fecha_nacimiento','password']
 
-		fields=['username','first_name','last_name', 'email','imagen','identificacion',
-		'cargo','actividad','areas_interes','password1','password2']
+		fields=['username','password1','password2','first_name','last_name', 'email','imagen','identificacion',
+		'cargo','actividad','areas_interes']
 		widgets={
 			'password': forms.PasswordInput(attrs={'class': 'form-control','placeholder':'Contraseña'}),
 			
@@ -121,7 +122,7 @@ class PersonaForm(UserCreationForm):
 	first_name=forms.CharField(label='Nombres',widget=forms.TextInput(attrs={'class': 'form-control','placeholder':'Nombre'}))
 	last_name=forms.CharField(label='Apellidos',widget=forms.TextInput(attrs={'class': 'form-control','placeholder':'Apellidos'}))
 	email=forms.EmailField(label='Correo Electrónico',widget=forms.TextInput(attrs={'class': 'form-control','placeholder':'Ingrese su dirección de Correo electrónico'}))	
-	identificacion=forms. IntegerField(label='Identificación',widget=forms.TextInput(attrs={'class': 'form-control','pattern':"[0-9]{1,15}",'placeholder':'Número de cédula o pasaporte'}))	
+	identificacion=forms.CharField(label='Identificación',widget=forms.TextInput(attrs={'class': 'form-control','pattern':"[0-9]{1,15}",'placeholder':'Número de cédula o pasaporte'}))	
 	password1=forms.CharField(label='Contraseña',widget=forms.PasswordInput(attrs={'class': 'form-control','placeholder':'Confirmacion'}))
 	password2=forms.CharField(label='Confirmación de Contraseña',widget=forms.PasswordInput(attrs={'class': 'form-control','placeholder':'Confirmacion'}))
 	imagen = forms.ImageField(label="Imagen de Perfil",widget=forms.FileInput())
@@ -132,8 +133,8 @@ class PersonaForm(UserCreationForm):
 		user.fecha_nacimiento='2012-12-12'
 		if commit:
 			user.save()
-			
 		return user
+
 
 class PersonaEditarForm(forms.ModelForm):
 
@@ -164,7 +165,7 @@ class PersonaEditarForm(forms.ModelForm):
 	first_name=forms.CharField(label='Nombres',widget=forms.TextInput(attrs={'class': 'form-control','placeholder':'Nombre'}))
 	last_name=forms.CharField(label='Apellidos',widget=forms.TextInput(attrs={'class': 'form-control','placeholder':'Apellidos'}))
 	email=forms.EmailField(label='Correo Electrónico',widget=forms.TextInput(attrs={'class': 'form-control','placeholder':'Ingrese su dirección de Correo electrónico'}))	
-	identificacion=forms. IntegerField(label='Identificación',widget=forms.TextInput(attrs={'class': 'form-control','pattern':"[0-9]{1,15}",'placeholder':'Número de cédula o pasaporte'}))	
+	identificacion=forms.CharField(label='Identificación',widget=forms.TextInput(attrs={'class': 'form-control','pattern':"[0-9]{1,15}",'placeholder':'Número de cédula o pasaporte'}))	
 	
 
 	def clean(self):
@@ -235,7 +236,6 @@ class InstitucionForm(UserCreationForm):
 		#user.idpersona='default'		
 		if commit:
 			user1.save()
-			
 		return user1
 
 
