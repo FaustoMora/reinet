@@ -86,7 +86,7 @@
          {% for c in lst_ofertas %}
                 <div class="col-md-3 col-sm-6">
                     <div class="thumbnail">
-                      <img class="img-responsive" src="{{MEDIA_URL}}{{ c.imagen }} " alt="Oferta">
+                      <img class="img-responsive" src="{{MEDIA_URL}}{{ c.imagen }} " alt="Oferta" style="display: block; width: 100%; max-height: 200px">
                       <div class="visit"><a href="/verOferta/?q={{c.idOferta}}"><i class="fa fa-question-circle"></i> Ver Oferta</a></div>
                       <div class="caption">
                         <h4>{{c.nombre}}</h4>
