@@ -36,12 +36,20 @@
             <div class="col-md-3 col-sm-6">
               <div class="thumbnail">
                   <img src="/media/{{MEDIA_URL}}{{ demanda.imagen }}" class="img-responsive" alt="Oferta">
-                  <div class="visit"><a href="OfertaVer"><i class="fa fa-question-circle"></i> Galeria</a></div>
+                  <div class="visit"><a href="/verDemanda/?q={{demanda.idDemanda}}"><i class="fa fa-question-circle"></i> Galeria</a></div>
               </div>
             </div>
             {{ demanda.descripcion }}
             <br /><br />
-              {{ demanda.dominio }}
+              {% if demanda.dominio == 0|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Mundial</td>
+                      {% elif demanda.dominio == 1|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Regional</td>
+                      {% elif demanda.dominio == 2|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Nivel Pais</td>
+                      {%else%}
+                        <td>No tiene dominio</td>
+                      {%endif%}
             </p>
 
           <div class="row">
@@ -57,12 +65,71 @@
                   <tbody>
                     <tr>
                       <td class="text-muted">Dominio</td>
-                      <td colspan=4 style="text-align:center">{{ demanda.dominio }}</td>
+                      <td colspan=4 style="text-align:center">
+                           {% if demanda.dominio == 0|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Mundial</td>
+                      {% elif demanda.dominio == 1|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Regional</td>
+                      {% elif demanda.dominio == 2|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Nivel Pais</td>
+                      {%else%}
+                        <td>No tiene dominio</td>
+                      {%endif%}</td>
                     </tr>
                     
                     <tr>
                       <td class="text-muted">Lugar de Aplicación</td>
-                      <td colspan=4 style="text-align:center">{{ demanda.lugar_aplicacion }}</td>
+                      <td colspan=4 style="text-align:center">
+                          {% if demanda.lugar_aplicacion == 1|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Azuay</td>
+                      {% elif demanda.lugar_aplicacion == 2|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Bolivar</td>
+                      {% elif demanda.lugar_aplicacion == 3|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Caniar</td>
+                      {% elif demanda.lugar_aplicacion == 4|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Carchi</td>
+                      {% elif demanda.lugar_aplicacion == 5|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Chimborazo</td>
+                      {% elif demanda.lugar_aplicacion == 6|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Cotopaxi</td>
+                      {% elif demanda.lugar_aplicacion == 7|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">El Oro</td>
+                      {% elif demanda.lugar_aplicacion == 8|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Esmeraldas</td>
+                      {% elif demanda.lugar_aplicacion == 9|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Galapagos</td>
+                      {% elif demanda.lugar_aplicacion == 10|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Guayas</td>
+                      {% elif demanda.lugar_aplicacion == 11|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Imbabura</td>
+                      {% elif demanda.lugar_aplicacion == 12|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Loja</td>
+                      {% elif demanda.lugar_aplicacion == 13|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Los Rios</td>
+                      {% elif demanda.lugar_aplicacion == 14|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Manabi</td>
+                      {% elif demanda.lugar_aplicacion == 15|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Morona Santiago</td>
+                      {% elif demanda.lugar_aplicacion == 16|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Napo</td>
+                      {% elif demanda.lugar_aplicacion == 17|stringformat:"s" %} 
+                        <td colspan=4 style="text-align:center">Orellana</td> 
+                      {% elif demanda.lugar_aplicacion == 18|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Pastaza</td>
+                      {% elif demanda.lugar_aplicacion == 19|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Pichincha</td>
+                      {% elif demanda.lugar_aplicacion == 20|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Santa Elena</td>
+                      {% elif demanda.lugar_aplicacion == 21|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Santo Domingo de los Tsachilas</td>
+                      {% elif demanda.lugar_aplicacion == 22|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Sucumbios</td>
+                      {% elif demanda.lugar_aplicacion == 23|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Tungurahua</td>
+                      
+                      {% else %}
+                        <td colspan=4 style="text-align:center">Zamora Chinchipe</td>
+                      {% endif %}</td>
                     </tr>
                     <tr>
                       <td class="text-muted">Fecha disponibilidad</td>
