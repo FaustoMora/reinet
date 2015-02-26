@@ -80,6 +80,9 @@ ipch/
 # TFS 2012 Local Workspace
 $tf/
 
+#Imagenenes
+*.jpg
+
 # Guidance Automation Toolkit
 *.gpState
 
