@@ -145,10 +145,10 @@
           <!-- First blog post -->
 		  {% for m in milestones%}
             <div class="blog-summary">
-              <h4><a href="#" id="openmile">Milestone {{m.peso}}%</a></h4>
+              <h4><p id="openmile" style="color:blue;">Milestone {{m.peso}}%</p></h4>
               <time datetime="2013-11-10" class="timestamp hidden-xs">{{ m.fecha_entrega }}</time>
               <ul class="text-muted list-inline">
-                <li><i class="fa fa-user"></i> {{ concurso.idusuario }}</a></li>
+                <li><i class="fa fa-user"></i> {{ concurso.idusuario }}</li>
                 <li><i class="fa fa-calendar"></i> {{ m.fecha_entrega }}</li>
               </ul>
               <hr>

@@ -188,46 +188,50 @@ def verConcurso(request):
 
 @login_required(login_url='/ingresar/')
 def editarConcurso(request):
-	#try:
-	if(request.session["tipo"]=="institucion"):
-		info=""
-		idcon = int(request.GET.get('q', ''))
-		print 'HERE HELLO!!!'
-		print idcon
-		if request.method == 'POST':
-			concurso=Concurso.objects.get(idConcurso = idcon)
-			form = EditarConcursoForm(request.POST, request.FILES, instance=concurso)
-			if form.is_valid() :
+	try:
+		if(request.session["tipo"]=="institucion"):
+			info=""
+			idcon = int(request.GET.get('q', ''))
+			print 'HERE HELLO!!!'
+			print idcon
+			if request.method == 'POST':
+				concurso=Concurso.objects.get(idConcurso = idcon)
+				fechafin = concurso.fecha_fin
+				form = EditarConcursoForm(request.POST, request.FILES, instance=concurso)
+				if form.is_valid() :
 
-				if validarfechas(concurso.fecha_fin,form.cleaned_data['fecha_fin']):
-					print 'Yeah'
-					form.save()
-					return HttpResponseRedirect('/homeConcursos')
+					print fechafin
+					print form.cleaned_data['fecha_fin']
+
+					if validarfechas(fechafin,form.cleaned_data['fecha_fin']):
+						print 'Yeah'
+						form.save()
+						return HttpResponseRedirect('/homeConcursos')
+					else:
+						info="Error en la fecha final, la nueva fecha final no puede ser menor a la ya existente"
+						concursoForm = EditarConcursoForm(instance=concurso)
 				else:
-					info="Error en la fecha final, la nueva fecha final no puede ser menor a la ya existente"
 					concursoForm = EditarConcursoForm(instance=concurso)
 			else:
+				print 'oh no'
+				concurso=Concurso.objects.get(idConcurso = idcon)
+				print concurso.idusuario
+				print request.session['id_user']
+				if not compararIds(concurso.idusuario.id,request.session['id_user']):
+					return HttpResponseRedirect('/homeConcursos')
 				concursoForm = EditarConcursoForm(instance=concurso)
+				
+			args={}
+			args.update(csrf(request))
+			args['form']=concursoForm
+			args['idconcu'] = idcon
+			print concurso.nombre
+			messages.success(request, info)
+			return render_to_response('CONCURSO_editar_concurso.html', args,context_instance=RequestContext(request))
 		else:
-			print 'oh no'
-			concurso=Concurso.objects.get(idConcurso = idcon)
-			print concurso.idusuario
-			print request.session['id_user']
-			if not compararIds(concurso.idusuario.id,request.session['id_user']):
-				return HttpResponseRedirect('/homeConcursos')
-			concursoForm = EditarConcursoForm(instance=concurso)
-			
-		args={}
-		args.update(csrf(request))
-		args['form']=concursoForm
-		args['idconcu'] = idcon
-		print concurso.nombre
-		messages.success(request, info)
-		return render_to_response('CONCURSO_editar_concurso.html', args,context_instance=RequestContext(request))
-	else:
-		return HttpResponseRedirect('/homeConcursos')
-	#except:
-		#return HttpResponseRedirect('/RNNotFound')
+			return HttpResponseRedirect('/homeConcursos')
+	except:
+			return HttpResponseRedirect('/RNNotFound')
 
 
 
