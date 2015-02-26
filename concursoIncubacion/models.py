@@ -20,7 +20,7 @@ class Concurso(models.Model):
     num_finalistas = models.PositiveIntegerField()
     perfil = models.CharField(max_length=200)
     tipo_oferta = models.IntegerField()
-    estado = models.ForeignKey(Catalogo, db_column="estado")
+    estado = models.IntegerField()
     imagen = models.ImageField(upload_to='conInc_media')
     ranking = models.IntegerField()
 
@@ -35,7 +35,7 @@ class Inscripcion(models.Model):
     idConcurso = models.ForeignKey(Concurso, db_column='idconcurso')
     idOferta = models.ForeignKey(Oferta, db_column='idoferta')
     fecha = models.DateField(db_column='fechainscripcion')
-    estado = models.ForeignKey(Catalogo, db_column="estado")
+    estado = models.IntegerField()
 
     class Meta:
         db_table = 'inscripcion'
@@ -47,7 +47,7 @@ class MilestoneConcurso(models.Model):
     fecha_entrega = models.DateField()
     requerimiento = models.CharField(max_length=300)
     peso = models.PositiveIntegerField()
-    estado = models.ForeignKey(Catalogo, db_column="estado")
+    estado = models.IntegerField()
 
     class Meta:
         db_table = 'milestoneConcurso'
@@ -58,7 +58,7 @@ class MilestoneEntregable(models.Model):
     idMilestoneConcurso = models.ForeignKey(MilestoneConcurso, db_column='idmilestoneConcurso')
     idInscripcion = models.ForeignKey(Inscripcion, db_column='idinscripcion')
     fecha_entrega = models.DateField()
-    estado = models.ForeignKey(Catalogo, db_column="estado")
+    estado = models.IntegerField()
 
     class Meta:
         db_table = 'milestoneentregable'

@@ -100,7 +100,7 @@ def crearConcurso(request):
 						print "pasa prueba"
 						nuevoConcurso=super(CrearConcursoForm, form).save(commit=False)
 						nuevoConcurso.idusuario=Institucion.objects.get(idinstitucion=request.session['id_institucion'])
-						nuevoConcurso.estado=Catalogo.objects.get(id=8)
+						nuevoConcurso.estado=1
 						nuevoConcurso.ranking=0
 						nuevoConcurso.save()
 
@@ -119,7 +119,7 @@ def crearConcurso(request):
 							mile.fecha_entrega= request.POST.getlist("mileFecha")[i]
 							mile.peso = request.POST.getlist("milePeso")[i]
 							mile.requerimiento = request.POST.getlist("mileReq")[i]
-							mile.estado = Catalogo.objects.get(id=8)
+							mile.estado = 1
 							mile.idConcurso = nuevoConcurso
 							mile.save()
 
@@ -286,7 +286,7 @@ def registrarOferta(request):
 				val = True
 		i = i+1
 	inscri.idConcurso = Concurso.objects.get(idConcurso = concu)
-	inscri.estado = Catalogo.objects.get(id=8)
+	inscri.estado = 1
 	inscri.fecha = datetime.now().strftime('%Y-%m-%d')
 	print val
 	args = {}
