@@ -234,7 +234,7 @@ def searchOfertaRed(request):
         elif len(busquedaOfertaRed)>25:
             errors.append('por favor ingrese un termino no mas de 25 caracteres.')
         else:
-            ofertas = Oferta.objects.filter(nombre__icontains=busquedaOfertaRed).exclude(idusuario = request.session['id_persona'])
+            ofertas = Oferta.objects.filter(nombre__icontains=busquedaOfertaRed).exclude(idusuario = request.session['id_user'])
             return render(request, 'OFERTA_Inicio2.html',
                 {'ofertas':ofertas,'nombre':busquedaOfertaRed,'buscarOfer':True})
         return render(request,'OFERTA_Inicio2.html',{'errors':errors})    
@@ -249,7 +249,7 @@ def searchDemandaRed(request):
         elif len(busquedaDemandaRed)>25:
             errors.append('por favor ingrese un termino no mas de 25 caracteres.')
         else:
-            demandas = Demanda.objects.filter(nombre__icontains=busquedaDemandaRed).exclude(idusuario = request.session['id_persona'])
+            demandas = Demanda.objects.filter(nombre__icontains=busquedaDemandaRed).exclude(idusuario = request.session['id_user'])
             return render(request, 'DEMANDA_Inicio.html',
                 {'demandas':demandas,'nombre':busquedaDemandaRed,'buscarDema':True})
         return render(request,'DEMANDA_Inicio.html',{'errors':errors})
