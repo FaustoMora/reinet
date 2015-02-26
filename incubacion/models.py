@@ -31,7 +31,7 @@ class Incubacion(models.Model):
     autor = models.ForeignKey(Institucion, null=True, db_column="institucionAutor", related_name="autor")
     invitaciones_consultores = models.ManyToManyField(Persona, through="InvitacionConsultor", related_name="invitaciones_consultores")
     consultores = models.ManyToManyField(Consultor, through="IncubacionConsultor",null=True)
-    imagen = models.ImageField(upload_to='incubacion_media',db_column="imagenIncubacion",null=True)
+    #imagen = models.ImageField(upload_to='incubacion_media',db_column="imagenIncubacion",null=True)
 
     class Meta:
         db_table = "Incubacion"
