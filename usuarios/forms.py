@@ -28,6 +28,9 @@ from models import  *
 from django.contrib.auth.forms import *
 from django.contrib.auth.models import User
 from datetime import datetime
+from sorl.thumbnail import ImageField, get_thumbnail
+
+
 #from phonenumber_field.modelfields import PhoneNumberField
 """
 class UsuarioForm(forms.ModelForm):
@@ -91,10 +94,9 @@ class UsuarioForm2(UserCreationForm):
 			p.idUsuario='null';
 			p.user_id=user.id
 			p.save()
-			
-		
-		
 		return user
+
+	
 
 class PersonaForm(UserCreationForm):
 
@@ -130,10 +132,22 @@ class PersonaForm(UserCreationForm):
 		user=super(PersonaForm, self).save(commit=False)
 		#user.idpersona='default'
 		user.fecha_nacimiento='2012-12-12'
-		if commit:
-			user.save()
-			
 		return user
+
+	"""RESTRINGIR IMAGENES MAYORES
+	def clean_image(self):
+		imagen = self.cleaned_data.get("imagen")
+		if not imagen:
+			raise forms.ValidationError("No hay imagen!")
+		else:
+			w, h = get_image_dimensions(imagen)
+			if w > 700 or h > 600:
+		   		raise forms.ValidationError("La imagen excede las dimensiones establecidas. Máximo 700x600px")
+		return imagen
+	"""
+
+
+
 
 class PersonaEditarForm(forms.ModelForm):
 
@@ -235,7 +249,6 @@ class InstitucionForm(UserCreationForm):
 		#user.idpersona='default'		
 		if commit:
 			user1.save()
-			
 		return user1
 
 
