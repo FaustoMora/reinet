@@ -76,25 +76,28 @@ def crearIncubacion(request):
 @csrf_exempt
 @decorators.login_required(login_url='/ingresar/')
 def createIncubacion(request):
-    i = Incubacion()
-    i.nombre = request.POST.get('nombre')
-    i.descripcion = request.POST.get('descripcion')
-    i.condiciones = request.POST.get('condiciones')
-    i.perfiles = request.POST.get('perfiles')
-    #i.alcance = Catalogo.objects.get(request.POST.get("alcanc"))
-    i.alcance = Catalogo.objects.get(id=2)
-    temp = request.POST.getlist('tipoOf')
-    autor = Institucion.objects.get(idinstitucion=request.session['id_institucion'])
-    i.autor = autor
-    i.estado = Catalogo.objects.get(id=8)
-    i.save()
+    try:    
+        i = Incubacion()
+        i.nombre = request.POST.get('nombre')
+        i.descripcion = request.POST.get('descripcion')
+        i.condiciones = request.POST.get('condiciones')
+        i.perfiles = request.POST.get('perfiles')
+        #i.alcance = Catalogo.objects.get(request.POST.get("alcanc"))
+        i.alcance = Catalogo.objects.get(id=2)
+        temp = request.POST.getlist('tipoOf')
+        autor = Institucion.objects.get(idinstitucion=request.session['id_institucion'])
+        i.autor = autor
+        i.estado = Catalogo.objects.get(id=8)
+        i.save()
 
-    for a in temp:
-        y = TiposOfertasIncubacion()
-        y.incubacion=i
-        y.tipo = Catalogo.objects.get(id=int(a))
-        y.save()
-    return HttpResponseRedirect('/incubacion')
+        for a in temp:
+            y = TiposOfertasIncubacion()
+            y.incubacion=i
+            y.tipo = Catalogo.objects.get(id=int(a))
+            y.save()
+        return HttpResponseRedirect('/incubacion')
+    except:
+        return HttpResponseRedirect('/incubacion')
 
 @decorators.login_required(login_url='/ingresar/')
 def incubacionDetails(request,identifier):
