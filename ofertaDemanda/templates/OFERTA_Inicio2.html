@@ -10,14 +10,17 @@
         <div class="row">
           <div class="col-sm-12">
             <!-- Remove the .animated class if you don't want things to move -->
-            <h1 class="animated slideInLeft"><span>Ofertas de la Red de Innovaci&oacute;n</span></h1>
+            <h1 class="animated slideInLeft"><span>Ofertas</span></h1>
           </div>
         </div>
       </div>      
     </div>
-    
+
     <div class="container">
       <div class="row">
+         <div class="col-md-6 col-sm-9">
+    <h1 class="animated slideInLeft"><span>Ofertas de la red</span></h1>
+  </div>
         <div class=" ">
           <div class="row faq-cats">
             <div class="col-xs-6 col-xs-offset-6 visible-xs">
@@ -52,6 +55,16 @@
           </form><br />
         </div>
 
+
+        <div class="col-md-6 col-sm-3 hidden-xs">
+          <div class="row faq-cats">
+            <div class="col-md-6 col-md-offset-6 col-sm-12">
+              <ul>
+                <li><i class="fa fa-home fa-2x"></i><a href="/homeOfertas/">Ofertas de la Red</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
           {% ifequal tipo_user "persona" %}
         <div class="col-md-6 col-sm-3 hidden-xs">
           <div class="row faq-cats">
@@ -78,7 +91,7 @@
                       <div class="caption">
                         <h4>{{c.nombre}}</h4>
                         <div class="rating">
-                            {{c.calificacionGeneral}}
+                            {{c.tipo}}
                             <br/>
                             <i class="fa fa-star"></i> 
                             <i class="fa fa-star"></i> 
@@ -99,36 +112,37 @@
           {% endfor %}
 
           {% if buscarOfer %}
+             <div class="col-md-6 col-sm-9">
           <p>Has buscado por: <strong>{{ nombre }}</strong></p>
             {% if ofertas %}
                 <p>Encontrado {{ ofertas|length }} Ofertas {{ ofertas|pluralize }}.</p>
                 {% for c in ofertas %}
-
+            </div>
                     <div class="col-md-3 col-sm-6">
-                        <div class="thumbnail">
-                          <img class="img-responsive" src="{{MEDIA_URL}}{{ c.imagen }} " alt="Oferta">
-                          <div class="visit"><a href="/verOferta/?q={{c.idOferta}}"><i class="fa fa-question-circle"></i> Ver Oferta</a></div>
-                          <div class="caption">
-                            <h4>{{c.nombre}}</h4>
-                            <div class="rating">
-                                {{c.calificacionGeneral}}
-                                <i class="fa fa-star"></i> 
-                                <i class="fa fa-star"></i> 
-                                <i class="fa fa-star"></i> 
-                                <i class="fa fa-star"></i> 
-                                <i class="fa fa-star"></i>
-                              </div>
-                            <ul class="text-muted list-inline">
-                              <li><i class="fa fa-user"></i> <a href="#">{{c.idusuario}}</a></li>
-                              <li><i class="fa fa-calendar"></i> {{c.tiempo_inicio_disponible}}</li>
-                              
-                            </ul>
-                              
-                            <p>{{c.descripcion}}</p>
+                    <div class="thumbnail">
+                      <img class="img-responsive" src="{{MEDIA_URL}}{{ c.imagen }} " alt="Oferta">
+                      <div class="visit"><a href="/verOferta/?q={{c.idOferta}}"><i class="fa fa-question-circle"></i> Ver Oferta</a></div>
+                      <div class="caption">
+                        <h4>{{c.nombre}}</h4>
+                        <div class="rating">
+                            {{c.tipo}}
+                            <br/>
+                            <i class="fa fa-star"></i> 
+                            <i class="fa fa-star"></i> 
+                            <i class="fa fa-star"></i> 
+                            <i class="fa fa-star"></i> 
+                            <i class="fa fa-star"></i>
                           </div>
-                        </div>
+                        <ul class="text-muted list-inline">
+                          <li><i class="fa fa-user"></i> <a href="/verPerfil/?q={{c.idusuario}}">{{c.idusuario}}</a></li>
+                          <li><i class="fa fa-calendar"></i> {{c.tiempo_inicio_disponible}}</li>
+                          
+                        </ul>
+                          
+                        <p>{{c.descripcion}}</p>
+                      </div>
                     </div>
-
+                </div>
 
                     {% endfor %}
             {% else %}

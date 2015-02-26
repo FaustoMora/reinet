@@ -69,6 +69,16 @@ class Oferta(models.Model):
     class Meta:
         db_table = 'oferta'
 
+    def getTipo(self):
+        if self.tipoOferta==1:
+            return "Emprendimiento"
+        elif self.tipoOferta==2:
+            return "Prototipo"
+        elif self.tipoOferta==3:
+            return "Tecnologia"
+        else:
+            return "Ninguna"
+    tipo=property(getTipo)
 
 class Diagramacanvas(models.Model):
     iddiagramacanvas = models.AutoField(primary_key=True) # Field name made lowercase.
