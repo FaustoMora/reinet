@@ -1,7 +1,7 @@
 {% extends "base.tpl.html" %}
 {%block content%}
 
-
+	<input type="hidden" value="{{concurso.idConcurso}}" id="hiddenid" />
     <div class="section-header">
       <div class="container">
         <div class="row">
@@ -45,7 +45,7 @@
             <br /><br />
           </p>
           </div>
-      
+			
             <!-- Informacion general dominio,subdominio,disponibilidad, lugar de palicacion -->
             <div class="col-sm-12">
               <div class="block-header">
@@ -139,11 +139,11 @@
 
 
           {% endif %}
-      
-      <h4>Milestones : </h4>
-     <div class="timeline-block" >
+		  
+		  <h4>Milestones : </h4>
+		 <div class="timeline-block" >
           <!-- First blog post -->
-      {% for m in milestones%}
+		  {% for m in milestones%}
             <div class="blog-summary">
               <h4><a href="#" id="openmile">Milestone {{m.peso}}%</a></h4>
               <time datetime="2013-11-10" class="timestamp hidden-xs">{{ m.fecha_entrega }}</time>
@@ -156,12 +156,18 @@
                 {{ m.requerimiento }} 
               </p>
             </div>
-      {% endfor %}
-      <!--End mile -->
+			{% endfor %}
+			<!--End mile -->
            
           </div>
-
-          
+		  {% csrf_token %}
+		  
+		  {% if val2 %}
+			<button id="insOf" class="btn btn-blue">Inscribir Oferta</button>
+		  {% endif %}	
+		  <div id="showOf">
+		  
+		  </div>
 
       </div>
 
@@ -172,4 +178,5 @@
     </div>
   </div>
 </div>
+
 {% endblock %}

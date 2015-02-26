@@ -1,0 +1,33 @@
+{% if ofertas.count > 0 %}
+	<br />
+	<select id="comboOfertas" class="form-group form-control infoGener">
+{% for o in ofertas %}
+	<option>{{o.nombre}}</option>
+{% endfor %}
+	</select>
+	<button id="ingresar" class="btn btn-blue">Aceptar</button>
+{% else %}
+	<br />
+	<p class="text-muted"> Usted no tiene Ofertas </p>
+
+{% endif %}
+
+<script>
+$(function(){
+	$('#ingresar').click(function(){
+		$.ajax({
+			type: "POST",
+			url: "/registrarOferta/",
+			data: {
+				'concu' : $(':hidden#hiddenid').val(),
+				'indice' : $('#comboOfertas option:selected').index(),
+				'csrfmiddlewaretoken' : $("input[name=csrfmiddlewaretoken]").val()
+			},
+			success: searchSuccess,
+			dataType: 'html'
+		});
+	
+	
+	});
+});
+</script>

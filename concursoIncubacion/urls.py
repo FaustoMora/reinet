@@ -10,6 +10,7 @@ urlpatterns = patterns('',
         url(r'^crearConcurso[/]?$',crearConcurso,name='crearConcurso'),
         url(r'^verConcurso[/]?$',verConcurso,name='verConcurso'),
         url(r'^editarConcurso[/]?$',editarConcurso,name='editarConcurso'),
-        url(r'^media/(?P<path>.*)$','django.views.static.serve',{'document_root':settings.MEDIA_ROOT})
-        
+        url(r'^media/(?P<path>.*)$','django.views.static.serve',{'document_root':settings.MEDIA_ROOT}),
+        url(r'^mostrarOfertas[/]$', mostrarOfertas, name="mostrarOfertas"),
+		url(r'^registrarOferta[/]$', registrarOferta, name="registrarOfertas")
 )
