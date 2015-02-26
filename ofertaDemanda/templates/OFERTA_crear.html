@@ -7,6 +7,20 @@
 <li id="sign-in" class="show"><a href="{% url 'usuarios.views.ingresar' %}">Iniciar Sesión</a></li>
 {% endblock %}
 {% block content %}
+
+<script src="http://maps.googleapis.com/maps/api/js"></script>
+		<script>
+      function initialize() {
+          var mapProp = {
+              center: new google.maps.LatLng(-2.16667, -79.9),
+              zoom: 12,
+              mapTypeId: google.maps.MapTypeId.ROADMAP
+          };
+          var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+      }
+      google.maps.event.addDomListener(window, 'load', initialize);
+      window.addEventListener("load", init, false);
+      </script>
  
     <!-- Page Tip -->
     <div class="page-tip animated slideInDown">

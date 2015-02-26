@@ -1,0 +1,5 @@
+{% extends 'base.tpl.html' %}
+{% block content %}
+        {% csrf_token %}
+      <div ng-view></div>
+{% endblock %}

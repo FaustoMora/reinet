@@ -1,0 +1,19 @@
+<form>
+<div class="form-group">
+                    <label for="alcance">Alcance</label>
+                    <br>
+                    <input type="radio" ng-model="alcance" name="alcanc" value="institucion" checked>Institucion
+                    <br>
+                    <input type="radio" ng-model="alcance" name="alcanc" value="grupos">Grupos
+                    <div ng-show="alcance==='grupos'">
+                    <input type="text" id="grupos" placeholder="Especifique los grupos aqui"> 
+                    </div>
+                    <br ng-show="alcance!=='grupos'">
+                    <input type="radio" ng-model="alcance" name="alcanc" value="todos">Todos
+                
+                </div>
+            <div class="form-group">
+              <button type="button" data-dismiss="modal" class="btn btn-green">CAMBIAR ALCANCE</button>
+                <button type="reset" class="btn btn-red">RESET</button>
+            </div>
+            </form>

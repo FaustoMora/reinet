@@ -1,0 +1,109 @@
+<div class="section-header">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <!-- Remove the .animated class if you don't want things to move -->
+            <h1 class="animated slideInLeft"><span>Nueva Incubacion</span></h1>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+        <div class="col-sm-4 col-md-3">
+            <div class="user-menu bottom-15">
+            <ul>
+                <li>
+                <a href="./incubacion">
+                  <i class="sign fa fa-times bg-red"></i>Cancelar
+                </a>  
+              </li>
+            </ul>
+          </div>
+        </div>
+      <div class="row">
+        <!-- Contact us form -->
+        <div class="col-sm-8" ng-controller="crearIncubacionController">
+          <h2 class="hl top-zero" >Crear Nueva Incubacion</h2>
+          <hr>
+            <form name="crear" method="post" action="./incubacion/createInc" novalidate>
+               <div class="form-group"
+                    ng-class="{'has-error' : crear.fecha.$error.required,
+                                'has-success' : crear.fecha.$valid,
+                                'has-warning' : crear.fecha.$error.date}">
+                <label for="fecha" class="control-label">Fecha de Inicio</label>
+                <input type="date" name="fecha" class="form-control"
+                       id="fecha" min="2015-01-01" max="2020-01-01" ng-model="incubacion.fecha" required>
+              </div>
+              <div class="form-group"
+                   ng-class="{'has-error' : crear.nombre.$error.required,
+                                'has-success' : crear.nombre.$valid,
+                                'has-warning' : crear.nombre.$error.pattern}">
+                <label for="nombre" class="control-label">Nombre</label>
+                <input type="text" class="form-control"
+                       name="nombre" ng-pattern="/^[A-Z][a-z]{2,50}$/"
+                       id="nombre" placeholder="Ingrese Nombre de la incubacion"
+                        ng-model="incubacion.nombre" required>
+              </div>
+              <div class="form-group"
+                      ng-class="{'has-error' : crear.descripcion.$error.required,
+                                'has-success' : crear.descripcion.$valid,
+                                'has-warning' : crear.descripcion.$error.pattern}">
+                <label for="descripcion" class="control-label">Descripcion</label>
+                <textarea class="form-control" rows="3"
+                          name="descripcion"
+                          id="descripcion" placeholder="Ingrese la Descripcion"
+                          ng-model="incubacion.descripcion"
+                          ng-patter="/^[\ŵ]+{10,}$/"
+                          required></textarea>
+              </div>
+                <div class="form-group"
+                        ng-class="{'has-error' : crear.condiciones.$error.required,
+                                'has-success' : crear.condiciones.$valid,
+                                'has-warning' : crear.condiciones.$error.pattern}">
+                <label for="condiciones" class="control-label">Condiciones</label>
+                <textarea class="form-control" rows="3" id="condiciones" placeholder="Ingrese Condiciones"
+                        name="condiciones"
+                        ng-model="incubacion.condiciones"
+                        ng-patter="/^[\ŵ]+{10,}$/"
+                        required></textarea></textarea>
+              </div>
+                <div class="form-group"
+                        ng-class="{'has-error' : crear.perfiles.$error.required,
+                                'has-success' : crear.perfiles.$valid,
+                                'has-warning' : crear.perfiles.$error.pattern}">
+                <label for="perfiles" class="control-label">Perfiles de Ofertas</label>
+                <textarea class="form-control" rows="3" id="perfiles" placeholder="Ingrese Perfiles de Ofertas"
+                        name="perfiles"
+                        ng-model="incubacion.perfilOfertas"
+                        ng-patter="/^[\ŵ]+{10,}$/"
+                        required></textarea></textarea>
+              </div>
+                <div class="form-group">
+                <label for="typoOferta">Tipos de Ofertas</label>
+                    <br>
+                    <input type="checkbox" name="tipoOf" value="10" >Emprendimiento
+                    <br>
+                    <input type="checkbox"  name="tipoOf" value="11">Innovacion
+                    <br>
+                    <input type="checkbox"  name="tipoOf" value="12">Prototipo
+                    {{ crearInc.incubacion.tipos }}
+                </div>
+
+                <div class="form-group">
+                    <label for="alcance">Alcance</label>
+                    <br>
+                    <input type="radio" ng-model="incubacion.alcance" name="alcanc" value="10" checked>Institucion
+                    <br>
+                    <input type="radio" ng-model="incubacion.alcance" name="alcanc" value="11">Grupos
+                    <br/>
+                    <input type="radio" ng-model="incubacion.alcance" name="alcanc" value="12">Todos
+                </div>
+            <div class="form-group">
+              <button type="submit" ng-disabled="crear.$invalid" class="btn btn-green">CREAR</button>
+                <button type="reset" class="btn btn-red">RESET</button>
+            </div>
+            </form>
+
+        </div>
+        </div>
+      </div>

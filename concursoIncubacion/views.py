@@ -5,6 +5,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.template import RequestContext
 from forms import *
 from models import *
+from ofertaDemanda.models import *
 from usuarios.models import *
 from usuarios.views import *
 from usuarios.urls import *
@@ -75,12 +76,13 @@ def crearConcurso(request):
 						user_jurado_name = request.POST.getlist("jurado")[i]
 						user_jurado = User.objects.get(username=user_jurado_name)
 
-						aux_jurado = Institucion.objects.get(user_ptr_id=user_jurado.id)
+						try:
+							aux_jurado = Institucion.objects.get(user_ptr_id=user_jurado.id)
+							val6=False
+						except:
+							val6=True
 
-						print user_jurado
-						print aux_jurado
-
-						if not aux_jurado:
+						if val6:
 							if user_jurado:
 								val5=True
 							else:
@@ -95,6 +97,7 @@ def crearConcurso(request):
 					######################################
 
 					if val1 and val2 and val3 and val4  and val5:
+						print "pasa prueba"
 						nuevoConcurso=super(CrearConcursoForm, form).save(commit=False)
 						nuevoConcurso.idusuario=Institucion.objects.get(idinstitucion=request.session['id_institucion'])
 						nuevoConcurso.estado=Catalogo.objects.get(id=8)
@@ -120,6 +123,7 @@ def crearConcurso(request):
 							mile.idConcurso = nuevoConcurso
 							mile.save()
 
+						print "crea"
 						info="Concurso creado correctamente"
 						return HttpResponseRedirect('/homeConcursos')
 
@@ -133,7 +137,7 @@ def crearConcurso(request):
 				messages.success(request, info)
 				return HttpResponseRedirect('/crearConcurso')
 				
-			else:
+			else: #GET
 				form=CrearConcursoForm()
 
 			args={}
@@ -141,9 +145,13 @@ def crearConcurso(request):
 			args['form']=form
 			return render_to_response('CONCURSO_crear_concurso.html', args,context_instance=RequestContext(request))
 		else:
-			return HttpResponseRedirect('/homeConcursos')
+			return HttpResponseRedirect('/crearConcurso')
 	except:
-		return HttpResponseRedirect('/RNNotFound')
+		args={}
+		info="Error Datos incorrectos"
+		args['form']=form
+		messages.success(request,info)
+		return HttpResponseRedirect('/crearConcurso')
 
 
 @login_required(login_url='/ingresar/')
@@ -154,15 +162,22 @@ def verConcurso(request):
 		milestones = MilestoneConcurso.objects.all().filter(idConcurso = idcon)
 		concursousuario=Concurso.objects.get(idConcurso = idcon).idusuario.id
 		args = {}
+		args.update(csrf(request))
 		args['concurso'] = concurso
 
 		val = compararIds(concursousuario,request.session['id_user'])
+
+		if (request.session["tipo"] == 'persona'):
+			val2 = True;
+		else:
+			val2 = False;
 
 		print "Probado"
 		print concursousuario
 		print request.session['id_user']
 		print val
 		args['val'] = val
+		args['val2'] = val2
 		args['milestones'] = milestones
 		args['nums'] = range(len(milestones))
 		return render_to_response('CONCURSO_perfil.html', args)
@@ -173,46 +188,50 @@ def verConcurso(request):
 
 @login_required(login_url='/ingresar/')
 def editarConcurso(request):
-	#try:
-	if(request.session["tipo"]=="institucion"):
-		info=""
-		idcon = int(request.GET.get('q', ''))
-		print 'HERE HELLO!!!'
-		print idcon
-		if request.method == 'POST':
-			concurso=Concurso.objects.get(idConcurso = idcon)
-			form = EditarConcursoForm(request.POST, request.FILES, instance=concurso)
-			if form.is_valid() :
+	try:
+		if(request.session["tipo"]=="institucion"):
+			info=""
+			idcon = int(request.GET.get('q', ''))
+			print 'HERE HELLO!!!'
+			print idcon
+			if request.method == 'POST':
+				concurso=Concurso.objects.get(idConcurso = idcon)
+				fechafin = concurso.fecha_fin
+				form = EditarConcursoForm(request.POST, request.FILES, instance=concurso)
+				if form.is_valid() :
 
-				if validarfechas(concurso.fecha_fin,form.cleaned_data['fecha_fin']):
-					print 'Yeah'
-					form.save()
-					return HttpResponseRedirect('/homeConcursos')
+					print fechafin
+					print form.cleaned_data['fecha_fin']
+
+					if validarfechas(fechafin,form.cleaned_data['fecha_fin']):
+						print 'Yeah'
+						form.save()
+						return HttpResponseRedirect('/homeConcursos')
+					else:
+						info="Error en la fecha final, la nueva fecha final no puede ser menor a la ya existente"
+						concursoForm = EditarConcursoForm(instance=concurso)
 				else:
-					info="Error en la fecha final, la nueva fecha final no puede ser menor a la ya existente"
 					concursoForm = EditarConcursoForm(instance=concurso)
 			else:
+				print 'oh no'
+				concurso=Concurso.objects.get(idConcurso = idcon)
+				print concurso.idusuario
+				print request.session['id_user']
+				if not compararIds(concurso.idusuario.id,request.session['id_user']):
+					return HttpResponseRedirect('/homeConcursos')
 				concursoForm = EditarConcursoForm(instance=concurso)
+				
+			args={}
+			args.update(csrf(request))
+			args['form']=concursoForm
+			args['idconcu'] = idcon
+			print concurso.nombre
+			messages.success(request, info)
+			return render_to_response('CONCURSO_editar_concurso.html', args,context_instance=RequestContext(request))
 		else:
-			print 'oh no'
-			concurso=Concurso.objects.get(idConcurso = idcon)
-			print concurso.idusuario
-			print request.session['id_user']
-			if not compararIds(concurso.idusuario.id,request.session['id_user']):
-				return HttpResponseRedirect('/homeConcursos')
-			concursoForm = EditarConcursoForm(instance=concurso)
-			
-		args={}
-		args.update(csrf(request))
-		args['form']=concursoForm
-		args['idconcu'] = idcon
-		print concurso.nombre
-		messages.success(request, info)
-		return render_to_response('CONCURSO_editar_concurso.html', args,context_instance=RequestContext(request))
-	else:
-		return HttpResponseRedirect('/homeConcursos')
-	#except:
-		#return HttpResponseRedirect('/RNNotFound')
+			return HttpResponseRedirect('/homeConcursos')
+	except:
+			return HttpResponseRedirect('/RNNotFound')
 
 
 
@@ -232,10 +251,51 @@ def compararIds(idA, idB):
 		return True
 	return False
 
+
 def mayorCero(a):
 	if a < 0:
 		return False
 	return True
+
+def mostrarOfertas(request):
+	print "requested!!!"
+	ofert = Oferta.objects.all().filter(idusuario=request.session['id_user'])
+	args = {}
+	args['ofertas'] = ofert
+	return render_to_response('ajax_busqueda_ofertas.html', args)
+		
+def registrarOferta(request):
+	i = 0
+	val = False;
+	print 'registro!!'
+	indice = request.POST['indice']
+	concu = request.POST['concu']
+	inscri = Inscripcion()
+	ofertas = Oferta.objects.all().filter(idusuario=request.session['id_user'])
+	for o in ofertas:
+		if(i == int(indice)):
+			print 'YEAH'
+			inscri.idOferta = o
+			print concu
+			print o.idOferta
+			try:
+				ins = Inscripcion.objects.get(idConcurso = concu, idOferta = o.idOferta)
+				print "op"
+				val = False
+			except:
+				val = True
+		i = i+1
+	inscri.idConcurso = Concurso.objects.get(idConcurso = concu)
+	inscri.estado = Catalogo.objects.get(id=8)
+	inscri.fecha = datetime.now().strftime('%Y-%m-%d')
+	print val
+	args = {}
+	if (val):
+		inscri.save()
+		args['msj'] = "Oferta Inscrita Exitosamente!"
+	else:
+		args['msj'] = "La Oferta ya fue Inscrita Anteriormente"
+	return render_to_response('ajax_vaciar.html', args)
 
 
 
