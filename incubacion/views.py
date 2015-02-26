@@ -8,19 +8,21 @@ from app.models import Catalogo
 from ofertaDemanda.models import Oferta
 from usuarios.models import Institucion, Persona
 from incubacion.models import Incubacion, Incubada, TiposOfertasIncubacion
-from restless.modelviews import Endpoint
+from restless.modelviews import Endpoint,ListEndpoint, DetailEndpoint
 from restless.auth import BasicHttpAuthMixin,login_required
 from restless.models import serialize
+from django.views.decorators.csrf import csrf_exempt
 
 
 # Create your views here.
 
 
 
-class ListIncubaciones(Endpoint, BasicHttpAuthMixin):
+class ListIncubaciones(ListEndpoint, BasicHttpAuthMixin):
+    model = Incubacion
     @login_required
     def get(self, request):
-        incs=[]
+        incs = []
         try:
             temp = request.session['id_institucion']
             inst = Institucion.objects.get(idinstitucion=temp)
@@ -38,12 +40,6 @@ class ListIncubaciones(Endpoint, BasicHttpAuthMixin):
                     'descripcion',
                     ]
             )),
-            ('estado',dict(
-                fields=[
-                    'codigo',
-                    'descripcion',
-                ]
-            )),
             ('autor',dict(
                 fields=[
                     'nombre_corto'
@@ -57,18 +53,22 @@ class ListIncubaciones(Endpoint, BasicHttpAuthMixin):
             )),
             ('ofertasIncubadas',
              lambda a: a.countIncubadas()
-            )])
+            )
+        ])
 
 
 @decorators.login_required(login_url='/ingresar/')
 def homeIncubacion(request):
-    return render(request, 'incubacion_main.html')
+    #return render(request, 'incubacion_main.html')
+    return render(request, 'index-incubacion.html')
+
 
 
 @decorators.login_required(login_url='/ingresar/')
 def crearIncubacion(request):
     return render(request, 'crear_incubacion.html')
 
+@csrf_exempt
 @decorators.login_required(login_url='/ingresar/')
 def createIncubacion(request):
     i = Incubacion()
@@ -97,3 +97,11 @@ def incubacionDetails(request,identifier):
     context = {"incubacion":i,}
 
     return render(request,"incubacion_institucion.html",context)
+
+
+class IncDetails(DetailEndpoint):
+    model = Incubacion
+
+
+class IncubadasList(ListEndpoint):
+    model = Incubada

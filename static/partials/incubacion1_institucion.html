@@ -1,0 +1,117 @@
+    <div class="section-header">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12">
+            <!-- Remove the .animated class if you don't want things to move -->
+            <h1 class="animated slideInLeft"><span>Ofertas de {{ incubacion.nombre }}</span></h1>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+          <div class="col-sm-4 col-md-3 oculto">
+            <div class="user-menu bottom-15">
+            <ul>
+              <li>
+                <a href="" ng-click="setModal(0)" data-target="#sendemail" data-toggle="modal">
+                  <i class="sign fa fa-calendar bg-amethyst"></i>Crear Convocatoria
+                </a>  
+              </li>
+                <li>
+                <a href="" ng-click="setModal(1)" data-target="#sendemail" data-toggle="modal">
+                  <i class="sign fa fa-users bg-blue"></i>Invitar Consultor
+                </a>  
+              </li>
+                <li>
+                <a  href="" ng-click="setModal(2)" data-target="#sendemail" data-toggle="modal">
+                  <i class="sign fa fa-users bg-green"></i>Asignar Milestones
+                </a>  
+              </li>
+                <li>
+                <a  href="" ng-click="setModal(3)" data-target="#sendemail" data-toggle="modal">
+                  <i class="sign fa fa-edit bg-amethyst"></i>Aumentar Alcance
+                </a>  
+              </li>
+                <li>
+                <a  href="" ng-click="setModal(4)" data-target="#sendemail" data-toggle="modal">
+                  <i class="sign fa fa-times bg-red"></i>Terminar Incubacion
+                </a>  
+              </li>
+                <li>
+                <a  href="" ng-click="setModal(5)" data-target="#sendemail" data-toggle="modal">
+                  <i class="sign fa fa-stop bg-turquoise"></i>Suspender Incubacion
+                </a>  
+              </li>
+            </ul>
+          </div>
+              <div>
+                  <h3 class="hl">Milestones</h3>
+                  <hr>
+                  
+                      <div class="timeline-block">
+          <!-- First blog post -->
+            <div class="blog-summary">
+              <h4 class="new-story"><a href="">HighLand - a new responsive Bootstrap 3 template</a></h4>
+              <time class="timestamp hidden-xs" datetime="2013-11-10">Nov 10, 2013</time>
+              <ul class="text-muted list-inline">
+                <li><i class="fa fa-comments-o"></i> 21 comments</li>
+              </ul>
+            </div>
+            <!-- Second blog post -->
+            <div class="blog-summary">
+              <h4><a href="">Lorem ipsum dolor sit amet, consectetur adipiscing elit</a></h4>
+              <time class="timestamp hidden-xs" datetime="2013-09-10">Nov 09, 2013</time>
+              <ul class="text-muted list-inline">
+                <li><i class="fa fa-comments-o"></i> 10 comments</li>
+              </ul>
+            </div>
+            <!-- Third blog post -->
+            <div class="blog-summary">
+              <h4><a href="">Nulla dapibus lorem sed felis placerat fringilla</a></h4>
+              <time class="timestamp hidden-xs" datetime="2013-08-10">Nov 08, 2013</time>
+              <ul class="text-muted list-inline">
+                <li><i class="fa fa-comments-o"></i> 6 comments</li>
+              </ul>
+            </div>
+          </div>
+                  
+                </div>
+          </div>
+        <div class="col-sm-8 blog-summary-list">
+          <!-- First blog post -->
+            <div class="alert alert-danger alert-dismissable" ng-show="incubadas.length<=0">
+                <p>No hay ninguna Incubada en esta Incubacion</p>
+            </div>
+            <div class="panel panel-green" ng-repeat=" i in incubadas" ng-show="incubadas.length>0">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Incubada 1</h3>
+                </div>
+              <div class="panel-body">
+              <p class="blog-text">
+                <img class="pull-right img-responsive blog-img" alt="Blog Image" src="img/works1.jpg">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc consectetur urna at neque mollis sagittis. Vivamus viverra justo in dui vulputate tincidunt in eu magna. Ut ut risus pretium, varius felis a, congue metus. Nam aliquam pretium eros, et venenatis sapien porttitor at. Nunc bibendum ipsum sit amet euismod sodales. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam varius justo sed velit dictum feugiat. Sed tempus eros quis eleifend posuere. Fusce tempus euismod sem vitae porta. Vestibulum eget mi suscipit, ultrices turpis quis, ultricies ipsum. Pellentesque et facilisis odio. Vivamus et mauris consequat, rhoncus risus vitae, porttitor dui.
+              </p>
+                </div>
+            </div>
+        </div>          
+      </div>
+    </div>
+<!--<a class="btn btn-green btn-sm" data-target="#sendemail" data-toggle="modal" href="">
+<i class="fa fa-envelope"></i>
+Send e-mail
+</a>-->
+<div aria-hidden="true" aria-labelledby="sendemailtitle" role="dialog" tabindex="-1" id="sendemail" class="modal fade" style="display: none;">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                        <h4 id="sendemailtitle" class="modal-title">{{modal_content.title}}</h4>
+                        <div class="clearfix"></div>
+                      </div>
+                      <div class="modal-body">
+                          <div ng-include="modal_content.tpl"></div>
+                      </div>
+                    </div><!-- /.modal-content -->
+                  </div><!-- /.modal-dialog -->
+                </div>
