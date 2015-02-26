@@ -36,7 +36,7 @@
       
       <ul class="row list-inline gallery-list" id="isotope-container">
         
-        {% if lst_ofertas %}
+        {% if lst_inst %}
         <p> &nbsp;&nbsp;&nbsp;&nbsp;Si desea visualizar las instituciones. Por favor <a href="/ingresar/">Inicie Sesión.</a></p>
         <!--
         <div class="row">
@@ -47,16 +47,16 @@
         </div>
         </div>
       -->
-          {% for o in lst_ofertas%}
+          {% for ins in lst_inst%}
           
            <li class="isotope-item cat-1 cat-2 cat-4">
                 <a href="#">
                   <span class="gallery-thumbnail">
-                    <img class="img-responsive" src="{{MEDIA_URL}}{{o.imagen }} " alt="...">
+                    <img style="width=100vh;" class="img-responsive" src="{{MEDIA_URL}}{{ins.imagen }} " alt="...">
                   </span>
                   <span class="gallery-text">
-                    <span class="gallery-title">{{ o.nombre }}</span>
-                    {{ o.descripcion }} 
+                    <span class="gallery-title">{{ ins.nombre_corto }}</span>
+                    {{ ins.descripcion }} 
                   </span>
                 </a>
               </li>

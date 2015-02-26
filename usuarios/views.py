@@ -637,6 +637,6 @@ def incubacionSinLogin(request):
 	return render_to_response('USUARIO_incubacionSinLogin.html',args,context_instance=RequestContext(request))
 
 def institucionSinLogin(request):
-	lst_ofertas = Oferta.objects.all()
-	args={"lst_ofertas":lst_ofertas}
+	lst_inst = Institucion.objects.all()
+	args={"lst_inst":lst_inst}
 	return render_to_response('USUARIO_institucionSinLogin.html',args,context_instance=RequestContext(request))
