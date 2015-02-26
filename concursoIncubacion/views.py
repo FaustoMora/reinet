@@ -300,3 +300,16 @@ def registrarOferta(request):
 
 
 
+def searchConcursoRed(request):
+    errors= []
+    if 'busquedaOfertaRed' in request.GET:
+        busquedaOfertaRed = request.GET['busquedaOfertaRed']
+        if not busquedaOfertaRed:
+            errors.append('Ingrese un termino a buscar')
+        elif len(busquedaOfertaRed)>25:
+            errors.append('por favor ingrese un termino no mas de 25 caracteres.')
+        else:
+            ofertas = Concurso.objects.filter(nombre__icontains=busquedaOfertaRed).exclude(idusuario = request.session['id_user'])
+            return render(request, 'CONCURSO_inicio_concurso.html',
+                {'ofertas':ofertas,'nombre':busquedaOfertaRed,'buscarOfer':True})
+        return render(request,'CONCURSO_inicio_concurso.html',{'errors':errors})    

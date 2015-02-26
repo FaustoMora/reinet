@@ -113,9 +113,11 @@
 
           {% if buscarOfer %}
             
-          <p>Has buscado por: <strong>{{ nombre }}</strong></p>
             {% if ofertas %}
-                <p>Encontrado {{ ofertas|length }} Ofertas {{ ofertas|pluralize }}.</p>
+              <div class="col-md-12">
+               <p>Has buscado por: <strong>{{ nombre }}</strong></p>
+                  <p>Encontrado {{ ofertas|length }} Ofertas {{ ofertas|pluralize }}.</p>
+                </div>
                 {% for c in ofertas %}
             
                     <div class="col-md-3 col-sm-6">
@@ -146,7 +148,9 @@
 
                     {% endfor %}
             {% else %}
-                <p>Las Ofertas no concuerda con sus criterios de búsqueda.</p>    
+              <div class="col-md-12">
+                <p>Las Ofertas no concuerda con sus criterios de búsqueda.</p> 
+                </div>   
             {% endif %}
           {%endif%}
         </div>      

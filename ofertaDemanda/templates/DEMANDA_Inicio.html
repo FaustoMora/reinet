@@ -104,9 +104,12 @@
           {% endfor %}
 
           {% if buscarDema %}
-          <p>Has buscado por: <strong>{{ nombre }}</strong></p>
             {% if demandas %}
+            <div class="col-md-12">
+            <p>Has buscado por: <strong>{{ nombre }}</strong></p>
+          
                 <p>Encontrado {{ demandas|length }} Demandas {{ ofertas|pluralize }}.</p>
+              </div>
                 {% for c in demandas %}
 
                     <div class="col-md-3 col-sm-6">
@@ -137,7 +140,9 @@
 
                     {% endfor %}
             {% else %}
-                <p>Las Demandas no concuerda con sus criterios de búsqueda.</p>    
+            <div class="col-md-12">
+                <p>Las Demandas no concuerda con sus criterios de búsqueda.</p>
+                </div>    
             {% endif %}
           {%endif%}
         </div>      

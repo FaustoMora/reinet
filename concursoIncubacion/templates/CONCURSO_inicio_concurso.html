@@ -46,7 +46,41 @@
           </div>
         {% endifequal %}
       </div>
-    
+    <div class=" ">
+          <div class="row faq-cats">
+            <div class="col-xs-6 col-xs-offset-6 visible-xs">
+              <ul>
+                <li><i class="fa fa-home fa-2x"></i><a href="/misOfertas/">Crear Concurso</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-sm-9">
+        {%if errors%}
+          <ul style="color:red">
+            {%for error in errors %}
+            <li>{{error}}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+          <form class="form-inline" action="/searchConcursoRed/" method="GET" role="form">
+            <div class="row">
+              <div class="col-md-10 col-sm-10">
+                <div class="input-group">
+                  <label class="sr-only" for="search3">Search</label>
+                    <input type="text" class="form-control " id="search3" name="busquedaOfertaRed" placeholder="Encuentre concursos de su inter&eacute;s">
+                  <span class="input-group-btn">
+                    <input type="submit" class="btn btn-blue" value="Buscar">
+                    <!--<button type="submit" class="btn btn-blue">Buscar</button>-->
+                  </span>
+                </div>
+              </div>
+            </div>
+          </form><br />
+        </div>
+
+
 
     <div class="col-md-6 col-sm-3 hidden-xs">
       {% ifequal tipo_user "persona" %}
@@ -78,12 +112,12 @@
     {% ifequal tipo_user "persona" %}
     <h3>CONCURSOS</h3>
     {% endifequal %} -->
-      <ul class="row list-inline gallery-list" id="isotope-container">
       
     <!-- Se presenta los concursos en li--> 
 
     {% if lst_concursos %}
-
+       <ul class="row list-inline gallery-list" id="isotope-container">
+   
       {% for c in lst_concursos%}
       
        <li class="isotope-item cat-1 cat-2 cat-4">
@@ -105,12 +139,59 @@
 
     {% else %}
       
-      <div style="background-color:white; color:white; margin:20px; padding:20px; display:block; visible:hidden;min-height:250px;min-width:75px;">
-
-      </div>
-
-    {% endif %}
     
+    </ul>
+    {% endif %}
+      
+
+        {% if buscarOfer %}
+             <ul class="row list-inline gallery-list" id="isotope-container">
+   
+            {% if ofertas %}
+ <div class="col-md-12">
+           
+             <p>Has buscado por: <strong>{{ nombre }}</strong></p>
+         
+                <p>Encontrado {{ ofertas|length }} Concursos {{ ofertas|pluralize }}.</p>
+              </div>
+                {% for c in ofertas %}
+            
+                    <div class="col-md-3 col-sm-6">
+                    <div class="thumbnail">
+                      <img class="img-responsive" src="{{MEDIA_URL}}{{ c.imagen }} " alt="Oferta" style="display: block; width: 100%; max-height: 200px" >
+                      <div class="visit"><a href="/verOferta/?q={{c.idOferta}}"><i class="fa fa-question-circle"></i> Ver Oferta</a></div>
+                      <div class="caption">
+                        <h4>{{c.nombre}}</h4>
+                        <div class="rating">
+                            {{c.tipo}}
+                            <br/>
+                            <i class="fa fa-star"></i> 
+                            <i class="fa fa-star"></i> 
+                            <i class="fa fa-star"></i> 
+                            <i class="fa fa-star"></i> 
+                            <i class="fa fa-star"></i>
+                          </div>
+                        <ul class="text-muted list-inline">
+                          <li><i class="fa fa-user"></i> <a href="/verPerfil/?q={{c.idusuario}}">{{c.idusuario}}</a></li>
+                          <li><i class="fa fa-calendar"></i> {{c.tiempo_inicio_disponible}}</li>
+                          
+                        </ul>
+                          
+                        <p>{{c.descripcion}}</p>
+                      </div>
+                    </div>
+                </div>
+
+                    {% endfor %}
+            {% else %}
+            <div class="col-md-12">
+                <p>Las Concursos no concuerda con sus criterios de búsqueda.</p>    
+              </div>
+            {% endif %}
+          </div>
+
+          {%endif%}
+            
     <!--     
         <li class="isotope-item cat-1 cat-2 cat-4">
           <a href="verConcurso">
@@ -157,8 +238,9 @@
           </a>
         </li>
         -->
-                
-      </ul>
+             <div style="background-color:white; color:white; margin:20px; padding:20px; display:block; visible:hidden;min-height:250px;min-width:75px;">
+
+      </div>
     </div>
   
   

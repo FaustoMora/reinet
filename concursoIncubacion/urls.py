@@ -12,5 +12,7 @@ urlpatterns = patterns('',
         url(r'^editarConcurso[/]?$',editarConcurso,name='editarConcurso'),
         url(r'^media/(?P<path>.*)$','django.views.static.serve',{'document_root':settings.MEDIA_ROOT}),
         url(r'^mostrarOfertas[/]$', mostrarOfertas, name="mostrarOfertas"),
-		url(r'^registrarOferta[/]$', registrarOferta, name="registrarOfertas")
+		url(r'^registrarOferta[/]$', registrarOferta, name="registrarOfertas"),
+		url(r'^searchConcursoRed[/]$', searchConcursoRed, name="registrarOfertas")
+
 )
