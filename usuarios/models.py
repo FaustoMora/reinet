@@ -27,7 +27,7 @@ class Institucion(User):
     imagen=models.ImageField(upload_to='usuarios_media')
     class Meta:
         db_table = 'institucion'
-
+        
 
 class Persona(User):
     idpersona = models.AutoField(primary_key=True)
