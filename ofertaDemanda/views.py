@@ -199,24 +199,25 @@ def editarOferta(request):
 @login_required(login_url='/ingresar/') 
 def editarDemanda(request):
     id_persona=request.session['id_persona']
+    idof = int(request.GET.get('q', ''))
+    demanda=Demanda.objects.get(idDemanda = idof)
     args={}
+    args["dm"]=demanda
     if request.method == 'POST':
-        id_persona=request.session['id_persona']
-        persona=Persona.objects.get(idpersona=id_persona)
-        persona_form = EditarDemandaForm(request.POST, request.FILES, instance=persona)
+        id_user=request.session['id_user']
+        persona_form = EditarDemandaForm(request.POST, request.FILES, instance=demanda)
         if  persona_form.is_valid():
             persona_form.save()
-            return HttpResponseRedirect('/perfil/')
+            return HttpResponseRedirect('/misDemandas/')
         else:
-            persona=Persona.objects.get(idpersona=id_persona)
-            persona_form = EditarDemandaForm(instance=persona)
-            args['personaform']=persona_form
+            demanda=Demanda.objects.get(idDemanda = idof)
+            persona_form = EditarDemandaForm(instance=demanda)
+            args['form']=persona_form
     else:
-        persona=Persona.objects.get(idpersona=id_persona)
-        persona_form = EditarDemandaForm(instance=persona)
-        args['personaform']=persona_form
+        demanda=Demanda.objects.get(idDemanda = idof)
+        persona_form = EditarDemandaForm(instance=demanda)
+        args['form']=persona_form
     return render_to_response('DEMANDA_Editar_Demanda.html', RequestContext(request,args))
-
 
 @login_required(login_url='/ingresar/') 
 def misOfertas(request):
