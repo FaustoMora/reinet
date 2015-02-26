@@ -104,8 +104,8 @@ class PersonaForm(UserCreationForm):
 		exclude=['last_login','is_superuser','user_permissions','is_staff','groups'
 		,'date_joined','idpersona','is_active','fecha_nacimiento','password']
 
-		fields=['username','first_name','last_name', 'email','imagen','identificacion',
-		'cargo','actividad','areas_interes','password1','password2']
+		fields=['username','password1','password2','first_name','last_name', 'email','imagen','identificacion',
+		'cargo','actividad','areas_interes']
 		widgets={
 			'password': forms.PasswordInput(attrs={'class': 'form-control','placeholder':'Contraseña'}),
 			
