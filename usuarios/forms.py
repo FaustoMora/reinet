@@ -28,7 +28,6 @@ from models import  *
 from django.contrib.auth.forms import *
 from django.contrib.auth.models import User
 from datetime import datetime
-from sorl.thumbnail import ImageField, get_thumbnail
 
 
 #from phonenumber_field.modelfields import PhoneNumberField
