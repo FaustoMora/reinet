@@ -199,8 +199,8 @@ def editarOferta(request):
 @login_required(login_url='/ingresar/') 
 def editarDemanda(request):
     id_persona=request.session['id_persona']
-    idof = int(request.GET.get('q', ''))
-    demanda=Demanda.objects.get(idDemanda = idof)
+    idDem = int(request.GET.get('q', ''))
+    demanda=Demanda.objects.get(idDemanda = idDem)
     args={}
     args["dm"]=demanda
     if request.method == 'POST':
@@ -210,11 +210,11 @@ def editarDemanda(request):
             persona_form.save()
             return HttpResponseRedirect('/misDemandas/')
         else:
-            demanda=Demanda.objects.get(idDemanda = idof)
+            demanda=Demanda.objects.get(idDemanda = idDem)
             persona_form = EditarDemandaForm(instance=demanda)
             args['form']=persona_form
     else:
-        demanda=Demanda.objects.get(idDemanda = idof)
+        demanda=Demanda.objects.get(idDemanda = idDem)
         persona_form = EditarDemandaForm(instance=demanda)
         args['form']=persona_form
     return render_to_response('DEMANDA_Editar_Demanda.html', RequestContext(request,args))

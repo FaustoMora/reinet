@@ -6,178 +6,183 @@
         <div class="row">
           <div class="col-sm-12">
             <!-- Remove the .animated class if you don't want things to move -->
-            <h1 class="animated slideInLeft"><span>DEMANDA</span></h1>
+            <h1 class="animated slideInLeft"><span>Demanda {{demanda.nombre}}</span></h1>
           </div>
         </div>
       </div>
     </div>
+
     <div class="container">
       <div class="row">
-        <!-- Profile Menu -->
-        <div class="col-sm-4 col-md-3">
-          <div class="user-menu bottom-15">
-            <ul><!-- 
-              <li>
-                <a href="DemandaCrear">
-                  <i class="sign fa fa-edit bg-blue"></i> CREAR DEMANDA <i class="fa fa-chevron-right pull-right"></i>
-                </a>  
-              </li>-->
-             
-            </ul>
-          </div>
+        <div class="col-sm-10">            
+            <div class="col-sm-10">
+              <h3>
+                {{demanda.nombre}}
+              </h3>
+            </div>
+            <!-- Este es el codigo para el rating las estrellitas-->
+            <div class="col-sm-12">
+              <ul class="text-muted list-inline">
+                <li><i class="fa fa-flag"></i> {{ demanda.estadoDemanda }}</li>
+                <li><i class="fa fa-user"></i> <a href="/verPerfil/?q={{demanda.idusuario}}">{{ demanda.idusuario }}</a></li>
+                <li><i class="fa fa-calendar"></i> {{demanda.tiempo_inicio_disponible}}</li>
+              </ul>
+            </div>
         </div>
-        <!-- Avatar & social links -->
-        <div class="col-sm-8 col-md-6">
-          <div class="row">
-            <div class="col-sm-4">
+
+         <div class="col-sm-8">
+          <!-- Blog Post -->   
+          <p class="blog-text">
+            <div class="col-md-3 col-sm-6">
               <div class="thumbnail">
-                <div class="avatar">
-                  <a href="#" class="thumbnail bottom-15" data-toggle="modal" data-target="#upload-avatar">
-                    <img src="/media/{{MEDIA_URL}}{{demanda.imagen}}" alt="...">
-                  </a>
-                  <!-- Upload new avatar bubble -->
-                  <div class="avatar-bubble">
-                  
-                  </div>
-                </div>
-              </div>
-             
-            </div>
-        
-
-            <!-- Main profile info -->
-            <div class="col-sm-8">
-              <h3 class="hl">{{ demanda.nombre }}</h3>
-              <hr>
-              
-              <div class="bottom-15">
-                
-                <!-- Modal window: Send an email -->
-                <div class="modal fade" id="sendemail" tabindex="-1" role="dialog" aria-labelledby="sendemailtitle" aria-hidden="true">
-                  <div class="modal-dialog">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <img src="../static/img/imgDemandaOferta/face1.jpg" alt="...">
-                        <h4 class="modal-title" id="sendemailtitle">Administrator</h4>
-                        <p class="text-muted"><i class="fa fa-envelope"></i> New Email</p>
-                        <div class="clearfix"></div>
-                      </div>
-                      <div class="modal-body">
-                        <form role="form">
-                          <div class="form-group">
-                            <label for="subject" class="sr-only">Subject</label>
-                            <input type="text" class="form-control" id="subject" placeholder="Subject">
-                          </div>
-                          <div class="form-group">
-                            <label for="message-1" class="sr-only">Message</label>
-                            <textarea class="form-control" rows="3" id="message-1" placeholder="Enter your message here"></textarea>
-                          </div>
-                          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                          <button type="button" class="btn btn-green" data-dismiss="modal">Send Email</button>
-                        </form>
-                      </div>
-                    </div><!-- /.modal-content -->
-                  </div><!-- /.modal-dialog -->
-                </div><!-- /.modal -->
-                <!-- End of modal window -->
-                <!-- Modal window: Send a private message -->
-                <div class="modal fade" id="sendpm" tabindex="-1" role="dialog" aria-labelledby="sendpmtitle" aria-hidden="true">
-                  <div class="modal-dialog">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <img src="../static/img/imgDemandaOferta/face1.jpg" alt="...">
-                        <h4 class="modal-title" id="sendpmtitle">Administrator</h4>
-                        <p class="text-muted"><i class="fa fa-envelope"></i> New PM</p>
-                        <div class="clearfix"></div>
-                      </div>
-                      <div class="modal-body">
-                        <form role="form">
-                          <div class="form-group">
-                            <label for="message-2" class="sr-only">Message</label>
-                            <textarea class="form-control" rows="3" id="message-2" placeholder="Enter your message here"></textarea>
-                          </div>
-                          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                          <button type="button" class="btn btn-green" data-dismiss="modal">Send Message</button>
-                        </form>
-                      </div>
-                    </div><!-- /.modal-content -->
-                  </div><!-- /.modal-dialog -->
-                </div><!-- /.modal -->
-                <!-- End of modal window -->
+                  <img src="/media/{{MEDIA_URL}}{{ demanda.imagen }}" class="img-responsive" alt="Oferta">
+                  <div class="visit"><a href="/verDemanda/?q={{demanda.idDemanda}}"><i class="fa fa-question-circle"></i> Galeria</a></div>
               </div>
             </div>
-          </div>
-          <!-- About Me  fa fa-user fa  fa-calendar  fa fa-comments-o  fa fa-info-circle  fa fa-map-marker-->
-          <div class="row">
-            <div class="col-sm-12">
-              <h4 class="hl"><i class="fa fa-info-circle"></i> Nombre de la demanada</h4>
-              <p class="bottom-15">{{ demanda.nombre }}</p>
-              <hr>
-            </div>
-          </div>
+            {{ demanda.descripcion }}
+            <br /><br />
+              {% if demanda.dominio == 0|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Mundial</td>
+                      {% elif demanda.dominio == 1|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Regional</td>
+                      {% elif demanda.dominio == 2|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Nivel Pais</td>
+                      {%else%}
+                        <td>No tiene dominio</td>
+                      {%endif%}
+            </p>
 
-           <!-- About Me -->
           <div class="row">
+            <!-- Informacion general dominio,subdominio,disponibilidad, lugar de palicacion -->
             <div class="col-sm-12">
-              <h4 class="hl"><i class="fa fa-info-circle"></i> Descripcion de la demanda</h4>
-              <p class="bottom-15">{{ demanda.descripcion }}</p>
-              <hr>
+              <div class="block-header">
+                <h2>
+                  <span class="title">Informaci&oacute;n General</span><span class="decoration"></span><span class="decoration"></span><span class="decoration"></span>
+                </h2>
+              </div>
+              <div class="col-sm-10">
+                <table class="table">
+                  <tbody>
+                    <tr>
+                      <td class="text-muted">Dominio</td>
+                      <td colspan=4 style="text-align:center">
+                           {% if demanda.dominio == 0|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Mundial</td>
+                      {% elif demanda.dominio == 1|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Regional</td>
+                      {% elif demanda.dominio == 2|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Nivel Pais</td>
+                      {%else%}
+                        <td>No tiene dominio</td>
+                      {%endif%}</td>
+                    </tr>
+                    
+                    <tr>
+                      <td class="text-muted">Lugar de Aplicación</td>
+                      <td colspan=4 style="text-align:center">
+                          {% if demanda.lugar_aplicacion == 1|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Azuay</td>
+                      {% elif demanda.lugar_aplicacion == 2|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Bolivar</td>
+                      {% elif demanda.lugar_aplicacion == 3|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Caniar</td>
+                      {% elif demanda.lugar_aplicacion == 4|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Carchi</td>
+                      {% elif demanda.lugar_aplicacion == 5|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Chimborazo</td>
+                      {% elif demanda.lugar_aplicacion == 6|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Cotopaxi</td>
+                      {% elif demanda.lugar_aplicacion == 7|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">El Oro</td>
+                      {% elif demanda.lugar_aplicacion == 8|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Esmeraldas</td>
+                      {% elif demanda.lugar_aplicacion == 9|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Galapagos</td>
+                      {% elif demanda.lugar_aplicacion == 10|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Guayas</td>
+                      {% elif demanda.lugar_aplicacion == 11|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Imbabura</td>
+                      {% elif demanda.lugar_aplicacion == 12|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Loja</td>
+                      {% elif demanda.lugar_aplicacion == 13|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Los Rios</td>
+                      {% elif demanda.lugar_aplicacion == 14|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Manabi</td>
+                      {% elif demanda.lugar_aplicacion == 15|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Morona Santiago</td>
+                      {% elif demanda.lugar_aplicacion == 16|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Napo</td>
+                      {% elif demanda.lugar_aplicacion == 17|stringformat:"s" %} 
+                        <td colspan=4 style="text-align:center">Orellana</td> 
+                      {% elif demanda.lugar_aplicacion == 18|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Pastaza</td>
+                      {% elif demanda.lugar_aplicacion == 19|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Pichincha</td>
+                      {% elif demanda.lugar_aplicacion == 20|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Santa Elena</td>
+                      {% elif demanda.lugar_aplicacion == 21|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Santo Domingo de los Tsachilas</td>
+                      {% elif demanda.lugar_aplicacion == 22|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Sucumbios</td>
+                      {% elif demanda.lugar_aplicacion == 23|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Tungurahua</td>
+                      
+                      {% else %}
+                        <td colspan=4 style="text-align:center">Zamora Chinchipe</td>
+                      {% endif %}</td>
+                    </tr>
+                    <tr>
+                      <td class="text-muted">Fecha disponibilidad</td>
+                      <td class="text-muted">Desde:</td>
+                      <td>{{demanda.tiempo_inicio_disponible}}</td>
+                      <td class="text-muted">Hasta:</td>
+                      <td>{{demanda.tiempo_fin_disponible}}</td>
+                    </tr>
+                  </tbody>
+                </table>  
+              </div>
+            </div>
+             <!-- Perfil del beneficiario  y del cliente-->
+            <div class="col-sm-12">
+              <div class="block-header">
+                <h2>
+                  <span class="title">Perfiles</span><span class="decoration"></span><span class="decoration"></span><span class="decoration"></span>
+                </h2>
+              </div>
+              <div class="col-sm-10">
+                <table class="table">
+                  <tbody>
+                    <tr>
+                      <td class="text-muted">Beneficiario</td>
+                      <td>{{demanda.perfil_beneficiario}}</tr>
+                    <tr>
+                      <td class="text-muted">Cliente</td>
+                      <td>{{demanda.perfil_cliente}}</tr>
+                  </tbody>
+                </table>  
+              </div>
+            </div>
+            <!-- Otros datos relevantes de la demanda-->
+            <div class="col-sm-12">
+              <div class="block-header">
+                <h2>
+                  <span class="title">Otros</span><span class="decoration"></span><span class="decoration"></span><span class="decoration"></span>
+                </h2>
+              </div>
+              <div class="col-sm-10">
+                <table class="table">
+                  <tbody>
+                    <tr>
+                      <td class="text-muted">Soluciones Alternativas</td>
+                      <td>{{demanda.soluciones_alternativas}}</tr>
+                    <tr>
+                      <td class="text-muted">Importancia de soluci&oacute;n</td>
+                      <td>{{demanda.importancia_solucion}}</tr>
+                  </tbody>
+                </table>  
+              </div>
             </div>
           </div>
-          
-           <!-- About Me -->
-          <div class="row">
-            <div class="col-sm-12">
-              <h4 class="hl"><i class="fa fa-info-circle"></i> Dominio de la demanda</h4>
-              <p class="bottom-15">{{ demanda.dominio }}</p>
-              <hr>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-12">
-              <h4 class="hl"><i class="fa fa-info-circle"></i> Subdominio de la demanda</h4>
-              <p class="bottom-15">{{ demanda.subdominio }}</p>
-              <hr>
-            </div>
-          </div>
-           <!-- About Me -->
-          <div class="row">
-            <div class="col-sm-12">
-              <h4 class="hl"><i class="fa  fa-calendar"></i> Tiempo de la demanda</h4>
-              <p class="bottom-15"> {{ demanda.tiempo_fin_disponible }}</p>
-              <hr>
-            </div>
-          </div>
-
-          <!-- General Information -->
-          <div class="row">
-            <div class="col-sm-12">
-              <h4 class="hl"><i class="fa fa-map-marker"></i> Lugar donde se necesita de la demanda</h4>
-              <p class="bottom-15"> {{ demanda.lugar_aplicacion }}</p>
-              <hr>
-            </div>
-          </div>
-          
-           <!-- About Me -->
-          <div class="row">
-            <div class="col-sm-12">
-              <h4 class="hl"><i class="fa fa-user"></i> Perfil Beneficiario</h4>
-              <p class="bottom-15">{{ demanda.perfil_beneficiario }}</p>
-              <hr>
-            </div>
-          </div>
-          
-           <!-- About Me -->
-          <div class="row">
-            <div class="col-sm-12">
-              <h4 class="hl"><i class="fa fa-user"></i>  Perfil Cliente</h4>
-              <p class="bottom-15"> {{ demanda.perfil_cliente }}</p>
-              <hr>
-            </div>
-          </div>
-
         </div>
       </div>
     </div>

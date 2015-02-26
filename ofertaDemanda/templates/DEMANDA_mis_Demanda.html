@@ -6,7 +6,6 @@
 		text-align:center;
 	}	
 
-
 </style>
 
  <div class="section-header">
@@ -45,12 +44,13 @@
             {% endfor %}
           </ul>
         {% endif %}
+
          <form method="GET" action="/searchMisDemanda/">
             <div class="row">
               <div class="col-md-10 col-sm-10">
                 <div class="input-group">
                   <label class="sr-only" for="search3">Search</label>
-                    <input type="text" class="form-control " id="search3" name="busquedaMisDemanda" placeholder="Busque una de sus ofertas creadas">
+                    <input type="text" class="form-control " id="search3" name="busquedaMisDemanda" placeholder="Busque una de sus demandas creadas">
                   <span class="input-group-btn">
                     <button type="submit" class="btn btn-blue">Buscar</button>
                   </span>
@@ -58,7 +58,6 @@
               </div>
             </div>
           </form><br />
-
         </div>
 
         <div class="col-md-6 col-sm-3 hidden-xs">
@@ -78,95 +77,176 @@
     </div>
 
 
-<div class="container">
-   
+<div class="container">   
        <div class="row">
       
 		<!-- Se presentan las ofertas--> 
 		<div class="container">
 			<div class="table-responsive">
-				<table class="table table-hover" id="misofertas">
+				<table class="table table-hover" id="misdemandas">
 			    {% if buscarMisDema %}
-         		   <p>Has buscado por: <strong>{{ nombre }}</strong></p>
-            	{% if demandas %}
-            		<h3>MIS DEMANDAS</h3>
-					<thead>
-						<tr>
-							<th >N&uacute;mero</th>
-						    <th>Nombre</th>	
-						    <th>Tipo</th> 	    
-						    <th>Estado</th>    
-						    <th>Editar demanda<th>
-						    <th>Visualizar demanda<th>
-						</tr>
-					</thead>
-					<tbody>
-		
-	 					{% for c in demandas %}	 	
-						<tr>
-							<td class="numero">{{c.idDemanda}}</td>
-						    <td>{{c.nombre}}</td>
-						     {% if c.tipoDemanda == 1 %}
-							 	<td>Emprendimiento</td> 
-							 {% elif c.tipoDemanda == 2%}
-							   	<td>Prototipo</td>
-							 {% elif c.tipoDemanda == 3%}
-							   	<td>Tecnolog&iacute;a</td>
-							 {% endif %}
-						        <td>{{c.estadoDemanda}}</td>		
-						    <th style="text-align:center"><button type="button" class="btn btn-green">
-								  <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-								</button>
-						    <th>
-						    <th style="text-align:center"><button type="button" class="btn btn-amethyst">
-						    		<span href="verDemanda/?q={{c.idDemanda}}" class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>
-						    	</button>
-						    <th>
-						  </tr>
-						{% endfor %}
-					</tbody>
-				{% else %}
-                	<p>Las Demandas no concuerda con sus criterios de búsqueda.</p>    
-            	{% endif %}
-             {%endif%}
+         		    <p>Has buscado por: <strong>{{ nombre }}</strong></p>
+            		{% if demandas %}
+	            		<h3>MIS DEMANDAS</h3>
+						<thead>
+							<tr>
+								<th >N&uacute;mero</th>
+							    <th>Nombre</th>	
+							    <th>Tipo</th> 	    
+							    <th>Estado</th>    
+							    <th>Lugar de Aplicaci&oacute;n</th> 
+							    <th>Editar demanda<th>
+							    <th>Visualizar demanda<th>
+							</tr>
+						</thead>
+						<tbody>
+		 					{% for c in demandas %}	 	
+								<tr>
+									<td class="numero">{{c.idDemanda}}</td>
+								    <td>{{c.nombre}}</td>
+								     
+								     {% if c.tipoDemanda == 1 %}
+									 	<td>Emprendimiento</td> 
+									 {% elif c.tipoDemanda == 2%}
+									   	<td>Prototipo</td>
+									 {% elif c.tipoDemanda == 3%}
+									   	<td>Tecnolog&iacute;a</td>
+									 {% endif %}
+
+									 {% if c.estadoDemanda == 1%}
+										<td>Activa</td>
+									 {% elif c.estadoDemanda == 2%}
+									   	<td>Terminada</td>
+									 {% elif c.estadoDemanda == 3%}
+									   	<td>Desactivada</td>
+									 {% else %}
+									   	<td>Censurada</td>
+									 {% endif %}
+
+									<td>{{c.lugar_aplicacion}}</td>
+
+								    <th style="text-align:center">
+								    	<a href="/editarDemanda/?q={{d.idDemanda}}">
+								    	<button type="button" class="btn btn-green">
+										  <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+										</button></a>
+								    <th>
+								    <th style="text-align:center">
+								    	<a href="/verDemanda/?q={{d.idDemanda}}"
+								    	<button type="button" class="btn btn-amethyst">
+								    		<span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>
+								    	</button></a>
+								    <th>
+							  	</tr>
+							{% endfor %}
+						</tbody>
+					{% else %}
+	                	<p>Las Demandas no concuerda con sus criterios de búsqueda.</p>    
+	            	{% endif %}
+             	{%endif%}
             	{% if mostrarDemanda %}
             		<h3>MIS DEMANDAS</h3>
             		<thead>
 						<tr>
 							<th >N&uacute;mero</th>
-						    <th>Nombre</th>	
-						    <th>Tipo</th> 	    
-						    <th>Estado</th>    
-						    <th>Editar demanda<th>
-						    <th>Visualizar demanda<th>
+							<th>Nombre</th>	
+							<th>Tipo</th> 	    
+							<th>Estado</th>    
+							<th>Lugar de Aplicaci&oacute;n</th> 
+							<th>Editar demanda<th>
+							<th>Visualizar demanda<th>
 						</tr>
 					</thead>
 				{%endif%}
-				
 					<tbody>
-		
-	 					{% for c in lst_demandas %}	 	
+	 					{% for d in lst_demandas %}	 	
 						<tr>
-							<td class="numero">{{c.idDemanda}}</td>
-						    <td>{{c.nombre}}</td>
-						     {% if c.tipoDemanda == 1 %}
-							 <td>Emprendimiento</td> 
-							    {% elif c.tipoDemanda == 2%}
-							   	<td>Prototipo</td>
-							    {% elif c.tipoDemanda == 3%}
-							   	<td>Tecnolog&iacute;a</td>
-							    {% endif %}
-						        <td>{{c.estadoDemanda}}</td>
-						    				
+							<td class="numero">{{d.idDemanda}}</td>
+								    <td>{{d.nombre}}</td>
+                           <!-- <td colspan=4 style="text-align:center">{{d.idDemanda}}</td>
+                            <td colspan=4 style="text-align:center">{{d.nombre}}</td>-->
+								     
+								     {% if d.tipoDemanda == 1 %}
+									 	<td>Emprendimiento</td> 
+									 {% elif d.tipoDemanda == 2%}
+									   	<td>Prototipo</td>
+									 {% elif d.tipoDemanda == 3%}
+									   	<td>Tecnolog&iacute;a</td>
+									 {% endif %}
 
-						    <th style="text-align:center"><a href="/editarDemanda/?q={{c.idDemanda}}"><button type="button" class="btn btn-green">
-								  <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-								</button>
-						    <th>
-						    <th style="text-align:center"><a href="/verDemanda/?q={{c.idDemanda}}"><button type="button"  class="btn btn-amethyst">
-						    		<span  class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>
-						    	</button></a>
-						    <th>
+									 {% if d.estadoDemanda == 1%}
+										<td>Activa</td>
+									 {% elif d.estadoDemanda == 2%}
+									   	<td>Terminada</td>
+									 {% elif d.estadoDemanda == 3%}
+									   	<td>Desactivada</td>
+									 {% else %}
+									   	<td>Censurada</td>
+									 {% endif %}
+
+									<td>{% if demanda.lugar_aplicacion == 1|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Azuay</td>
+                      {% elif demanda.lugar_aplicacion == 2|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Bolivar</td>
+                      {% elif demanda.lugar_aplicacion == 3|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Caniar</td>
+                      {% elif demanda.lugar_aplicacion == 4|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Carchi</td>
+                      {% elif demanda.lugar_aplicacion == 5|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Chimborazo</td>
+                      {% elif demanda.lugar_aplicacion == 6|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Cotopaxi</td>
+                      {% elif demanda.lugar_aplicacion == 7|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">El Oro</td>
+                      {% elif demanda.lugar_aplicacion == 8|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Esmeraldas</td>
+                      {% elif demanda.lugar_aplicacion == 9|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Galapagos</td>
+                      {% elif demanda.lugar_aplicacion == 10|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Guayas</td>
+                      {% elif demanda.lugar_aplicacion == 11|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Imbabura</td>
+                      {% elif demanda.lugar_aplicacion == 12|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Loja</td>
+                      {% elif demanda.lugar_aplicacion == 13|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Los Rios</td>
+                      {% elif demanda.lugar_aplicacion == 14|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Manabi</td>
+                      {% elif demanda.lugar_aplicacion == 15|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Morona Santiago</td>
+                      {% elif demanda.lugar_aplicacion == 16|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Napo</td>
+                      {% elif demanda.lugar_aplicacion == 17|stringformat:"s" %} 
+                        <td colspan=4 style="text-align:center">Orellana</td> 
+                      {% elif demanda.lugar_aplicacion == 18|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Pastaza</td>
+                      {% elif demanda.lugar_aplicacion == 19|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Pichincha</td>
+                      {% elif demanda.lugar_aplicacion == 20|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Santa Elena</td>
+                      {% elif demanda.lugar_aplicacion == 21|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Santo Domingo de los Tsachilas</td>
+                      {% elif demanda.lugar_aplicacion == 22|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Sucumbios</td>
+                      {% elif demanda.lugar_aplicacion == 23|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Tungurahua</td>
+                      
+                      {% else %}
+                        <td colspan=4 style="text-align:center">Zamora Chinchipe</td>
+                      {% endif %}</td></td>
+
+								    <th style="text-align:center">
+								    	<a href="/editarDemanda/?q={{d.idDemanda}}">
+								    	<button type="button" class="btn btn-green">
+										  <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+										</button></a>
+								    <th>
+								    <th style="text-align:center">
+								    	<a href="/verDemanda/?q={{d.idDemanda}}"
+								    	<button type="button" class="btn btn-amethyst">
+								    		<span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>
+								    	</button></a>
+								    <th>
 						  </tr>
 						{% endfor %}
 					</tbody>	
