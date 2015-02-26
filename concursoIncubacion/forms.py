@@ -44,7 +44,7 @@ class EditarConcursoForm(forms.ModelForm):
 		model = Concurso
 		fields = ['fecha_fin','alcance','premios', 'imagen']
 
-	fecha_fin = forms.DateField(label="Fecha Final",widget=forms.DateInput(format=('%d/%m/%y'),attrs={'class':'form-control','required':'','type':'date'}))
+	fecha_fin = forms.DateField(label="Aplazar Fecha Final",widget=forms.DateInput(format=('%d/%m/%y'),attrs={'class':'form-control','required':'','type':'date'}))
 	alcance = forms.CharField(label="Alcance",widget=forms.Textarea(attrs={'rows':3, 'cols':60, 'class':'form-control', 'placeholder':'Describa el alcance del concurso','data-trigger':'focus','data-placement':'left','data-toggle':'popover', 'required':''}))
 	premios = forms.CharField(label="Premios",widget=forms.Textarea(attrs={'rows':4, 'cols':60,'class':'form-control', 'placeholder':'Describa el premio final del concurso','data-trigger':'focus','data-placement':'left','data-toggle':'popover'}))
 	imagen = forms.ImageField(label="Cargar Imagen",widget=forms.FileInput(attrs={'class':'btn btn-default','data-trigger':'focus','data-placement':'left','data-toggle':'popover'}))
