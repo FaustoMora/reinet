@@ -13,19 +13,7 @@
     </div>
 
     <div class="container">        
-      <div class="row">         <!-- -
-        <div class="col-sm-4 col-md-3">
-          <div class="user-menu bottom-15">
-            <ul>
-              <li>
-                <a href="../editarConcurso/?q={{ concurso.idConcurso}}">
-                  <i class="sign fa fa-edit bg-blue"></i> Editar Concurso <i class="fa fa-chevron-right pull-right"></i>
-                </a>  
-              </li>
-             
-            </ul>
-          </div>
-        </div>      -->  -
+      <div class="row">   
         <div class="col-sm-10">            
             <div class="col-sm-10">
               <h3>
@@ -54,7 +42,15 @@
             </div>
             {{ oferta.descripcion }}
             <br /><br />
-              {{ oferta.dominio }}
+              {% if oferta.dominio == 0|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Mundial</td>
+                      {% elif oferta.dominio == 1|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Regional</td>
+                      {% elif oferta.dominio == 2|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Nivel Pais</td>
+                      {%else%}
+                        <td>No tiene dominio</td>
+                      {%endif%}
             </p>
 
           
@@ -71,12 +67,68 @@
                   <tbody>
                     <tr>
                       <td class="text-muted">Dominio</td>
-                      <td colspan=4 style="text-align:center">{{ oferta.dominio }}</td>
+                      {% if oferta.dominio == 0|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Mundial</td>
+                      {% elif oferta.dominio == 1|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Regional</td>
+                      {% elif oferta.dominio == 2|stringformat:"s" %}
+                        <td colspan=4 style="text-align:center">Nivel Pais</td>
+                      {%else%}
+                        <td>No tiene dominio</td>
+                      {%endif%}
                     </tr>
-                    
                     <tr>
                       <td class="text-muted">Lugar de Aplicación</td>
-                      <td colspan=4 style="text-align:center">{{ oferta.lugar_aplicacion }}</td>
+                      {% if oferta.lugar_aplicacion == 1|stringformat:"s" %}
+                        <td>Azuay</td>
+                      {% elif oferta.lugar_aplicacion == 2|stringformat:"s" %}
+                        <td>Bolivar</td>
+                      {% elif oferta.lugar_aplicacion == 3|stringformat:"s" %}
+                        <td>Caniar</td>
+                      {% elif oferta.lugar_aplicacion == 4|stringformat:"s" %}
+                        <td>Carchi</td>
+                      {% elif oferta.lugar_aplicacion == 5|stringformat:"s" %}
+                        <td>Chimborazo</td>
+                      {% elif oferta.lugar_aplicacion == 6|stringformat:"s" %}
+                        <td>Cotopaxi</td>
+                      {% elif oferta.lugar_aplicacion == 7|stringformat:"s" %}
+                        <td>El Oro</td>
+                      {% elif oferta.lugar_aplicacion == 8|stringformat:"s" %}
+                        <td>Esmeraldas</td>
+                      {% elif oferta.lugar_aplicacion == 9|stringformat:"s" %}
+                        <td>Galapagos</td>
+                      {% elif oferta.lugar_aplicacion == 10|stringformat:"s" %}
+                        <td>Guayas</td>
+                      {% elif oferta.lugar_aplicacion == 11|stringformat:"s" %}
+                        <td>Imbabura</td>
+                      {% elif oferta.lugar_aplicacion == 12|stringformat:"s" %}
+                        <td>Loja</td>
+                      {% elif oferta.lugar_aplicacion == 13|stringformat:"s" %}
+                        <td>Los Rios</td>
+                      {% elif oferta.lugar_aplicacion == 14|stringformat:"s" %}
+                        <td>Manabi</td>
+                      {% elif oferta.lugar_aplicacion == 15|stringformat:"s" %}
+                        <td>Morona Santiago</td>
+                      {% elif oferta.lugar_aplicacion == 16|stringformat:"s" %}
+                        <td>Napo</td>
+                      {% elif oferta.lugar_aplicacion == 17|stringformat:"s" %} 
+                        <td>Orellana</td> 
+                      {% elif oferta.lugar_aplicacion == 18|stringformat:"s" %}
+                        <td>Pastaza</td>
+                      {% elif oferta.lugar_aplicacion == 19|stringformat:"s" %}
+                        <td>Pichincha</td>
+                      {% elif oferta.lugar_aplicacion == 20|stringformat:"s" %}
+                        <td>Santa Elena</td>
+                      {% elif oferta.lugar_aplicacion == 21|stringformat:"s" %}
+                        <td>Santo Domingo de los Tsachilas</td>
+                      {% elif oferta.lugar_aplicacion == 22|stringformat:"s" %}
+                        <td>Sucumbios</td>
+                      {% elif oferta.lugar_aplicacion == 23|stringformat:"s" %}
+                        <td>Tungurahua</td>
+                      
+                      {% else %}
+                        <td>Zamora Chinchipe</td>
+                      {% endif %}
                     </tr>
                     <tr>
                       <td class="text-muted">Fecha disponibilidad</td>
@@ -126,9 +178,6 @@
                       <td class="text-muted">Propuesta de Valor</td>
                       <td>{{oferta.propuesta_valor}}</tr>
                     <tr>
-                      <td class="text-muted">Estado Propiedad Intelectual</td>
-                      <td>{{oferta.estado_propiedad_intelectual}}</tr>
-                    <tr>
                       <td class="text-muted">Evidencia de Tracción</td>
                       <td>{{oferta.evidencia_traccion}}</tr>
                   </tbody>
@@ -137,175 +186,8 @@
             </div>
           </div>
 
-          <!-- New comment form 
-          <div class="col-sm-10 col-sm-offset-1">
-            <div class="new-comment">
-              <form class="form-horizontal" role="form">
-                <div class="form-group">
-                  <div class="col-sm-2 hidden-xs">
-                    <img src="../static/img/face1.jpg" alt="..." class="img-responsive">
-                  </div>
-                  <div class="col-sm-10">
-                    <textarea class="form-control" rows="3" placeholder="Leave a message..."></textarea>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="col-sm-offset-2 col-sm-10">
-                    <button type="submit" class="btn btn-dark btn-sm">Post comment</button>
-                  </div>
-                </div>
-              </form>
-            </div>
-             Comments list -->
-              <!--
-            <h4>21 comments</h4>
-            <hr>
-
-            <div class="comment">
-              <div class="media">
-                <a class="pull-left" href="#">
-                  <img class="media-object" src="../static/img/face2.jpg" alt="...">
-                </a>
-                <div class="media-body">
-                  <p><a href="profile.html">Username</a></p>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc consectetur urna at neque mollis sagittis. Vivamus viverra justo in dui vulputate tincidunt in eu magna. Ut ut risus pretium, varius felis a, congue metus.
-                  </p>
-                  <ul class="text-muted list-inline">
-                    <li><i class="fa fa-clock-o"></i> 20 minutes ago</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div class="comment">
-              <div class="media">
-                <a class="pull-left" href="#">
-                  <img class="media-object" src="../static/img/face3.jpg" alt="...">
-                </a>
-                <div class="media-body">
-                  <p><a href="profile.html">Username 2</a></p>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc consectetur urna at neque mollis sagittis. Vivamus viverra justo in dui vulputate tincidunt in eu magna. Ut ut risus pretium, varius felis a, congue metus.
-                  </p>
-                  <ul class="text-muted list-inline">
-                    <li><i class="fa fa-clock-o"></i> 1 hour ago</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div class="comment">
-              <div class="media">
-                <a class="pull-left" href="#">
-                  <img class="media-object" src="../static/img/face4.jpg" alt="...">
-                </a>
-                <div class="media-body">
-                  <p><a href="profile.html">Username 3</a></p>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc consectetur urna at neque mollis sagittis. Vivamus viverra justo in dui vulputate tincidunt in eu magna. Ut ut risus pretium, varius felis a, congue metus.
-                  </p>
-                  <ul class="text-muted list-inline">
-                    <li><i class="fa fa-calendar"></i> 11/10/2013</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-              -->
           </div>
         </div>
-
-        <!--
-        <div class="col-sm-4">
-          <div class="block-inverse">
-            <div class="head-inverse">
-              <div class="text-center">
-                <strong class="text-muted">Ranking</strong>
-                      <div class="thumbnail " style="margin-bottom:0;background-color:#F5F5F5">              
-                        <div class="caption">
-                          <div class="rating">
-                              <i class="fa fa-star"></i> 
-                              <i class="fa fa-star"></i> 
-                              <i class="fa fa-star"></i> 
-                              <i class="fa fa-star"></i> 
-                              <i class="fa fa-star"></i>
-                          </div>                              
-                        </div>
-                      </div>
-              </div>
-            </div>
-            <div class="body-inverse">
-              <p class="text-center">
-                <strong class="text-muted">My Gallery</strong>
-              </p>
-              <div class="user-gallery text-center">
-                <a href="#"><img src="../static/img/works1.jpg" alt="..."></a>
-                <a href="#"><img src="../static/img/works2.jpg" alt="..."></a>
-                <a href="#"><img src="../static/img/works3.jpg" alt="..."></a>
-                <a href="#"><img src="../static/img/works4.jpg" alt="..."></a>
-                <a href="#"><img src="../static/img/works1.jpg" alt="..."></a>
-                <a href="#"><img src="../static/img/works2.jpg" alt="..."></a>
-                <a href="#"><img src="../static/img/works3.jpg" alt="..."></a>
-                <a href="#"><img src="../static/img/works4.jpg" alt="..."></a>
-                <a href="#"><img src="../static/img/dots.jpg" alt="..."></a>
-              </div>
-            </div>
-          </div>
-                     
-
-          Tags           <h3 class="hl">PALABRAS CLAVES</h3>
-          <hr>
-          <p class="tags">
-            <a href="#">Bootstrap</a>
-            <a href="#">HTML5</a>
-            <a href="#">Highland</a>
-            <a href="#">Blog post</a>
-            <a href="#">CSS3</a>
-            <a href="#">jQuery</a>
-          </p>
-          <br />
-          
-           Recently Added 
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <h3 class="panel-title">Equipo</h3>
-            </div>
-            <div class="panel-body">
-              <div class="recent-blogs">
-                <ul>
-
-                  <li>
-                    <div class="media">
-                      <a class="pull-left" href="#">
-                        <img class="media-object" src="../static/img/face2.jpg" alt="...">
-                      </a>
-                      <div class="media-body">
-                        <p><a href="profile.html">Username</a></p>
-                        <ul class="text-muted list-inline">
-                          <li><i class="fa fa-flag"></i> Estado</li>
-                          <li><i class="fa fa-heart"></i>Programador(Rol)</li>
-                        </ul>
-                      </div>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="media">
-                      <a class="pull-left" href="#">
-                        <img class="media-object" src="../static/img/face2.jpg" alt="...">
-                      </a>
-                      <div class="media-body">
-                        <p><a href="profile.html">Username</a></p>
-                        <ul class="text-muted list-inline">
-                          <li><i class="fa fa-flag"></i> Estado</li>
-                          <li><i class="fa fa-heart"></i>Programador(Rol)</li>
-                        </ul>
-                      </div>
-                    </div>
-                  </li>
-
-                </ul>
-              </div>
-            </div>
-          </div>
--->
 
 </div>
 
