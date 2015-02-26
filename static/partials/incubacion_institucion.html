@@ -1,5 +1,3 @@
-{% extends 'base.tpl.html' %}
-{% block content %}
     <div class="section-header">
       <div class="container">
         <div class="row">
@@ -10,28 +8,26 @@
         </div>
       </div>
     </div>
-    <div class="container" >
-      {% ifequal tipo_user "institucion" %}
+    <div class="container">
         <div class="col-sm-4 col-md-3">
             <div class="user-menu bottom-15">
             <ul>
               <li>
-                <a href="{% url 'incubacion.views.crearIncubacion' %}">
+                <a href="#/crear">
                   <i class="sign fa fa-plus bg-amethyst"></i>Crear Incubacion
-                </a>
+                </a>  
             </ul>
           </div>
           </div>
-        {% endifequal %}
       <div class="row">
 
         <div class="col-sm-8 blog-summary-list" ng-controller="IncubacionController as InCtrl">
           <div>
               <input type="text" placeholder="Buscar...." ng-model="buscarInc" class="form-control">
           </div>
-          <!-- First blog post -->{% verbatim %}
+          <!-- First blog post -->
             <div class="blog-summary" ng-repeat=" inc in InCtrl.incubaciones|filter:buscarInc |orderBy:inc.fecha:reverse">
-              <h4 ng-class="{'new-story':inc.isToday(inc.fechaInicio)}"><a href="./incubacion/{{ inc.id }}">{{ inc.nombre }}</a></h4>
+              <h4 ng-class="{'new-story':InCtrl.isToday(inc.fechaInicio)}"><a href="#/incubaciones/{{ inc.id }}">{{ inc.nombre }}</a></h4>
               <ul class="text-muted list-inline">
                 <li><i class="fa fa-calendar"></i> {{ inc.fechaInicio|date }}</li>
                 <li><i class="fa fa-tasks"></i> {{ inc.ofertasIncubadas }} Incubadas</li>
@@ -49,9 +45,8 @@
             <div class="alert alert-danger alert-dismissable" ng-show="InCtrl.incubaciones.length==0">
                 <p>No hay ninguna Incubaci&oacute;n disponible</p>
             </div>
-            {% endverbatim %}
           <!-- Pagination -->
-        <!--  <ul class="pagination pull-right">
+          <!--<ul class="pagination pull-right">
             <li class="disabled"><a href="#">&laquo;</a></li>
             <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
             <li><a href="#">2</a></li>
@@ -63,4 +58,3 @@
         </div>
       </div>
     </div>
-{% endblock %}

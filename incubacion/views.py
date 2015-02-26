@@ -8,16 +8,18 @@ from app.models import Catalogo
 from ofertaDemanda.models import Oferta
 from usuarios.models import Institucion, Persona
 from incubacion.models import Incubacion, Incubada, TiposOfertasIncubacion
-from restless.modelviews import Endpoint
+from restless.modelviews import Endpoint,ListEndpoint, DetailEndpoint
 from restless.auth import BasicHttpAuthMixin,login_required
 from restless.models import serialize
+from django.views.decorators.csrf import csrf_exempt
 
 
 # Create your views here.
 
 
 
-class ListIncubaciones(Endpoint, BasicHttpAuthMixin):
+class ListIncubaciones(ListEndpoint, BasicHttpAuthMixin):
+    model = Incubacion
     @login_required
     def get(self, request):
         incs=[]
@@ -62,14 +64,16 @@ class ListIncubaciones(Endpoint, BasicHttpAuthMixin):
 
 @decorators.login_required(login_url='/ingresar/')
 def homeIncubacion(request):
-    
-    return render(request, 'incubacion_main.html')
+    #return render(request, 'incubacion_main.html')
+    return render(request, 'index-incubacion.html')
+
 
 
 @decorators.login_required(login_url='/ingresar/')
 def crearIncubacion(request):
     return render(request, 'crear_incubacion.html')
 
+@csrf_exempt
 @decorators.login_required(login_url='/ingresar/')
 def createIncubacion(request):
     i = Incubacion()
@@ -89,4 +93,20 @@ def createIncubacion(request):
         y = TiposOfertasIncubacion()
         y.incubacion=i
         y.tipo = Catalogo.objects.get(id=int(a))
+        y.save()
     return HttpResponseRedirect('/incubacion')
+
+@decorators.login_required(login_url='/ingresar/')
+def incubacionDetails(request,identifier):
+    i = Incubacion.objects.get(id=int(identifier))
+    context = {"incubacion":i,}
+
+    return render(request,"incubacion_institucion.html",context)
+
+
+class IncDetails(DetailEndpoint):
+    model = Incubacion
+
+
+class IncubadasList(ListEndpoint):
+    model = Incubada
