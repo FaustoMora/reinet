@@ -11,6 +11,8 @@ from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import User
 from app.models import *
+from swampdragon.models import SelfPublishModel
+from .serializers import NotificationSerializer
 
 
 class Institucion(User):
@@ -71,3 +73,6 @@ class Mensaje(models.Model):
     imgEm=property(imagenEmisor)
 
 
+class Notification(SelfPublishModel, models.Model):
+    serializer_class = NotificationSerializer
+    message = models.TextField()

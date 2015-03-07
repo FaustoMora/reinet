@@ -6,6 +6,7 @@ from datetime import datetime
 from django.conf.urls import patterns, url, include
 from app.forms import BootstrapAuthenticationForm
 from usuarios.views import *
+from usuarios.views import Notifications
 
 # Uncomment the next lines to enable the admin:
 # from django.conf.urls import include
@@ -36,7 +37,6 @@ urlpatterns = patterns('',
             'next_page': '/',
         },
         name='logout'),
-
     url(r'^',include('usuarios.urls')),
     url(r'^',include('concursoIncubacion.urls')),
     url(r'^',include('ofertaDemanda.urls')),

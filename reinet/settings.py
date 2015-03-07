@@ -111,7 +111,8 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     # Uncomment the next line for simple clickjacking protection:
-    # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
 )
 
 ROOT_URLCONF = 'reinet.urls'
@@ -139,7 +140,8 @@ INSTALLED_APPS = (
     'concursoIncubacion',
     'usuarios',
     'ofertaDemanda',
-    'incubacion'
+    'incubacion',
+    'swampdragon',
 
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',
@@ -178,3 +180,7 @@ LOGGING = {
 
 # Specify the default test runner.
 TEST_RUNNER = 'django.test.runner.DiscoverRunner'
+
+
+# SwampDragon settings
+SWAMP_DRAGON_CONNECTION = ('swampdragon.connections.sockjs_connection.DjangoSubscriberConnection', '/data')

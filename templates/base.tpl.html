@@ -125,8 +125,13 @@
   </div>
   <div class="wrapper">
   {% block content %}
+
+    
   {% endblock %}
   </div>
+
+  
+  
   <!-- Foooter
   ================== -->
   <footer>
@@ -222,5 +227,19 @@
   <script src="{% static 'js/angular-animate.js'%}"></script>
   <script src="{% static 'js/angular-route.js'%}"></script>
   <script src="{% static 'js/app.js'%}"></script>
+
+
+
+  <!-- SwampDragon -->
+  <script src="../../static\swampdragon\js\vendor/sockjs-0.3.4.min.js"></script>
+  <script src="../../static\swampdragon/js/swampdragon.js"></script>
+  <script src="../../static\swampdragon/js/datamapper.js"></script>
+  <script src="../../static\swampdragon/js/swampdragon-vanilla.js"></script>
+  <script src="http://localhost:9999/settings.js"></script>
+
+  <!-- notifications -->
+  <script src="{% static 'notifications.js' %}"></script>
+
+
 </body>
 </html>

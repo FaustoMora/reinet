@@ -42,4 +42,6 @@ urlpatterns = patterns('',
         url(r'^incubacionSL[/]?$',incubacionSinLogin),
         url(r'^instSL[/]?$',institucionSinLogin),
         
+
+        url(r'^notif[/]$', Notifications.as_view()),
 )

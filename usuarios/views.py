@@ -16,6 +16,9 @@ from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
 from django.views.decorators.csrf import csrf_protect
 from datetime import datetime
+from django.views.generic import ListView
+from usuarios.models import Notification
+
 
 def index(request):
 	return render_to_response('USUARIO_index.html')
@@ -650,3 +653,11 @@ def institucionSinLogin(request):
 	lst_inst = Institucion.objects.all()
 	args={"lst_inst":lst_inst}
 	return render_to_response('USUARIO_institucionSinLogin.html',args,context_instance=RequestContext(request))
+
+
+class Notifications(ListView):
+    model = Notification
+    template_name = 'base.tpl.html'
+
+    def get_queryset(self):
+        return self.model.objects.order_by('-pk')[:5]
