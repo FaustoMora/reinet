@@ -166,20 +166,37 @@ def verConcurso(request):
 		args['concurso'] = concurso
 
 		val = compararIds(concursousuario,request.session['id_user'])
-
+		
 		if (request.session["tipo"] == 'persona'):
 			val2 = True;
 		else:
 			val2 = False;
-
+			if (val == False):
+				return HttpResponseRedirect('/homeConcursos')
+		try:
+			inscrip = Inscripcion.objects.all().filter(idConcurso = idcon, estado = 0)
+			print len(inscrip)
+		except:
+			print "no hay inscripcion"
+			inscrip = ""
+			
+		try:
+			siInscrip = Inscripcion.objects.all().filter(idConcurso = idcon, estado = 1)
+			print len(siInscrip)
+		except: 
+			print "no hay inscripciones aceptadas"
+			siInscrip = ""
 		print "Probado"
 		print concursousuario
 		print request.session['id_user']
 		print val
+		
 		args['val'] = val
 		args['val2'] = val2
 		args['milestones'] = milestones
 		args['nums'] = range(len(milestones))
+		args['inscrip'] = inscrip
+		args['participantes'] = siInscrip
 		return render_to_response('CONCURSO_perfil.html', args)
 	except:
 		return HttpResponseRedirect('/RNNotFound')
@@ -286,7 +303,7 @@ def registrarOferta(request):
 				val = True
 		i = i+1
 	inscri.idConcurso = Concurso.objects.get(idConcurso = concu)
-	inscri.estado = 1
+	inscri.estado = 0
 	inscri.fecha = datetime.now().strftime('%Y-%m-%d')
 	print val
 	args = {}
@@ -297,7 +314,14 @@ def registrarOferta(request):
 		args['msj'] = "La Oferta ya fue Inscrita Anteriormente"
 	return render_to_response('ajax_vaciar.html', args)
 
-
+def gestionarInscripcion(request):
+	idInscrip = request.POST['idinscrip']
+	valor = request.POST['value']
+	print idInscrip
+	inscrip = Inscripcion.objects.get(idInscripcion = idInscrip)
+	inscrip.estado = valor
+	inscrip.save()
+	return render_to_response('empty.html');
 
 
 def searchConcursoRed(request):

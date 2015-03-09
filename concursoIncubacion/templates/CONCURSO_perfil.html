@@ -168,7 +168,86 @@
 		  <div id="showOf">
 		  
 		  </div>
-
+		
+		  {% if val2 == False %}
+			{% if inscrip.count > 0 %}
+				<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+				<h4>Solicitudes de Ofertas </h4>
+				{%for i in inscrip%}
+					<div id="panel{{i.idInscripcion}}" class="panel panel-red">
+					  <div class="panel-heading">
+						<h3 class="panel-title">{{ i.idOferta.nombre }}</h3>
+					  </div>
+					  <div class="panel-body">
+						{{ i.idOferta.descripcion }}<br/>
+						Fecha de Inscripci&oacute;n: {{ i.fecha }}<br/>
+						<input type="hidden" value="{{i.idInscripcion}}" id="{{i.idInscripcion}}">
+						<button class="btn btn-default" id="Accept{{i.idInscripcion}}">Aceptar</button>
+						
+						<button class="btn btn-default" id="Denie{{i.idInscripcion}}">Rechazar</button>
+						
+						<script>
+							$(document).ready(function() {
+								$(function(){
+									$('#Accept{{i.idInscripcion}}').click(function(){
+										$.ajax({
+											type: "POST",
+											url: "/gestionarInscripcion/",
+											data: {
+												'csrfmiddlewaretoken' : $("input[name=csrfmiddlewaretoken]").val(),
+												'idinscrip' : {{i.idInscripcion}},
+												'value' : 1
+											},
+											
+											dataType: 'html'
+										});
+										$('#panel{{i.idInscripcion}}').remove();
+									});
+								});
+							});
+							$(document).ready(function() {
+								$(function(){
+									$('#Denie{{i.idInscripcion}}').click(function(){
+										$.ajax({
+											type: "POST",
+											url: "/gestionarInscripcion/",
+											data: {
+												'csrfmiddlewaretoken' : $("input[name=csrfmiddlewaretoken]").val(),
+												'idinscrip' : {{i.idInscripcion}},
+												'value' : 2
+											},
+											
+											dataType: 'html'
+										});
+										$('#panel{{i.idInscripcion}}').remove();
+									});
+								});
+							});
+						</script>
+					  </div>
+					</div>
+				{% endfor %}
+			{% endif %}
+		  {% endif %}
+			
+			
+		   
+			{% if participantes.count > 0 %}
+			<h4>Ofertas Participantes</h4>
+				{%for p in participantes%}
+					<div id="panel{{i.idInscripcion}}" class="panel panel-blue">
+					  <div class="panel-heading">
+						<h3 class="panel-title">{{ p.idOferta.nombre }}</h3>
+					  </div>
+					  <div class="panel-body">
+						{{ p.idOferta.descripcion }}<br/>
+						Creador de la Oferta: {{ p.idOferta.idusuario }}<br/>
+						<!--<input type="hidden" value="{{i.idInscripcion}}" id="{{i.idInscripcion}}">-->
+					  </div>
+					</div>
+				{% endfor %}
+			{% endif %}
+			
       </div>
 
 
