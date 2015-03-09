@@ -17,19 +17,27 @@ from datetime import datetime
 
 @login_required(login_url='/ingresar/')
 def homeConcursos(request):
+	id_session=request.session['id_user']
+	user1=User.objects.get(id=id_session)
 	try:
 		tipo_user = request.session['tipo']
 		if (tipo_user=="persona"):
 			lst_concursos = Concurso.objects.all()[:8]
 		elif (tipo_user=="institucion"):
 			lst_concursos = Concurso.objects.all().filter(idusuario=request.session['id_user'])[:8]
-		return render_to_response('CONCURSO_inicio_concurso.html',{'lst_concursos' : lst_concursos,'tipo_user':tipo_user},context_instance=RequestContext(request))
+		return render_to_response('CONCURSO_inicio_concurso.html',
+			{'lst_concursos' : lst_concursos,
+			'tipo_user':tipo_user,
+			'usuario':user1},
+			context_instance=RequestContext(request))
 	except:
 		return HttpResponseRedirect('/RNNotFound')
 
 
 @login_required(login_url='/ingresar/')
 def crearConcurso(request):
+	id_session=request.session['id_user']
+	user1=User.objects.get(id=id_session)
 	try:
 		if(request.session["tipo"]=="institucion"):
 			if request.POST: #POST
@@ -143,6 +151,7 @@ def crearConcurso(request):
 			args={}
 			args.update(csrf(request))
 			args['form']=form
+			args['usuario']=user1
 			return render_to_response('CONCURSO_crear_concurso.html', args,context_instance=RequestContext(request))
 		else:
 			return HttpResponseRedirect('/crearConcurso')
@@ -150,12 +159,15 @@ def crearConcurso(request):
 		args={}
 		info="Error Datos incorrectos"
 		args['form']=form
+		args['usuario']=user1
 		messages.success(request,info)
 		return HttpResponseRedirect('/crearConcurso')
 
 
 @login_required(login_url='/ingresar/')
 def verConcurso(request):
+	id_session=request.session['id_user']
+	user1=User.objects.get(id=id_session)
 	try:
 		idcon = int(request.GET.get('q', ''))
 		concurso=Concurso.objects.get(idConcurso = idcon)
@@ -180,6 +192,7 @@ def verConcurso(request):
 		args['val2'] = val2
 		args['milestones'] = milestones
 		args['nums'] = range(len(milestones))
+		args['usuario']=user1
 		return render_to_response('CONCURSO_perfil.html', args)
 	except:
 		return HttpResponseRedirect('/RNNotFound')
@@ -188,6 +201,8 @@ def verConcurso(request):
 
 @login_required(login_url='/ingresar/')
 def editarConcurso(request):
+	id_session=request.session['id_user']
+	user1=User.objects.get(id=id_session)
 	try:
 		if(request.session["tipo"]=="institucion"):
 			info=""
@@ -225,6 +240,7 @@ def editarConcurso(request):
 			args.update(csrf(request))
 			args['form']=concursoForm
 			args['idconcu'] = idcon
+			args['usuario']=user1
 			print concurso.nombre
 			messages.success(request, info)
 			return render_to_response('CONCURSO_editar_concurso.html', args,context_instance=RequestContext(request))

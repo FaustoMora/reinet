@@ -15,18 +15,25 @@ from django.core.urlresolvers import reverse
 
 @login_required(login_url='/ingresar/') 
 def homeDemandas(request):
+    id_session=request.session['id_user']
+    user1=User.objects.get(id=id_session)
+
     tipo_user = request.session['tipo']
     print tipo_user
     if tipo_user=="persona":
         persona = Persona.objects.get(idpersona=request.session['id_persona'])
         lst_demandas = Demanda.objects.filter(~Q(idusuario = request.session['id_user']))[:8]
-        return render_to_response('DEMANDA_Inicio.html',{'lst_demandas': lst_demandas,'persona':persona,'tipo_user':tipo_user},context_instance=RequestContext(request))
+        return render_to_response('DEMANDA_Inicio.html',{'lst_demandas': lst_demandas,'persona':persona,'tipo_user':tipo_user,'usuario':user1},context_instance=RequestContext(request))
     elif tipo_user=="institucion":
         lst_demandas = Demanda.objects.all()[:8]
-    return render_to_response('DEMANDA_Inicio.html',{'lst_demandas': lst_demandas,'tipo_user':tipo_user},context_instance=RequestContext(request))
+    return render_to_response('DEMANDA_Inicio.html',
+        {'lst_demandas': lst_demandas,'tipo_user':tipo_user,'usuario':user1},
+        context_instance=RequestContext(request))
 
 @login_required(login_url='/ingresar/') 
 def verDemanda(request):
+    id_session=request.session['id_user']
+    user1=User.objects.get(id=id_session)
     iddem = int(request.GET.get('q', ''))
     demanda=Demanda.objects.get(idDemanda = iddem)
     imagenes= ImagenDemanda.objects.all().filter(idDemanda = iddem)
@@ -46,28 +53,39 @@ def verDemanda(request):
     args['val'] = val
     args['imagenes'] = imagenes
     args['nums'] = range(len(imagenes))
+    args['usuario']=user1
     return render_to_response('DEMANDA_perfil.html', args)
 
 @login_required(login_url='/ingresar/') 
 def misDemandas(request):
+    id_session=request.session['id_user']
+    user1=User.objects.get(id=id_session)
     persona = Persona.objects.get(idpersona=request.session['id_persona'])
     lst_demandas = Demanda.objects.filter(idusuario = request.session['id_user'])[:5]
     print lst_demandas
-    return render_to_response('DEMANDA_mis_Demanda.html', {'lst_demandas' :lst_demandas,'persona':persona}, context_instance=RequestContext(request)) 
+    return render_to_response('DEMANDA_mis_Demanda.html', 
+        {'lst_demandas' :lst_demandas,
+        'persona':persona,
+        'usuario':user1},
+         context_instance=RequestContext(request)) 
 
 @login_required(login_url='/ingresar/') 
 def homeOfertas(request):
+    id_session=request.session['id_user']
+    user1=User.objects.get(id=id_session)
     tipo_user = request.session['tipo']
     if tipo_user=="persona":
         persona = Persona.objects.get(idpersona=request.session['id_persona'])
         lst_ofertas = Oferta.objects.filter(~Q(idusuario = request.session['id_user']))[:8]
-        return render_to_response('OFERTA_Inicio2.html',{'lst_ofertas': lst_ofertas,'persona':persona,'tipo_user':tipo_user},context_instance=RequestContext(request))
+        return render_to_response('OFERTA_Inicio2.html',{'lst_ofertas': lst_ofertas,'persona':persona,'tipo_user':tipo_user,'usuario':user1},context_instance=RequestContext(request))
     elif tipo_user=="institucion":
         lst_ofertas = Oferta.objects.all()[:8]
-    return render_to_response('OFERTA_Inicio2.html',{'lst_ofertas': lst_ofertas,'tipo_user':tipo_user},context_instance=RequestContext(request))
+    return render_to_response('OFERTA_Inicio2.html',{'lst_ofertas': lst_ofertas,'tipo_user':tipo_user,'usuario':user1},context_instance=RequestContext(request))
 
 @login_required(login_url='/ingresar/')
 def crearOferta(request):
+    id_session=request.session['id_user']
+    user1=User.objects.get(id=id_session)
     if request.POST: #POST
         form = CrearOfertaForm(request.POST, request.FILES)
 
@@ -92,11 +110,14 @@ def crearOferta(request):
     args={}
     args.update(csrf(request))
     args['form']=form
+    args['usuario']=user1
     return render_to_response('OFERTA_crear_oferta.html',args)
 
 
 @login_required(login_url='/ingresar/')
 def completarOferta(request,ofertaid):
+    id_session=request.session['id_user']
+    user1=User.objects.get(id=id_session)
     ofertaCompletar=Oferta.objects.get(idOferta = ofertaid)
     form = CompletarOfertaForm(request.POST, request.FILES, instance=ofertaCompletar)
     if form.is_valid():
@@ -106,10 +127,13 @@ def completarOferta(request,ofertaid):
     args.update(csrf(request))
     args['form']=form
     args['oferta']=Oferta.objects.get(idOferta=ofertaid)
+    args['usuario']=user1
     return render_to_response('OFERTA_crear_oferta_completar.html', args, context_instance=RequestContext(request))
 
 @login_required(login_url='/ingresar/')
 def crearDiagramaCanvas(request,ofertaid):
+    id_session=request.session['id_user']
+    user1=User.objects.get(id=id_session)
     form = CanvasForm(request.POST, request.FILES)
     if form.is_valid():
         return HttpResponseRedirect('/misOfertas/')
@@ -118,10 +142,13 @@ def crearDiagramaCanvas(request,ofertaid):
     args.update(csrf(request))
     args['form']=form
     args['oferta']=Oferta.objects.get(idOferta=ofertaid)
+    args['usuario']=user1
     return render_to_response('OFERTA_crear_oferta_completar.html', args, context_instance=RequestContext(request))
 
 @login_required(login_url='/ingresar/')
 def crearDiagramaPorter(request,ofertaid):
+    id_session=request.session['id_user']
+    user1=User.objects.get(id=id_session)
     form = PorterForm(request.POST, request.FILES)
     if form.is_valid():
         return HttpResponseRedirect('/misOfertas/')
@@ -130,10 +157,13 @@ def crearDiagramaPorter(request,ofertaid):
     args.update(csrf(request))
     args['form']=form
     args['oferta']=Oferta.objects.get(idOferta=ofertaid)
+    args['usuario']=user1
     return render_to_response('OFERTA_crear_oferta_completar.html', args, context_instance=RequestContext(request))
 
 @login_required(login_url='/ingresar/')
 def crearDemanda(request):
+    id_session=request.session['id_user']
+    user1=User.objects.get(id=id_session)
     form = CrearDemandaForm(request.POST, request.FILES)
 
     if form.is_valid():
@@ -148,10 +178,13 @@ def crearDemanda(request):
     args={}
     args.update(csrf(request))
     args['form']=form
+    args['usuario']=user1
     return render_to_response('DEMANDA_crear_demanda.html',args)    
 	
 @login_required(login_url='/ingresar/')
 def verOferta(request):
+    id_session=request.session['id_user']
+    user1=User.objects.get(id=id_session)
     idof = int(request.GET.get('q', ''))
     oferta=Oferta.objects.get(idOferta = idof)
     imagenes= ImagenOferta.objects.all().filter(idOferta = idof)
@@ -171,10 +204,13 @@ def verOferta(request):
     args['val'] = val
     args['imagenes'] = imagenes
     args['nums'] = range(len(imagenes))
+    args['usuario']=user1
     return render_to_response('OFERTA_perfil.html', args)
 
 @login_required(login_url='/ingresar/') 
 def editarOferta(request):
+    id_session=request.session['id_user']
+    user1=User.objects.get(id=id_session)
     id_persona=request.session['id_persona']
     idof = int(request.GET.get('q', ''))
     oferta=Oferta.objects.get(idOferta = idof)
@@ -194,10 +230,13 @@ def editarOferta(request):
         oferta=Oferta.objects.get(idOferta = idof)
         persona_form = EditarOfertaForm(instance=oferta)
         args['form']=persona_form
+        args['usuario']=user1
     return render_to_response('OFERTA_Editar_Oferta.html', RequestContext(request,args))
 
 @login_required(login_url='/ingresar/') 
 def editarDemanda(request):
+    id_session=request.session['id_user']
+    user1=User.objects.get(id=id_session)
     id_persona=request.session['id_persona']
     idDem = int(request.GET.get('q', ''))
     demanda=Demanda.objects.get(idDemanda = idDem)
@@ -213,19 +252,24 @@ def editarDemanda(request):
             demanda=Demanda.objects.get(idDemanda = idDem)
             persona_form = EditarDemandaForm(instance=demanda)
             args['form']=persona_form
+            args['usuario']=user1
     else:
         demanda=Demanda.objects.get(idDemanda = idDem)
         persona_form = EditarDemandaForm(instance=demanda)
         args['form']=persona_form
+        args['usuario']=user1
     return render_to_response('DEMANDA_Editar_Demanda.html', RequestContext(request,args))
 
 @login_required(login_url='/ingresar/') 
 def misOfertas(request):
+    id_session=request.session['id_user']
+    user1=User.objects.get(id=id_session)
     persona = Persona.objects.get(idpersona=request.session['id_persona'])
     lst_ofertas = Oferta.objects.filter(idusuario = request.session['id_user'])[:5]
     return render_to_response('OFERTA_misOfertas.html', {'lst_ofertas' :lst_ofertas,'persona':persona}, context_instance=RequestContext(request)) 
 
 def searchOfertaRed(request):
+
     errors= []
     if 'busquedaOfertaRed' in request.GET:
         busquedaOfertaRed = request.GET['busquedaOfertaRed']

@@ -5,10 +5,16 @@ from .serializers import NotificationSerializer
 
 
 class NotificationRouter(ModelPubRouter):
-    valid_verbs = ['subscribe']
-    route_name = 'notifications'
-    model = Notification
-    serializer_class = NotificationSerializer
+	valid_verbs = ['subscribe']
+	route_name = 'notifications'
+	model = Notification
+	serializer_class = NotificationSerializer
 
+	@login_required(login_url='/ingresar/')
+	def subscribe(self, **kwargs):
+		super().subscribe(**kwargs)
 
-route_handler.register(NotificationRouter)
+	def get_subscription_contexts(self, **kwargs):
+		return {'user_id': self.connection.user.pk}
+
+	route_handler.register(NotificationRouter)

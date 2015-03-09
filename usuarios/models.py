@@ -76,3 +76,4 @@ class Mensaje(models.Model):
 class Notification(SelfPublishModel, models.Model):
     serializer_class = NotificationSerializer
     message = models.TextField()
+    user = models.ForeignKey(User)

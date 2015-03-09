@@ -5,8 +5,9 @@ from django.http import HttpResponse, Http404,HttpResponseNotFound,HttpResponseR
 from django.contrib.auth import decorators
 from django.utils.dateparse import parse_date
 from app.models import Catalogo
+from models import *
 from ofertaDemanda.models import Oferta
-from usuarios.models import Institucion, Persona
+from usuarios.models import *
 from incubacion.models import Incubacion, Incubada, TiposOfertasIncubacion
 from restless.modelviews import Endpoint,ListEndpoint, DetailEndpoint
 from restless.auth import BasicHttpAuthMixin,login_required
@@ -22,6 +23,8 @@ class ListIncubaciones(ListEndpoint, BasicHttpAuthMixin):
     model = Incubacion
     @login_required
     def get(self, request):
+        id_session=request.session['id_user']
+        user1=User.objects.get(id=id_session)
         incs=[]
         try:
             temp = request.session['id_institucion']
@@ -64,18 +67,26 @@ class ListIncubaciones(ListEndpoint, BasicHttpAuthMixin):
 
 @decorators.login_required(login_url='/ingresar/')
 def homeIncubacion(request):
+    id_session=request.session['id_user']
+    user1=User.objects.get(id=id_session)
+    context = {"usuario":user1}
     #return render(request, 'incubacion_main.html')
-    return render(request, 'index-incubacion.html')
+    return render(request, 'index-incubacion.html',context)
 
 
 
 @decorators.login_required(login_url='/ingresar/')
 def crearIncubacion(request):
-    return render(request, 'crear_incubacion.html')
+    id_session=request.session['id_user']
+    user1=User.objects.get(id=id_session)
+    context = {"usuario":user1}
+    return render(request, 'crear_incubacion.html',context)
 
 @csrf_exempt
 @decorators.login_required(login_url='/ingresar/')
 def createIncubacion(request):
+    id_session=request.session['id_user']
+    user1=User.objects.get(id=id_session)
     try:    
         i = Incubacion()
         i.nombre = request.POST.get('nombre')
@@ -101,8 +112,10 @@ def createIncubacion(request):
 
 @decorators.login_required(login_url='/ingresar/')
 def incubacionDetails(request,identifier):
+    id_session=request.session['id_user']
+    user1=User.objects.get(id=id_session)
     i = Incubacion.objects.get(id=int(identifier))
-    context = {"incubacion":i,}
+    context = {"incubacion":i,"usuario":user1}
 
     return render(request,"incubacion_institucion.html",context)
 
@@ -113,3 +126,9 @@ class IncDetails(DetailEndpoint):
 
 class IncubadasList(ListEndpoint):
     model = Incubada
+
+
+
+
+
+
