@@ -14,6 +14,7 @@ urlpatterns = patterns('',
         url(r'^mostrarOfertas[/]$', mostrarOfertas, name="mostrarOfertas"),
 		url(r'^registrarOferta[/]$', registrarOferta, name="registrarOfertas"),
 		url(r'^searchConcursoRed[/]$', searchConcursoRed, name="registrarOfertas"),
-		url(r'^gestionarInscripcion[/]$', gestionarInscripcion, name="gestionarInscripcion")
+		url(r'^gestionarInscripcion[/]$', gestionarInscripcion, name="gestionarInscripcion"),
+		url(r'^milesperfil[/]$', milesperfil, name="milesperfil")
 
 )

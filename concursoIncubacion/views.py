@@ -14,6 +14,10 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.core.context_processors import csrf
 from datetime import datetime
+from datetime import date
+
+
+#funciones de crear,ver,editar
 
 @login_required(login_url='/ingresar/')
 def homeConcursos(request):
@@ -193,6 +197,7 @@ def verConcurso(request):
 		
 		args['val'] = val
 		args['val2'] = val2
+		args['timenow'] = date.today()
 		args['milestones'] = milestones
 		args['nums'] = range(len(milestones))
 		args['inscrip'] = inscrip
@@ -274,6 +279,9 @@ def mayorCero(a):
 		return False
 	return True
 
+
+#funciones para ajax
+
 def mostrarOfertas(request):
 	print "requested!!!"
 	ofert = Oferta.objects.all().filter(idusuario=request.session['id_user'])
@@ -336,4 +344,25 @@ def searchConcursoRed(request):
             ofertas = Concurso.objects.filter(nombre__icontains=busquedaOfertaRed).exclude(idusuario = request.session['id_user'])
             return render(request, 'CONCURSO_inicio_concurso.html',
                 {'ofertas':ofertas,'nombre':busquedaOfertaRed,'buscarOfer':True})
-        return render(request,'CONCURSO_inicio_concurso.html',{'errors':errors})    
+        return render(request,'CONCURSO_inicio_concurso.html',{'errors':errors})  
+
+
+def milesperfil(request):
+	print "estoy aca"
+	miles_id = request.POST.get('idmiles',False)
+	print miles_id
+	milestone = MilestoneConcurso.objects.get(idMilestone = miles_id)
+	print milestone
+	print milestone.idConcurso.idConcurso
+	concurso = Concurso.objects.get(idConcurso = milestone.idConcurso.idConcurso)
+	jurado_lst = Jurado.objects.filter(idConcurso = milestone.idConcurso.idConcurso)
+	print jurado_lst
+
+	valfecha = not validarfechas(milestone.fecha_entrega,date.today())
+
+	args={}
+	args['concurso']=concurso
+	args['lstjurados']=jurado_lst
+	args['milestone']=milestone
+	args['valfecha']=valfecha
+	return render_to_response('ajax_milestone.html',args)  

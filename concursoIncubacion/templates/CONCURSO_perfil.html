@@ -1,6 +1,7 @@
 {% extends "base.tpl.html" %}
 {%block content%}
 
+ 
 	<input type="hidden" value="{{concurso.idConcurso}}" id="hiddenid" />
     <div class="section-header">
       <div class="container">
@@ -14,11 +15,18 @@
     </div>
 
     <div class="container">        
-      <div class="row">
+    <div class="row">
+
+      <!-- pop up de milestone-->
+    <div id="blackscreen" class="detras ocultar"></div>
+    <div id="miles" class="container centrado ocultar">
+      
+    </div>
+    <!--Hasta AQUI-->
+
 
 
       <div class="col-sm-12">
-
         <div class="col-sm-8">
             <div class="col-sm-12">
               <h3>
@@ -143,9 +151,42 @@
 		  <h4>Milestones : </h4>
 		 <div class="timeline-block" >
           <!-- First blog post -->
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+          <input type="hidden" value="" id="miles_hidden">
 		  {% for m in milestones%}
             <div class="blog-summary">
-              <h4><p id="openmile" style="color:blue;">Milestone {{m.peso}}%</p></h4>
+                <h4><a href="#" id="openmiles{{m.idMilestone}}">Milestone {{m.peso}}</a></h4>
+                
+                <script>
+                    $(document).ready(function(){
+                      $(function(){
+                        console.log("dentro del jquery")
+                        $('#openmiles{{m.idMilestone}}').click(function(){
+                          console.log("funcion click")
+                          $('#miles').addClass("container centrado mostrar");
+                          $('#blackscreen').addClass("detras mostrar");
+                          $('#miles_hidden').val("");
+
+                          $.ajax({
+                            type: "POST",
+                            url: "/milesperfil/",
+                            data: {
+                            'csrfmiddlewaretoken' : $("input[name=csrfmiddlewaretoken]").val(),
+                            'idmiles' : {{m.idMilestone}}
+                            },
+                            success: milesSuccess,
+                            dataType: 'html'
+                          });
+
+                        });
+                      });
+                    });
+
+                    function milesSuccess(data, textStatus, jqXHR){
+                      $('#miles').html(data);
+                    }
+                </script>
+
               <time datetime="2013-11-10" class="timestamp hidden-xs">{{ m.fecha_entrega }}</time>
               <ul class="text-muted list-inline">
                 <li><i class="fa fa-user"></i> {{ concurso.idusuario }}</li>
@@ -187,6 +228,7 @@
 						<button class="btn btn-default" id="Denie{{i.idInscripcion}}">Rechazar</button>
 						
 						<script>
+
 							$(document).ready(function() {
 								$(function(){
 									$('#Accept{{i.idInscripcion}}').click(function(){
@@ -205,6 +247,9 @@
 									});
 								});
 							});
+
+
+
 							$(document).ready(function() {
 								$(function(){
 									$('#Denie{{i.idInscripcion}}').click(function(){
@@ -223,6 +268,8 @@
 									});
 								});
 							});
+
+
 						</script>
 					  </div>
 					</div>
@@ -249,13 +296,8 @@
 			{% endif %}
 			
       </div>
-
-
-
-
       
     </div>
   </div>
 </div>
-
 {% endblock %}

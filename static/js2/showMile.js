@@ -19,7 +19,7 @@ function showmile(){
 
 function hidemiles(e){
     var div = document.getElementById("miles");
-    div.setAttribute("class", "container centrado ocultar");
+    div.setAttribute("class", "container ocultar");
     var ventana = document.getElementById("blackscreen");
     ventana.setAttribute("class", "detras ocultar");
 }
