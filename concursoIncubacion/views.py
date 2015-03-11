@@ -280,6 +280,14 @@ def mayorCero(a):
 	return True
 
 
+def fechasiguales(fechaIn,fechaOut):
+	if fechaIn:
+		if fechaOut:
+			if fechaIn == fechaOut:
+				return True
+	return False	
+
+
 #funciones para ajax
 
 def mostrarOfertas(request):
@@ -360,7 +368,17 @@ def milesperfil(request):
 
 	valfecha = not validarfechas(milestone.fecha_entrega,date.today())
 
+	valigual = fechasiguales(milestone.fecha_entrega,date.today())
+	print valigual
+
+	if(request.session["tipo"]=="institucion"):
+		valinst=True
+	else:
+		valinst=False
+
 	args={}
+	args['valinst']=valinst
+	args['valigual']=valigual
 	args['concurso']=concurso
 	args['lstjurados']=jurado_lst
 	args['milestone']=milestone

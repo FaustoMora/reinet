@@ -12,12 +12,14 @@
             <p>{{ milestone.requerimiento}}</p>
           </ul>
           <br/>
-          {% if milestone.fecha_entrega == timenow %}
+          {% if not valinst %}
+          {% if valigual %}
           <form>
             <label>Entrega: </label><input type="file" id="archivo" required/>
             <br/>
             <button type="submit" class="btn btn-turquoise">Subir Entrega</button>
           </form>
+          {% endif %}
           {% endif %}
         </div>
 
