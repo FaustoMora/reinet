@@ -13,15 +13,13 @@ window.addEventListener('load', function () {
 // Create an instance of vanilla dragon
 var dragon = new VanillaDragon({onopen: onOpen, onchannelmessage: onChannelMessage});
 
-// This is the list of notifications
-var notificationsList = document.getElementById("notifications");
-
 
 // New channel message received
-function onChannelMessage(channels, message) {
+function onChannelMessage(channels, datos) {
     // Add the notification
-    if (message.action === "created") {
-        addNotification((message.data));
+    console.log(datos);
+    if (datos.action === "created") {
+        addNotification((datos.data));
     }
 }
 
@@ -29,29 +27,29 @@ function onChannelMessage(channels, message) {
 // SwampDragon connection open
 function onOpen() {
     // Once the connection is open, subscribe to notifications
-    dragon.subscribe('notifications', 'notifications');
+    dragon.subscribe('notifications', 'notificaciones');
+    
 }
 
 
 // Add new notifications
 function addNotification(notification) {
     // If we have permission to show browser notifications
-    // we can show the notifiaction
+    // we can show the notification
     if (window.Notification && Notification.permission === "granted") {
         new Notification(notification.message);
     }
 
-    // Add the new notification
-    var li = document.createElement("li");
-    li.innerHTML = notification.message;
-    notificationsList.insertBefore(li, notificationsList.firstChild);
+}
 
-    // Remove excess notifications
-    while (notificationsList.getElementsByTagName("li").length > 5) {
-        notificationsList.getElementsByTagName("li")[5].remove();
+function notifRec(name){
+    new Notification('Mensaje Enviado Exitosamente',name);
+    console.log(Notification.user);
+    if(Notification.user.username == name){
+        window.addEventListener('load',function(){
+            new Notification('Ha recibido un nuevo mensaje',name);
+        });
     }
 }
 
-function notifRec(){
-    new Notification('Has recibido un nuevo mensaje');
-}
+

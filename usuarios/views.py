@@ -152,6 +152,9 @@ def perfil_view(request):
 def enviar_mensaje(request):
 	tipo = request.session['tipo']
 	id_user=request.session['id_user']
+	id_session=request.session['id_user']
+	user1=User.objects.get(id=id_session)
+	args={}
 	if request.method=='POST':
 		form1=MensajeForm(request.POST)
 		if form1.is_valid():
@@ -160,7 +163,8 @@ def enviar_mensaje(request):
 			ur=form1.cleaned_data['recibe']
 			print "aqui ur",ur
 			try:
-				userReceptor=User.objects.get(username=ur)
+				userReceptor=User.objects.get(username=ur)				
+				args['recep']=userReceptor
 				print "aqui ureceptor",userReceptor, "envia", emisor
 				if userReceptor is not None:
 					#receptor=Persona.objects.get(id_user)
@@ -183,15 +187,19 @@ def enviar_mensaje(request):
 		elif tipo == "institucion":
 			id_institucion=request.session['id_institucion']
 		form1=MensajeForm()
-	args={}
+	
 	args.update(csrf(request))
+	
+	args['usuario']=user1
 	args['form']=form1
 	return render_to_response('USUARIO_enviar-mensaje.html',args)
 
 
 @login_required(login_url='/ingresar/')
 def mensajes_view(request):
+	id_session=request.session['id_user']
 	tipo=request.session['tipo']
+	user1=User.objects.get(id=id_session)
 	if tipo == "persona":
 		id_persona=request.session['id_persona']
 	elif tipo == "institucion":
@@ -199,6 +207,7 @@ def mensajes_view(request):
 
 	mensajes = Mensaje.objects.all().filter(idDestino=request.session['id_user'])[:8]
 	args={}
+	args['usuario']=user1
 	args['mensajes']=mensajes
 	args['range']=range(len(mensajes))
 	return render_to_response('USUARIO_inbox.html',args)
@@ -206,8 +215,9 @@ def mensajes_view(request):
 
 @login_required(login_url='/ingresar/')
 def mensajesEnviados_view(request):
+	id_session=request.session['id_user']
 	tipo = request.session['tipo']
-
+	user1=User.objects.get(id=id_session)
 	if tipo == "persona":
 		id_persona=request.session['id_persona']
 		persona1=Persona.objects.get(idpersona=id_persona)
@@ -219,6 +229,7 @@ def mensajesEnviados_view(request):
 	mensajes = Mensaje.objects.all().filter(idEmisor=request.session['id_user'])[:8]
 	args={}
 	args['mensajes']=mensajes
+	args['usuario']=user1
 	if persona1 is not None:
 		args['persona']=persona1	
 	else:
@@ -236,6 +247,7 @@ def inicio_view(request):
 def editar_perfil_view(request):
 	id_session=request.session['id_user']
 	id_persona=request.session['id_persona']
+	user1=User.objects.get(id=id_session)
 	args={}
 	if request.method == 'POST':
 		id_session=request.session['id_user']
@@ -263,6 +275,7 @@ def editar_perfil_view(request):
 		persona_form = PersonaEditarForm(instance=persona)
 		#args['userform']=user_form
 		args['personaform']=persona_form
+	args['usuario']=user1
 	#return render_to_response('USUARIO_edit-profile.html', args)
 	return render_to_response('USUARIO_edit-profile.html', RequestContext(request,args))
 
@@ -298,25 +311,31 @@ def subir_imagen(request):
 
 @login_required(login_url='/ingresar/')
 def verPerfil(request):
+	id_session=request.session['id_user']
+	user1=User.objects.get(id=id_session)
 	idu = request.GET.get('q', '')
 	try:
-		user1=User.objects.get(username = idu)
+		user2=User.objects.get(username = idu)
 		args={}
+		args['usuario2']=user2
 		args['usuario']=user1
 		tipo = request.session['tipo']
 		try:
 			print "persona perfil otro"
-			persona1=Persona.objects.get(user_ptr=user1)
+			persona1=Persona.objects.get(user_ptr=user2)
 			args['persona']=persona1
 			return render_to_response('USUARIO_perfilOtro.html',args,context_instance=RequestContext(request))
 		except:
-			institucion1=Institucion.objects.get(user_ptr=user1)
+			institucion1=Institucion.objects.get(user_ptr=user2)
 			args['institucion']=institucion1
 			return render_to_response('USUARIO_perfilinstitucionOtro.html',args,context_instance=RequestContext(request))
 	except:
 		return HttpResponseRedirect('/RNNotFound/')	
+
 @login_required(login_url='/ingresar/')
 def verMensaje(request):
+	id_session=request.session['id_user']
+	user1=User.objects.get(id=id_session)
 	args = {}
 	tipo = request.session['tipo']
 	if tipo == "persona":
@@ -332,12 +351,13 @@ def verMensaje(request):
 		idM = int(request.GET.get('q', ''))
 		msj=Mensaje.objects.get(id = idM)
 		print "mensaje",msj.id
-		user1=msj.idEmisor
+		user2=msj.idEmisor
 		#print "user",user1
 		#persona=Persona.objects.get(user_ptr=user1)
 		#print "persona",persona
 		args['msj']=msj
-		args['user1']=user1
+		args['user1']=user2
+		args['usuario']=user1
 		#args['persona']=persona
 		
 		return render_to_response('USUARIO_verMensaje.html',args,context_instance=RequestContext(request))

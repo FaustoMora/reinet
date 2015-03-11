@@ -12,9 +12,11 @@ class NotificationRouter(ModelPubRouter):
 
 	@login_required(login_url='/ingresar/')
 	def subscribe(self, **kwargs):
+		id_session=request.session['id_user']
+		print "ESTA ES LA SESSION QUE SE USA",id_session
 		super().subscribe(**kwargs)
 
 	def get_subscription_contexts(self, **kwargs):
-		return {'user_id': self.connection.user.pk}
+		return {'id_user': self.connection.user.pk}
 
 	route_handler.register(NotificationRouter)
