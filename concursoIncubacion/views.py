@@ -163,7 +163,7 @@ def verConcurso(request):
 	try:
 		idcon = int(request.GET.get('q', ''))
 		concurso=Concurso.objects.get(idConcurso = idcon)
-		milestones = MilestoneConcurso.objects.all().filter(idConcurso = idcon)
+		milestones = MilestoneConcurso.objects.filter(idConcurso = idcon)
 		concursousuario=Concurso.objects.get(idConcurso = idcon).idusuario.id
 		args = {}
 		args.update(csrf(request))
@@ -194,9 +194,22 @@ def verConcurso(request):
 		print concursousuario
 		print request.session['id_user']
 		print val
+
+
+		ofertas = Oferta.objects.filter(idusuario=request.session['id_user'])
+		valinsc=False
+		for o in ofertas:
+			try:
+				ins = Inscripcion.objects.get(idConcurso = idcon, idOferta = o.idOferta)
+				print "op"
+				valinsc = True
+			except:
+				valinsc = False
+		print valinsc
 		
 		args['val'] = val
 		args['val2'] = val2
+		args['valinsc']=valinsc
 		args['timenow'] = date.today()
 		args['milestones'] = milestones
 		args['nums'] = range(len(milestones))
@@ -357,30 +370,35 @@ def searchConcursoRed(request):
 
 def milesperfil(request):
 	print "estoy aca"
-	miles_id = request.POST.get('idmiles',False)
+	miles_id = request.POST.get('idmiles')
 	print miles_id
-	milestone = MilestoneConcurso.objects.get(idMilestone = miles_id)
-	print milestone
-	print milestone.idConcurso.idConcurso
-	concurso = Concurso.objects.get(idConcurso = milestone.idConcurso.idConcurso)
-	jurado_lst = Jurado.objects.filter(idConcurso = milestone.idConcurso.idConcurso)
-	print jurado_lst
 
-	valfecha = not validarfechas(milestone.fecha_entrega,date.today())
+	if miles_id: 
+		milestone = MilestoneConcurso.objects.get(idMilestone = miles_id)
+		print milestone
+		print milestone.idConcurso.idConcurso
+		concurso = Concurso.objects.get(idConcurso = milestone.idConcurso.idConcurso)
+		jurado_lst = Jurado.objects.filter(idConcurso = milestone.idConcurso.idConcurso)
+		print jurado_lst
 
-	valigual = fechasiguales(milestone.fecha_entrega,date.today())
-	print valigual
+		valfecha = not validarfechas(milestone.fecha_entrega,date.today())
 
-	if(request.session["tipo"]=="institucion"):
-		valinst=True
+		valigual = fechasiguales(milestone.fecha_entrega,date.today())
+		print valigual
+
+		if(request.session["tipo"]=="institucion"):
+			valinst=True
+		else:
+			valinst=False
+
+		args={}
+		args['valinst']=valinst
+		args['valigual']=valigual
+		args['concurso']=concurso
+		args['lstjurados']=jurado_lst
+		args['milestone']=milestone
+		args['valfecha']=valfecha
+		return render_to_response('ajax_milestone.html',args,) 
 	else:
-		valinst=False
-
-	args={}
-	args['valinst']=valinst
-	args['valigual']=valigual
-	args['concurso']=concurso
-	args['lstjurados']=jurado_lst
-	args['milestone']=milestone
-	args['valfecha']=valfecha
-	return render_to_response('ajax_milestone.html',args)  
+		print 'no funcionaa' 
+		return HttpResponseRedirect('/RNNotFound')

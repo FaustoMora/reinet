@@ -155,6 +155,7 @@
           <input type="hidden" value="" id="miles_hidden">
 		  {% for m in milestones%}
             <div class="blog-summary">
+              {% if valinsc %}
                 <h4><a href="#" id="openmiles{{m.idMilestone}}">Milestone {{m.peso}}</a></h4>
                 
                 <script>
@@ -163,6 +164,7 @@
                         console.log("dentro del jquery")
                         $('#openmiles{{m.idMilestone}}').click(function(){
                           console.log("funcion click")
+                          console.log({{m.idMilestone}})
                           $('#miles').addClass("container centrado mostrar");
                           $('#blackscreen').addClass("detras mostrar");
                           $('#miles_hidden').val("");
@@ -186,6 +188,9 @@
                       $('#miles').html(data);
                     }
                 </script>
+                {% else %}
+                    <h4 style="color:blue">Milestone {{m.peso}}</h4>
+                {% endif %}
 
               <time datetime="2013-11-10" class="timestamp hidden-xs">{{ m.fecha_entrega }}</time>
               <ul class="text-muted list-inline">
